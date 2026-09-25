@@ -4,7 +4,7 @@ email: "TODO"
 telefon: "TODO"
 naslov: "TODO"
 eos:
-  portal: "TODO" # header button "Za starše in člane"
+  portal: https://eos.fbkloka.si # header button "Za starše in člane"
   registracija: "TODO" # button "Vpiši se" on /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/

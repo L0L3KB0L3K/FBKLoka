@@ -2,83 +2,84 @@
 # Gorenjski glas (3. 4. 2023), Floorball zveza Slovenije (arhiv novic, zgodovina, reprezentanca), floorball.sport.
 # Vnosi s "TODO" potrdi s klubom pred objavo.
 
-- leto: 1991
-  dogodek: "V Škofji Loki se na delavskih igrah prvič igra floorball, s prirejenimi pravili."
+dogodki:
+  - leto: 1991
+    dogodek: "V Škofji Loki se na delavskih igrah prvič igra floorball, s prirejenimi pravili."
 
-- leto: 2000
-  dogodek: "Ustanovljen FBK Loka Spiders. Klub je 17. decembra 2000 med ustanovitelji Floorball zveze Slovenije."
+  - leto: 2000
+    dogodek: "Ustanovljen FBK Loka Spiders. Klub je 17. decembra 2000 med ustanovitelji Floorball zveze Slovenije."
 
-- leto: 2001
-  dogodek: "Spiders v prvem letu obstoja osvojijo mednarodno ligo, državno prvenstvo in slovenski pokal."
-  opomba: "TODO: vir je Wikipedija. Potrdi sezono."
+  - leto: 2001
+    dogodek: "Spiders v prvem letu obstoja osvojijo mednarodno ligo, državno prvenstvo in slovenski pokal."
+    opomba: "TODO: vir je Wikipedija. Potrdi sezono."
 
-- leto: 2007
-  dogodek: "Večina igralcev Spidersov ustanovi FBK Insport Škofja Loka. Spiders prenehajo delovati."
+  - leto: 2007
+    dogodek: "Večina igralcev Spidersov ustanovi FBK Insport Škofja Loka. Spiders prenehajo delovati."
 
-- leto: 2009
-  dogodek: "Insport Škofja Loka je državni prvak."
-  opomba: "TODO: floorball.sport piše o osmem naslovu v zgodovini, Wikipedija o šestih naslovih Insporta do 2024. Razlika so verjetno naslovi Spidersov. Potrdi seznam vseh naslovov po letih."
+  - leto: 2009
+    dogodek: "Insport Škofja Loka je državni prvak."
+    opomba: "TODO: floorball.sport piše o osmem naslovu v zgodovini, Wikipedija o šestih naslovih Insporta do 2024. Razlika so verjetno naslovi Spidersov. Potrdi seznam vseh naslovov po letih."
 
-- leto: 2016
-  dogodek: "Dvorana Poden gosti kvalifikacije za svetovno prvenstvo za moške."
+  - leto: 2016
+    dogodek: "Dvorana Poden gosti kvalifikacije za svetovno prvenstvo za moške."
 
-- leto: 2018
-  dogodek: "Klub, takrat FBK Insport, odpre Instagram profil."
+  - leto: 2018
+    dogodek: "Klub, takrat FBK Insport, odpre Instagram profil."
 
-- leto: 2019
-  dogodek: "Člani osvojijo mednarodno ligo IFL. Finale proti VSV Unihockey je bilo na Podnu."
+  - leto: 2019
+    dogodek: "Člani osvojijo mednarodno ligo IFL. Finale proti VSV Unihockey je bilo na Podnu."
 
-- leto: 2019
-  dogodek: "Člani so državni prvaki (finale 1. SFL na Podnu)."
+  - leto: 2019
+    dogodek: "Člani so državni prvaki (finale 1. SFL na Podnu)."
 
-- leto: 2019
-  dogodek: "Branilec Rok Prevodnik podpiše za IBF Falun kot prvi Slovenec v elitni švedski ligi."
+  - leto: 2019
+    dogodek: "Branilec Rok Prevodnik podpiše za IBF Falun kot prvi Slovenec v elitni švedski ligi."
 
-- leto: 2019
-  dogodek: "Vratar Jaka Zupančič prejme malo športno plaketo občine Medvode."
+  - leto: 2019
+    dogodek: "Vratar Jaka Zupančič prejme malo športno plaketo občine Medvode."
 
-- leto: 2020
-  dogodek: "Člani drugič zapored osvojijo IFL."
+  - leto: 2020
+    dogodek: "Člani drugič zapored osvojijo IFL."
 
-- leto: 2022
-  dogodek: "Tretji zaporedni naslov IFL."
+  - leto: 2022
+    dogodek: "Tretji zaporedni naslov IFL."
 
-- leto: 2022
-  dogodek: "Insport A je državni prvak 1. SFL, Insport B osvoji 3. mesto."
+  - leto: 2022
+    dogodek: "Insport A je državni prvak 1. SFL, Insport B osvoji 3. mesto."
 
-- leto: 2023
-  dogodek: "Četrti zaporedni naslov IFL."
+  - leto: 2023
+    dogodek: "Četrti zaporedni naslov IFL."
 
-- leto: 2023
-  dogodek: "V finalu 1. SFL na Podnu igrata obe ekipi kluba. Insport A premaga Insport B z 10:3 in ubrani naslov."
+  - leto: 2023
+    dogodek: "V finalu 1. SFL na Podnu igrata obe ekipi kluba. Insport A premaga Insport B z 10:3 in ubrani naslov."
 
-- leto: 2023
-  dogodek: "Ekipa Švigalice je prvak 2. SFL."
+  - leto: 2023
+    dogodek: "Ekipa Švigalice je prvak 2. SFL."
 
-- leto: 2024
-  dogodek: "Švigalice ubranijo naslov v 2. SFL."
+  - leto: 2024
+    dogodek: "Švigalice ubranijo naslov v 2. SFL."
 
-- leto: 2024
-  dogodek: "Dvorana Poden drugič gosti kvalifikacije za svetovno prvenstvo za moške."
+  - leto: 2024
+    dogodek: "Dvorana Poden drugič gosti kvalifikacije za svetovno prvenstvo za moške."
 
-- leto: 2024
-  dogodek: "Člani na zaključnem turnirju v Gorenji vasi ubranijo naslov državnih prvakov."
+  - leto: 2024
+    dogodek: "Člani na zaključnem turnirju v Gorenji vasi ubranijo naslov državnih prvakov."
 
-- leto: 2024
-  dogodek: "Peti zaporedni naslov IFL."
+  - leto: 2024
+    dogodek: "Peti zaporedni naslov IFL."
 
-- leto: 2024
-  dogodek: "Člani zmagajo na turnirju Torpedo Cup v Budimpešti."
+  - leto: 2024
+    dogodek: "Člani zmagajo na turnirju Torpedo Cup v Budimpešti."
 
-- leto: 2025
-  dogodek: "U15 A je državni prvak, U17 osvoji bron."
+  - leto: 2025
+    dogodek: "U15 A je državni prvak, U17 osvoji bron."
 
-- leto: 2025
-  dogodek: "Klub nastopa pod imenom FBK Loka."
-  opomba: "TODO: točno leto preimenovanja iz FBK Insport."
+  - leto: 2025
+    dogodek: "Klub nastopa pod imenom FBK Loka."
+    opomba: "TODO: točno leto preimenovanja iz FBK Insport."
 
-- leto: 2026
-  dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici."
+  - leto: 2026
+    dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici."
 
-- leto: 2026
-  dogodek: "Sedem igralcev kluba igra za reprezentanco U19."
+  - leto: 2026
+    dogodek: "Sedem igralcev kluba igra za reprezentanco U19."

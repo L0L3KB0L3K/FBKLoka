@@ -1,0 +1,45 @@
+# Training slots (SPEC.md §4.2). One item per slot. Source for /treningi and every team page.
+# TEMPORARY: one placeholder slot per team until the club sends the real schedule (SPEC.md §14).
+termini:
+  - selekcija: clani
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: svigalice
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: u19
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: u17
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: u15
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: u13
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"
+  - selekcija: u11
+    dan: ponedeljek
+    od: "17:00"
+    do: "18:30"
+    dvorana: poden
+    opomba: "TODO: termin od kluba"

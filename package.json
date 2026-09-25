@@ -19,6 +19,7 @@
     "@fontsource-variable/archivo": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.5",
+    "js-yaml": "^4.3.2",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@types/js-yaml": "^4.0.9",
     "typescript": "^6.0.3"
   }
 }

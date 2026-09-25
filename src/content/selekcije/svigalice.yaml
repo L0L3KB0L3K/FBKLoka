@@ -1,0 +1,9 @@
+# Team (SPEC.md §4.1). File name = slug. TODO values are hidden on the site.
+ime: Švigalice
+vrstniRed: 2
+starostniRazpon: "TODO" # shown to parents
+kapetan: "TODO"
+trenerji: [] # TODO: coach slugs from src/content/trenerji
+naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
+kratekOpis: "Švigalice igrajo v mešani 2. slovenski floorball ligi."
+prikaziSestavo: true

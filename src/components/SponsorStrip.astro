@@ -1,0 +1,39 @@
+---
+// Sponsor logos under the black footer on every page, on a white background (SPEC.md §7.1, §9.5).
+// Order: main sponsors first, then gold, then supporting; alphabetical within a level.
+// No sponsors -> nothing is rendered (SPEC.md §1).
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const LEVEL_ORDER = { glavni: 0, zlati: 1, podporni: 2 } as const;
+
+const sponzorji = (await getCollection("sponzorji")).sort(
+  (a, b) =>
+    LEVEL_ORDER[a.data.raven] - LEVEL_ORDER[b.data.raven] || a.data.ime.localeCompare(b.data.ime, "sl"),
+);
+---
+
+{
+  sponzorji.length > 0 && (
+    <section aria-labelledby="sponsors-title" class="bg-paper text-ink">
+      <div class="page-wrap py-8">
+        <h2 id="sponsors-title" class="text-small">
+          Sponzorji
+        </h2>
+        <ul class="mt-4 flex flex-wrap items-center gap-x-10 gap-y-6">
+          {sponzorji.map(({ data }) => (
+            <li>
+              {data.povezava ? (
+                <a href={data.povezava} class="inline-flex min-h-11 items-center">
+                  <Image src={data.logo} alt={data.ime} height={48} densities={[1, 2]} class="h-12 w-auto" />
+                </a>
+              ) : (
+                <Image src={data.logo} alt={data.ime} height={48} densities={[1, 2]} class="h-12 w-auto" />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,9 @@
+# Team (SPEC.md §4.1). File name = slug. TODO values are hidden on the site.
+ime: Člani
+vrstniRed: 1
+starostniRazpon: "18+" # shown to parents
+kapetan: "TODO"
+trenerji: [] # TODO: coach slugs from src/content/trenerji
+naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
+kratekOpis: "Člani igrajo v mednarodni ligi 3 Nations – IFL in v 1. slovenski floorball ligi."
+prikaziSestavo: true

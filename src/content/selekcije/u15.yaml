@@ -1,0 +1,9 @@
+# Team (SPEC.md §4.1). File name = slug. TODO values are hidden on the site.
+ime: U15
+vrstniRed: 5
+starostniRazpon: "TODO" # shown to parents
+kapetan: "TODO"
+trenerji: [] # TODO: coach slugs from src/content/trenerji
+naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
+kratekOpis: "Selekcija U15 igra v državnem prvenstvu U15."
+prikaziSestavo: true
