@@ -1,0 +1,204 @@
+---
+// Site header (SPEC.md §8, §9.5): black, 64 px, logo left, menu right, EOS button.
+// Mobile: logo and a menu button. The menu is a native modal <dialog> (SPEC.md §2):
+// the browser handles Escape, the focus trap and returning focus to the button.
+import { Image } from "astro:assets";
+import logoDark from "../assets/logo/logo-dark.png";
+import { MAIN_NAV, navState } from "../config/nav";
+import { getSettings, isSet } from "../lib/site";
+import Button from "./ui/Button.astro";
+
+const settings = await getSettings();
+// The EOS button stays hidden until the club sends the real link (SPEC.md §1).
+const eosUrl = isSet(settings.eos.portal) ? settings.eos.portal : null;
+const pathname = Astro.url.pathname;
+
+// aria-current: "page" on the current page, "true" on its parent section.
+const current = (href: string) => {
+  const state = navState(href, pathname);
+  return state === "page" ? "page" : state === "section" ? "true" : undefined;
+};
+---
+
+<header class="surface-ink sticky top-0 z-50">
+  <div class="page-wrap flex h-16 items-center justify-between gap-6">
+    <a href="/" class="flex min-h-11 shrink-0 items-center">
+      <Image src={logoDark} alt="FBK Loka, domov" height={40} densities={[1, 2]} loading="eager" />
+    </a>
+
+    <!-- Right side: desktop menu, EOS button, mobile menu button -->
+    <div class="flex items-center gap-6">
+      <nav aria-label="Glavni meni" class="hidden lg:block">
+        <ul class="flex items-center gap-5">
+          {
+            MAIN_NAV.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  aria-current={current(href)}
+                  class:list={[
+                    "flex min-h-11 items-center font-semibold no-underline hover:text-ball",
+                    current(href) && "underline decoration-ball decoration-3 underline-offset-8",
+                  ]}
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {
+        eosUrl && (
+          <div class="hidden lg:block">
+            <Button href={eosUrl} variant="on-ink">
+              Za starše in člane
+            </Button>
+          </div>
+        )
+      }
+
+      <!-- Mobile menu button. Without JS the same links are in the footer. -->
+      <button
+        type="button"
+        class="flex min-h-11 min-w-11 items-center gap-2 font-semibold hover:text-ball lg:hidden"
+        aria-haspopup="dialog"
+        aria-controls="site-menu"
+        data-menu-open
+      >
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+        Meni
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu: full screen over the page (SPEC.md §9.5) -->
+  <dialog id="site-menu" class="menu surface-ink" aria-label="Meni">
+    <div class="page-wrap flex h-16 items-center justify-between gap-6">
+      <a href="/" class="flex min-h-11 shrink-0 items-center">
+        <Image src={logoDark} alt="FBK Loka, domov" height={40} densities={[1, 2]} loading="eager" />
+      </a>
+      <button
+        type="button"
+        class="flex min-h-11 min-w-11 items-center gap-2 font-semibold hover:text-ball"
+        data-menu-close
+        autofocus
+      >
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+        Zapri
+      </button>
+    </div>
+
+    <nav aria-label="Glavni meni" class="page-wrap pt-4 pb-10">
+      <ul>
+        {
+          MAIN_NAV.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                aria-current={current(href)}
+                class:list={[
+                  "flex min-h-12 items-center text-h2 font-extrabold no-underline hover:text-ball",
+                  current(href) && "text-ball",
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        eosUrl && (
+          <div class="mt-8">
+            <Button href={eosUrl} variant="on-ink">
+              Za starše in člane
+            </Button>
+          </div>
+        )
+      }
+    </nav>
+  </dialog>
+</header>
+
+<style>
+  /* Full-screen dialog. Open: opacity + translateY(-8px -> 0), 220 ms.
+     Close: the same in reverse, 160 ms, faster than opening (SPEC.md §9.6). */
+  .menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--dur-menu-out) var(--ease-out),
+      transform var(--dur-menu-out) var(--ease-out),
+      overlay var(--dur-menu-out) allow-discrete,
+      display var(--dur-menu-out) allow-discrete;
+  }
+
+  .menu[open] {
+    opacity: 1;
+    transform: none;
+    transition-duration: var(--dur-menu-in);
+  }
+
+  @starting-style {
+    .menu[open] {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  .menu::backdrop {
+    background: transparent;
+  }
+
+  /* Menu links use the wide heading style. */
+  .menu nav a {
+    font-stretch: 125%;
+  }
+
+  /* The page behind the open menu does not scroll. */
+  :global(html:has(.menu[open])) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion: no movement, the fade stays (SPEC.md §9.6). */
+  @media (prefers-reduced-motion: reduce) {
+    .menu,
+    .menu[open] {
+      transform: none;
+    }
+
+    @starting-style {
+      .menu[open] {
+        transform: none;
+      }
+    }
+  }
+</style>
+
+<script>
+  // Opens and closes the mobile menu. Escape and focus return are native to <dialog>.
+  const menu = document.querySelector<HTMLDialogElement>("#site-menu");
+  const openButton = document.querySelector<HTMLButtonElement>("[data-menu-open]");
+  const closeButton = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+
+  if (menu && openButton && closeButton) {
+    openButton.addEventListener("click", () => menu.showModal());
+    closeButton.addEventListener("click", () => menu.close());
+  }
+</script>

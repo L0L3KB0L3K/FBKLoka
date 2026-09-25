@@ -1,18 +1,12 @@
 ---
-// Temporary placeholder for step 0 (SPEC.md §15).
-// Replaced in step 1 by the Base layout with Header, Footer and skip link.
-import "../styles/global.css";
+// Home page. Step 1: only the layout with a heading.
+// The match board and the other sections follow in step 5 (SPEC.md §7.1).
+import Base from "../layouts/Base.astro";
 ---
 
-<html lang="sl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FBK Loka</title>
-  </head>
-  <body>
-    <main id="main">
-      <h1>FBK Loka</h1>
-    </main>
-  </body>
-</html>
+<Base title="FBK Loka" description="FBK Loka je floorball klub iz Škofje Loke. Tekme, treningi in vpis za otroke.">
+  <div class="page-wrap py-12">
+    <h1>FBK Loka</h1>
+    <p class="mt-6 max-w-[70ch]">Floorball klub iz Škofje Loke.</p>
+  </div>
+</Base>

@@ -1,0 +1,64 @@
+---
+// Base layout for every page (SPEC.md §13.2, §13.3):
+// <html lang="sl">, skip link as the first element, header, <main id="main">, footer.
+// OG image, JSON-LD and the rest of the SEO head follow in step 7.
+import "../styles/global.css";
+// The one font file above the fold is preloaded (SPEC.md §9.3). Same hashed file as in global.css.
+import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  /** Page name, e.g. "Treningi". The home page passes "FBK Loka". */
+  title: string;
+  /** Unique meta description for the page. */
+  description: string;
+}
+
+const { title, description } = Astro.props;
+// Title pattern "Treningi | FBK Loka" (SPEC.md §13.2).
+const fullTitle = title === "FBK Loka" ? title : `${title} | FBK Loka`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="sl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a href="#main" class="skip-link">Skoči na vsebino</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* Skip link: hidden until it gets keyboard focus, then shown over the header. */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 60;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    background-color: var(--color-ball);
+    color: var(--color-ink);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    top: 0.5rem;
+  }
+</style>

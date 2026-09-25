@@ -1,2 +1,172 @@
-/* Tailwind 4 entry point. Design tokens (@theme) are added in step 1 (SPEC.md §9). */
+/* Global styles and design tokens (SPEC.md §9).
+   Colors, fonts, type sizes and motion come only from these tokens.
+   Raw hex values or arbitrary colors (text-[#...]) in components are a bug. */
 @import "tailwindcss";
+
+/* Archivo variable with the width axis (wdth 62–125 %), SPEC.md §9.3.
+   Only latin and latin-ext subsets. Vite copies the files into dist with a content hash. */
+@font-face {
+  font-family: "Archivo Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url("@fontsource-variable/archivo/files/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Archivo Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url("@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  /* Colors (SPEC.md §9.2). The reset removes Tailwind's default palette. */
+  --color-*: initial;
+  --color-ink: #000000; /* logo black: header, footer, match board, main text */
+  --color-ball: #fff112; /* logo yellow, sampled from the club PNG. Never as text on light backgrounds. */
+  --color-paper: #ffffff; /* content background */
+  --color-court: #f4f4f2; /* alternating rows, section backgrounds */
+  --color-muted: #5c5c5c; /* dates, secondary text */
+  --color-line: #e2e2de; /* decorative dividers and table borders only, not UI edges */
+  --color-input-border: #767676; /* edges of inputs, selects and controls */
+
+  /* One font family; width makes the difference between headings and text (SPEC.md §9.3). */
+  --font-sans: "Archivo Variable", Arial, system-ui, sans-serif;
+
+  /* Type scale, mobile values. Desktop values are set in the media query below.
+     The reset removes Tailwind's default sizes so only this scale exists. */
+  --text-*: initial;
+  --text-hero: 2.5rem;
+  --text-hero--line-height: 1.05;
+  --text-h1: 1.75rem;
+  --text-h1--line-height: 1.05;
+  --text-h2: 1.375rem;
+  --text-h2--line-height: 1.05;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.2;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+
+  /* Layout (SPEC.md §9.5): max content width 1200 px. */
+  --container-page: 75rem;
+
+  /* Motion (SPEC.md §9.6). No UI animation longer than 250 ms. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --dur-hover: 150ms;
+  --dur-press: 120ms;
+  --dur-menu-in: 220ms;
+  --dur-menu-out: 160ms;
+}
+
+/* Hover only on devices with a mouse, colour changes only (SPEC.md §9.6).
+   Overrides Tailwind's default hover variant. */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+/* Page container: max 1200 px, side padding 20 px mobile and 32 px desktop (SPEC.md §9.5). */
+@utility page-wrap {
+  margin-inline: auto;
+  max-width: var(--container-page);
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Black surface (header, footer, match board). Focus ring turns yellow on it (SPEC.md §13.3). */
+@utility surface-ink {
+  --focus-ring: var(--color-ball);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+@layer base {
+  /* Desktop type scale (SPEC.md §9.3). */
+  @media (width >= 48rem) {
+    :root {
+      --text-hero: 4rem;
+      --text-h1: 2.5rem;
+      --text-h2: 1.75rem;
+      --text-h3: 1.25rem;
+    }
+  }
+
+  html {
+    /* The header is sticky and 64 px tall: anchors and focused elements stay below it (SPEC.md §13.3). */
+    scroll-padding-top: 4.5rem;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-weight: 400;
+    font-stretch: 100%;
+  }
+
+  h1,
+  h2 {
+    font-weight: 800;
+    font-stretch: 125%;
+    line-height: 1.05;
+  }
+
+  h1 {
+    font-size: var(--text-h1);
+  }
+
+  h2 {
+    font-size: var(--text-h2);
+  }
+
+  h3 {
+    font-size: var(--text-h3);
+    font-weight: 700;
+    font-stretch: 112%;
+    line-height: var(--text-h3--line-height);
+  }
+
+  /* Thick bar under every H1, from the line under the lettering in the logo (SPEC.md §9.4). */
+  h1::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 6px;
+    margin-top: 0.75rem;
+    background-color: currentColor;
+  }
+
+  /* Links in text are underlined, so they do not rely on colour alone. */
+  a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* Hover changes colour only, 150 ms ease (SPEC.md §9.6). Button.astro adds the press effect. */
+  a,
+  button {
+    transition-property: color, background-color, text-decoration-color;
+    transition-duration: var(--dur-hover);
+    transition-timing-function: ease;
+  }
+
+  /* Visible focus: 2 px ring with 2 px offset. Black on light, yellow on black (SPEC.md §13.3). */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring, var(--color-ink));
+    outline-offset: 2px;
+  }
+}

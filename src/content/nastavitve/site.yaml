@@ -1,0 +1,11 @@
+# Club settings (SPEC.md §4.7). A value "TODO" is hidden on the site until the club confirms it.
+imeKluba: FBK Loka
+email: "TODO"
+telefon: "TODO"
+naslov: "TODO"
+eos:
+  portal: "TODO" # header button "Za starše in člane"
+  registracija: "TODO" # button "Vpiši se" on /vpis
+socialna:
+  instagram: https://www.instagram.com/fbk_loka/
+  facebook: https://www.facebook.com/FloorballInsport # TODO: confirm this is the official club page

@@ -1,0 +1,54 @@
+---
+// Button or link styled as a button (SPEC.md §9.2, §9.6).
+// Two variants only, so no cva (SPEC.md §2):
+//   on-ink   = yellow background, black text (on black surfaces)
+//   on-paper = black background, white text (on white surfaces)
+// Renders <a> when href is given, otherwise <button>.
+interface Props {
+  variant: "on-ink" | "on-paper";
+  href?: string;
+  type?: "button" | "submit";
+  class?: string;
+}
+
+const { variant, href, type = "button", class: className } = Astro.props;
+
+const classes = [
+  "btn inline-flex min-h-11 items-center justify-center rounded-md px-5 font-bold no-underline",
+  variant === "on-ink" ? "bg-ball text-ink hover:bg-paper" : "bg-ink text-paper hover:text-ball",
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  /* Hover: colour only, 150 ms. Press: scale 0.97, 120 ms (SPEC.md §9.6). */
+  .btn {
+    transition:
+      color var(--dur-hover) ease,
+      background-color var(--dur-hover) ease,
+      transform var(--dur-press) var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Reduced motion: no movement, colour changes stay. */
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active {
+      transform: none;
+    }
+  }
+</style>

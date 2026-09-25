@@ -14,9 +14,14 @@ export default defineConfig({
   // Sitemap. The /ekipa/ exclusion is added in step 7 together with robots.txt (SPEC.md §13.2).
   integrations: [sitemap()],
 
-  // Tailwind 4 through the official Vite plugin (SPEC.md §2).
-  // Added by hand: `astro add` fails in this folder because of the "Š" in the path.
   vite: {
+    // Tailwind 4 through the official Vite plugin (SPEC.md §2).
+    // Added by hand: `astro add` fails in this folder because of the "Š" in the path.
     plugins: [tailwindcss()],
+    build: {
+      // Astro inlines scripts and styles smaller than this limit (default 4 kB) into the HTML.
+      // Inline scripts would break the CSP `script-src 'self'` (SPEC.md §13.1), so nothing is inlined.
+      assetsInlineLimit: 0,
+    },
   },
 });
