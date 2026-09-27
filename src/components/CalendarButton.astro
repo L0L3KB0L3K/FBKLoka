@@ -1,20 +1,23 @@
 ---
-// "Dodaj v koledar": link to the team's public Google Calendar (SPEC.md §7.2, §8).
-// No URL -> no button (SPEC.md §1).
-import { isSet } from "../lib/site.ts";
+// "Dodaj v koledar" (SPEC.md §7.2, §8): subscribe to the team's match calendar /koledar/[slug].ics.
+// webcal: opens the calendar app on iPhone, Mac and Outlook. Google Calendar (Android) needs its own link.
+// The calendar app refreshes the matches on its own; nothing to install, no account on our side.
 import Button from "./ui/Button.astro";
 
 interface Props {
-  url?: string;
+  slug: string;
 }
 
-const { url } = Astro.props;
+const { slug } = Astro.props;
+const https = new URL(`/koledar/${slug}.ics`, Astro.site);
+const webcal = https.href.replace(/^https?:/, "webcal:");
+const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
 ---
 
-{
-  isSet(url) && (
-    <Button href={url} variant="on-paper">
-      Dodaj v koledar
-    </Button>
-  )
-}
+<div>
+  <Button href={webcal} variant="on-paper">Dodaj v koledar</Button>
+  <p class="mt-3 text-small">
+    Vse tekme se prikažejo v koledarju na telefonu in se posodabljajo same.
+    Uporabljaš Google Koledar? <a href={google}>Dodaj ga tukaj</a>.
+  </p>
+</div>

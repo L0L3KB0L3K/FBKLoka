@@ -14,7 +14,7 @@ interface Props {
 const { variant, href, type = "button", class: className } = Astro.props;
 
 const classes = [
-  "btn inline-flex min-h-11 items-center justify-center rounded-md px-5 font-bold no-underline",
+  "btn inline-flex min-h-11 items-center justify-center rounded-md px-5 font-bold no-underline disabled:cursor-not-allowed disabled:opacity-70",
   variant === "on-ink" ? "bg-ball text-ink hover:bg-paper" : "bg-ink text-paper hover:text-ball",
   className,
 ];

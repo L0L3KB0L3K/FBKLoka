@@ -52,8 +52,11 @@ const panels = [
   players.length > 0 && { id: `${team.id}-sestava`, label: "Sestava" },
 ].filter((panel): panel is { id: string; label: string } => Boolean(panel));
 
+// The match calendar /koledar/[slug].ics exists only for a team with matches.
+const calendarSlug = allMatches.some((m) => m.selekcija === team.id) ? team.id : undefined;
+
 // Two columns only when both the summary and the panels exist; otherwise one full-width column.
-const twoColumns = panels.length > 0 && hasSummary(team, coaches, trainings);
+const twoColumns = panels.length > 0 && hasSummary(team, coaches, trainings, Boolean(calendarSlug));
 ---
 
 <Base title={ime} description={kratekOpis}>
@@ -62,7 +65,7 @@ const twoColumns = panels.length > 0 && hasSummary(team, coaches, trainings);
     <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>
 
     <div class:list={["mt-10 grid gap-10", twoColumns && "lg:grid-cols-[18rem_1fr] lg:items-start"]}>
-      <TeamSummary team={team} coaches={coaches} trainings={trainings} />
+      <TeamSummary team={team} coaches={coaches} trainings={trainings} calendarSlug={calendarSlug} />
 
       {
         panels.length > 1 && (

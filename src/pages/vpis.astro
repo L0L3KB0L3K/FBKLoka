@@ -1,0 +1,152 @@
+---
+// /vpis: for a new parent (SPEC.md §7.5). First free trainings, what to bring, the main button
+// "Vpiši se" (EOS registration), when and where the youth train, questions and a short form.
+// Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
+import { render } from "astro:content";
+import Field from "../components/forms/Field.astro";
+import NetlifyForm from "../components/forms/NetlifyForm.astro";
+import TrainingTable from "../components/TrainingTable.astro";
+import Button from "../components/ui/Button.astro";
+import Base from "../layouts/Base.astro";
+import { getPage, loadCollection } from "../lib/content.ts";
+import { groupBySchedule, joinSl } from "../lib/schedule.ts";
+import { getSettings, isSet } from "../lib/site.ts";
+import { getTrainings } from "../lib/trainings.ts";
+
+const page = await getPage("vpis");
+const { Content } = await render(page);
+const { eos } = await getSettings();
+
+// Youth teams (U9 ... U19), youngest first, grouped when they train at the same time.
+const trainings = await getTrainings();
+const youth = (await loadCollection("selekcije"))
+  .filter((team) => team.id.startsWith("u"))
+  .sort((a, b) => b.data.vrstniRed - a.data.vrstniRed)
+  .map((team) => ({ ime: team.data.ime, trainings: trainings.filter((t) => t.selekcija === team.id) }));
+const schedules = groupBySchedule(youth);
+
+// Questions whose answer the club has not given yet stay hidden (SPEC.md §1).
+const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
+---
+
+<Base title={page.data.naslov} description={page.data.opis}>
+  <div class="page-wrap py-12">
+    <h1>{page.data.naslov}</h1>
+
+    <div class="mt-8 prose">
+      <Content />
+    </div>
+
+    {
+      isSet(eos.registracija) && (
+        <div class="mt-8">
+          <Button href={eos.registracija} variant="on-paper">
+            Vpiši se
+          </Button>
+          <p class="mt-3 text-small text-muted">Vpis in članarina potekata v aplikaciji EOS.</p>
+        </div>
+      )
+    }
+
+    {
+      schedules.length > 0 && (
+        <section aria-labelledby="treningi-mladih" class="mt-14 max-w-2xl">
+          <h2 id="treningi-mladih" class="heading-bar">
+            Kdaj in kje trenirajo mladi
+          </h2>
+          {schedules.map((group) => (
+            <div class="mt-6">
+              <h3>{joinSl(group.names)}</h3>
+              <div class="mt-2">
+                <TrainingTable trainings={group.trainings} caption={`Treningi ${joinSl(group.names)}`} />
+              </div>
+            </div>
+          ))}
+          <p class="mt-6">
+            Urnik vseh selekcij je na strani <a href="/treningi">Treningi</a>.
+          </p>
+        </section>
+      )
+    }
+
+    {
+      questions.length > 0 && (
+        <section aria-labelledby="vprasanja" class="mt-14 max-w-2xl">
+          <h2 id="vprasanja" class="heading-bar">
+            Pogosta vprašanja
+          </h2>
+          <div class="mt-6 border-t border-line">
+            {questions.map((q) => (
+              <details class="border-b border-line">
+                <summary class="faq-summary flex min-h-11 cursor-pointer items-center justify-between gap-4 py-3 font-semibold">
+                  {q.vprasanje}
+                </summary>
+                <p class="pb-4">{q.odgovor}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section aria-labelledby="imam-vprasanje" class="mt-14 max-w-xl">
+      <h2 id="imam-vprasanje" class="heading-bar">Imam vprašanje</h2>
+      <p class="mt-4">Napišite nam in odgovorimo po e-pošti.</p>
+      <div class="mt-6">
+        <NetlifyForm name="vpis-vprasanje" submitLabel="Pošlji vprašanje">
+          <Field id="vpis-ime" name="ime" label="Vaše ime" autocomplete="name" required error="Vpiši svoje ime." />
+          <Field
+            id="vpis-email"
+            name="email"
+            type="email"
+            label="E-mail"
+            autocomplete="email"
+            required
+            error="Vpiši e-mail v obliki ime@domena.si."
+          />
+          <Field
+            id="vpis-letnik"
+            name="letnik"
+            label="Letnik otroka"
+            inputmode="numeric"
+            pattern="(19|20)[0-9]{2}"
+            maxlength={4}
+            autocomplete="off"
+            hint="Na primer 2017."
+            error="Vpiši letnik s štirimi številkami, na primer 2017."
+          />
+          <Field
+            id="vpis-sporocilo"
+            name="sporocilo"
+            as="textarea"
+            label="Sporočilo"
+            required
+            maxlength={2000}
+            error="Napiši sporočilo."
+          />
+        </NetlifyForm>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  /* Questions: a visible + / – instead of the browser marker, which flex hides. */
+  .faq-summary {
+    list-style: none;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary::after {
+    content: "+";
+    font-size: var(--text-h3);
+    line-height: 1;
+  }
+
+  details[open] > .faq-summary::after {
+    content: "–";
+  }
+</style>

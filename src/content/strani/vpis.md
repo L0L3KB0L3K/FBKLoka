@@ -17,8 +17,10 @@ vprasanja:
 
 **Prvi treningi so brezplačni.** Otrok pride na nekaj treningov in vidi, kako potekajo in ali mu je floorball všeč.
 
-**Kaj prinese s seboj**
+## Kaj prinese s seboj
+
 Dvoranske čevlje, kratke hlače in majico. Palico mu posodimo.
 
-**Ko se otrok odloči za floorball**
+## Ko se otrok odloči za floorball
+
 Včlani se v klub in si kupi svojo palico. Članarina se ureja prek aplikacije EOS.

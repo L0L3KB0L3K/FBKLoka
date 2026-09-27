@@ -1,0 +1,33 @@
+---
+// /hvala: after a form is sent (SPEC.md §7.5). Says what happens next and offers another way to reach us.
+// Not for search engines.
+import Base from "../layouts/Base.astro";
+import { getSettings, isSet } from "../lib/site.ts";
+
+const { email, socialna } = await getSettings();
+---
+
+<Base title="Hvala" description="Sporočilo smo prejeli." noindex>
+  <div class="page-wrap py-12">
+    <h1>Hvala za sporočilo</h1>
+    <div class="mt-8 prose">
+      <p>Sporočilo smo prejeli. Odgovorili vam bomo po e-pošti.</p>
+      {
+        isSet(email) ? (
+          <p>
+            Če je nujno, pišite na <a href={`mailto:${email}`}>{email}</a>.
+          </p>
+        ) : (
+          isSet(socialna.instagram) && (
+            <p>
+              Če je nujno, nam pišite na <a href={socialna.instagram}>Instagramu</a>.
+            </p>
+          )
+        )
+      }
+      <p>
+        Medtem si lahko ogledate <a href="/tekme">tekme</a> ali <a href="/treningi">urnik treningov</a>.
+      </p>
+    </div>
+  </div>
+</Base>

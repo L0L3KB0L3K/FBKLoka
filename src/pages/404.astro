@@ -1,0 +1,30 @@
+---
+// 404 page (Netlify serves dist/404.html for unknown URLs). Points to the main tasks (SPEC.md §9.5).
+import Base from "../layouts/Base.astro";
+
+const links = [
+  { href: "/", label: "Domov" },
+  { href: "/tekme", label: "Tekme" },
+  { href: "/treningi", label: "Treningi" },
+  { href: "/vpis", label: "Vpis" },
+  { href: "/kontakt", label: "Kontakt" },
+];
+---
+
+<Base title="Strani ni" description="Te strani ni na spletni strani FBK Loka." noindex>
+  <div class="page-wrap py-12">
+    <h1>Strani ni mogoče najti</h1>
+    <p class="mt-8">Morda je bila povezava napačna ali pa je stran umaknjena. Poskusite tukaj:</p>
+    <ul class="mt-4">
+      {
+        links.map(({ href, label }) => (
+          <li>
+            <a href={href} class="inline-flex min-h-11 items-center">
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

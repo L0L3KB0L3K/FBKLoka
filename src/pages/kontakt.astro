@@ -1,0 +1,142 @@
+---
+// /kontakt (SPEC.md §7.7): club contact, the person responsible for each team, a form and social links.
+// Contact is one click away from every page (footer). Values that are still "TODO" are not shown.
+import Field from "../components/forms/Field.astro";
+import NetlifyForm from "../components/forms/NetlifyForm.astro";
+import Base from "../layouts/Base.astro";
+import { loadCollection } from "../lib/content.ts";
+import { joinSl } from "../lib/schedule.ts";
+import { getSettings, isSet } from "../lib/site.ts";
+
+const { naslov, email, telefon, socialna } = await getSettings();
+const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+
+// Head coaches with the teams they lead, in team order (SPEC.md §7.7 "odgovorne osebe po selekcijah").
+const heads = (await loadCollection("trenerji"))
+  .filter((coach) => coach.data.vloga === "Glavni trener")
+  .map((coach) => ({
+    ...coach.data,
+    teams: teams.filter((team) => team.data.trenerji.includes(coach.id)).map((team) => team.data.ime),
+    order: Math.min(...teams.filter((team) => team.data.trenerji.includes(coach.id)).map((team) => team.data.vrstniRed)),
+  }))
+  .filter((coach) => coach.teams.length > 0)
+  .sort((a, b) => a.order - b.order);
+
+const social = [
+  { href: socialna.instagram, label: "Instagram" },
+  { href: socialna.facebook, label: "Facebook" },
+  { href: socialna.youtube, label: "YouTube" },
+].filter((item): item is { href: string; label: string } => isSet(item.href));
+---
+
+<Base title="Kontakt" description="Kontakt floorball kluba FBK Loka iz Škofje Loke: trenerji po selekcijah in obrazec za sporočilo.">
+  <div class="page-wrap py-12">
+    <h1>Kontakt</h1>
+
+    <div class="mt-10 grid gap-12 lg:grid-cols-2">
+      <div class="space-y-12">
+        <section aria-labelledby="klub">
+          <h2 id="klub" class="heading-bar">FBK Loka</h2>
+          <dl class="mt-6 space-y-4">
+            {
+              isSet(naslov) && (
+                <div>
+                  <dt class="text-small text-muted">Naslov</dt>
+                  <dd>{naslov}</dd>
+                </div>
+              )
+            }
+            {
+              isSet(email) && (
+                <div>
+                  <dt class="text-small text-muted">E-mail</dt>
+                  <dd>
+                    <a href={`mailto:${email}`} class="inline-flex min-h-11 items-center">
+                      {email}
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
+            {
+              isSet(telefon) && (
+                <div>
+                  <dt class="text-small text-muted">Telefon</dt>
+                  <dd>
+                    <a href={`tel:${telefon.replace(/\s/g, "")}`} class="inline-flex min-h-11 items-center">
+                      {telefon}
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+          {
+            social.length > 0 && (
+              <ul class="mt-6 flex flex-wrap gap-x-6">
+                {social.map(({ href, label }) => (
+                  <li>
+                    <a href={href} class="inline-flex min-h-11 items-center">
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </section>
+
+        {
+          heads.length > 0 && (
+            <section aria-labelledby="trenerji">
+              <h2 id="trenerji" class="heading-bar">
+                Trenerji po selekcijah
+              </h2>
+              <ul class="mt-6 border-t border-line">
+                {heads.map((coach) => (
+                  <li class="border-b border-line py-4">
+                    <p class="font-semibold">{coach.ime}</p>
+                    <p class="text-small text-muted">{joinSl(coach.teams)}</p>
+                    {isSet(coach.email) && (
+                      <a href={`mailto:${coach.email}`} class="inline-flex min-h-11 items-center">
+                        {coach.email}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </div>
+
+      <section aria-labelledby="pisite-nam" class="max-w-xl">
+        <h2 id="pisite-nam" class="heading-bar">Pišite nam</h2>
+        <div class="mt-6">
+          <NetlifyForm name="kontakt" submitLabel="Pošlji sporočilo">
+            <Field id="kontakt-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpiši svoje ime." />
+            <Field
+              id="kontakt-email"
+              name="email"
+              type="email"
+              label="E-mail"
+              autocomplete="email"
+              required
+              error="Vpiši e-mail v obliki ime@domena.si."
+            />
+            <Field id="kontakt-zadeva" name="zadeva" label="Zadeva" maxlength={150} error="Zadeva je predolga." />
+            <Field
+              id="kontakt-sporocilo"
+              name="sporocilo"
+              as="textarea"
+              label="Sporočilo"
+              required
+              maxlength={2000}
+              error="Napiši sporočilo."
+            />
+          </NetlifyForm>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>

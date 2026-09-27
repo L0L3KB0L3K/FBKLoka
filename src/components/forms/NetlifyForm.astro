@@ -1,0 +1,79 @@
+---
+// Form handled by Netlify Forms (SPEC.md §2, §7.5, §7.7). It is in the static HTML, so Netlify finds it
+// when the site is deployed. Spam protection: honeypot field only; reCAPTCHA only if spam arrives.
+// After sending the visitor lands on /hvala. Fields are <Field> children.
+// The script shows Slovenian error messages under the fields, moves focus to the first error
+// and shows "Pošiljam…" while sending. Without JS the browser's own validation still works.
+import Button from "../ui/Button.astro";
+
+interface Props {
+  /** Form name in the Netlify dashboard, e.g. "kontakt". */
+  name: string;
+  submitLabel: string;
+}
+
+const { name, submitLabel } = Astro.props;
+---
+
+<form name={name} method="POST" action="/hvala" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6" data-validate>
+  <input type="hidden" name="form-name" value={name} />
+  <p hidden>
+    <label>Tega polja ne izpolnjuj: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <slot />
+  <div>
+    <Button type="submit" variant="on-paper">{submitLabel}</Button>
+    <p class="mt-3 text-small text-muted">
+      Podatke uporabimo samo za odgovor. <a href="/zasebnost">Več o zasebnosti</a>.
+    </p>
+  </div>
+</form>
+
+<script>
+  // Client-side checks with messages that say what to fix (SPEC.md §10).
+  for (const form of document.querySelectorAll<HTMLFormElement>("form[data-validate]")) {
+    const fields = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("[data-field]")];
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]");
+    const buttonLabel = button?.textContent ?? "";
+    form.noValidate = true;
+
+    const check = (field: HTMLInputElement | HTMLTextAreaElement) => {
+      const valid = field.checkValidity();
+      const message = document.getElementById(`${field.id}-error`);
+      field.setAttribute("aria-invalid", String(!valid));
+      if (message) {
+        message.textContent = valid ? "" : (field.dataset.error ?? "Preveri to polje.");
+        message.hidden = valid;
+      }
+      return valid;
+    };
+
+    form.addEventListener("submit", (event) => {
+      const invalid = fields.filter((field) => !check(field));
+      if (invalid.length > 0) {
+        event.preventDefault();
+        invalid[0].focus();
+        return;
+      }
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Pošiljam…";
+      }
+    });
+
+    // Once a field has shown an error, re-check it while the visitor corrects it.
+    for (const field of fields) {
+      field.addEventListener("input", () => {
+        if (field.getAttribute("aria-invalid") === "true") check(field);
+      });
+    }
+
+    // Back button from /hvala: the page may come from the cache with a disabled button.
+    window.addEventListener("pageshow", () => {
+      if (button) {
+        button.disabled = false;
+        button.textContent = buttonLabel;
+      }
+    });
+  }
+</script>

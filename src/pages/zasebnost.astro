@@ -1,0 +1,18 @@
+---
+// /zasebnost (SPEC.md §12): text from src/content/strani/zasebnost.md.
+import { render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { getPage } from "../lib/content.ts";
+
+const page = await getPage("zasebnost");
+const { Content } = await render(page);
+---
+
+<Base title={page.data.naslov} description={page.data.opis}>
+  <div class="page-wrap py-12">
+    <h1>{page.data.naslov}</h1>
+    <div class="mt-8 prose">
+      <Content />
+    </div>
+  </div>
+</Base>

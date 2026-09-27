@@ -1,0 +1,82 @@
+---
+// /klub (SPEC.md §7.6): about the club (Markdown), coaches as cards with their teams, and the halls
+// with a map link. "Vodstvo" follows when the club sends it; /zgodovina is linked in phase 3.
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import Base from "../layouts/Base.astro";
+import { getPage, loadCollection } from "../lib/content.ts";
+import { joinSl } from "../lib/schedule.ts";
+import { isSet } from "../lib/site.ts";
+
+const page = await getPage("klub");
+const { Content } = await render(page);
+
+const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+const coaches = (await loadCollection("trenerji"))
+  .map((coach) => {
+    const own = teams.filter((team) => team.data.trenerji.includes(coach.id));
+    return { ...coach.data, id: coach.id, teams: own.map((team) => team.data.ime), order: Math.min(...own.map((t) => t.data.vrstniRed)) };
+  })
+  .filter((coach) => coach.teams.length > 0)
+  // Team order first, then head coach before assistants, then name.
+  .sort((a, b) => a.order - b.order || Number(b.vloga === "Glavni trener") - Number(a.vloga === "Glavni trener") || a.ime.localeCompare(b.ime, "sl"));
+
+const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden" ? -1 : b.id === "poden" ? 1 : 0));
+---
+
+<Base title="Klub" description={page.data.opis}>
+  <div class="page-wrap py-12">
+    <h1>{page.data.naslov}</h1>
+    <div class="mt-8 prose">
+      <Content />
+    </div>
+
+    {
+      coaches.length > 0 && (
+        <section aria-labelledby="trenerji" class="mt-16">
+          <h2 id="trenerji" class="heading-bar">
+            Trenerji
+          </h2>
+          <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {coaches.map((coach) => (
+              <li class="border border-line p-5">
+                {coach.foto && (
+                  <Image src={coach.foto} alt={coach.ime} width={320} class="mb-4 aspect-[4/5] w-full rounded-md object-cover" />
+                )}
+                <h3>{coach.ime}</h3>
+                <p class="text-small text-muted">{coach.vloga}</p>
+                <p class="mt-2">{joinSl(coach.teams)}</p>
+                {isSet(coach.email) && (
+                  <a href={`mailto:${coach.email}`} class="inline-flex min-h-11 items-center">
+                    {coach.email}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      halls.length > 0 && (
+        <section aria-labelledby="dvorane" class="mt-16">
+          <h2 id="dvorane" class="heading-bar">
+            Dvorane
+          </h2>
+          <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+            {halls.map(({ data }) => (
+              <li>
+                <h3>{data.ime}</h3>
+                <p class="mt-1">{data.naslov}</p>
+                <a href={data.zemljevid} class="inline-flex min-h-11 items-center">
+                  Zemljevid<span class="sr-only"> za {data.ime}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</Base>

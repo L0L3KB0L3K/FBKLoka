@@ -27,7 +27,7 @@ function refTo(collection: string) {
   const dir = join(process.cwd(), "src", "content", collection);
   const slugs = readdirSync(dir)
     .filter((name) => name.endsWith(".yaml"))
-    .map((name) => name.replace(/.yaml$/, ""));
+    .map((name) => name.replace(/\.yaml$/, ""));
   const allowed = slugs.length ? slugs.join(", ") : "(zbirka je prazna)";
   return z.string().refine((value) => slugs.includes(value), {
     message: `Ni vnosa s to oznako v zbirki "${collection}". Obstajajo: ${allowed}.`,
@@ -62,7 +62,6 @@ const selekcije = defineCollection({
       .default([]),
     kratekOpis: z.string().min(1), // 1–2 sentences
     prikaziSestavo: z.boolean().default(true),
-    koledar: z.url().optional(), // public Google Calendar of the team, "Dodaj v koledar" (SPEC.md §7.2)
     treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
   }),
 });

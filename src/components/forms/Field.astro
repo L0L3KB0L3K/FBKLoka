@@ -1,0 +1,78 @@
+---
+// One labelled form field (SPEC.md §7.5, §7.7, §10). The label is always visible, never a placeholder.
+// `error` says what to fix ("Vpiši e-mail v obliki ime@domena.si."). The form script shows it under
+// the field; without JS the browser's own check runs (required, type, pattern).
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  /** Message shown when the value is missing or wrong. */
+  error: string;
+  type?: "text" | "email" | "tel";
+  as?: "input" | "textarea";
+  required?: boolean;
+  autocomplete?: string;
+  inputmode?: "text" | "numeric" | "email" | "tel";
+  pattern?: string;
+  maxlength?: number;
+  hint?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  error,
+  type = "text",
+  as = "input",
+  required = false,
+  autocomplete,
+  inputmode,
+  pattern,
+  maxlength,
+  hint,
+} = Astro.props;
+
+const describedBy = [hint && `${id}-hint`, `${id}-error`].filter(Boolean).join(" ");
+const control =
+  "mt-2 block w-full min-h-11 rounded-md border border-input-border bg-paper px-3 py-2 aria-invalid:border-2 aria-invalid:border-ink";
+---
+
+<div>
+  <label for={id} class="block font-semibold">
+    {label}
+    {!required && <span class="font-normal text-muted"> (neobvezno)</span>}
+  </label>
+  {hint && <p id={`${id}-hint`} class="text-small text-muted">{hint}</p>}
+  {
+    as === "textarea" ? (
+      <textarea
+        id={id}
+        name={name}
+        rows="5"
+        required={required}
+        maxlength={maxlength}
+        aria-describedby={describedBy}
+        data-field
+        data-error={error}
+        class={control}
+      />
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required={required}
+        autocomplete={autocomplete}
+        inputmode={inputmode}
+        pattern={pattern}
+        maxlength={maxlength}
+        aria-describedby={describedBy}
+        data-field
+        data-error={error}
+        class={control}
+      />
+    )
+  }
+  <p id={`${id}-error`} class="mt-2 border-l-4 border-ink pl-2 font-semibold" hidden></p>
+</div>

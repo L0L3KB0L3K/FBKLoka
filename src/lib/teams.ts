@@ -11,8 +11,9 @@ export function hasSummary(
   team: CollectionEntry<"selekcije">,
   coaches: CollectionEntry<"trenerji">[],
   trainings: Training[],
+  hasCalendar: boolean,
 ): boolean {
-  const { starostniRazpon, kapetan, naslovi, koledar, treningiOpomba } = team.data;
+  const { starostniRazpon, kapetan, naslovi, treningiOpomba } = team.data;
   return (
     isSet(starostniRazpon) ||
     coaches.length > 0 ||
@@ -20,7 +21,7 @@ export function hasSummary(
     trainings.length > 0 ||
     isSet(treningiOpomba) ||
     naslovi.length > 0 ||
-    isSet(koledar)
+    hasCalendar
   );
 }
 

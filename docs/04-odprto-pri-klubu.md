@@ -8,6 +8,8 @@ Stanje: 27. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Kontaktne osebe po selekcijah: Gorazd Tomc (člani), Gašper Triler (U19–U13), Gašper Dagarin (U11, U9). Ali objavimo njihov e-mail ali telefon?
 - [ ] Letniki (leta rojstva) za U9, U11, U13, U15, U17 in U19.
 - [ ] Za stran o zasebnosti potrdi podatke iz javnega registra: FLOORBALL KLUB LOKA, Podlubnik 1C, 4220 Škofja Loka, matična številka 1677055000. Isti naslov je zdaj v nogi strani.
+- [ ] Preberite in potrdite osnutka besedil na straneh O klubu (/klub) in Zasebnost (/zasebnost). Pri zasebnosti: ali drži rok hrambe sporočil največ 12 mesecev? Priporočam, da ga prebere nekdo s pravnim znanjem.
+- [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.
 - [ ] Logo v izvirni obliki (SVG ali PDF od oblikovalca) in potrditev rumene barve.
 - [ ] Skupinska fotografija članske ekipe v izvirni velikosti, ne z Instagrama (ta jo zmanjša na 1080 px). Potrebujemo vsaj 2000 px širine.
 - [ ] Domena fbkloka.si: kdo v klubu jo ima? Ta oseba mora ob objavi nastaviti DNS ali domeno prenesti.

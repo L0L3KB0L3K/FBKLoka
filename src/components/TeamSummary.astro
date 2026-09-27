@@ -14,11 +14,13 @@ interface Props {
   team: CollectionEntry<"selekcije">;
   coaches: CollectionEntry<"trenerji">[];
   trainings: Training[];
+  /** Team slug when the team has matches, so the calendar /koledar/[slug].ics exists. */
+  calendarSlug?: string;
 }
 
-const { team, coaches, trainings } = Astro.props;
-const { starostniRazpon, kapetan, naslovi, koledar, treningiOpomba } = team.data;
-const hasContent = hasSummary(team, coaches, trainings);
+const { team, coaches, trainings, calendarSlug } = Astro.props;
+const { starostniRazpon, kapetan, naslovi, treningiOpomba } = team.data;
+const hasContent = hasSummary(team, coaches, trainings, Boolean(calendarSlug));
 ---
 
 {
@@ -68,9 +70,9 @@ const hasContent = hasSummary(team, coaches, trainings);
           </div>
         )}
       </dl>
-      {isSet(koledar) && (
+      {calendarSlug && (
         <div class="mt-6">
-          <CalendarButton url={koledar} />
+          <CalendarButton slug={calendarSlug} />
         </div>
       )}
     </aside>

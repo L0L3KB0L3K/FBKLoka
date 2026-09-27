@@ -26,7 +26,7 @@ const current = (href: string) => {
       <Image src={logoDark} alt="FBK Loka, domov" height={40} densities={[1, 2]} loading="eager" />
     </a>
 
-    <!-- Right side: desktop menu, EOS button, mobile menu button -->
+    {/* Right side: desktop menu, EOS button, mobile menu button */}
     <div class="flex items-center gap-6">
       <nav aria-label="Glavni meni" class="hidden lg:block">
         <ul class="flex items-center gap-5">
@@ -59,7 +59,7 @@ const current = (href: string) => {
         )
       }
 
-      <!-- Mobile menu button. Without JS the same links are in the footer. -->
+      {/* Mobile menu button. Without JS the same links are in the footer. */}
       <button
         type="button"
         class="flex min-h-11 min-w-11 items-center gap-2 font-semibold hover:text-ball lg:hidden"
@@ -75,7 +75,7 @@ const current = (href: string) => {
     </div>
   </div>
 
-  <!-- Mobile menu: full screen over the page (SPEC.md §9.5) -->
+  {/* Mobile menu: full screen over the page (SPEC.md §9.5) */}
   <dialog id="site-menu" class="menu surface-ink" aria-label="Meni">
     <div class="page-wrap flex h-16 items-center justify-between gap-6">
       <a href="/" class="flex min-h-11 shrink-0 items-center">
