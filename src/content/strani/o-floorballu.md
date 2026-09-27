@@ -12,7 +12,7 @@ Floorball je dvoranska različica hokeja. Igra se s plastično žogico z luknjam
 - Tekma ima tri tretjine.
 
 **Kaj otrok potrebuje**
-Športno obutev za dvorano, kratke hlače in majico. Palico lahko na začetku posodi klub. <!-- TODO: potrdi, ali klub posodi palice -->
+Dvoranske čevlje, kratke hlače in majico. Palico mu na prvih treningih posodimo. Prvi obiski treninga so brezplačni.
 
 **Floorball v svetu**
 Mednarodna floorball zveza je bila ustanovljena leta 1986 na Švedskem. Floorball je od leta 2011 priznan s strani Mednarodnega olimpijskega komiteja. Največ igralcev imajo Švedska, Finska, Češka in Švica.

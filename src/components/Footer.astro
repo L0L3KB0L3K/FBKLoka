@@ -19,6 +19,7 @@ const eosUrl = isSet(eos.portal) ? eos.portal : null;
 const social = [
   { href: socialna.instagram, label: "Instagram" },
   { href: socialna.facebook, label: "Facebook" },
+  { href: socialna.youtube, label: "YouTube" },
 ].filter((item): item is { href: string; label: string } => isSet(item.href));
 
 const year = new Date().getFullYear();

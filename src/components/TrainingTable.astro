@@ -1,0 +1,63 @@
+---
+// Training slots of one team (SPEC.md §7.4, §8).
+// Full: a small table (day, time, hall with a map link). Compact: one line per slot for the team summary.
+// Nothing is rendered without slots.
+import type { Training } from "../lib/trainings.ts";
+
+interface Props {
+  trainings: Training[];
+  compact?: boolean;
+  /** Accessible table caption, e.g. "Treningi U15". */
+  caption?: string;
+}
+
+const { trainings, compact = false, caption = "Treningi" } = Astro.props;
+const DAY_SHORT: Record<string, string> = {
+  ponedeljek: "pon",
+  torek: "tor",
+  sreda: "sre",
+  četrtek: "čet",
+  petek: "pet",
+  sobota: "sob",
+  nedelja: "ned",
+};
+---
+
+{
+  trainings.length > 0 &&
+    (compact ? (
+      <ul class="space-y-1">
+        {trainings.map((t) => (
+          <li>
+            <span class="tabular-nums">{`${DAY_SHORT[t.dan]} ${t.od}–${t.do}`}</span>, {t.dvorana.ime}
+            {t.opomba && <span class="block text-small text-muted">{t.opomba}</span>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <table class="w-full text-left">
+        <caption class="sr-only">{caption}</caption>
+        <thead class="text-small text-muted">
+          <tr>
+            <th scope="col" class="py-2 pr-4 font-semibold">Dan</th>
+            <th scope="col" class="py-2 pr-4 font-semibold">Ura</th>
+            <th scope="col" class="py-2 font-semibold">Dvorana</th>
+          </tr>
+        </thead>
+        <tbody>
+          {trainings.map((t) => (
+            <tr class="border-t border-line align-top">
+              <td class="py-3 pr-4">{t.dan}</td>
+              <td class="py-3 pr-4 font-bold whitespace-nowrap tabular-nums">
+                {t.od}–{t.do}
+              </td>
+              <td class="py-3">
+                <a href={t.dvorana.zemljevid}>{t.dvorana.ime}</a>
+                {t.opomba && <span class="block text-small text-muted">{t.opomba}</span>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ))
+}

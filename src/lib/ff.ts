@@ -171,6 +171,16 @@ export function normalize(details: FfCompetitionDetails, config: NormalizeConfig
   return sortMatches(matches);
 }
 
+/**
+ * Local file name for a FloorballFlash logo URL, e.g. ".../uploads/public/abc-123.png" -> "abc-123.png".
+ * Returns null for anything that is not a plain image file name, so a strange URL can never
+ * write outside the logo folder.
+ */
+export function logoFileName(url: string): string | null {
+  const name = url.split("/").pop() ?? "";
+  return /^[a-z0-9-]+\.(svg|png|jpe?g|webp|gif)$/i.test(name) ? name.toLowerCase() : null;
+}
+
 /** Chronological order. Compares instants, not strings: offsets differ across the DST change. */
 export function sortMatches(matches: Match[]): Match[] {
   return [...matches].sort(

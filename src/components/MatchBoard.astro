@@ -1,0 +1,168 @@
+---
+// Match board: the one loud element of the site (SPEC.md §7.1, §9.1, §9.4).
+// Black, ball-hole pattern, the next match of any team: team, opponent, date, time, venue, countdown.
+// The HTML holds up to 5 upcoming matches and the last result. The script picks what to show in the
+// browser (src/lib/upcoming.ts): matches that started more than 3 hours ago are skipped, on match day
+// "Danes igramo" appears, and the countdown is refreshed every minute.
+// Without JS the first match is shown with its date and no countdown. No matches at all: nothing is
+// rendered, and the join section below becomes the first thing on the page.
+import { formatDateLong, formatTime } from "../lib/format.ts";
+import { scoreForLoka } from "../lib/matches.ts";
+import type { Match } from "../lib/types.ts";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  upcoming: Match[];
+  last: Match | null;
+  teamNames: Record<string, string>;
+}
+
+const { upcoming, last, teamNames } = Astro.props;
+
+const sides = (match: Match) => {
+  const ours = match.ekipaLoka;
+  const theirs = match.nasprotnik.ime;
+  return match.doma ? [ours, theirs] : [theirs, ours];
+};
+const venueOf = (match: Match) =>
+  match.prizorisce
+    ? [match.prizorisce.ime, match.prizorisce.ime.includes(match.prizorisce.kraj) ? "" : match.prizorisce.kraj]
+        .filter(Boolean)
+        .join(", ")
+    : "";
+---
+
+{
+  (upcoming.length > 0 || last) && (
+    <section aria-label="Naslednja tekma" class="board surface-ink relative overflow-hidden" data-board>
+      <div class="board-pattern" aria-hidden="true" />
+      <div class="page-wrap relative py-12 md:py-16">
+        {upcoming.map((match, index) => {
+          const [home, away] = sides(match);
+          const venue = venueOf(match);
+          return (
+            <article class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-slide data-start={match.zacetek} hidden={index > 0}>
+              <div>
+                <p class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-md bg-ball px-2 py-1 font-bold text-ink" data-today hidden>
+                    Danes igramo
+                  </span>
+                  <span>
+                    <span class="font-bold">{teamNames[match.selekcija]}</span> {match.tekmovanje}
+                  </span>
+                </p>
+                <p class="mt-4 text-h1 font-extrabold [font-stretch:125%]">
+                  {home}
+                  <span aria-hidden="true"> – </span>
+                  <span class="sr-only"> proti </span>
+                  {away}
+                </p>
+                {venue && <p class="mt-3">{venue}</p>}
+              </div>
+              <div class="md:text-right">
+                <p class="text-h3 font-bold">
+                  <time datetime={match.zacetek}>
+                    {formatDateLong(match.zacetek).replace(/ \d{4}$/, "")}
+                    <span class="block text-h1 tabular-nums">{formatTime(match.zacetek)}</span>
+                  </time>
+                </p>
+                <p class="mt-2 min-h-[1.5em] text-h3 font-bold text-ball" data-countdown />
+                <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 md:justify-end">
+                  <a href={match.ffUrl} class="inline-flex min-h-11 items-center font-bold hover:text-ball" data-live hidden>
+                    V živo na FloorballFlash
+                  </a>
+                  <Button href="/tekme" variant="on-ink">
+                    Vse tekme
+                  </Button>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+
+        {last && (
+          <article class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-slide-result hidden={upcoming.length > 0}>
+            <div>
+              <p>
+                <span class="font-bold">{teamNames[last.selekcija]}</span> {last.tekmovanje}, zadnja tekma
+              </p>
+              <p class="mt-4 text-h1 font-extrabold [font-stretch:125%]">
+                {sides(last)[0]}
+                <span aria-hidden="true"> – </span>
+                <span class="sr-only"> proti </span>
+                {sides(last)[1]}
+              </p>
+              <p class="mt-3">
+                <time datetime={last.zacetek}>{formatDateLong(last.zacetek)}</time>
+              </p>
+            </div>
+            <div class="md:text-right">
+              <p class="text-h1 font-extrabold text-ball tabular-nums">{scoreForLoka(last)}</p>
+              <div class="mt-6">
+                <Button href="/tekme" variant="on-ink">
+                  Vse tekme
+                </Button>
+              </div>
+            </div>
+          </article>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Ball-hole pattern: the SVG only masks, the colour is the ball token at ~12 %. Static (SPEC.md §9.4, §9.6). */
+  .board-pattern {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-ball);
+    opacity: 0.12;
+    mask-image: url("../assets/ball-holes.svg");
+    mask-size: 240px 240px;
+    mask-repeat: repeat;
+  }
+</style>
+
+<script>
+  // Picks the board match in the browser and keeps the countdown fresh (SPEC.md §7.1).
+  // The rows of "Naslednje tekme" ([data-upcoming-row]) follow the same 3-hour rule.
+  import { currentTime } from "../lib/clock.ts";
+  import { formatCountdown, pick } from "../lib/upcoming.ts";
+
+  const board = document.querySelector<HTMLElement>("[data-board]");
+  const upcomingSection = document.querySelector<HTMLElement>("[data-upcoming-section]");
+
+  function update() {
+    const now = currentTime();
+
+    if (board) {
+      const slides = [...board.querySelectorAll<HTMLElement>("[data-slide]")];
+      const result = board.querySelector<HTMLElement>("[data-slide-result]");
+      const state = pick(slides.map((slide) => slide.dataset.start ?? ""), now);
+
+      slides.forEach((slide, i) => (slide.hidden = i !== state.board));
+      if (result) result.hidden = state.board !== null;
+      board.hidden = state.board === null && !result;
+
+      const current = state.board === null ? null : slides[state.board];
+      if (current) {
+        (current.querySelector("[data-today]") as HTMLElement).hidden = !state.today;
+        (current.querySelector("[data-live]") as HTMLElement).hidden = !state.today;
+        (current.querySelector("[data-countdown]") as HTMLElement).textContent = state.live
+          ? "Tekma poteka"
+          : formatCountdown(state.msToStart);
+      }
+    }
+
+    if (upcomingSection) {
+      const rows = [...upcomingSection.querySelectorAll<HTMLElement>("[data-start]")];
+      const { visible } = pick(rows.map((row) => row.dataset.start ?? ""), now);
+      rows.forEach((row, i) => (row.hidden = !visible[i]));
+      upcomingSection.hidden = !visible.includes(true);
+    }
+  }
+
+  update();
+  setInterval(update, 60_000);
+</script>

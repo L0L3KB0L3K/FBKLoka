@@ -1,45 +1,83 @@
 # Training slots (SPEC.md §4.2). One item per slot. Source for /treningi and every team page.
-# TEMPORARY: one placeholder slot per team until the club sends the real schedule (SPEC.md §14).
+# From the club, 27. 9. 2026. All youth teams train at the same time: U9 and U11 on one third
+# of the hall, U13–U17 on the other two thirds. U19 trains with the seniors or U17 (see selekcije/u19.yaml).
+# Švigalice: times not known yet.
 termini:
   - selekcija: clani
     dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
+    od: "19:00"
+    do: "20:30"
+    dvorana: trata
+    opomba: ""
+  - selekcija: clani
+    dan: torek
+    od: "20:15"
+    do: "21:45"
     dvorana: poden
-    opomba: "TODO: termin od kluba"
-  - selekcija: svigalice
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
-    dvorana: poden
-    opomba: "TODO: termin od kluba"
-  - selekcija: u19
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
-    dvorana: poden
-    opomba: "TODO: termin od kluba"
+    opomba: ""
+  - selekcija: clani
+    dan: četrtek
+    od: "20:45"
+    do: "22:15"
+    dvorana: trata
+    opomba: ""
   - selekcija: u17
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
+    dan: sreda
+    od: "15:45"
+    do: "17:15"
     dvorana: poden
-    opomba: "TODO: termin od kluba"
+    opomba: "Skupaj z U13 in U15"
+  - selekcija: u17
+    dan: petek
+    od: "16:00"
+    do: "17:30"
+    dvorana: trata
+    opomba: "Skupaj z U13 in U15"
   - selekcija: u15
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
+    dan: sreda
+    od: "15:45"
+    do: "17:15"
     dvorana: poden
-    opomba: "TODO: termin od kluba"
+    opomba: "Skupaj z U13 in U17"
+  - selekcija: u15
+    dan: petek
+    od: "16:00"
+    do: "17:30"
+    dvorana: trata
+    opomba: "Skupaj z U13 in U17"
   - selekcija: u13
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
+    dan: sreda
+    od: "15:45"
+    do: "17:15"
     dvorana: poden
-    opomba: "TODO: termin od kluba"
+    opomba: "Skupaj z U15 in U17"
+  - selekcija: u13
+    dan: petek
+    od: "16:00"
+    do: "17:30"
+    dvorana: trata
+    opomba: "Skupaj z U15 in U17"
   - selekcija: u11
-    dan: ponedeljek
-    od: "17:00"
-    do: "18:30"
+    dan: sreda
+    od: "15:45"
+    do: "17:15"
     dvorana: poden
-    opomba: "TODO: termin od kluba"
+    opomba: "Skupaj z U9"
+  - selekcija: u11
+    dan: petek
+    od: "16:00"
+    do: "17:30"
+    dvorana: trata
+    opomba: "Skupaj z U9"
+  - selekcija: u9
+    dan: sreda
+    od: "15:45"
+    do: "17:15"
+    dvorana: poden
+    opomba: "Skupaj z U11"
+  - selekcija: u9
+    dan: petek
+    od: "16:00"
+    do: "17:30"
+    dvorana: trata
+    opomba: "Skupaj z U11"

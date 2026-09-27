@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { mergeWithPrevious, normalize, sortMatches, type FfCompetitionDetails } from "../src/lib/ff.ts";
+import { FF_LOGO_BASE, logoFileName, mergeWithPrevious, normalize, sortMatches, type FfCompetitionDetails } from "../src/lib/ff.ts";
 import type { Match } from "../src/lib/types.ts";
 
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/ff-738.json", import.meta.url), "utf8"));
@@ -82,4 +82,10 @@ test("sorting compares instants, not strings, across the DST change", () => {
   const early: Match = { ...base, id: 1, zacetek: "2026-10-25T01:30:00+02:00" }; // 23:30 UTC on the 24th
   const late: Match = { ...base, id: 2, zacetek: "2026-10-25T01:00:00+01:00" }; // 00:00 UTC on the 25th
   assert.deepEqual(sortMatches([late, early]).map((m) => m.id), [1, 2]);
+});
+
+test("logo file names: plain image names only, nothing that could leave the logo folder", () => {
+  assert.equal(logoFileName(FF_LOGO_BASE + "uploads/public/abc-123.PNG"), "abc-123.png");
+  assert.equal(logoFileName("https://example.com/..%2F..%2Fetc%2Fpasswd"), null);
+  assert.equal(logoFileName("https://example.com/page.html"), null);
 });

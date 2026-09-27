@@ -41,6 +41,10 @@ dogodki:
   - leto: 2020
     dogodek: "Člani drugič zapored osvojijo IFL."
 
+  - leto: 2020
+    dogodek: "Člani ubranijo naslov državnih prvakov."
+    # Source: IFF archive, "Insport Škofja Loka defends title in Slovenia", 6. 10. 2020.
+
   - leto: 2022
     dogodek: "Tretji zaporedni naslov IFL."
 
@@ -76,7 +80,7 @@ dogodki:
 
   - leto: 2025
     dogodek: "Klub nastopa pod imenom FBK Loka."
-    opomba: "TODO: točno leto preimenovanja iz FBK Insport."
+    opomba: "TODO: točno leto preimenovanja. Aprila 2024 še FBK Insport (Gorenjski glas), aprila 2025 že FBK Loka (novice)."
 
   - leto: 2026
     dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici."

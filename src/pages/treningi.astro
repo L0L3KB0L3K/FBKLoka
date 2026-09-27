@@ -1,0 +1,52 @@
+---
+// /treningi: training times of all teams (SPEC.md §7.4). One card per team with a small table:
+// no sideways scrolling on a phone. Teams without slots and without a training note are not shown.
+import { loadCollection } from "../lib/content.ts";
+import TrainingTable from "../components/TrainingTable.astro";
+import Base from "../layouts/Base.astro";
+import { isSet } from "../lib/site.ts";
+import { getTrainings } from "../lib/trainings.ts";
+
+const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+const coaches = new Map((await loadCollection("trenerji")).map((coach) => [coach.id, coach.data.ime]));
+const trainings = await getTrainings();
+
+const cards = teams
+  .map((team) => ({
+    team,
+    trainings: trainings.filter((t) => t.selekcija === team.id),
+    coaches: team.data.trenerji.map((id) => coaches.get(id)).filter((name): name is string => Boolean(name)),
+  }))
+  .filter((card) => card.trainings.length > 0 || isSet(card.team.data.treningiOpomba));
+---
+
+<Base title="Treningi" description="Urnik treningov floorballa v Škofji Loki za vse selekcije FBK Loka, od U11 do članov.">
+  <div class="page-wrap py-12">
+    <h1>Treningi</h1>
+
+    {
+      cards.length > 0 && (
+        <div class="mt-10 grid gap-6 md:grid-cols-2">
+          {cards.map(({ team, trainings, coaches }) => (
+            <section aria-labelledby={`treningi-${team.id}`} class="border border-line p-5">
+              <h2 id={`treningi-${team.id}`} class="text-h3">
+                <a href={`/ekipe/${team.id}`}>{team.data.ime}</a>
+              </h2>
+              {coaches.length > 0 && (
+                <p class="mt-1 text-small text-muted">
+                  {coaches.length > 1 ? "Trenerji" : "Trener"}: {coaches.join(", ")}
+                </p>
+              )}
+              {isSet(team.data.treningiOpomba) && <p class="mt-4">{team.data.treningiOpomba}</p>}
+              {trainings.length > 0 && (
+                <div class="mt-4">
+                  <TrainingTable trainings={trainings} caption={`Treningi ${team.data.ime}`} />
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Base>

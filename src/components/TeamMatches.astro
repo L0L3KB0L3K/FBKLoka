@@ -1,0 +1,72 @@
+---
+// Matches on a team page (SPEC.md §7.2): upcoming on top, played below (newest first),
+// result from the club's side. One tab per competition, but only when more than one has matches.
+import type { Match } from "../lib/types.ts";
+import MatchRow from "./MatchRow.astro";
+import TabPanel from "./ui/TabPanel.astro";
+import Tabs from "./ui/Tabs.astro";
+
+interface Competition {
+  id: string;
+  label: string;
+  prihodnje: Match[];
+  odigrane: Match[];
+}
+
+interface Props {
+  competitions: Competition[];
+}
+
+const { competitions } = Astro.props;
+const nested = competitions.length > 1;
+// Heading levels: page h1 > "Tekme" h2 > competition h3 (only with tabs) > upcoming/played.
+const ListHeading = nested ? "h4" : "h3";
+---
+
+{
+  nested ? (
+    <Tabs label="Tekmovanja" tabs={competitions.map(({ id, label }) => ({ id, label }))}>
+      {competitions.map((c) => (
+        <TabPanel id={c.id} title={`Tekme ${c.label}`} level={3}>
+          {c.prihodnje.length > 0 && (
+            <section>
+              <ListHeading>Prihodnje</ListHeading>
+              <ul class="mt-2">
+                {c.prihodnje.map((match) => <MatchRow match={match} variant="ekipa" />)}
+              </ul>
+            </section>
+          )}
+          {c.odigrane.length > 0 && (
+            <section class="mt-10">
+              <ListHeading>Odigrane</ListHeading>
+              <ul class="mt-2">
+                {c.odigrane.map((match) => <MatchRow match={match} variant="ekipa" />)}
+              </ul>
+            </section>
+          )}
+        </TabPanel>
+      ))}
+    </Tabs>
+  ) : (
+    competitions.map((c) => (
+      <Fragment>
+        {c.prihodnje.length > 0 && (
+          <section>
+            <ListHeading>Prihodnje</ListHeading>
+            <ul class="mt-2">
+              {c.prihodnje.map((match) => <MatchRow match={match} variant="ekipa" />)}
+            </ul>
+          </section>
+        )}
+        {c.odigrane.length > 0 && (
+          <section class="mt-10">
+            <ListHeading>Odigrane</ListHeading>
+            <ul class="mt-2">
+              {c.odigrane.map((match) => <MatchRow match={match} variant="ekipa" />)}
+            </ul>
+          </section>
+        )}
+      </Fragment>
+    ))
+  )
+}

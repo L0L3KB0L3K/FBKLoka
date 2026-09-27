@@ -8,6 +8,8 @@ export type Match = {
   zacetek: string; // ISO 8601 with offset, e.g. "2026-10-10T17:00:00+02:00"
   doma: boolean; // true when FBK Loka is the home team
   ekipaLoka: string; // our team name in FF, e.g. "FBK Loka A"
+  // logo: file name in src/data/ff/logos/ after fetch-ff.ts downloads it, null if there is none.
+  // normalize() returns the FloorballFlash URL; the fetch script swaps it for the local file.
   nasprotnik: { ime: string; logo: string | null };
   prizorisce: { ime: string; kraj: string; naslov: string } | null;
   stanje: "prihodnja" | "koncana";

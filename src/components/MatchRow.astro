@@ -1,0 +1,99 @@
+---
+// One match as a row, not a card (SPEC.md §7.3, §9.5). Mobile first, three short lines:
+//   sob 10. 10. 17:00                13:6 / Podrobnosti
+//   FBK Loka – KAC Floorball
+//   Člani IFL   Dvorana Poden, Škofja Loka
+// On desktop: date | teams + details | result.
+// variant "vse":   general list. Result home:away, label = team + competition.
+// variant "ekipa": team page. Result from the club's side ("Zmaga 13:6"), label = doma / v gosteh.
+// On match day the link of an upcoming game reads "V živo na FloorballFlash" (SPEC.md §5.8).
+// "Today" depends on the visitor's clock, so the script below decides it, not the build.
+import { formatDayShort, formatTime } from "../lib/format.ts";
+import { scoreForLoka, scoreHomeAway } from "../lib/matches.ts";
+import type { Match } from "../lib/types.ts";
+import TeamLogo from "./TeamLogo.astro";
+
+interface Props {
+  match: Match;
+  variant: "vse" | "ekipa";
+  /** Team name for the label in the general list, e.g. "Člani". */
+  selekcijaIme?: string;
+}
+
+const { match, variant, selekcijaIme = "" } = Astro.props;
+const ours = { ime: match.ekipaLoka, logo: null };
+const theirs = match.nasprotnik;
+const [home, away] = match.doma ? [ours, theirs] : [theirs, ours];
+
+// Venue with the town, unless the venue name already contains it ("Alterlaa, Wien").
+const venue = match.prizorisce
+  ? [match.prizorisce.ime, match.prizorisce.ime.includes(match.prizorisce.kraj) ? "" : match.prizorisce.kraj]
+      .filter(Boolean)
+      .join(", ")
+  : "";
+const finished = match.stanje === "koncana";
+const score = variant === "vse" ? scoreHomeAway(match) : scoreForLoka(match);
+---
+
+<li
+  class="grid grid-cols-[1fr_auto] items-center gap-x-4 border-b border-line py-3 md:grid-cols-[9rem_1fr_auto]"
+  data-selekcija={match.selekcija}
+  data-start={match.zacetek}
+>
+  <p class="font-bold tabular-nums">
+    <time datetime={match.zacetek}>{formatDayShort(match.zacetek)} <span class="ml-1">{formatTime(match.zacetek)}</span></time>
+  </p>
+
+  <p class="text-right md:order-3">
+    {
+      finished ? (
+        <a href={match.ffUrl} class="inline-flex min-h-11 items-center font-bold tabular-nums">
+          {score}
+          <span class="sr-only">, podrobnosti na FloorballFlash</span>
+        </a>
+      ) : (
+        <a href={match.ffUrl} class="inline-flex min-h-11 items-center" data-live-link>
+          <span data-label-default>
+            Podrobnosti<span class="sr-only"> tekme na FloorballFlash</span>
+          </span>
+          <span class="font-bold" data-label-live hidden>V živo na FloorballFlash</span>
+        </a>
+      )
+    }
+  </p>
+
+  <div class="col-span-2 md:order-2 md:col-span-1">
+    <p class="flex flex-wrap items-center gap-x-2 font-bold [font-stretch:112%]">
+      <span class="inline-flex items-center gap-2"><TeamLogo file={home.logo} />{home.ime}</span>
+      <span aria-hidden="true">–</span>
+      <span class="sr-only">proti</span>
+      <span class="inline-flex items-center gap-2"><TeamLogo file={away.logo} />{away.ime}</span>
+    </p>
+    <p class="flex flex-wrap gap-x-4 text-small text-muted">
+      {
+        variant === "vse" ? (
+          <span>
+            <span class="font-semibold text-ink">{selekcijaIme}</span> {match.tekmovanje}
+          </span>
+        ) : (
+          <span class="font-semibold text-ink">{match.doma ? "doma" : "v gosteh"}</span>
+        )
+      }
+      {venue && <span>{venue}</span>}
+    </p>
+  </div>
+</li>
+
+<script>
+  // Match day: swap "Podrobnosti" for "V živo na FloorballFlash" (SPEC.md §5.8).
+  import { currentTime } from "../lib/clock.ts";
+  import { isSameDay } from "../lib/upcoming.ts";
+
+  const now = currentTime();
+  for (const link of document.querySelectorAll<HTMLElement>("[data-live-link]")) {
+    const start = link.closest<HTMLElement>("[data-start]")?.dataset.start;
+    if (!start || !isSameDay(start, now)) continue;
+    link.querySelector("[data-label-default]")?.setAttribute("hidden", "");
+    link.querySelector("[data-label-live]")?.removeAttribute("hidden");
+  }
+</script>

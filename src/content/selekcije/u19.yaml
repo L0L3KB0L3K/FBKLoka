@@ -3,7 +3,8 @@ ime: U19
 vrstniRed: 3
 starostniRazpon: "TODO" # shown to parents
 kapetan: "TODO"
-trenerji: [] # TODO: coach slugs from src/content/trenerji
+trenerji: [gasper-triler, maj-oman, nik-oman]
 naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
 kratekOpis: "Selekcija U19 igra v državnem prvenstvu U19."
 prikaziSestavo: true
+treningiOpomba: "U19 trenira skupaj s člani ali z U17."

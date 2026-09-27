@@ -1,12 +1,62 @@
 ---
-// Home page. Step 1: only the layout with a heading.
-// The match board and the other sections follow in step 5 (SPEC.md §7.1).
+// Home page (SPEC.md §7.1). In 3 seconds: when the next match is, and the way in for a new parent.
+// 1. Match board (hero)  2. Next matches (up to 5)  3. Join call to action.
+// News and Instagram follow in phase 2; sponsors are in the footer of every page.
+import MatchBoard from "../components/MatchBoard.astro";
+import MatchRow from "../components/MatchRow.astro";
+import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
+import { loadCollection } from "../lib/content.ts";
+import { allMatches } from "../lib/match-data.ts";
+import { uniqueGames } from "../lib/matches.ts";
+
+const teamNames = Object.fromEntries((await loadCollection("selekcije")).map((team) => [team.id, team.data.ime]));
+const games = uniqueGames(allMatches);
+// The browser drops matches that started more than 3 hours ago (src/lib/upcoming.ts).
+const upcoming = games.filter((game) => game.stanje === "prihodnja").slice(0, 5);
+const last = games.filter((game) => game.stanje === "koncana").at(-1) ?? null;
 ---
 
-<Base title="FBK Loka" description="FBK Loka je floorball klub iz Škofje Loke. Tekme, treningi in vpis za otroke.">
-  <div class="page-wrap py-12">
-    <h1>FBK Loka</h1>
-    <p class="mt-6 max-w-[70ch]">Floorball klub iz Škofje Loke.</p>
-  </div>
+<Base
+  title="FBK Loka"
+  description="FBK Loka je floorball klub iz Škofje Loke. Tekme članov v IFL in 1. SFL, treningi in vpis za otroke od U9 do U19."
+>
+  <h1 class="sr-only">FBK Loka, floorball klub iz Škofje Loke</h1>
+
+  <MatchBoard upcoming={upcoming} last={last} teamNames={teamNames} />
+
+  {
+    upcoming.length > 0 && (
+      <section aria-labelledby="naslednje-tekme" class="page-wrap py-12" data-upcoming-section>
+        <h2 id="naslednje-tekme" class="heading-bar">
+          Naslednje tekme
+        </h2>
+        <ul class="mt-6">
+          {upcoming.map((match) => (
+            <MatchRow match={match} variant="vse" selekcijaIme={teamNames[match.selekcija]} />
+          ))}
+        </ul>
+        <p class="mt-6">
+          <a href="/tekme" class="inline-flex min-h-11 items-center font-semibold">
+            Vse tekme
+          </a>
+        </p>
+      </section>
+    )
+  }
+
+  <section aria-labelledby="pridruzi-se" class="bg-court">
+    <div class="page-wrap flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 id="pridruzi-se" class="heading-bar">Pridruži se nam</h2>
+        <p class="mt-4 max-w-[60ch]">
+          Prvi treningi so brezplačni. Otrok potrebuje samo dvoranske čevlje, kratke hlače in majico,
+          palico mu posodimo. Urnik je na strani <a href="/treningi">Treningi</a>.
+        </p>
+      </div>
+      <div class="shrink-0">
+        <Button href="/vpis" variant="on-paper">Vpiši otroka</Button>
+      </div>
+    </div>
+  </section>
 </Base>

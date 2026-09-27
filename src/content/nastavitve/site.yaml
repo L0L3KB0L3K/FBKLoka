@@ -2,10 +2,11 @@
 imeKluba: FBK Loka
 email: "TODO"
 telefon: "TODO"
-naslov: "TODO"
+naslov: "Podlubnik 1c, 4220 Škofja Loka" # seat in the business register (FLOORBALL KLUB LOKA), club to confirm
 eos:
   portal: https://eos.fbkloka.si # header button "Za starše in člane"
-  registracija: "TODO" # button "Vpiši se" on /vpis
+  registracija: https://eos.fbkloka.si/registration # button "Vpiši se" on /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/
-  facebook: https://www.facebook.com/FloorballInsport # TODO: confirm this is the official club page
+  facebook: https://www.facebook.com/FloorballInsport/ # official club page (confirmed 27. 9. 2026)
+  youtube: https://www.youtube.com/user/FBKInsport

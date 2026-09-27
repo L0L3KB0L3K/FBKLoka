@@ -62,6 +62,8 @@ const selekcije = defineCollection({
       .default([]),
     kratekOpis: z.string().min(1), // 1–2 sentences
     prikaziSestavo: z.boolean().default(true),
+    koledar: z.url().optional(), // public Google Calendar of the team, "Dodaj v koledar" (SPEC.md §7.2)
+    treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
   }),
 });
 
@@ -176,12 +178,14 @@ const dokumenti = defineCollection({
     }),
 });
 
-// §4.7 Text pages (Markdown): /klub, /kodeks, /zasebnost, /podpri-nas, /o-floorballu.
+// §4.7 Text pages (Markdown): /klub, /vpis, /kodeks, /zasebnost, /podpri-nas, /o-floorballu.
 const strani = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/strani" }),
   schema: z.object({
     naslov: z.string().min(1),
     opis: z.string().min(1), // meta description
+    // Frequently asked questions, shown as <details> (SPEC.md §7.5). An answer with TODO is hidden.
+    vprasanja: z.array(z.object({ vprasanje: z.string().min(1), odgovor: z.string().min(1) })).default([]),
   }),
 });
 
@@ -200,6 +204,7 @@ const nastavitve = defineCollection({
     socialna: z.object({
       instagram: z.url().optional(),
       facebook: z.url().optional(),
+      youtube: z.url().optional(),
     }),
   }),
 });

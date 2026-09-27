@@ -1,0 +1,94 @@
+---
+// /ekipe/[slug]: one team (SPEC.md §7.2). Summary on the left (on top on a phone),
+// tabs on the right: Tekme and Sestava. "Lestvica" follows in phase 3.
+// Tabs appear only when at least two panels have content; empty panels are not rendered.
+import { getCollection, type CollectionEntry } from "astro:content";
+import RosterList from "../../components/RosterList.astro";
+import TeamMatches from "../../components/TeamMatches.astro";
+import TeamSummary from "../../components/TeamSummary.astro";
+import TabPanel from "../../components/ui/TabPanel.astro";
+import Tabs from "../../components/ui/Tabs.astro";
+import { FF_CONFIG } from "../../config/ff.ts";
+import Base from "../../layouts/Base.astro";
+import { loadCollection } from "../../lib/content.ts";
+import { allMatches } from "../../lib/match-data.ts";
+import { splitByState } from "../../lib/matches.ts";
+import { hasSummary } from "../../lib/teams.ts";
+import { getTrainings } from "../../lib/trainings.ts";
+
+export async function getStaticPaths() {
+  const teams = await getCollection("selekcije");
+  return teams.map((team) => ({ params: { slug: team.id }, props: { team } }));
+}
+
+interface Props {
+  team: CollectionEntry<"selekcije">;
+}
+
+const { team } = Astro.props;
+const { ime, kratekOpis, trenerji, prikaziSestavo } = team.data;
+
+// Coaches in the order the team file lists them (head coach first).
+const allCoaches = await loadCollection("trenerji");
+const coaches = trenerji
+  .map((id) => allCoaches.find((coach) => coach.id === id))
+  .filter((coach): coach is CollectionEntry<"trenerji"> => coach !== undefined);
+const trainings = (await getTrainings()).filter((t) => t.selekcija === team.id);
+const players = prikaziSestavo
+  ? (await loadCollection("igralci")).filter((p) => p.data.selekcija === team.id && p.data.aktiven)
+  : [];
+
+// Matches per competition, in the order of src/config/ff.ts. Competitions without matches are left out.
+const competitions = (FF_CONFIG[team.id] ?? [])
+  .map(({ label }) => ({
+    id: `${team.id}-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
+    label,
+    ...splitByState(allMatches.filter((m) => m.selekcija === team.id && m.tekmovanje === label)),
+  }))
+  .filter((c) => c.prihodnje.length + c.odigrane.length > 0);
+
+const panels = [
+  competitions.length > 0 && { id: `${team.id}-tekme`, label: "Tekme" },
+  players.length > 0 && { id: `${team.id}-sestava`, label: "Sestava" },
+].filter((panel): panel is { id: string; label: string } => Boolean(panel));
+
+// Two columns only when both the summary and the panels exist; otherwise one full-width column.
+const twoColumns = panels.length > 0 && hasSummary(team, coaches, trainings);
+---
+
+<Base title={ime} description={kratekOpis}>
+  <div class="page-wrap py-12">
+    <h1>{ime}</h1>
+    <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>
+
+    <div class:list={["mt-10 grid gap-10", twoColumns && "lg:grid-cols-[18rem_1fr] lg:items-start"]}>
+      <TeamSummary team={team} coaches={coaches} trainings={trainings} />
+
+      {
+        panels.length > 1 && (
+          <div class="min-w-0">
+            <Tabs label={ime} tabs={panels}>
+              <TabPanel id={`${team.id}-tekme`} title="Tekme">
+                <TeamMatches competitions={competitions} />
+              </TabPanel>
+              <TabPanel id={`${team.id}-sestava`} title="Sestava">
+                <RosterList players={players} />
+              </TabPanel>
+            </Tabs>
+          </div>
+        )
+      }
+
+      {
+        panels.length === 1 && (
+          <section aria-labelledby={panels[0].id} class="min-w-0">
+            <h2 id={panels[0].id}>{panels[0].label}</h2>
+            <div class="mt-6">
+              {competitions.length > 0 ? <TeamMatches competitions={competitions} /> : <RosterList players={players} />}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </div>
+</Base>

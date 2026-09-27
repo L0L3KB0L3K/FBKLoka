@@ -1,0 +1,29 @@
+---
+// /ekipe: all teams in the club's order (SPEC.md §7). Rows, not cards (SPEC.md §9.5).
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { isSet } from "../../lib/site.ts";
+
+const teams = (await getCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+---
+
+<Base title="Ekipe" description="Selekcije FBK Loka: člani v IFL in 1. SFL, Švigalice ter mladi od U11 do U19.">
+  <div class="page-wrap py-12">
+    <h1>Ekipe</h1>
+    <ul class="mt-10 border-t border-line">
+      {
+        teams.map((team) => (
+          <li class="border-b border-line py-6">
+            <h2>
+              <a href={`/ekipe/${team.id}`}>{team.data.ime}</a>
+            </h2>
+            <p class="mt-2 max-w-[70ch]">{team.data.kratekOpis}</p>
+            {isSet(team.data.starostniRazpon) && (
+              <p class="mt-1 text-small text-muted">Starost: {team.data.starostniRazpon}</p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

@@ -3,7 +3,9 @@ ime: Švigalice
 vrstniRed: 2
 starostniRazpon: "TODO" # shown to parents
 kapetan: "TODO"
-trenerji: [] # TODO: coach slugs from src/content/trenerji
-naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
-kratekOpis: "Švigalice igrajo v mešani 2. slovenski floorball ligi."
+trenerji: [] # recreational team without a coach (club, 27. 9. 2026)
+naslovi: # confirmed titles only; titles before 2019 wait for the club
+  - { leto: 2023, naziv: "Prvaki 2. SFL" }
+  - { leto: 2024, naziv: "Prvaki 2. SFL" }
+kratekOpis: "Švigalice so rekreativna ekipa kluba in igrajo v mešani 2. slovenski floorball ligi."
 prikaziSestavo: true

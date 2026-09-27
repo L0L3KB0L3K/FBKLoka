@@ -1,0 +1,20 @@
+---
+// "Dodaj v koledar": link to the team's public Google Calendar (SPEC.md §7.2, §8).
+// No URL -> no button (SPEC.md §1).
+import { isSet } from "../lib/site.ts";
+import Button from "./ui/Button.astro";
+
+interface Props {
+  url?: string;
+}
+
+const { url } = Astro.props;
+---
+
+{
+  isSet(url) && (
+    <Button href={url} variant="on-paper">
+      Dodaj v koledar
+    </Button>
+  )
+}

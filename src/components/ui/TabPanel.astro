@@ -1,0 +1,17 @@
+---
+// One panel of <Tabs>. The heading names the panel for screen readers and, without JS,
+// separates the stacked panels. Visually the tab row already shows the name.
+interface Props {
+  id: string;
+  title: string;
+  level?: 2 | 3;
+}
+
+const { id, title, level = 2 } = Astro.props;
+const Heading = level === 3 ? "h3" : "h2";
+---
+
+<section id={id} data-tabpanel class="pt-6 focus-visible:outline-offset-4">
+  <Heading class="sr-only">{title}</Heading>
+  <slot />
+</section>

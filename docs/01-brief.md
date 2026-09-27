@@ -28,7 +28,7 @@ Območje delovanja: Škofja Loka in okolica (Gorenjska). Člani igrajo tudi v Av
 ## Dokazi za zaupanje, ki obstajajo
 
 - Pet zaporednih naslovov v IFL (2019, 2020, 2022, 2023, 2024).
-- Državni naslovi članov (nazadnje 2022, TODO: celoten seznam).
+- Državni naslovi članov 2019, 2020, 2022, 2023, 2024 (naslovi pred 2019: TODO od kluba).
 - U17 državni prvak 2026, U15 državni prvak 2025.
 - Sedem igralcev v reprezentanci U19 (2026).
 - Instagram: 532 sledilcev, 3.376 doseženih računov v zadnjih treh mesecih.
@@ -82,4 +82,4 @@ ODPRTO — odgovori: vodstvo kluba. Predlog: faza 1 pred prvo domačo tekmo 1. S
 - Prenos domene fbkloka.si na klub — odgovori: trenutni skrbnik + vodstvo.
 - Plačano ali prostovoljno — odgovori: vodstvo.
 - Letniki za vpis, prvi trening, članarina — odgovori: vodstvo.
-- Ali privolitev za objavo pokriva spletno stran in statistiko — odgovori: vodstvo.
+- ~~Ali privolitev za objavo pokriva spletno stran in statistiko~~ — DA (27. 9. 2026).

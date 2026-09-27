@@ -1,0 +1,88 @@
+---
+// Accessible tabs (SPEC.md §7.2, §8). Panels are <TabPanel> children in the same order as `tabs`.
+// Without JS: the tab row is a list of in-page links and every panel is visible, one below the other.
+// With JS: WAI-ARIA tabs, only the selected panel is shown; arrow keys, Home and End move between tabs.
+// No animation, instant switch (SPEC.md §9.6). On mobile the row scrolls sideways (SPEC.md §7.2).
+interface Props {
+  /** Accessible name of the tab list, e.g. "Tekmovanja". */
+  label: string;
+  tabs: { id: string; label: string }[];
+}
+
+const { label, tabs } = Astro.props;
+---
+
+<div data-tabs>
+  <ul data-tablist data-label={label} class="-mx-5 flex overflow-x-auto border-b border-line px-5 md:mx-0 md:px-0">
+    {
+      tabs.map((tab) => (
+        <li class="shrink-0">
+          <a
+            href={`#${tab.id}`}
+            data-tab
+            class="-mb-px flex min-h-11 items-center border-b-3 border-transparent px-3 font-semibold whitespace-nowrap no-underline hover:border-muted aria-selected:border-ink"
+          >
+            {tab.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <slot />
+</div>
+
+<script>
+  // Upgrades every [data-tabs] block to WAI-ARIA tabs. Nested blocks work: each uses only its own row.
+  for (const root of document.querySelectorAll<HTMLElement>("[data-tabs]")) {
+    const list = root.querySelector<HTMLElement>(":scope > [data-tablist]");
+    const tabs = list ? [...list.querySelectorAll<HTMLAnchorElement>("[data-tab]")] : [];
+    const panels = tabs.map((tab) => document.getElementById(tab.hash.slice(1)));
+    if (!list || tabs.length === 0 || panels.some((panel) => !panel)) continue;
+
+    list.setAttribute("role", "tablist");
+    list.setAttribute("aria-label", list.dataset.label ?? "");
+    tabs.forEach((tab, i) => {
+      const panel = panels[i] as HTMLElement;
+      tab.parentElement?.setAttribute("role", "presentation");
+      tab.setAttribute("role", "tab");
+      tab.id = `${panel.id}-tab`;
+      tab.setAttribute("aria-controls", panel.id);
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", tab.id);
+      panel.tabIndex = 0;
+    });
+
+    const select = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        (panels[i] as HTMLElement).hidden = !selected;
+      });
+      if (focus) tabs[index].focus();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", (event) => {
+        event.preventDefault();
+        select(i);
+      });
+      tab.addEventListener("keydown", (event) => {
+        const last = tabs.length - 1;
+        const moves: Record<string, number> = {
+          ArrowRight: i === last ? 0 : i + 1,
+          ArrowLeft: i === 0 ? last : i - 1,
+          Home: 0,
+          End: last,
+        };
+        if (!(event.key in moves)) return;
+        event.preventDefault();
+        select(moves[event.key], true);
+      });
+    });
+
+    // Open the tab named in the URL (e.g. #clani-sestava), otherwise the first one.
+    const fromHash = tabs.findIndex((tab) => tab.hash === location.hash);
+    select(fromHash >= 0 ? fromHash : 0);
+  }
+</script>

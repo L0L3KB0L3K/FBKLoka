@@ -1,0 +1,29 @@
+---
+// General match list grouped by week (SPEC.md §7.3). Nothing is rendered for an empty list.
+import { formatWeek } from "../lib/format.ts";
+import { groupByWeek } from "../lib/matches.ts";
+import type { Match } from "../lib/types.ts";
+import MatchRow from "./MatchRow.astro";
+
+interface Props {
+  matches: Match[];
+  /** Team slug -> team name, for the label in each row. */
+  teamNames: Record<string, string>;
+}
+
+const { matches, teamNames } = Astro.props;
+const weeks = groupByWeek(matches);
+---
+
+{
+  weeks.map((week) => (
+    <section class="mt-8" data-week>
+      <h3 class="border-b-2 border-ink pb-2">{formatWeek(week.monday)}</h3>
+      <ul>
+        {week.matches.map((match) => (
+          <MatchRow match={match} variant="vse" selekcijaIme={teamNames[match.selekcija]} />
+        ))}
+      </ul>
+    </section>
+  ))
+}

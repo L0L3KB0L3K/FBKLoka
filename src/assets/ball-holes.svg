@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <!-- Holes of the floorball from the club logo. Used only as a mask tile on the match board (SPEC.md §9.4):
+       the colour comes from the ball colour token in CSS; the fill here only defines the shapes. -->
+  <g fill="#000">
+    <circle cx="40" cy="36" r="11"/>
+    <ellipse cx="128" cy="24" rx="14" ry="8" transform="rotate(20 128 24)"/>
+    <ellipse cx="200" cy="58" rx="7" ry="13" transform="rotate(-25 200 58)"/>
+    <circle cx="96" cy="92" r="12"/>
+    <ellipse cx="22" cy="128" rx="6" ry="13" transform="rotate(15 22 128)"/>
+    <circle cx="170" cy="130" r="11"/>
+    <ellipse cx="80" cy="176" rx="13" ry="7" transform="rotate(35 80 176)"/>
+    <ellipse cx="214" cy="196" rx="7" ry="12" transform="rotate(30 214 196)"/>
+    <ellipse cx="140" cy="214" rx="14" ry="7"/>
+  </g>
+</svg>
