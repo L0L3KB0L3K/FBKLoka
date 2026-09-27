@@ -19,14 +19,13 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    # frame-ancestors is not enforced while the CSP is Report-Only, so block framing here meanwhile.
-    X-Frame-Options = "DENY"
-    # Phase 1: Report-Only. After a clean console on every page, rename the header to
-    # Content-Security-Policy (SPEC.md §15, step 8).
+    # Enforced since 28. 9. 2026 (SPEC.md §15, step 8): no violations with the enforced policy in
+    # tests/e2e/site.spec.ts, and on the live site only the injected "Powered by Netlify" badge
+    # (turned off in Project configuration > General) broke it. frame-ancestors replaces X-Frame-Options.
     # Stricter than SPEC.md §13.1: the build has no inline styles, no data: images and no inline
-    # scripts (checked 27. 9. 2026), and opponent logos are local, so none of those sources are needed.
+    # scripts, and opponent logos are local, so none of those sources are needed.
     # /ekipa/* (phase 2) will need connect-src for Apps Script in its own [[headers]] block.
-    Content-Security-Policy-Report-Only = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
 
 # Files in /_astro/ have a content hash in their name, so browsers may keep them for a year.
 # Fewer requests and less bandwidth, which also saves credits.

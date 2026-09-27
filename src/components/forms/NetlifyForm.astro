@@ -15,7 +15,7 @@ interface Props {
 const { name, submitLabel } = Astro.props;
 ---
 
-<form name={name} method="POST" action="/hvala" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6" data-validate>
+<form name={name} method="POST" action="/hvala/" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6" data-validate>
   <input type="hidden" name="form-name" value={name} />
   <p hidden>
     <label>Tega polja ne izpolnjuj: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
@@ -24,7 +24,7 @@ const { name, submitLabel } = Astro.props;
   <div>
     <Button type="submit" variant="on-paper">{submitLabel}</Button>
     <p class="mt-3 text-small text-muted">
-      Podatke uporabimo samo za odgovor. <a href="/zasebnost">Več o zasebnosti</a>.
+      Podatke uporabimo samo za odgovor. <a href="/zasebnost/">Več o zasebnosti</a>.
     </p>
   </div>
 </form>

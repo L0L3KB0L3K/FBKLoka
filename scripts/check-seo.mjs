@@ -36,6 +36,14 @@ for (const file of htmlFiles(DIST)) {
     }
   }
 
+  // Internal page links end with "/": a link to /tekme gets a 301 to /tekme/ on Netlify.
+  // Links to files (/og.png, /koledar/clani.ics) keep their extension.
+  for (const [, url] of html.matchAll(/(?:href|action)="([/][^"]*)"/g)) {
+    const path = url.split(/[?#]/)[0];
+    if (url.startsWith("//")) continue;
+    if (!path.endsWith("/") && !/[.][a-z0-9]+$/i.test(path)) fail(`internal link without a trailing slash: ${url}`);
+  }
+
   // Temporary values are "TODO" (SPEC.md §14); none may be visible on a built page.
   const visibleText = html.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<[^>]+>/g, " ");
   if (visibleText.includes("TODO")) fail('visible "TODO" on the page');

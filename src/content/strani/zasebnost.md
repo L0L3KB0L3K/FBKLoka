@@ -7,7 +7,7 @@ opis: "Kako FBK Loka ravna z osebnimi podatki, ki jih pošljete prek obrazcev na
 
 ## Kdo skrbi za vaše podatke
 
-Upravljavec osebnih podatkov je FLOORBALL KLUB LOKA, Podlubnik 1c, 4220 Škofja Loka, matična številka 1677055000. Za vprašanja o osebnih podatkih nam pišite prek obrazca na strani [Kontakt](/kontakt).
+Upravljavec osebnih podatkov je FLOORBALL KLUB LOKA, Podlubnik 1c, 4220 Škofja Loka, matična številka 1677055000. Za vprašanja o osebnih podatkih nam pišite prek obrazca na strani [Kontakt](/kontakt/).
 
 ## Katere podatke zbiramo
 
@@ -36,4 +36,4 @@ Razpored in rezultati tekem so s strani FloorballFlash, vpis in članarina potek
 
 ## Vaše pravice
 
-Imate pravico do vpogleda v svoje podatke, do popravka, izbrisa in omejitve obdelave ter do ugovora. Privolitev lahko kadar koli prekličete. Pišite nam prek strani [Kontakt](/kontakt). Če menite, da z vašimi podatki ne ravnamo prav, se lahko pritožite pri [Informacijskem pooblaščencu](https://www.ip-rs.si/).
+Imate pravico do vpogleda v svoje podatke, do popravka, izbrisa in omejitve obdelave ter do ugovora. Privolitev lahko kadar koli prekličete. Pišite nam prek strani [Kontakt](/kontakt/). Če menite, da z vašimi podatki ne ravnamo prav, se lahko pritožite pri [Informacijskem pooblaščencu](https://www.ip-rs.si/).

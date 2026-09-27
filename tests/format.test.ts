@@ -94,3 +94,13 @@ test("titles are grouped by name with years ascending", async () => {
     { naziv: "Državni prvaki", leta: [2019] },
   ]);
 });
+
+test("clean page paths for canonical URLs and the menu", async () => {
+  const { cleanPath } = await import("../src/lib/paths.ts");
+  assert.equal(cleanPath("/index.html"), "/");
+  assert.equal(cleanPath("/"), "/");
+  assert.equal(cleanPath("/tekme.html"), "/tekme");
+  assert.equal(cleanPath("/tekme"), "/tekme");
+  assert.equal(cleanPath("/ekipe/clani.html"), "/ekipe/clani");
+  assert.equal(cleanPath("/ekipe/"), "/ekipe");
+});

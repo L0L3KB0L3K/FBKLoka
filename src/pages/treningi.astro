@@ -30,7 +30,7 @@ const cards = teams
           {cards.map(({ team, trainings, coaches }) => (
             <section aria-labelledby={`treningi-${team.id}`} class="border border-line p-5">
               <h2 id={`treningi-${team.id}`} class="text-h3">
-                <a href={`/ekipe/${team.id}`}>{team.data.ime}</a>
+                <a href={`/ekipe/${team.id}/`}>{team.data.ime}</a>
               </h2>
               {coaches.length > 0 && (
                 <p class="mt-1 text-small text-muted">

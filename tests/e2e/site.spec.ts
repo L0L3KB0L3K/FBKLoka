@@ -1,16 +1,16 @@
 // Pages from SPEC.md §13.5 plus /klub and /zasebnost:
 // 1. axe finds no WCAG 2.2 A/AA violations,
-// 2. no CSP violation when the policy from netlify.toml is enforced (it ships as Report-Only first),
+// 2. no CSP violation with the policy from netlify.toml,
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button.
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
-const PAGES = ["/", "/ekipe/clani", "/tekme", "/treningi", "/vpis", "/kontakt", "/klub", "/zasebnost"];
+const PAGES = ["/", "/ekipe/clani/", "/tekme/", "/treningi/", "/vpis/", "/kontakt/", "/klub/", "/zasebnost/"];
 
 // The same policy Netlify sends, read from netlify.toml so the test cannot drift from it.
 const policy = readFileSync(new URL("../../netlify.toml", import.meta.url), "utf8").match(
-  /Content-Security-Policy-Report-Only = "([^"]+)"/,
+  /Content-Security-Policy = "([^"]+)"/,
 )?.[1];
 
 for (const path of PAGES) {
@@ -23,7 +23,7 @@ for (const path of PAGES) {
     expect(summary).toEqual([]);
   });
 
-  test(`CSP enforced: ${path}`, async ({ page }) => {
+  test(`CSP: ${path}`, async ({ page }) => {
     expect(policy, "CSP not found in netlify.toml").toBeTruthy();
     await page.addInitScript(() => {
       (window as unknown as { cspViolations: string[] }).cspViolations = [];

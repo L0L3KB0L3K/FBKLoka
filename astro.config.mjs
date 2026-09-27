@@ -11,6 +11,11 @@ export default defineConfig({
   // Static output only, no SSR (SPEC.md §2). "static" is Astro's default, stated here for clarity.
   output: "static",
 
+  // Every page URL ends with a slash (/tekme/), the form Netlify serves for tekme/index.html without a
+  // redirect. Links without it caused a 301 on every click (found 28. 9. 2026). The dev server rejects
+  // such links, and scripts/check-seo.mjs fails the build on them.
+  trailingSlash: "always",
+
   // Sitemap without the thank-you page, the 404 page and the hidden team pages (SPEC.md §13.2, §19).
   integrations: [
     sitemap({

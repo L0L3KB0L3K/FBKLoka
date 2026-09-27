@@ -28,13 +28,13 @@ const filterTeams = teams.filter((team) => games.some((game) => game.selekcija =
         <nav aria-label="Izberi selekcijo" class="mt-8" data-match-filter>
           <ul class="flex flex-wrap gap-2">
             <li>
-              <a href="/tekme" data-team="" aria-current="true" class="filter-chip">
+              <a href="/tekme/" data-team="" aria-current="true" class="filter-chip">
                 Vse
               </a>
             </li>
             {filterTeams.map((team) => (
               <li>
-                <a href={`/tekme?s=${team.id}`} data-team={team.id} class="filter-chip">
+                <a href={`/tekme/?s=${team.id}`} data-team={team.id} class="filter-chip">
                   {team.data.ime}
                 </a>
               </li>
