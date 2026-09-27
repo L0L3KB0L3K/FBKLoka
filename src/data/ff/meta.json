@@ -1,0 +1,19 @@
+{
+  "fetchedAt": "2026-09-27T20:04:10.401Z",
+  "competitions": [
+    {
+      "selekcija": "clani",
+      "label": "IFL",
+      "competitionId": 738,
+      "name": "3 Nations - IFL",
+      "ok": true
+    },
+    {
+      "selekcija": "clani",
+      "label": "1. SFL",
+      "competitionId": 760,
+      "name": "SLO 1.SFL - DP VF",
+      "ok": true
+    }
+  ]
+}

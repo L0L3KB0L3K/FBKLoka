@@ -1,0 +1,308 @@
+[
+  {
+    "id": 16488,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-09-19T14:30:00+02:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "Phoenix Fireball",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/f2afc842-b849-5f4b-9f0c-5ccf1df8c204.jpg"
+    },
+    "prizorisce": {
+      "ime": "Batthyány Sportiskolai Általános Iskola",
+      "kraj": "Érd",
+      "naslov": "Fácán köz 1, 2030 Érd"
+    },
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 12,
+      "nasprotnik": 6
+    },
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16488"
+  },
+  {
+    "id": 16458,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-09-20T14:10:00+02:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "IBK Cartoon Heroes",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/340e60df-c47f-52d9-8ed5-eaa04e804235.png"
+    },
+    "prizorisce": {
+      "ime": "Batthyány Sportiskolai Általános Iskola",
+      "kraj": "Érd",
+      "naslov": "Fácán köz 1, 2030 Érd"
+    },
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 13,
+      "nasprotnik": 6
+    },
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16458"
+  },
+  {
+    "id": 16493,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-09-26T17:00:00+02:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "C.Hamp VSV Unihockey",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 7,
+      "nasprotnik": 8
+    },
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16493"
+  },
+  {
+    "id": 16450,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-09-27T17:00:00+02:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Borovnica",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+    },
+    "prizorisce": {
+      "ime": "Osnovna šola Dobrova",
+      "kraj": "Dobrova",
+      "naslov": "Cesta 7. maja 20, 1356 Dobrova"
+    },
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 5,
+      "nasprotnik": 4
+    },
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16450"
+  },
+  {
+    "id": 16464,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-10-03T15:00:00+02:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Dragons",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/5e2168bf-4f00-557b-a520-3dcf83db797e.png"
+    },
+    "prizorisce": {
+      "ime": "Alterlaa",
+      "kraj": "Wien",
+      "naslov": "Anton-Baumgartner-Straße 44, 1230 Wien"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16464"
+  },
+  {
+    "id": 16472,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-10-04T13:00:00+02:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "SU Wiener FV",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/869f543d-34c6-5b97-bd6a-311fca9c2f83.svg"
+    },
+    "prizorisce": {
+      "ime": "Alterlaa",
+      "kraj": "Wien",
+      "naslov": "Anton-Baumgartner-Straße 44, 1230 Wien"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16472"
+  },
+  {
+    "id": 16494,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-10-10T17:00:00+02:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "KAC Floorball",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16494"
+  },
+  {
+    "id": 16495,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-10-24T14:00:00+02:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "SU Wiener FV",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/869f543d-34c6-5b97-bd6a-311fca9c2f83.svg"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16495"
+  },
+  {
+    "id": 16496,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-10-25T13:00:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Dragons",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/5e2168bf-4f00-557b-a520-3dcf83db797e.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16496"
+  },
+  {
+    "id": 16497,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-11-07T17:00:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "IBK Cartoon Heroes",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/340e60df-c47f-52d9-8ed5-eaa04e804235.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16497"
+  },
+  {
+    "id": 16498,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-11-08T13:00:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "Phoenix Fireball",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/f2afc842-b849-5f4b-9f0c-5ccf1df8c204.jpg"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16498"
+  },
+  {
+    "id": 16483,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2026-11-21T18:00:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "KAC Floorball",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
+    },
+    "prizorisce": {
+      "ime": "Waidmannsdorf",
+      "kraj": "Klagenfurt",
+      "naslov": "Obirstraße 6, 9020 Klagenfurt"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16483"
+  },
+  {
+    "id": 16499,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2027-01-09T14:00:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Borovnica",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16499"
+  },
+  {
+    "id": 16505,
+    "selekcija": "clani",
+    "tekmovanje": "IFL",
+    "zacetek": "2027-01-23T18:00:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "C.Hamp VSV Unihockey",
+      "logo": "https://storage.googleapis.com/floorballflash.appspot.com/uploads/public/f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+    },
+    "prizorisce": {
+      "ime": "Sankt Martin",
+      "kraj": "Villach",
+      "naslov": "St.Martiner-Straße 11, 9500 Villach"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Qualification Round",
+    "ffUrl": "https://www.floorballflash.at/game/16505"
+  }
+]

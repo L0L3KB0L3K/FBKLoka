@@ -1,0 +1,2634 @@
+{
+  "data": {
+    "competitionDetails": {
+      "id": 738,
+      "name": "3 Nations - IFL",
+      "teams": [
+        {
+          "id": 3457,
+          "name": "C.Hamp VSV Unihockey",
+          "shortName": "C.Hamp VSV Unihockey",
+          "logo": "uploads/public/f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+        },
+        {
+          "id": 3458,
+          "name": "KAC Floorball",
+          "shortName": "KAC",
+          "logo": "uploads/public/c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
+        },
+        {
+          "id": 3459,
+          "name": "SU Wiener FV",
+          "shortName": "WFV",
+          "logo": "uploads/public/869f543d-34c6-5b97-bd6a-311fca9c2f83.svg"
+        },
+        {
+          "id": 3460,
+          "name": "FBC Borovnica",
+          "shortName": "Borovnica",
+          "logo": "uploads/public/4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+        },
+        {
+          "id": 3461,
+          "name": "FBC Dragons",
+          "shortName": "Dragons",
+          "logo": "uploads/public/5e2168bf-4f00-557b-a520-3dcf83db797e.png"
+        },
+        {
+          "id": 3462,
+          "name": "FBK Loka",
+          "shortName": "Skofja Loka",
+          "logo": "uploads/public/d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
+        },
+        {
+          "id": 3463,
+          "name": "IBK Cartoon Heroes",
+          "shortName": "Cartoon Heroes",
+          "logo": "uploads/public/340e60df-c47f-52d9-8ed5-eaa04e804235.png"
+        },
+        {
+          "id": 3464,
+          "name": "Phoenix Fireball",
+          "shortName": "Phoenix Fireball",
+          "logo": "uploads/public/f2afc842-b849-5f4b-9f0c-5ccf1df8c204.jpg"
+        }
+      ],
+      "phases": [
+        {
+          "id": 1975,
+          "name": "Qualification Round",
+          "mode": "Single",
+          "order": 1,
+          "groups": [
+            {
+              "id": 1238,
+              "name": "Main Group",
+              "order": 0,
+              "rounds": [
+                {
+                  "id": 3804,
+                  "name": "1",
+                  "order": 0,
+                  "games": [
+                    {
+                      "id": 16450,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 86,
+                        "name": "Osnovna šola Dobrova",
+                        "address": {
+                          "street": "Cesta 7. maja",
+                          "number": "20",
+                          "postCode": "1356",
+                          "city": "Dobrova",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 27
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16451,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 86,
+                        "name": "Osnovna šola Dobrova",
+                        "address": {
+                          "street": "Cesta 7. maja",
+                          "number": "20",
+                          "postCode": "1356",
+                          "city": "Dobrova",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 24
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16452,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 86,
+                        "name": "Osnovna šola Dobrova",
+                        "address": {
+                          "street": "Cesta 7. maja",
+                          "number": "20",
+                          "postCode": "1356",
+                          "city": "Dobrova",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 25
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16453,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 86,
+                        "name": "Osnovna šola Dobrova",
+                        "address": {
+                          "street": "Cesta 7. maja",
+                          "number": "20",
+                          "postCode": "1356",
+                          "city": "Dobrova",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 17
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16454,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 114,
+                        "name": "OŠ AMS Vrhnika",
+                        "address": {
+                          "street": "Pod Hruševco",
+                          "number": "33",
+                          "postCode": "1360",
+                          "city": "Vrhnika",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 7
+                        },
+                        "time": {
+                          "hour": 13,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16455,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 114,
+                        "name": "OŠ AMS Vrhnika",
+                        "address": {
+                          "street": "Pod Hruševco",
+                          "number": "33",
+                          "postCode": "1360",
+                          "city": "Vrhnika",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 8
+                        },
+                        "time": {
+                          "hour": 12,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16456,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 86,
+                        "name": "Osnovna šola Dobrova",
+                        "address": {
+                          "street": "Cesta 7. maja",
+                          "number": "20",
+                          "postCode": "1356",
+                          "city": "Dobrova",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 23
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16457,
+                      "state": "Finished",
+                      "home": {
+                        "id": 3463,
+                        "goals": 3,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 7,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 19
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 40,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16458,
+                      "state": "Finished",
+                      "home": {
+                        "id": 3463,
+                        "goals": 6,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 13,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 20
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 10,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16459,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 12,
+                          "day": 19
+                        },
+                        "time": {
+                          "hour": 16,
+                          "min": 40,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16460,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 28
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 40,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16461,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 29
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 10,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16462,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 16
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 40,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16463,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 30
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 40,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16464,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 63,
+                        "name": "Alterlaa",
+                        "address": {
+                          "street": "Anton-Baumgartner-Straße",
+                          "number": "44",
+                          "postCode": "1230",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 3
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16465,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 63,
+                        "name": "Alterlaa",
+                        "address": {
+                          "street": "Anton-Baumgartner-Straße",
+                          "number": "44",
+                          "postCode": "1230",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 4
+                        },
+                        "time": {
+                          "hour": 10,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16466,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16467,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 7
+                        },
+                        "time": {
+                          "hour": 16,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16468,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 8
+                        },
+                        "time": {
+                          "hour": 10,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16469,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 21
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16470,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 12,
+                          "day": 5
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16471,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 63,
+                        "name": "Alterlaa",
+                        "address": {
+                          "street": "Anton-Baumgartner-Straße",
+                          "number": "44",
+                          "postCode": "1230",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 3
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16472,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 63,
+                        "name": "Alterlaa",
+                        "address": {
+                          "street": "Anton-Baumgartner-Straße",
+                          "number": "44",
+                          "postCode": "1230",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 4
+                        },
+                        "time": {
+                          "hour": 13,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16474,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16475,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 7
+                        },
+                        "time": {
+                          "hour": 19,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16476,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 8
+                        },
+                        "time": {
+                          "hour": 13,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16477,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 21
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16478,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 70,
+                        "name": "PAHO Kurt Kucera Rundhalle",
+                        "address": {
+                          "street": "Jura Soyfer Gasse",
+                          "number": "3",
+                          "postCode": "1100",
+                          "city": "Wien",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 12,
+                          "day": 19
+                        },
+                        "time": {
+                          "hour": 16,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16479,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 26
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16480,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 3
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16481,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 4
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16482,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 24
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16483,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 21
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16484,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 9
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16485,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 1,
+                        "name": "Waidmannsdorf",
+                        "address": {
+                          "street": "Obirstraße",
+                          "number": "6",
+                          "postCode": "9020",
+                          "city": "Klagenfurt",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16486,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 28
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16487,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 29
+                        },
+                        "time": {
+                          "hour": 10,
+                          "min": 45,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16488,
+                      "state": "Finished",
+                      "home": {
+                        "id": 3464,
+                        "goals": 6,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 12,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 19
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16489,
+                      "state": "Finished",
+                      "home": {
+                        "id": 3464,
+                        "goals": 10,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 8,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 20
+                        },
+                        "time": {
+                          "hour": 10,
+                          "min": 45,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16490,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 16
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16491,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 23
+                        },
+                        "time": {
+                          "hour": 16,
+                          "min": 45,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16492,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 81,
+                        "name": "Batthyány Sportiskolai Általános Iskola",
+                        "address": {
+                          "street": "Fácán köz",
+                          "number": "1",
+                          "postCode": "2030",
+                          "city": "Érd",
+                          "country": "HU"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 30
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 30,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16493,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 9,
+                          "day": 26
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16494,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16495,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 24
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16496,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 25
+                        },
+                        "time": {
+                          "hour": 13,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16497,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 7
+                        },
+                        "time": {
+                          "hour": 17,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16498,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 11,
+                          "day": 8
+                        },
+                        "time": {
+                          "hour": 13,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16499,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 3,
+                        "name": "Dvorana Poden",
+                        "address": {
+                          "street": "Podlubnik",
+                          "number": "1c",
+                          "postCode": "4220",
+                          "city": "Škofja Loka",
+                          "country": "SI"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 9
+                        },
+                        "time": {
+                          "hour": 14,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16500,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3464,
+                        "goals": 0,
+                        "comment": "Phoenix Fireball"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 3
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16501,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3463,
+                        "goals": 0,
+                        "comment": "IBK Cartoon Heroes"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 4
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16502,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3460,
+                        "goals": 0,
+                        "comment": "FBC Borovnica"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2026,
+                          "month": 10,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16503,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3459,
+                        "goals": 0,
+                        "comment": "SU Wiener FV"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 9
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16504,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3461,
+                        "goals": 0,
+                        "comment": "FBC Dragons"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 10
+                        },
+                        "time": {
+                          "hour": 15,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16505,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3462,
+                        "goals": 0,
+                        "comment": "FBK Loka"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 1,
+                          "day": 23
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16506,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": 3457,
+                        "goals": 0,
+                        "comment": "C.Hamp VSV Unihockey"
+                      },
+                      "away": {
+                        "id": 3458,
+                        "goals": 0,
+                        "comment": "KAC Floorball"
+                      },
+                      "venue": {
+                        "id": 2,
+                        "name": "Sankt Martin",
+                        "address": {
+                          "street": "St.Martiner-Straße",
+                          "number": "11",
+                          "postCode": "9500",
+                          "city": "Villach",
+                          "country": "AT"
+                        }
+                      },
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 2,
+                          "day": 6
+                        },
+                        "time": {
+                          "hour": 18,
+                          "min": 0,
+                          "sec": 0
+                        },
+                        "timezone": "Europe/Vienna"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1979,
+          "name": "Play In Game",
+          "mode": "Single",
+          "order": 2,
+          "groups": [
+            {
+              "id": 1242,
+              "name": "Main Group",
+              "order": 1,
+              "rounds": [
+                {
+                  "id": 3811,
+                  "name": "1",
+                  "order": 1,
+                  "games": [
+                    {
+                      "id": 16264,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "3rd seeded "
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "5th or 6th"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 2,
+                          "day": 13
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16265,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "4th seeded"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "5th or 6th"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 2,
+                          "day": 13
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1976,
+          "name": "3 Nations IFL - Semi Finals",
+          "mode": "Single",
+          "order": 3,
+          "groups": [
+            {
+              "id": 1240,
+              "name": "Main Group",
+              "order": 1,
+              "rounds": [
+                {
+                  "id": 3806,
+                  "name": "1",
+                  "order": 2,
+                  "games": [
+                    {
+                      "id": 16266,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Play In B"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "1st seeded"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 2,
+                          "day": 27
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16267,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Play in A"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "2nd seeded"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 2,
+                          "day": 27
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16273,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "1st seeded"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Play in B"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 6
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16275,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "2nd seeded"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Play in A"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 6
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16278,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "1st seeded"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Play in B"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 7
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16279,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "2nd seeded"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Play in A"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 7
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1981,
+          "name": "3rd Place",
+          "mode": "Single",
+          "order": 4,
+          "groups": [
+            {
+              "id": 1244,
+              "name": "Main Group",
+              "order": 1,
+              "rounds": [
+                {
+                  "id": 3814,
+                  "name": "1",
+                  "order": 1,
+                  "games": [
+                    {
+                      "id": 16292,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 2"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 1"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 13
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16296,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 1"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 2"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 20
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16299,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 1"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Looser Semi 2"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 21
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1977,
+          "name": "3 Nations IFL - Finals",
+          "mode": "Single",
+          "order": 5,
+          "groups": [
+            {
+              "id": 1241,
+              "name": "Main Group",
+              "order": 3,
+              "rounds": [
+                {
+                  "id": 3808,
+                  "name": "1",
+                  "order": 3,
+                  "games": [
+                    {
+                      "id": 16283,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 2"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 1"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 13
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16285,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 1"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 2"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 20
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    },
+                    {
+                      "id": 16288,
+                      "state": "BeforeGame",
+                      "home": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 1"
+                      },
+                      "away": {
+                        "id": null,
+                        "goals": 0,
+                        "comment": "Winner Semi 2"
+                      },
+                      "venue": null,
+                      "schedule": {
+                        "date": {
+                          "year": 2027,
+                          "month": 3,
+                          "day": 21
+                        },
+                        "time": null,
+                        "timezone": "Europe/Vienna"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

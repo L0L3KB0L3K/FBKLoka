@@ -11,8 +11,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "verify": "npm run check && npm run check:contrast && npm run build",
-    "check:contrast": "node scripts/contrast.mjs"
+    "test": "node --test \"tests/*.test.ts\"",
+    "check:contrast": "node scripts/contrast.mjs",
+    "fetch:ff": "node scripts/fetch-ff.ts",
+    "scan:ff": "node scripts/scan-fbk-loka.ts",
+    "verify": "npm run check && npm test && npm run check:contrast && npm run build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
