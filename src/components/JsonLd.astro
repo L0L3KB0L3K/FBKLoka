@@ -1,0 +1,12 @@
+---
+// Structured data for search engines (SPEC.md §13.2). A data block, not a script: the browser never runs it,
+// so it needs no CSP exception. "<" is escaped so the JSON can never close the tag early.
+interface Props {
+  data: object | object[];
+}
+
+const escapedLessThan = String.fromCharCode(92) + "u003c";
+const json = JSON.stringify(Astro.props.data).replace(/</g, escapedLessThan);
+---
+
+<script type="application/ld+json" set:html={json} />

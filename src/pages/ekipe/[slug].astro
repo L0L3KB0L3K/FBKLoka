@@ -13,6 +13,7 @@ import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
 import { allMatches } from "../../lib/match-data.ts";
 import { splitByState } from "../../lib/matches.ts";
+import { sportsTeam } from "../../lib/jsonld.ts";
 import { hasSummary } from "../../lib/teams.ts";
 import { getTrainings } from "../../lib/trainings.ts";
 
@@ -57,9 +58,16 @@ const calendarSlug = allMatches.some((m) => m.selekcija === team.id) ? team.id :
 
 // Two columns only when both the summary and the panels exist; otherwise one full-width column.
 const twoColumns = panels.length > 0 && hasSummary(team, coaches, trainings, Boolean(calendarSlug));
+
+const jsonLd = sportsTeam(
+  Astro.site as URL,
+  new URL(Astro.url.pathname, Astro.site),
+  ime,
+  coaches.map((coach) => coach.data.ime),
+);
 ---
 
-<Base title={ime} description={kratekOpis}>
+<Base title={ime} description={kratekOpis} jsonLd={jsonLd}>
   <div class="page-wrap py-12">
     <h1>{ime}</h1>
     <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>

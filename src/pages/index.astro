@@ -8,17 +8,24 @@ import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
 import { loadCollection } from "../lib/content.ts";
 import { allMatches } from "../lib/match-data.ts";
+import { organization } from "../lib/jsonld.ts";
 import { uniqueGames } from "../lib/matches.ts";
+import { getSettings, isSet } from "../lib/site.ts";
 
 const teamNames = Object.fromEntries((await loadCollection("selekcije")).map((team) => [team.id, team.data.ime]));
 const games = uniqueGames(allMatches);
 // The browser drops matches that started more than 3 hours ago (src/lib/upcoming.ts).
 const upcoming = games.filter((game) => game.stanje === "prihodnja").slice(0, 5);
 const last = games.filter((game) => game.stanje === "koncana").at(-1) ?? null;
+
+const { naslov, socialna } = await getSettings();
+const sameAs = [socialna.instagram, socialna.facebook, socialna.youtube].filter((url): url is string => isSet(url));
+const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sameAs);
 ---
 
 <Base
-  title="FBK Loka"
+  title="Floorball klub iz Škofje Loke"
+  jsonLd={jsonLd}
   description="FBK Loka je floorball klub iz Škofje Loke. Tekme članov v IFL in 1. SFL, treningi in vpis za otroke od U9 do U19."
 >
   <h1 class="sr-only">FBK Loka, floorball klub iz Škofje Loke</h1>

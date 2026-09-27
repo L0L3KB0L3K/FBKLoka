@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ekipa/
+
+Sitemap: https://fbkloka.si/sitemap-index.xml

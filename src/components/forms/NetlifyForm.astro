@@ -18,7 +18,7 @@ const { name, submitLabel } = Astro.props;
 <form name={name} method="POST" action="/hvala" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6" data-validate>
   <input type="hidden" name="form-name" value={name} />
   <p hidden>
-    <label>Tega polja ne izpolnjuj: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+    <label>Tega polja ne izpolnjuj: <input type="text" name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
   <slot />
   <div>

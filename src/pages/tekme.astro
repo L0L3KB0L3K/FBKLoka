@@ -6,18 +6,20 @@ import { getCollection } from "astro:content";
 import MatchList from "../components/MatchList.astro";
 import Base from "../layouts/Base.astro";
 import { allMatches } from "../lib/match-data.ts";
+import { sportsEvents } from "../lib/jsonld.ts";
 import { splitByState, uniqueGames } from "../lib/matches.ts";
 
 const teams = (await getCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
 const teamNames = Object.fromEntries(teams.map((team) => [team.id, team.data.ime]));
 const games = uniqueGames(allMatches);
 const { prihodnje, odigrane } = splitByState(games);
+const jsonLd = sportsEvents(prihodnje);
 
 // The filter lists only teams with matches; with a single team it would be useless.
 const filterTeams = teams.filter((team) => games.some((game) => game.selekcija === team.id));
 ---
 
-<Base title="Tekme" description="Razpored in rezultati tekem vseh selekcij FBK Loka, od članov v IFL do mladih.">
+<Base title="Tekme" jsonLd={jsonLd} description="Razpored in rezultati tekem vseh selekcij FBK Loka, od članov v IFL do mladih.">
   <div class="page-wrap py-12">
     <h1>Tekme</h1>
 

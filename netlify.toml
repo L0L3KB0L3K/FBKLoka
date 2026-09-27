@@ -1,0 +1,44 @@
+# Netlify configuration (SPEC.md §13.1).
+
+[build]
+  # verify = astro check + tests + contrast + build + html-validate + link check + SEO check (SPEC.md §13.5).
+  # A broken content entry or wrong data stops the deploy instead of going live.
+  command = "npm run verify"
+  publish = "dist"
+  # Skip builds for commits that only touch docs or tooling (saves credits, see scripts/netlify-ignore.sh).
+  ignore = "bash scripts/netlify-ignore.sh"
+
+# Node version comes from .nvmrc (24).
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Without includeSubDomains until every subdomain of fbkloka.si is known to serve HTTPS:
+    # includeSubDomains would lock a subdomain without HTTPS out for a year. TODO: check DNS.
+    Strict-Transport-Security = "max-age=31536000"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # frame-ancestors is not enforced while the CSP is Report-Only, so block framing here meanwhile.
+    X-Frame-Options = "DENY"
+    # Phase 1: Report-Only. After a clean console on every page, rename the header to
+    # Content-Security-Policy (SPEC.md §15, step 8).
+    # Stricter than SPEC.md §13.1: the build has no inline styles, no data: images and no inline
+    # scripts (checked 27. 9. 2026), and opponent logos are local, so none of those sources are needed.
+    # /ekipa/* (phase 2) will need connect-src for Apps Script in its own [[headers]] block.
+    Content-Security-Policy-Report-Only = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+
+# Files in /_astro/ have a content hash in their name, so browsers may keep them for a year.
+# Fewer requests and less bandwidth, which also saves credits.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Team match calendars (/koledar/[slug].ics).
+[[headers]]
+  for = "/koledar/*"
+  [headers.values]
+    Content-Type = "text/calendar; charset=utf-8"
+
+# /admin (Decap, phase 2) needs its own CSP in a separate [[headers]] block. Never loosen "/*".

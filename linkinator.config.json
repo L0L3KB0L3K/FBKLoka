@@ -1,0 +1,5 @@
+{
+  "recurse": true,
+  "silent": true,
+  "skip": ["^https?://(?!localhost|127.0.0.1)"]
+}

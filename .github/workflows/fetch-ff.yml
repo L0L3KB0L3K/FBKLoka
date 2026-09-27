@@ -1,0 +1,41 @@
+# Fetches FloorballFlash matches and commits src/data/ff only when the data changed (SPEC.md §5.6).
+# The commit triggers a Netlify build; no change means no commit and no build.
+#
+# Schedule: once a week, Sunday evening. Each production deploy costs 15 of the 300 monthly credits on
+# Netlify Free, so weekend results arrive on Sunday evening (decided with the club, 27. 9. 2026).
+# For a change during the week (a moved match): GitHub > Actions > fetch-floorballflash > Run workflow.
+#
+# GitHub turns off scheduled workflows in public repos after 60 days without commits (e.g. in summer):
+# re-enable it under Actions before the season starts.
+name: fetch-floorballflash
+
+on:
+  schedule:
+    - cron: "0 20 * * 0" # Sunday 20:00 UTC = 22:00 summer time, 21:00 winter time
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-floorballflash
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run fetch:ff
+      - name: Commit if changed
+        run: |
+          git config user.name "ff-bot"
+          git config user.email "ff-bot@users.noreply.github.com"
+          git add src/data/ff
+          git diff --cached --quiet || (git commit -m "data: update FloorballFlash" && git push)

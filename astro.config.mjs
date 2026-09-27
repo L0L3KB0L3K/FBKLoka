@@ -11,8 +11,15 @@ export default defineConfig({
   // Static output only, no SSR (SPEC.md §2). "static" is Astro's default, stated here for clarity.
   output: "static",
 
-  // Sitemap. The /ekipa/ exclusion is added in step 7 together with robots.txt (SPEC.md §13.2).
-  integrations: [sitemap()],
+  // Sitemap without the thank-you page, the 404 page and the hidden team pages (SPEC.md §13.2, §19).
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !["/hvala", "/404", "/ekipa"].some((hidden) => path === hidden || path.startsWith(`${hidden}/`));
+      },
+    }),
+  ],
 
   vite: {
     // Tailwind 4 through the official Vite plugin (SPEC.md §2).

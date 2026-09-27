@@ -7,20 +7,25 @@ import "../styles/global.css";
 import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import JsonLd from "../components/JsonLd.astro";
 
 interface Props {
-  /** Page name, e.g. "Treningi". The home page passes "FBK Loka". */
+  /** Page name, e.g. "Treningi". */
   title: string;
   /** Unique meta description for the page. */
   description: string;
   /** Keep the page out of search results (/hvala, /404). */
   noindex?: boolean;
+  /** Structured data for this page (schema.org objects). */
+  jsonLd?: object | object[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, jsonLd } = Astro.props;
 // Title pattern "Treningi | FBK Loka" (SPEC.md §13.2).
-const fullTitle = title === "FBK Loka" ? title : `${title} | FBK Loka`;
+const fullTitle = `${title} | FBK Loka`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Default share image: the logo on black (SPEC.md §13.2). Match-specific images follow in phase 3.
+const ogImage = new URL("/og.png", Astro.site);
 ---
 
 <!doctype html>
@@ -32,6 +37,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FBK Loka" />
+    <meta property="og:locale" content="sl_SI" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logo FBK Loka" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd && <JsonLd data={jsonLd} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="sitemap" href="/sitemap-index.xml" />

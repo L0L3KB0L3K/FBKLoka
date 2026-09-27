@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # local preview config for Claude Code
 .claude/launch.json
+
+# Playwright output
+test-results/
+playwright-report/
