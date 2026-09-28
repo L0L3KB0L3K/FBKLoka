@@ -10,7 +10,7 @@ Stanje: 28. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Za stran o zasebnosti potrdi uradno ime iz registra: FLOORBALL KLUB LOKA. Naslov, matična in davčna številka so enaki kot na stari strani.
 - [ ] Preberite in potrdite osnutka besedil na straneh O klubu (/klub) in Zasebnost (/zasebnost). Pri zasebnosti: ali drži rok hrambe sporočil največ 12 mesecev? Priporočam, da ga prebere nekdo s pravnim znanjem.
 - [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.
-- [ ] Logo v izvirni obliki (SVG ali PDF od oblikovalca) in potrditev rumene barve.
+- [ ] Logo v izvirni obliki (SVG ali PDF od oblikovalca) in potrditev rumene barve. Do takrat je v `docs/znamka/logo/` prerisan vektor: potrdite ga (`docs/znamka/pregled.png`). Vsa vprašanja o znamki: `docs/05-znamka.md`.
 - [ ] Avtor fotografij s stare strani (člani na /klub in na strani članov). Ali ga navedemo ob fotografiji?
 - [ ] Domena fbkloka.si: kdo v klubu jo ima? Ta oseba mora ob objavi nastaviti DNS ali domeno prenesti. Zapisi MX za e-pošto info@fbkloka.si morajo ostati, sicer pošta ne pride več.
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
