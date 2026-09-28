@@ -1,0 +1,51 @@
+---
+// Floorball court lines behind the top of every inner page (owner, 28. 9. 2026; idea from the
+// "profesionalna raven" review: court lines as a quiet section mark for FBK Loka). Decorative only:
+// thin lines in the "line" token, a quarter off the right edge, fading out towards the content.
+// The home page has the match board instead (SPEC.md §9: one loud element), so Base leaves this out there.
+// Court to scale, 1 unit = 10 cm: rink 40 × 20 m with rounded corners, centre line and spot,
+// goal 1.6 × 0.65 m on the goal line 3.5 m from the end, goal area 4 × 5 m, goalkeeper area 1 × 2.5 m,
+// face-off dots 1.5 m from the side boards.
+---
+
+<div class="court-layer pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 overflow-hidden md:h-48" aria-hidden="true">
+  <div class="page-wrap relative h-full">
+    <svg
+      class="court absolute top-4 right-0 w-64 translate-x-1/3 text-line md:top-6 md:w-[28rem] md:translate-x-1/4"
+      viewBox="0 0 400 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      vector-effect="non-scaling-stroke"
+    >
+      <rect x="1" y="1" width="398" height="198" rx="30" vector-effect="non-scaling-stroke" />
+      <line x1="200" y1="1" x2="200" y2="199" vector-effect="non-scaling-stroke" />
+      <g fill="currentColor" stroke="none">
+        <circle cx="200" cy="100" r="2" />
+        <circle cx="200" cy="15" r="2" />
+        <circle cx="200" cy="185" r="2" />
+        <circle cx="35" cy="15" r="2" />
+        <circle cx="35" cy="185" r="2" />
+        <circle cx="365" cy="15" r="2" />
+        <circle cx="365" cy="185" r="2" />
+      </g>
+      <g vector-effect="non-scaling-stroke">
+        <!-- left end: goal area, goalkeeper area, goal -->
+        <rect x="28.5" y="75" width="40" height="50" vector-effect="non-scaling-stroke" />
+        <rect x="35" y="87.5" width="10" height="25" vector-effect="non-scaling-stroke" />
+        <rect x="28.5" y="92" width="6.5" height="16" vector-effect="non-scaling-stroke" />
+        <!-- right end -->
+        <rect x="331.5" y="75" width="40" height="50" vector-effect="non-scaling-stroke" />
+        <rect x="355" y="87.5" width="10" height="25" vector-effect="non-scaling-stroke" />
+        <rect x="365" y="92" width="6.5" height="16" vector-effect="non-scaling-stroke" />
+      </g>
+    </svg>
+  </div>
+</div>
+
+<style>
+  /* Only beside the title: the layer ends and fades out before cards, lists or tables start. */
+  .court-layer {
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  }
+</style>

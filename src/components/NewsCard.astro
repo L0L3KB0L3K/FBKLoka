@@ -20,17 +20,19 @@ const { naslov, datum, povzetek, naslovnaSlika, selekcija } = post.data;
 const Heading = `h${headingLevel}` as "h2" | "h3";
 ---
 
-<li class="relative flex flex-col" data-selekcija={selekcija ?? ""}>
+<li class="news-card relative flex flex-col" data-selekcija={selekcija ?? ""}>
   {/* Cropped to 4:3 when the image is built, so all cards line up (covers are square or portrait from Instagram). */}
-  <Image
-    src={naslovnaSlika}
-    alt=""
-    width={640}
-    height={480}
-    widths={[400, 640]}
-    sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw"
-    class="aspect-[4/3] w-full rounded-md object-cover"
-  />
+  <div class="overflow-hidden rounded-md">
+    <Image
+      src={naslovnaSlika}
+      alt=""
+      width={640}
+      height={480}
+      widths={[400, 640]}
+      sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw"
+      class="news-cover block aspect-[4/3] w-full object-cover"
+    />
+  </div>
   <p class="mt-4 text-small text-muted">
     <time datetime={datum.toISOString().slice(0, 10)}>{formatDate(datum.toISOString())}</time>
     {teamName && <span> · {teamName}</span>}
@@ -68,6 +70,17 @@ const Heading = `h${headingLevel}` as "h2" | "h3";
   @media (hover: hover) and (pointer: fine) {
     .news-link:hover {
       text-decoration: underline;
+    }
+  }
+
+  /* The cover grows 3 % inside its frame while the mouse is over the card. Mouse only, never with reduced motion. */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .news-cover {
+      transition: transform var(--dur-zoom) var(--ease-out);
+    }
+
+    .news-card:hover .news-cover {
+      transform: scale(1.03);
     }
   }
 </style>

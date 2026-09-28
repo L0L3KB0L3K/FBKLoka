@@ -39,16 +39,17 @@
   /* One font family; width makes the difference between headings and text (SPEC.md §9.3). */
   --font-sans: "Archivo Variable", Arial, system-ui, sans-serif;
 
-  /* Type scale, mobile values. Desktop values are set in the media query below.
-     The reset removes Tailwind's default sizes so only this scale exists. */
+  /* Type scale (SPEC.md §9.3): the same mobile (360 px) and desktop (960 px and up) sizes as before,
+     but fluid in between with clamp() instead of one jump at 768 px. The rem part keeps browser zoom
+     working (WCAG 1.4.4). The reset removes Tailwind's default sizes so only this scale exists. */
   --text-*: initial;
-  --text-hero: 2.5rem;
+  --text-hero: clamp(2.5rem, 1.6rem + 4vw, 4rem);
   --text-hero--line-height: 1.05;
-  --text-h1: 1.75rem;
+  --text-h1: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
   --text-h1--line-height: 1.05;
-  --text-h2: 1.375rem;
+  --text-h2: clamp(1.375rem, 1.15rem + 1vw, 1.75rem);
   --text-h2--line-height: 1.05;
-  --text-h3: 1.125rem;
+  --text-h3: clamp(1.125rem, 1.05rem + 0.3333vw, 1.25rem);
   --text-h3--line-height: 1.2;
   --text-body: 1.0625rem;
   --text-body--line-height: 1.6;
@@ -64,6 +65,7 @@
   --dur-press: 120ms;
   --dur-menu-in: 220ms;
   --dur-menu-out: 160ms;
+  --dur-zoom: 240ms; /* news card image on hover, within the 250 ms limit */
 }
 
 /* Hover only on devices with a mouse, colour changes only (SPEC.md §9.6).
@@ -128,15 +130,6 @@
 }
 
 @layer base {
-  /* Desktop type scale (SPEC.md §9.3). */
-  @media (width >= 48rem) {
-    :root {
-      --text-hero: 4rem;
-      --text-h1: 2.5rem;
-      --text-h2: 1.75rem;
-      --text-h3: 1.25rem;
-    }
-  }
 
   html {
     /* The header is sticky and 64 px tall: anchors and focused elements stay below it (SPEC.md §13.3). */

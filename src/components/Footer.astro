@@ -47,7 +47,8 @@ const year = new Date().getFullYear();
 
       <nav aria-labelledby="footer-links">
         <h2 id="footer-links" class="text-h3">Povezave</h2>
-        <ul class="mt-2">
+        {/* Two columns: half the height of one long list; every target stays 44 px high. */}
+        <ul class="mt-2 grid grid-cols-2 gap-x-6">
           {
             links.map(({ href, label }) => (
               <li>
@@ -59,7 +60,7 @@ const year = new Date().getFullYear();
           }
           {
             eosUrl && (
-              <li>
+              <li class="col-span-2">
                 <a href={eosUrl} class="inline-flex min-h-11 min-w-11 items-center hover:text-ball">
                   Za starše in člane (EOS)
                 </a>
@@ -75,7 +76,7 @@ const year = new Date().getFullYear();
             <h2 id="footer-social" class="text-h3">
               Spremljaj nas
             </h2>
-            <ul class="mt-2">
+            <ul class="mt-2 grid grid-cols-2 gap-x-6">
               {social.map(({ href, label }) => (
                 <li>
                   <a href={href} class="inline-flex min-h-11 min-w-11 items-center hover:text-ball">
