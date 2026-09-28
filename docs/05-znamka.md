@@ -6,7 +6,7 @@ Stanje: 28. 9. 2026. Popis tega, kar klub že ima. Brez prenove znaka.
 ## Povzetek
 
 - Znak je dober in prepoznaven: palica kot »l«, žogica kot »o«. Prenove ne potrebuje.
-- Največja vrzel: klub ni imel vektorske datoteke logotipa. Zdaj je v `docs/znamka/logo/`, klub jo mora potrditi.
+- Največja vrzel: klub ni imel vektorske datoteke logotipa. Zdaj je v `src/assets/logo/`, klub jo mora potrditi.
 - Ime ni povsod enako: Facebook in YouTube še nosita ime Insport, stara stran uporablja drugo rumeno.
 - Manjkajo prave fotografije v dresih FBK Loka, podatek o pisavi napisa in barve za tisk.
 
@@ -31,11 +31,13 @@ podlagi so obrisi črni, na temni beli.
 | `src/assets/logo/logo-dark.png` | PNG 1772×790, črna podlaga, brez prosojnosti | V glavi strani |
 | `src/assets/logo/logo-light.png` | PNG 1772×790, bela podlaga, brez prosojnosti | Vir za vektor |
 | FloorballFlash »LOGO - FBK Loka - (končni).svg« | JPEG 1812×828 v ovoju SVG. Ni vektor. Podatki v datoteki: ACDSee, 20. 10. 2024, Gorazd Tomc | Na FloorballFlash |
-| `docs/znamka/logo/*.svg` | Vektor (poti), 28. 9. 2026 | Čaka potrditev kluba |
+| `src/assets/logo/*.svg` | Vektor (poti), 28. 9. 2026 | Na strani od 28. 9. 2026: glava, favicon, slika za deljenje, lestvica. Klub še potrdi |
 
 [MANJKA] izvorna datoteka oblikovalca (AI, PDF, EPS ali SVG s potmi) in avtor znaka.
 
-### Nove vektorske datoteke (`docs/znamka/logo/`)
+### Nove vektorske datoteke (`src/assets/logo/`)
+
+Ista mapa kot za spletno stran, da je vir en sam: ob spremembi datoteke se stran zgradi znova.
 
 | Datoteka | Za kaj |
 |---|---|
@@ -124,5 +126,5 @@ Dresi: na fotografijah 2025/26 rumeni s črnim; starejši beli dresi Insport. [M
 4. Uradne barve za tisk (CMYK ali Pantone) in barve dresov, tudi rezervnega?
 5. Ali je znak zaščiten kot znamka? Preverba v TMview in WIPO še ni narejena.
 6. Ali je »Skupaj rastemo. Skupaj zmagujemo.« uradno geslo?
-7. Ali potrdite nove vektorske datoteke (`docs/znamka/pregled.png`)? Šele nato jih uporabimo na strani.
+7. Ali potrdite nove vektorske datoteke (`docs/znamka/pregled.png`)? Na strani so že v uporabi (odločitev Maja, 28. 9. 2026).
 8. Ali naj stran na Facebooku in kanal na YouTubu preimenujemo v FBK Loka?

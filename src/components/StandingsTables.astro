@@ -5,6 +5,9 @@
 // if a long name needs it, and takes keyboard focus for that (axe: scrollable-region-focusable).
 import { formatDate } from "../lib/format.ts";
 import type { Standings } from "../lib/types.ts";
+import { Image } from "astro:assets";
+// Our row shows the ball from the vector club logo; FloorballFlash only has a JPEG of the full logo.
+import clubBall from "../assets/logo/zogica.svg";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -76,7 +79,13 @@ const overtime = `${cell} hidden sm:table-cell`;
                   <td class={cell}>{row.mesto}.</td>
                   <th scope="row" class="px-1.5 py-2 text-left [font-weight:inherit]">
                     <span class="flex items-center gap-2">
-                      <TeamLogo file={row.logo} onInk={row.loka} />
+                      {row.loka ? (
+                        <span class="inline-flex size-6 shrink-0 items-center justify-center">
+                          <Image src={clubBall} alt="" width={22} height={22} />
+                        </span>
+                      ) : (
+                        <TeamLogo file={row.logo} />
+                      )}
                       {row.ekipa}
                     </span>
                   </th>

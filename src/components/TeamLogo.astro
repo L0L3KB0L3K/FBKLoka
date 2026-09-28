@@ -1,16 +1,14 @@
 ---
 // Opponent logo from src/data/ff/logos/ (downloaded by scripts/fetch-ff.ts, SPEC.md §5).
 // Decorative: the team name is always next to it, so alt is empty. Missing file = nothing rendered.
-// onInk: a black chip behind the logo, for a light logo on a light row (FBK Loka's own FF logo is light).
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface Props {
   file: string | null;
-  onInk?: boolean;
 }
 
-const { file, onInk = false } = Astro.props;
+const { file } = Astro.props;
 const logos = import.meta.glob<{ default: ImageMetadata }>("/src/data/ff/logos/*.{svg,png,jpg,jpeg,webp,gif}", {
   eager: true,
 });
@@ -19,7 +17,7 @@ const logo = file ? logos[`/src/data/ff/logos/${file}`]?.default : undefined;
 
 {
   logo && (
-    <span class:list={["inline-flex size-6 shrink-0 items-center justify-center", onInk && "rounded-sm bg-ink p-0.5"]}>
+    <span class="inline-flex size-6 shrink-0 items-center justify-center">
       <Image src={logo} alt="" height={24} densities={[1, 2]} class="max-h-6 w-auto max-w-6 object-contain" />
     </span>
   )

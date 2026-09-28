@@ -52,6 +52,7 @@ const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, hei
     <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <JsonLd data={jsonLd} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>

@@ -3,7 +3,9 @@
 // Mobile: logo and a menu button. The menu is a native modal <dialog> (SPEC.md §2):
 // the browser handles Escape, the focus trap and returning focus to the button.
 import { Image } from "astro:assets";
-import logoDark from "../assets/logo/logo-dark.png";
+// Vector logo for dark backgrounds (src/assets/logo/, redrawn from the club PNG, docs/05-znamka.md).
+// A file, not inlined: it is on every page twice (header and menu) and the browser caches it once.
+import logo from "../assets/logo/logo-na-temnem.svg";
 import { MAIN_NAV, navState } from "../config/nav";
 import { getSettings, isSet } from "../lib/site";
 import Button from "./ui/Button.astro";
@@ -12,6 +14,7 @@ const settings = await getSettings();
 // The EOS button stays hidden until the club sends the real link (SPEC.md §1).
 const eosUrl = isSet(settings.eos.portal) ? settings.eos.portal : null;
 const pathname = Astro.url.pathname;
+const logoWidth = Math.round((40 * logo.width) / logo.height);
 
 // aria-current: "page" on the current page, "true" on its parent section.
 const current = (href: string) => {
@@ -23,7 +26,7 @@ const current = (href: string) => {
 <header class="surface-ink sticky top-0 z-50">
   <div class="page-wrap flex h-16 items-center justify-between gap-6">
     <a href="/" class="flex min-h-11 shrink-0 items-center">
-      <Image src={logoDark} alt="FBK Loka, domov" height={40} densities={[1, 2]} loading="eager" />
+      <Image src={logo} alt="FBK Loka, domov" width={logoWidth} height={40} loading="eager" />
     </a>
 
     {/* Right side: desktop menu, EOS button, mobile menu button */}
@@ -79,7 +82,7 @@ const current = (href: string) => {
   <dialog id="site-menu" class="menu surface-ink" aria-label="Meni">
     <div class="page-wrap flex h-16 items-center justify-between gap-6">
       <a href="/" class="flex min-h-11 shrink-0 items-center">
-        <Image src={logoDark} alt="FBK Loka, domov" height={40} densities={[1, 2]} loading="eager" />
+        <Image src={logo} alt="FBK Loka, domov" width={logoWidth} height={40} loading="eager" />
       </a>
       <button
         type="button"
