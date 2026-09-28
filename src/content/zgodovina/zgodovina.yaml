@@ -1,5 +1,6 @@
 # Časovnica kluba. Viri: Instagram @fbk_loka (izvoz 24. 9. 2026), Wikipedija (FBK Insport Škofja Loka),
-# Gorenjski glas (3. 4. 2023), Floorball zveza Slovenije (arhiv novic, zgodovina, reprezentanca), floorball.sport.
+# Gorenjski glas (3. 4. 2023), Floorball zveza Slovenije (arhiv novic, zgodovina, reprezentanca), floorball.sport,
+# Facebook Floorball Insport (23. 3. 2025). Sezoni 2024/25 in 2025/26 je potrdil klub (29. 9. 2026).
 # Vnosi s "TODO" potrdi s klubom pred objavo.
 
 dogodki:
@@ -76,6 +77,12 @@ dogodki:
     dogodek: "Člani zmagajo na turnirju Torpedo Cup v Budimpešti."
 
   - leto: 2025
+    dogodek: "Šesti zaporedni naslov IFL."
+
+  - leto: 2025
+    dogodek: "Člani ubranijo naslov državnih prvakov, šesti zapored."
+
+  - leto: 2025
     dogodek: "U15 A je državni prvak, U17 osvoji bron."
 
   - leto: 2025
@@ -83,7 +90,7 @@ dogodki:
     opomba: "TODO: točno leto preimenovanja. Aprila 2024 še FBK Insport (Gorenjski glas), aprila 2025 že FBK Loka (novice)."
 
   - leto: 2026
-    dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici."
+    dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici in peti v IFL."
 
   - leto: 2026
     dogodek: "Sedem igralcev kluba igra za reprezentanco U19."
