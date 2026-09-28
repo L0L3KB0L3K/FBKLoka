@@ -1,6 +1,6 @@
 ---
-// /vpis: for a new parent (SPEC.md §7.5). First free trainings, what to bring, the main button
-// "Vpiši se" (EOS registration), when and where the youth train, questions and a link to the contact form.
+// /vpis: for a new parent (SPEC.md §7.5). A black panel first: free first trainings and the large
+// "Vpiši se" button (EOS). Then what to bring, when and where the youth train, questions, a link to the contact form.
 // Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
@@ -31,20 +31,37 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
 
-    <div class="mt-8 prose">
+    {/* The main task of this page first (SPEC.md §7.5, §9.5): free first trainings and the way into EOS. */}
+    <section aria-labelledby="prvi-treningi" class="surface-ink mt-8 rounded-md p-6 md:p-10">
+      <h2 id="prvi-treningi" class="text-h1">
+        Prvi treningi so <span class="text-ball">brezplačni</span>
+      </h2>
+      <p class="mt-4 max-w-[55ch]">
+        Otrok pride na nekaj treningov in vidi, kako potekajo in ali mu je floorball všeč. Ko se odloči, ga vpišete v
+        aplikaciji EOS.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+        {
+          isSet(eos.registracija) && (
+            <Button href={eos.registracija} variant="on-ink" size="lg">
+              Vpiši se
+            </Button>
+          )
+        }
+        {
+          schedules.length > 0 && (
+            <a href="#treningi-mladih" class="inline-flex min-h-11 items-center font-semibold hover:text-ball">
+              Kdaj in kje so treningi
+            </a>
+          )
+        }
+      </div>
+      {isSet(eos.registracija) && <p class="mt-4 text-small">Vpis in članarina potekata v aplikaciji EOS.</p>}
+    </section>
+
+    <div class="mt-12 prose">
       <Content />
     </div>
-
-    {
-      isSet(eos.registracija) && (
-        <div class="mt-8">
-          <Button href={eos.registracija} variant="on-paper">
-            Vpiši se
-          </Button>
-          <p class="mt-3 text-small text-muted">Vpis in članarina potekata v aplikaciji EOS.</p>
-        </div>
-      )
-    }
 
     {
       schedules.length > 0 && (

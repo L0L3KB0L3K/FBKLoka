@@ -6,8 +6,9 @@
 import { formatDate } from "../lib/format.ts";
 import type { Standings } from "../lib/types.ts";
 import { Image } from "astro:assets";
-// Our row shows the ball from the vector club logo; FloorballFlash only has a JPEG of the full logo.
-import clubBall from "../assets/logo/zogica.svg";
+// Our row shows the vector club logo instead of the name (it reads "loka"; alt keeps "FBK Loka" for screen readers).
+// 32 px high: the outlines are thin, at 24 px they would be half a pixel and fade.
+import clubLogo from "../assets/logo/logo-na-svetlem.svg";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -20,6 +21,7 @@ const { standings, updated } = Astro.props;
 const showTies = standings.some((s) => s.tabele.some((t) => t.vrstice.some((row) => row.remi > 0)));
 const cell = "px-1.5 py-2 text-right";
 const overtime = `${cell} hidden sm:table-cell`;
+const logoWidth = Math.round((32 * clubLogo.width) / clubLogo.height);
 ---
 
 {
@@ -78,16 +80,14 @@ const overtime = `${cell} hidden sm:table-cell`;
                 <tr class:list={["border-b border-line", row.loka && "bg-court font-bold"]}>
                   <td class={cell}>{row.mesto}.</td>
                   <th scope="row" class="px-1.5 py-2 text-left [font-weight:inherit]">
-                    <span class="flex items-center gap-2">
-                      {row.loka ? (
-                        <span class="inline-flex size-6 shrink-0 items-center justify-center">
-                          <Image src={clubBall} alt="" width={22} height={22} />
-                        </span>
-                      ) : (
+                    {row.loka ? (
+                      <Image src={clubLogo} alt={row.ekipa} width={logoWidth} height={32} class="block" />
+                    ) : (
+                      <span class="flex items-center gap-2">
                         <TeamLogo file={row.logo} />
-                      )}
-                      {row.ekipa}
-                    </span>
+                        {row.ekipa}
+                      </span>
+                    )}
                   </th>
                   <td class={cell}>{row.tekme}</td>
                   <td class={cell}>{row.zmage}</td>

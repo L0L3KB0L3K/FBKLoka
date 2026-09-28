@@ -1,0 +1,135 @@
+---
+// One team on /ekipe (owner, 28. 9. 2026): name, short text and the facts a parent or fan looks for.
+// A card, unlike SPEC.md §9.5 (rows): the owner chose cards; the look matches the team cards on /treningi.
+// The whole card opens the team page through the name link (stretched ::after), so there is one link per card.
+// Facts without data are left out (SPEC.md §1). The next match is picked in the browser (script on /ekipe).
+import type { CollectionEntry } from "astro:content";
+import { formatDayShort, formatTime } from "../lib/format.ts";
+import { joinSl } from "../lib/schedule.ts";
+import { isSet } from "../lib/site.ts";
+import type { Training } from "../lib/trainings.ts";
+import type { Match } from "../lib/types.ts";
+
+interface Props {
+  team: CollectionEntry<"selekcije">;
+  /** Head coaches, or all coaches when none is marked as head coach. */
+  coaches: string[];
+  trainings: Training[];
+  /** Competition labels with FloorballFlash data, e.g. ["IFL", "1. SFL"]. */
+  competitions: string[];
+  /** The next few upcoming matches, in time order. */
+  upcoming: Match[];
+}
+
+const { team, coaches, trainings, competitions, upcoming } = Astro.props;
+const { ime, kratekOpis, starostniRazpon, treningiOpomba } = team.data;
+
+const DAY_SHORT: Record<string, string> = {
+  ponedeljek: "pon",
+  torek: "tor",
+  sreda: "sre",
+  četrtek: "čet",
+  petek: "pet",
+  sobota: "sob",
+  nedelja: "ned",
+};
+// Start times only, one per day and time: "pon 19:00, tor 20:15". The full table is on the team page.
+const slots = [...new Set(trainings.map((t) => `${DAY_SHORT[t.dan] ?? t.dan} ${t.od}`))];
+// Slovenian dual: 1 trener, 2 trenerja, 3+ trenerji.
+const coachLabel = coaches.length === 1 ? "Trener" : coaches.length === 2 ? "Trenerja" : "Trenerji";
+---
+
+<li class="team-card relative flex flex-col rounded-md border border-line p-6">
+  <h2 class="text-h2">
+    <a href={`/ekipe/${team.id}/`} class="team-link">{ime}</a>
+  </h2>
+  <p class="mt-3">{kratekOpis}</p>
+
+  <dl class="mt-5 grid gap-x-6 gap-y-3 text-small sm:grid-cols-2">
+    {
+      isSet(starostniRazpon) && (
+        <div>
+          <dt class="text-muted">Starost</dt>
+          <dd class="font-semibold">{starostniRazpon}</dd>
+        </div>
+      )
+    }
+    {
+      coaches.length > 0 && (
+        <div>
+          <dt class="text-muted">{coachLabel}</dt>
+          <dd class="font-semibold">{joinSl(coaches)}</dd>
+        </div>
+      )
+    }
+    {
+      (slots.length > 0 || treningiOpomba) && (
+        <div>
+          <dt class="text-muted">Treningi</dt>
+          {/* A team without its own slots (U19) shows the note instead, e.g. "trenira skupaj s člani". */}
+          <dd class="font-semibold">{slots.length > 0 ? slots.join(", ") : treningiOpomba}</dd>
+        </div>
+      )
+    }
+    {
+      competitions.length > 0 && (
+        <div>
+          <dt class="text-muted">Tekmuje v</dt>
+          <dd class="font-semibold">{joinSl(competitions)}</dd>
+        </div>
+      )
+    }
+    {
+      upcoming.length > 0 && (
+        <div class="sm:col-span-2" data-next-match>
+          <dt class="text-muted">Naslednja tekma</dt>
+          <dd class="font-semibold">
+            {upcoming.map((match, index) => (
+              <span data-start={match.zacetek} hidden={index > 0}>
+                {`${formatDayShort(match.zacetek)} ob ${formatTime(match.zacetek)}, ${match.nasprotnik.ime} (${match.doma ? "doma" : "v gosteh"})`}
+              </span>
+            ))}
+          </dd>
+        </div>
+      )
+    }
+  </dl>
+</li>
+
+<style>
+  /* Stretched link: the name's ::after covers the card, so a click anywhere opens the team page. */
+  .team-link {
+    text-decoration: none;
+  }
+
+  .team-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+  }
+
+  .team-link:focus-visible {
+    outline: none;
+  }
+
+  /* The focus ring goes around the whole card, the same ring as everywhere else (global.css). */
+  .team-link:focus-visible::after {
+    outline: 2px solid var(--focus-ring, var(--color-ink));
+    outline-offset: 2px;
+  }
+
+  .team-card {
+    transition: border-color var(--dur-hover) ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .team-card:hover {
+      border-color: var(--color-ink);
+    }
+
+    .team-card:hover .team-link {
+      text-decoration: underline;
+    }
+  }
+</style>

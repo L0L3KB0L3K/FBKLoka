@@ -11,6 +11,7 @@ import { readFileSync } from "node:fs";
 
 const PAGES = [
   "/",
+  "/ekipe/",
   "/ekipe/clani/",
   "/tekme/",
   "/treningi/",

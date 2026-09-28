@@ -4,17 +4,20 @@
 //   on-ink   = yellow background, black text (on black surfaces)
 //   on-paper = black background, white text (on white surfaces)
 // Renders <a> when href is given, otherwise <button>.
+// size lg: the one main call to action of a page (/vpis, the join band on the home page).
 interface Props {
   variant: "on-ink" | "on-paper";
   href?: string;
   type?: "button" | "submit";
+  size?: "md" | "lg";
   class?: string;
 }
 
-const { variant, href, type = "button", class: className } = Astro.props;
+const { variant, href, type = "button", size = "md", class: className } = Astro.props;
 
 const classes = [
-  "btn inline-flex min-h-11 items-center justify-center rounded-md px-5 font-bold no-underline disabled:cursor-not-allowed disabled:opacity-70",
+  "btn inline-flex items-center justify-center rounded-md font-bold no-underline disabled:cursor-not-allowed disabled:opacity-70",
+  size === "lg" ? "min-h-14 px-8 text-h3" : "min-h-11 px-5",
   variant === "on-ink" ? "bg-ball text-ink hover:bg-paper" : "bg-ink text-paper hover:text-ball",
   className,
 ];

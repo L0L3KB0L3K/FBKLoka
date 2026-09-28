@@ -1,29 +1,57 @@
 ---
-// /ekipe: all teams in the club's order (SPEC.md §7). Rows, not cards (SPEC.md §9.5).
-import { getCollection } from "astro:content";
+// /ekipe: all teams in the club's order (SPEC.md §7), as cards in two columns (owner, 28. 9. 2026).
+// Next match per team: up to 3 upcoming matches are in the HTML and the browser shows the first one that
+// is not over yet (the 3-hour rule of the home page, src/lib/upcoming.ts). Without JS the first one shows.
+import { getCollection, type CollectionEntry } from "astro:content";
+import TeamCard from "../../components/TeamCard.astro";
+import { FF_CONFIG } from "../../config/ff.ts";
 import Base from "../../layouts/Base.astro";
-import { isSet } from "../../lib/site.ts";
+import { loadCollection } from "../../lib/content.ts";
+import { allMatches } from "../../lib/match-data.ts";
+import { getTrainings } from "../../lib/trainings.ts";
 
 const teams = (await getCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+const allCoaches = await loadCollection("trenerji");
+const trainings = await getTrainings();
+
+const cards = teams.map((team) => {
+  // Coaches in the order the team file lists them; the card names the head coach.
+  const own = team.data.trenerji
+    .map((id) => allCoaches.find((coach) => coach.id === id))
+    .filter((coach): coach is CollectionEntry<"trenerji"> => coach !== undefined);
+  const heads = own.filter((coach) => coach.data.vloga === "Glavni trener");
+  return {
+    team,
+    coaches: (heads.length > 0 ? heads : own).map((coach) => coach.data.ime),
+    trainings: trainings.filter((t) => t.selekcija === team.id),
+    competitions: (FF_CONFIG[team.id] ?? []).filter((c) => c.competitionId !== null).map((c) => c.label),
+    upcoming: allMatches.filter((m) => m.selekcija === team.id && m.stanje === "prihodnja").slice(0, 3),
+  };
+});
 ---
 
-<Base title="Ekipe" description="Selekcije FBK Loka: člani v IFL in 1. SFL, Švigalice ter mladi od U11 do U19.">
+<Base title="Ekipe" description="Selekcije FBK Loka: člani v IFL in 1. SFL, Švigalice ter mladi od U9 do U19.">
   <div class="page-wrap py-12">
     <h1>Ekipe</h1>
-    <ul class="mt-10 border-t border-line">
-      {
-        teams.map((team) => (
-          <li class="border-b border-line py-6">
-            <h2>
-              <a href={`/ekipe/${team.id}/`}>{team.data.ime}</a>
-            </h2>
-            <p class="mt-2 max-w-[70ch]">{team.data.kratekOpis}</p>
-            {isSet(team.data.starostniRazpon) && (
-              <p class="mt-1 text-small text-muted">Starost: {team.data.starostniRazpon}</p>
-            )}
-          </li>
-        ))
-      }
+    <ul class="mt-10 grid gap-6 md:grid-cols-2">
+      {cards.map((card) => <TeamCard {...card} />)}
     </ul>
   </div>
 </Base>
+
+<script>
+  // Shows the next match that is not over yet on every card; hides the line when none is left.
+  import { currentTime } from "../../lib/clock.ts";
+  import { pick } from "../../lib/upcoming.ts";
+
+  const now = currentTime();
+  for (const group of document.querySelectorAll<HTMLElement>("[data-next-match]")) {
+    const items = [...group.querySelectorAll<HTMLElement>("[data-start]")];
+    const { board } = pick(
+      items.map((item) => item.dataset.start ?? ""),
+      now,
+    );
+    items.forEach((item, index) => (item.hidden = index !== board));
+    group.hidden = board === null;
+  }
+</script>

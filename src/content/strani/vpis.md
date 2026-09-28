@@ -15,8 +15,6 @@ vprasanja:
     odgovor: "Nič hudega. Prvi obiski so namenjeni prav temu, da otrok brez obveznosti spozna šport in treninge ter vidi, ali mu je floorball všeč."
 ---
 
-**Prvi treningi so brezplačni.** Otrok pride na nekaj treningov in vidi, kako potekajo in ali mu je floorball všeč.
-
 ## Kaj prinese s seboj
 
 Dvoranske čevlje, kratke hlače in majico. Palico mu posodimo.
