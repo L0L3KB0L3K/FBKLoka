@@ -1,14 +1,12 @@
 ---
-// League tables on a team page (SPEC.md §5.8, §7.2): one table per competition, our row bold on grey.
+// League tables on a team page (SPEC.md §5.8, §7.2): one table per competition.
+// Every team shows its FloorballFlash logo at the same size, ours too (owner, 28. 9. 2026); our row is bold
+// on a light yellow tint with a black bar on the left. Rows turn grey under the mouse to help reading across.
 // Tables where nobody has played yet are left out by the page (SPEC.md §1: no empty sections).
 // On a phone the overtime columns are hidden, so the table fits 320 px; the box still scrolls sideways
 // if a long name needs it, and takes keyboard focus for that (axe: scrollable-region-focusable).
 import { formatDate } from "../lib/format.ts";
 import type { Standings } from "../lib/types.ts";
-import { Image } from "astro:assets";
-// Our row shows the vector club logo instead of the name (it reads "loka"; alt keeps "FBK Loka" for screen readers).
-// 32 px high: the outlines are thin, at 24 px they would be half a pixel and fade.
-import clubLogo from "../assets/logo/logo-na-svetlem.svg";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -19,9 +17,8 @@ interface Props {
 
 const { standings, updated } = Astro.props;
 const showTies = standings.some((s) => s.tabele.some((t) => t.vrstice.some((row) => row.remi > 0)));
-const cell = "px-1.5 py-2 text-right";
+const cell = "px-2 py-2.5 text-right first:pl-3 last:pr-3";
 const overtime = `${cell} hidden sm:table-cell`;
-const logoWidth = Math.round((32 * clubLogo.width) / clubLogo.height);
 ---
 
 {
@@ -29,19 +26,19 @@ const logoWidth = Math.round((32 * clubLogo.width) / clubLogo.height);
     <section class:list={[index > 0 && "mt-10"]} aria-labelledby={`lestvica-${competition.competitionId}`}>
       <h3 id={`lestvica-${competition.competitionId}`}>{competition.tekmovanje}</h3>
       {competition.tabele.map((table) => (
-        <section class="mt-3 overflow-x-auto" tabindex="0" aria-label={`Lestvica ${competition.tekmovanje}`}>
+        <section class="mt-3 overflow-x-auto rounded-card border border-line" tabindex="0" aria-label={`Lestvica ${competition.tekmovanje}`}>
           <table class="w-full text-small tabular-nums">
             <caption class="sr-only">
               Lestvica {competition.tekmovanje}
               {competition.tabele.length > 1 && `, ${table.ime}`}
             </caption>
-            <thead class="border-b border-ink">
+            <thead class="border-b border-line bg-court">
               <tr>
                 <th scope="col" class={cell}>
                   <span aria-hidden="true">#</span>
                   <span class="sr-only">Mesto</span>
                 </th>
-                <th scope="col" class="px-1.5 py-2 text-left">Ekipa</th>
+                <th scope="col" class="px-2 py-2.5 text-left">Ekipa</th>
                 <th scope="col" class={cell}>
                   <span aria-hidden="true">T</span>
                   <span class="sr-only">Tekme</span>
@@ -77,17 +74,13 @@ const logoWidth = Math.round((32 * clubLogo.width) / clubLogo.height);
             </thead>
             <tbody>
               {table.vrstice.map((row) => (
-                <tr class:list={["border-b border-line", row.loka && "bg-court font-bold"]}>
+                <tr class:list={["standings-row border-b border-line last:border-b-0", row.loka && "standings-ours font-bold"]}>
                   <td class={cell}>{row.mesto}.</td>
-                  <th scope="row" class="px-1.5 py-2 text-left [font-weight:inherit]">
-                    {row.loka ? (
-                      <Image src={clubLogo} alt={row.ekipa} width={logoWidth} height={32} class="block" />
-                    ) : (
-                      <span class="flex items-center gap-2">
-                        <TeamLogo file={row.logo} />
-                        {row.ekipa}
-                      </span>
-                    )}
+                  <th scope="row" class="px-2 py-2.5 text-left [font-weight:inherit]">
+                    <span class="flex items-center gap-2">
+                      <TeamLogo file={row.logo} />
+                      {row.ekipa}
+                    </span>
                   </th>
                   <td class={cell}>{row.tekme}</td>
                   <td class={cell}>{row.zmage}</td>
@@ -127,3 +120,21 @@ const logoWidth = Math.round((32 * clubLogo.width) / clubLogo.height);
     ))
   }
 </p>
+
+<style>
+  .standings-row {
+    transition: background-color var(--dur-hover) ease;
+  }
+
+  /* Our row: light yellow tint (text stays black) and a black bar on the left edge. */
+  .standings-ours {
+    background-color: color-mix(in srgb, var(--color-ball) 28%, var(--color-paper));
+    box-shadow: inset 4px 0 0 var(--color-ink);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .standings-row:not(.standings-ours):hover {
+      background-color: var(--color-court);
+    }
+  }
+</style>

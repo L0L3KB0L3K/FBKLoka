@@ -1,0 +1,37 @@
+---
+// A link that leads to more of the same ("Vse tekme", "Vse novice"): bold label and an arrow that moves
+// 4 px to the right under the mouse, so the link reads as "go on" before the click (feedback, not decoration).
+// No movement with reduced motion. Works on light and on black surfaces (colour is inherited).
+import ArrowIcon from "./ArrowIcon.astro";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a href={href} class:list={["arrow-link group inline-flex min-h-11 items-center gap-2 font-bold no-underline", className]}>
+  <slot />
+  <ArrowIcon class="arrow-link-icon" />
+</a>
+
+<style>
+  .arrow-link-icon {
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .arrow-link:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .arrow-link:hover .arrow-link-icon {
+      transform: translateX(4px);
+    }
+  }
+</style>

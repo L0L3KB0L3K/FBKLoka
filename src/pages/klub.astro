@@ -42,9 +42,9 @@ const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden"
           </h2>
           <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {coaches.map((coach) => (
-              <li class="border border-line p-5">
+              <li class="rounded-card border border-line p-5">
                 {coach.foto && (
-                  <Image src={coach.foto} alt={coach.ime} width={320} class="mb-4 aspect-[4/5] w-full rounded-md object-cover" />
+                  <Image src={coach.foto} alt={coach.ime} width={320} class="mb-4 aspect-[4/5] w-full rounded-field object-cover" />
                 )}
                 <h3>{coach.ime}</h3>
                 <p class="text-small text-muted">{coach.vloga}</p>

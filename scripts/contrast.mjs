@@ -18,6 +18,8 @@ const REQUIRED = [
   ["ink", "ball", 4.5],
   ["input-border", "paper", 3],
   ["input-border", "court", 3],
+  ["error", "paper", 4.5], // form error messages
+  ["error", "court", 4.5],
 ];
 
 // Listed for the record: yellow is never used as text on light backgrounds.

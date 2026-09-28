@@ -22,7 +22,7 @@ const Heading = `h${headingLevel}` as "h2" | "h3";
 
 <li class="news-card relative flex flex-col" data-selekcija={selekcija ?? ""}>
   {/* Cropped to 4:3 when the image is built, so all cards line up (covers are square or portrait from Instagram). */}
-  <div class="overflow-hidden rounded-md">
+  <div class="overflow-hidden rounded-card">
     <Image
       src={naslovnaSlika}
       alt=""

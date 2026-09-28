@@ -5,19 +5,24 @@
 //   on-paper = black background, white text (on white surfaces)
 // Renders <a> when href is given, otherwise <button>.
 // size lg: the one main call to action of a page (/vpis, the join band on the home page).
+// arrow: an arrow after the label that moves 4 px on hover, for buttons that lead to another page.
+// Shape: a pill, like every control on the site (radius rule in global.css).
+import ArrowIcon from "../ArrowIcon.astro";
+
 interface Props {
   variant: "on-ink" | "on-paper";
   href?: string;
   type?: "button" | "submit";
   size?: "md" | "lg";
+  arrow?: boolean;
   class?: string;
 }
 
-const { variant, href, type = "button", size = "md", class: className } = Astro.props;
+const { variant, href, type = "button", size = "md", arrow = false, class: className } = Astro.props;
 
 const classes = [
-  "btn inline-flex items-center justify-center rounded-md font-bold no-underline disabled:cursor-not-allowed disabled:opacity-70",
-  size === "lg" ? "min-h-14 px-8 text-h3" : "min-h-11 px-5",
+  "btn group inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap no-underline disabled:cursor-not-allowed disabled:opacity-70",
+  size === "lg" ? "min-h-14 px-8 text-h3" : "min-h-11 px-6",
   variant === "on-ink" ? "bg-ball text-ink hover:bg-paper" : "bg-ink text-paper hover:text-ball",
   className,
 ];
@@ -27,16 +32,18 @@ const classes = [
   href ? (
     <a href={href} class:list={classes}>
       <slot />
+      {arrow && <ArrowIcon class="btn-arrow" />}
     </a>
   ) : (
     <button type={type} class:list={classes}>
       <slot />
+      {arrow && <ArrowIcon class="btn-arrow" />}
     </button>
   )
 }
 
 <style>
-  /* Hover: colour only, 150 ms. Press: scale 0.97, 120 ms (SPEC.md §9.6). */
+  /* Hover: colour, 150 ms. Press: scale 0.97, 120 ms (SPEC.md §9.6). Arrow: 4 px nudge on hover. */
   .btn {
     transition:
       color var(--dur-hover) ease,
@@ -46,6 +53,16 @@ const classes = [
 
   .btn:active {
     transform: scale(0.97);
+  }
+
+  .btn-arrow {
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .btn:hover .btn-arrow {
+      transform: translateX(4px);
+    }
   }
 
   /* Reduced motion: no movement, colour changes stay. */

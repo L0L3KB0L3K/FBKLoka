@@ -25,7 +25,7 @@ const hasContent = hasSummary(team, coaches, trainings, Boolean(calendarSlug));
 
 {
   hasContent && (
-    <aside aria-label={`Povzetek: ${team.data.ime}`} class="bg-court p-5">
+    <aside aria-label={`Povzetek: ${team.data.ime}`} class="rounded-card bg-court p-5">
       <dl class="space-y-4">
         {isSet(starostniRazpon) && (
           <div>

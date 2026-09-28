@@ -4,7 +4,8 @@
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button,
 // 4. the team filter on /novice shows only that team and goes back to all,
 // 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
-// 6. the same for the photos behind the home match board.
+// 6. the same for the photos behind the home match board,
+// 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue.
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -81,7 +82,7 @@ test("news filter: ?s=u17 shows only U17 posts, Vse shows all again", async ({ p
     expect(value).toBe("u17");
   }
   await expect(page.getByRole("link", { name: "U17", exact: true })).toHaveAttribute("aria-current", "true");
-  await page.getByRole("link", { name: "Vse", exact: true }).click();
+  await page.getByRole("link", { name: "Vse selekcije", exact: true }).click();
   await expect(visible).toHaveCount(total);
   expect(new URL(page.url()).search).toBe("");
 });
@@ -109,4 +110,18 @@ test("home photos: the button stops the change, reduced motion keeps the first p
   await page.reload();
   await expect(page.getByRole("button", { name: /menjavo slik/ })).toBeHidden();
   await expect(page.locator("[data-photo][data-active]")).toHaveCount(1);
+});
+
+test("matches filter: Doma shows only home matches, the URL keeps it", async ({ page }) => {
+  await page.goto("/tekme/");
+  const rows = page.locator("[data-kraj]");
+  const total = await rows.count();
+  await page.getByRole("link", { name: "Doma", exact: true }).click();
+  await expect(page).toHaveURL(/kraj=doma/);
+  const visible = page.locator("[data-kraj]:visible");
+  for (const value of await visible.evaluateAll((items) => items.map((item) => item.getAttribute("data-kraj")))) {
+    expect(value).toBe("doma");
+  }
+  await page.getByRole("link", { name: "Vse", exact: true }).click();
+  await expect(visible).toHaveCount(total);
 });

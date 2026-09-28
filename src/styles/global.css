@@ -28,13 +28,14 @@
 @theme {
   /* Colors (SPEC.md §9.2). The reset removes Tailwind's default palette. */
   --color-*: initial;
-  --color-ink: #000000; /* logo black: header, footer, match board, main text */
+  --color-ink: #0b0b0c; /* near-black (not pure #000, flatter on screens): header, footer, match board, main text */
   --color-ball: #fff112; /* logo yellow, sampled from the club PNG. Never as text on light backgrounds. */
   --color-paper: #ffffff; /* content background */
   --color-court: #f4f4f2; /* alternating rows, section backgrounds */
   --color-muted: #5c5c5c; /* dates, secondary text */
   --color-line: #e2e2de; /* decorative dividers and table borders only, not UI edges */
   --color-input-border: #767676; /* edges of inputs, selects and controls */
+  --color-error: #b42318; /* form errors only: text and field border (6.5:1 on paper) */
 
   /* One font family; width makes the difference between headings and text (SPEC.md §9.3). */
   --font-sans: "Archivo Variable", Arial, system-ui, sans-serif;
@@ -55,6 +56,15 @@
   --text-body--line-height: 1.6;
   --text-small: 0.875rem;
   --text-small--line-height: 1.5;
+
+  /* Corner radius system (one rule for the whole site):
+     controls (buttons, filter chips) are pills (rounded-full), cards, panels and photos use --radius-card,
+     form fields use --radius-field. The match board, header and footer stay square (full-width bands). */
+  --radius-card: 1rem;
+  --radius-field: 0.75rem;
+
+  /* Lift of a clickable card under the mouse. Tinted with the ink colour, never pure black. */
+  --shadow-lift: 0 14px 30px -18px rgb(11 11 12 / 0.45);
 
   /* Layout (SPEC.md §9.5): max content width 1200 px. */
   --container-page: 75rem;
@@ -178,10 +188,39 @@
     background-color: currentColor;
   }
 
-  /* Links in text are underlined, so they do not rely on colour alone. */
+  /* Headings never leave one word alone on the last line; paragraphs avoid short last lines. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Links in text are underlined, so they do not rely on colour alone. Thin line, thicker under the mouse. */
   a {
     text-decoration: underline;
-    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  /* No double-tap zoom delay on controls; the tap flash is replaced by our own press and focus states. */
+  a,
+  button,
+  summary,
+  input,
+  textarea,
+  label {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Hover changes colour only, 150 ms ease (SPEC.md §9.6). Button.astro adds the press effect. */

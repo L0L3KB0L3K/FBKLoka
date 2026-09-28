@@ -4,6 +4,7 @@
 // Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
+import ArrowLink from "../components/ArrowLink.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
 import { getPage, loadCollection } from "../lib/content.ts";
@@ -32,7 +33,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
     <h1>{page.data.naslov}</h1>
 
     {/* The main task of this page first (SPEC.md §7.5, §9.5): free first trainings and the way into EOS. */}
-    <section aria-labelledby="prvi-treningi" class="surface-ink mt-8 rounded-md p-6 md:p-10">
+    <section aria-labelledby="prvi-treningi" class="surface-ink mt-8 rounded-card p-6 md:p-10">
       <h2 id="prvi-treningi" class="text-h1">
         Prvi treningi so <span class="text-ball">brezplačni</span>
       </h2>
@@ -43,16 +44,14 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
         {
           isSet(eos.registracija) && (
-            <Button href={eos.registracija} variant="on-ink" size="lg">
+            <Button href={eos.registracija} variant="on-ink" size="lg" arrow>
               Vpiši se
             </Button>
           )
         }
         {
           schedules.length > 0 && (
-            <a href="#treningi-mladih" class="inline-flex min-h-11 items-center font-semibold hover:text-ball">
-              Kdaj in kje so treningi
-            </a>
+            <ArrowLink href="#treningi-mladih" class="hover:text-ball">Kdaj in kje so treningi</ArrowLink>
           )
         }
       </div>
@@ -92,7 +91,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
           </h2>
           <div class="mt-6 border-t border-line">
             {questions.map((q) => (
-              <details class="border-b border-line">
+              <details class="faq-item rounded-field border border-line px-4">
                 <summary class="faq-summary flex min-h-11 cursor-pointer items-center justify-between gap-4 py-3 font-semibold">
                   {q.vprasanje}
                 </summary>

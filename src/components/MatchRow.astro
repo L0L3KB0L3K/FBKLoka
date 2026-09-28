@@ -8,9 +8,12 @@
 // variant "ekipa": team page. Result from the club's side ("Zmaga 13:6"), label = doma / v gosteh.
 // On match day the link of an upcoming game reads "V živo na FloorballFlash" (SPEC.md §5.8).
 // "Today" depends on the visitor's clock, so the script below decides it, not the build.
+// The whole row opens the match on FloorballFlash (the link's ::after covers the row) and turns grey
+// under the mouse, so it reads as one clickable item. data-kraj feeds the "Doma / V gosteh" filter.
 import { formatDayShort, formatTime } from "../lib/format.ts";
 import { scoreForLoka, scoreHomeAway } from "../lib/matches.ts";
 import type { Match } from "../lib/types.ts";
+import ArrowIcon from "./ArrowIcon.astro";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -36,8 +39,9 @@ const score = variant === "vse" ? scoreHomeAway(match) : scoreForLoka(match);
 ---
 
 <li
-  class="grid grid-cols-[1fr_auto] items-center gap-x-4 border-b border-line py-3 md:grid-cols-[9rem_1fr_auto]"
+  class="match-row relative -mx-3 grid grid-cols-[1fr_auto] items-center gap-x-4 rounded-field px-3 py-3 md:grid-cols-[9rem_1fr_auto]"
   data-selekcija={match.selekcija}
+  data-kraj={match.doma ? "doma" : "gosti"}
   data-start={match.zacetek}
 >
   <p class="font-bold tabular-nums">
@@ -47,16 +51,17 @@ const score = variant === "vse" ? scoreHomeAway(match) : scoreForLoka(match);
   <p class="text-right md:order-3">
     {
       finished ? (
-        <a href={match.ffUrl} class="inline-flex min-h-11 items-center font-bold tabular-nums">
+        <a href={match.ffUrl} class="match-link inline-flex min-h-11 items-center gap-1 font-bold tabular-nums no-underline">
           {score}
           <span class="sr-only">, podrobnosti na FloorballFlash</span>
         </a>
       ) : (
-        <a href={match.ffUrl} class="inline-flex min-h-11 items-center" data-live-link>
+        <a href={match.ffUrl} class="match-link inline-flex min-h-11 items-center gap-1 font-semibold no-underline" data-live-link>
           <span data-label-default>
             Podrobnosti<span class="sr-only"> tekme na FloorballFlash</span>
           </span>
           <span class="font-bold" data-label-live hidden>V živo na FloorballFlash</span>
+          <ArrowIcon class="match-arrow size-4" />
         </a>
       )
     }
@@ -83,6 +88,59 @@ const score = variant === "vse" ? scoreHomeAway(match) : scoreForLoka(match);
     </p>
   </div>
 </li>
+
+<style>
+  /* The link's ::after covers the row: one click target, one link for screen readers. */
+  .match-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-field);
+  }
+
+  .match-link:focus-visible {
+    outline: none;
+  }
+
+  .match-link:focus-visible::after {
+    outline: 2px solid var(--focus-ring, var(--color-ink));
+    outline-offset: 2px;
+  }
+
+  .match-row {
+    transition: background-color var(--dur-hover) ease;
+  }
+
+  /* Divider between rows, aligned with the text (not with the rounded hover background). */
+  .match-row::before {
+    content: "";
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0;
+    left: 0.75rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .match-arrow {
+    transition: transform var(--dur-hover) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .match-row:hover {
+      background-color: var(--color-court);
+    }
+
+    .match-row:hover .match-link {
+      text-decoration: underline;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .match-row:hover .match-arrow {
+      transform: translateX(3px);
+    }
+  }
+</style>
 
 <script>
   // Match day: swap "Podrobnosti" for "V živo na FloorballFlash" (SPEC.md §5.8).

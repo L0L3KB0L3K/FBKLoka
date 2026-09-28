@@ -1,7 +1,10 @@
 ---
-// One labelled form field (SPEC.md §7.5, §7.7, §10). The label is always visible, never a placeholder.
+// One labelled form field (SPEC.md §7.5, §7.7, §10). The label is always visible, never a placeholder;
+// a placeholder may only show an example ("npr. ime@domena.si").
 // `error` says what to fix ("Vpiši e-mail v obliki ime@domena.si."). The form script shows it under
-// the field; without JS the browser's own check runs (required, type, pattern).
+// the field in the error colour; without JS the browser's own check runs (required, type, pattern).
+// Look: 48 px high, radius --radius-field, white on the grey form panel; the border turns black under the
+// mouse and on focus (the global focus ring stays), red when the value is wrong.
 interface Props {
   id: string;
   name: string;
@@ -16,6 +19,8 @@ interface Props {
   pattern?: string;
   maxlength?: number;
   hint?: string;
+  /** Example value only, e.g. "npr. ime@domena.si". Never the label. */
+  placeholder?: string;
 }
 
 const {
@@ -31,11 +36,14 @@ const {
   pattern,
   maxlength,
   hint,
+  placeholder,
 } = Astro.props;
 
 const describedBy = [hint && `${id}-hint`, `${id}-error`].filter(Boolean).join(" ");
 const control =
-  "mt-2 block w-full min-h-11 rounded-md border border-input-border bg-paper px-3 py-2 aria-invalid:border-2 aria-invalid:border-ink";
+  "field-control mt-2 block min-h-12 w-full rounded-field border border-input-border bg-paper px-4 py-3 placeholder:text-muted aria-invalid:border-2 aria-invalid:border-error";
+// E-mail addresses are not words: no spell-check underline.
+const spellcheck = type === "email" ? "false" : undefined;
 ---
 
 <div>
@@ -52,10 +60,11 @@ const control =
         rows="5"
         required={required}
         maxlength={maxlength}
+        placeholder={placeholder}
         aria-describedby={describedBy}
         data-field
         data-error={error}
-        class={control}
+        class:list={[control, "resize-y"]}
       />
     ) : (
       <input
@@ -67,6 +76,8 @@ const control =
         inputmode={inputmode}
         pattern={pattern}
         maxlength={maxlength}
+        placeholder={placeholder}
+        spellcheck={spellcheck}
         aria-describedby={describedBy}
         data-field
         data-error={error}
@@ -74,5 +85,21 @@ const control =
       />
     )
   }
-  <p id={`${id}-error`} class="mt-2 border-l-4 border-ink pl-2 font-semibold" hidden></p>
+  <p id={`${id}-error`} class="mt-2 flex items-start gap-2 font-semibold text-error" hidden></p>
 </div>
+
+<style>
+  .field-control {
+    transition: border-color var(--dur-hover) ease;
+  }
+
+  .field-control:focus-visible {
+    border-color: var(--color-ink);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .field-control:hover:not([aria-invalid="true"]) {
+      border-color: var(--color-ink);
+    }
+  }
+</style>

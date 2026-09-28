@@ -1,9 +1,10 @@
 ---
-// Team filter (SPEC.md §7.3, §7.8), shared by /tekme and /novice. One chip per team plus "Vse".
-// Each chip is a real link (?s=u15), so it works without JS: the page then simply shows everything.
-// With JS the script hides items with another data-selekcija, and every group (the `groups` selector)
-// that has no visible item left. No animation, instant switch (SPEC.md §9.6).
-// With fewer than two teams a filter is useless, so nothing is rendered.
+// Filters for lists (SPEC.md §7.3, §7.8), shared by /tekme and /novice.
+// Row 1: team (?s=u15). Row 2, optional: where the match is (?kraj=doma | gosti), for items with data-kraj.
+// Each chip is a real link, so it works without JS: the page then simply shows everything.
+// With JS the script hides items that do not match both filters, and every group (the `groups` selector)
+// that has no visible item left. The URL keeps both values, so a filtered list can be shared.
+// No animation, instant switch (SPEC.md §9.6). With fewer than two teams the team row is left out.
 interface Props {
   /** Teams to offer, already in display order. */
   teams: { id: string; ime: string }[];
@@ -11,43 +12,77 @@ interface Props {
   path: string;
   /** CSS selector of groups to hide when they have no visible item, e.g. "[data-week]". Optional. */
   groups?: string;
+  /** Adds the "Vse / Doma / V gosteh" row (matches only). */
+  venue?: boolean;
 }
 
-const { teams, path, groups = "" } = Astro.props;
+const { teams, path, groups = "", venue = false } = Astro.props;
+const showTeams = teams.length > 1;
+const venues = [
+  { id: "", label: "Vse" },
+  { id: "doma", label: "Doma" },
+  { id: "gosti", label: "V gosteh" },
+];
 ---
 
 {
-  teams.length > 1 && (
-    <nav aria-label="Izberi selekcijo" class="mt-8" data-team-filter data-groups={groups}>
-      <ul class="flex flex-wrap gap-2">
-        <li>
-          <a href={path} data-team="" aria-current="true" class="filter-chip">
-            Vse
-          </a>
-        </li>
-        {teams.map((team) => (
-          <li>
-            <a href={`${path}?s=${team.id}`} data-team={team.id} class="filter-chip">
-              {team.ime}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+  (showTeams || venue) && (
+    <div class="mt-8 space-y-3" data-team-filter data-groups={groups}>
+      {showTeams && (
+        <nav aria-label="Izberi selekcijo">
+          <ul class="flex flex-wrap gap-2">
+            <li>
+              <a href={path} data-team="" aria-current="true" class="filter-chip">
+                Vse selekcije
+              </a>
+            </li>
+            {teams.map((team) => (
+              <li>
+                <a href={`${path}?s=${team.id}`} data-team={team.id} class="filter-chip">
+                  {team.ime}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+      {venue && (
+        <nav aria-label="Doma ali v gosteh">
+          <ul class="flex flex-wrap gap-2">
+            {venues.map((v) => (
+              <li>
+                <a
+                  href={v.id ? `${path}?kraj=${v.id}` : path}
+                  data-venue={v.id}
+                  aria-current={v.id === "" ? "true" : undefined}
+                  class="filter-chip"
+                >
+                  {v.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
   )
 }
 
 <style>
-  /* Filter chips: 44 px targets, black when selected (SPEC.md §9.2, §13.3). */
+  /* Filter chips: pills with 44 px targets, black when selected (SPEC.md §9.2, §13.3). */
   .filter-chip {
     display: inline-flex;
     min-height: 2.75rem;
     align-items: center;
-    padding-inline: 1rem;
+    padding-inline: 1.125rem;
     border: 1px solid var(--color-input-border);
-    border-radius: 6px;
+    border-radius: 9999px;
     font-weight: 600;
     text-decoration: none;
+    transition:
+      background-color var(--dur-hover) ease,
+      border-color var(--dur-hover) ease,
+      color var(--dur-hover) ease;
   }
 
   .filter-chip[aria-current="true"] {
@@ -59,27 +94,42 @@ const { teams, path, groups = "" } = Astro.props;
   @media (hover: hover) and (pointer: fine) {
     .filter-chip:not([aria-current="true"]):hover {
       border-color: var(--color-ink);
+      background-color: var(--color-court);
     }
   }
 </style>
 
 <script>
-  // Reads ?s=, marks the chip, hides other teams' items and empty groups. The URL is updated without a reload.
+  // Reads ?s= and ?kraj=, marks the chips, hides items that do not match and empty groups.
+  // The URL is updated without a reload.
   const filter = document.querySelector<HTMLElement>("[data-team-filter]");
 
   if (filter) {
-    const chips = [...filter.querySelectorAll<HTMLAnchorElement>("[data-team]")];
-    const known = new Set(chips.map((chip) => chip.dataset.team));
+    const teamChips = [...filter.querySelectorAll<HTMLAnchorElement>("[data-team]")];
+    const venueChips = [...filter.querySelectorAll<HTMLAnchorElement>("[data-venue]")];
+    const knownTeams = new Set(teamChips.map((chip) => chip.dataset.team));
+    const knownVenues = new Set(venueChips.map((chip) => chip.dataset.venue));
     const groups = filter.dataset.groups ?? "";
+    const params = new URLSearchParams(location.search);
+    const state = {
+      team: knownTeams.has(params.get("s") ?? "") ? (params.get("s") ?? "") : "",
+      venue: knownVenues.has(params.get("kraj") ?? "") ? (params.get("kraj") ?? "") : "",
+    };
 
-    const apply = (team: string) => {
-      const active = known.has(team) ? team : "";
+    const mark = (chips: HTMLAnchorElement[], key: "team" | "venue", value: string) => {
       for (const chip of chips) {
-        if (chip.dataset.team === active) chip.setAttribute("aria-current", "true");
+        if (chip.dataset[key] === value) chip.setAttribute("aria-current", "true");
         else chip.removeAttribute("aria-current");
       }
+    };
+
+    const apply = () => {
+      mark(teamChips, "team", state.team);
+      mark(venueChips, "venue", state.venue);
       for (const item of document.querySelectorAll<HTMLElement>("[data-selekcija]")) {
-        item.hidden = active !== "" && item.dataset.selekcija !== active;
+        const teamOk = state.team === "" || item.dataset.selekcija === state.team;
+        const venueOk = state.venue === "" || item.dataset.kraj === state.venue;
+        item.hidden = !(teamOk && venueOk);
       }
       if (groups) {
         for (const group of document.querySelectorAll<HTMLElement>(groups)) {
@@ -88,15 +138,31 @@ const { teams, path, groups = "" } = Astro.props;
       }
     };
 
-    for (const chip of chips) {
+    const updateUrl = () => {
+      const next = new URLSearchParams();
+      if (state.team) next.set("s", state.team);
+      if (state.venue) next.set("kraj", state.venue);
+      const query = next.toString();
+      history.replaceState(null, "", query ? `?${query}` : location.pathname);
+    };
+
+    for (const chip of teamChips) {
       chip.addEventListener("click", (event) => {
         event.preventDefault();
-        const team = chip.dataset.team ?? "";
-        history.replaceState(null, "", team ? `?s=${team}` : location.pathname);
-        apply(team);
+        state.team = chip.dataset.team ?? "";
+        updateUrl();
+        apply();
+      });
+    }
+    for (const chip of venueChips) {
+      chip.addEventListener("click", (event) => {
+        event.preventDefault();
+        state.venue = chip.dataset.venue ?? "";
+        updateUrl();
+        apply();
       });
     }
 
-    apply(new URLSearchParams(location.search).get("s") ?? "");
+    apply();
   }
 </script>

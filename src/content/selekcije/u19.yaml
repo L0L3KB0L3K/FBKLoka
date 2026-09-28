@@ -8,3 +8,4 @@ naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni p
 kratekOpis: "Selekcija U19 igra v državnem prvenstvu U19."
 prikaziSestavo: true
 treningiOpomba: "U19 trenira skupaj s člani ali z U17."
+treniraZ: clani # shown on /treningi as "Člani in U19" (owner, 28. 9. 2026)

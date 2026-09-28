@@ -38,6 +38,8 @@ const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, hei
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Browser bar colour on phones = the header. Same value as --color-ink in global.css (a meta tag cannot read CSS). */}
+    <meta name="theme-color" content="#0b0b0c" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}

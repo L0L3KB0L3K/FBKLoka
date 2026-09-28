@@ -1,7 +1,7 @@
 ---
 // Site footer (SPEC.md §8, §9.5): black, three columns (contact, links, social)
 // and a membership line with a link to the federation. Contact is one click away from every page.
-// Under it, the sponsor strip on a white background.
+// Above it, the sponsor strip on a white background (owner, 28. 9. 2026: sponsors before the black block).
 import { MAIN_NAV } from "../config/nav";
 import { getSettings, isSet, socialLinks } from "../lib/site";
 import SponsorStrip from "./SponsorStrip.astro";
@@ -22,6 +22,8 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="mt-16">
+  <SponsorStrip />
+
   <div class="surface-ink">
     <div class="page-wrap grid gap-10 py-12 md:grid-cols-3">
       <section aria-labelledby="footer-contact">
@@ -97,6 +99,4 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </div>
-
-  <SponsorStrip />
 </footer>

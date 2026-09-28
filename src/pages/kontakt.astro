@@ -85,10 +85,10 @@ const social = socialLinks(socialna);
           </dl>
           {
             social.length > 0 && (
-              <ul class="mt-6 flex flex-wrap gap-x-6">
+              <ul class="mt-6 flex flex-wrap gap-2">
                 {social.map(({ href, label }) => (
                   <li>
-                    <a href={href} class="inline-flex min-h-11 items-center">
+                    <a href={href} class="inline-flex min-h-11 items-center rounded-full border border-input-border px-4 font-semibold no-underline hover:border-ink hover:bg-court">
                       {label}
                     </a>
                   </li>
@@ -122,8 +122,9 @@ const social = socialLinks(socialna);
         }
       </div>
 
-      <section aria-labelledby="pisite-nam" class="max-w-xl">
+      <section aria-labelledby="pisite-nam" class="max-w-xl rounded-card bg-court p-6 md:p-8">
         <h2 id="pisite-nam" class="heading-bar">Pišite nam</h2>
+        <p class="mt-4 text-muted">Odgovorimo po e-pošti.</p>
         <div class="mt-6">
           <NetlifyForm name="kontakt" submitLabel="Pošlji sporočilo">
             <Field id="kontakt-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpiši svoje ime." />
@@ -133,6 +134,7 @@ const social = socialLinks(socialna);
               type="email"
               label="E-mail"
               autocomplete="email"
+              placeholder="npr. ime@domena.si"
               required
               error="Vpiši e-mail v obliki ime@domena.si."
             />

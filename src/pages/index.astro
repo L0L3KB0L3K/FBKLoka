@@ -1,10 +1,12 @@
 ---
 // Home page (SPEC.md §7.1). In 3 seconds: when the next match is, and the way in for a new parent.
-// 1. Match board (hero)  2. Next matches (up to 5)  3. Join call to action  4. Latest news (3, hidden below 3 posts).
+// 1. Match board (hero, next match of any team)  2. Home matches (up to 5; owner, 28. 9. 2026: the full list
+// is on /tekme)  3. Join call to action  4. Latest news (3, hidden below 3 posts).
 // Instagram follows in phase 2; sponsors are in the footer of every page.
 import MatchBoard from "../components/MatchBoard.astro";
 import MatchRow from "../components/MatchRow.astro";
 import NewsCard from "../components/NewsCard.astro";
+import ArrowLink from "../components/ArrowLink.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
 import { loadCollection } from "../lib/content.ts";
@@ -18,6 +20,8 @@ const teamNames = Object.fromEntries((await loadCollection("selekcije")).map((te
 const games = uniqueGames(allMatches);
 // The browser drops matches that started more than 3 hours ago (src/lib/upcoming.ts).
 const upcoming = games.filter((game) => game.stanje === "prihodnja").slice(0, 5);
+// Home matches for the list under the board: where fans can come and watch.
+const homeMatches = games.filter((game) => game.stanje === "prihodnja" && game.doma).slice(0, 5);
 const last = games.filter((game) => game.stanje === "koncana").at(-1) ?? null;
 const news = homeNews(await loadCollection("novice"));
 
@@ -37,20 +41,18 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
   <MatchBoard upcoming={upcoming} last={last} teamNames={teamNames} photos={naslovnaFotografije} />
 
   {
-    upcoming.length > 0 && (
-      <section aria-labelledby="naslednje-tekme" class="page-wrap py-12" data-upcoming-section>
-        <h2 id="naslednje-tekme" class="heading-bar">
-          Naslednje tekme
+    homeMatches.length > 0 && (
+      <section aria-labelledby="domace-tekme" class="page-wrap py-12" data-upcoming-section>
+        <h2 id="domace-tekme" class="heading-bar">
+          Domače tekme
         </h2>
         <ul class="mt-6">
-          {upcoming.map((match) => (
+          {homeMatches.map((match) => (
             <MatchRow match={match} variant="vse" selekcijaIme={teamNames[match.selekcija]} />
           ))}
         </ul>
         <p class="mt-6">
-          <a href="/tekme/" class="inline-flex min-h-11 items-center font-semibold">
-            Vse tekme
-          </a>
+          <ArrowLink href="/tekme/">Vse tekme</ArrowLink>
         </p>
       </section>
     )
@@ -68,7 +70,7 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
         </p>
       </div>
       <div class="md:justify-self-end">
-        <Button href="/vpis/" variant="on-ink" size="lg">
+        <Button href="/vpis/" variant="on-ink" size="lg" arrow>
           Vpiši otroka
         </Button>
       </div>
@@ -91,9 +93,7 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
           ))}
         </ul>
         <p class="mt-8">
-          <a href="/novice/" class="inline-flex min-h-11 items-center font-semibold">
-            Vse novice
-          </a>
+          <ArrowLink href="/novice/">Vse novice</ArrowLink>
         </p>
       </section>
     )

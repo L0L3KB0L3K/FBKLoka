@@ -63,6 +63,8 @@ const selekcije = defineCollection({
     kratekOpis: z.string().min(1), // 1–2 sentences
     prikaziSestavo: z.boolean().default(true),
     treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
+    // Trains with this team (e.g. U19 with "clani"): no own card on /treningi, the host card is "Člani in U19".
+    treniraZ: refTo("selekcije").optional(),
   }),
 });
 

@@ -1,0 +1,27 @@
+---
+// Right arrow for links and buttons that lead somewhere. Geometry of "arrow-right" from Tabler Icons
+// (MIT, tabler.io/icons), copied instead of adding a whole icon library for one glyph.
+// Decorative: the link text says where it goes. The parent moves it on hover (group-hover).
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class:list={["shrink-0", className]}
+  viewBox="0 0 24 24"
+  width="20"
+  height="20"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14"></path>
+  <path d="M13 18l6-6"></path>
+  <path d="M13 6l6 6"></path>
+</svg>

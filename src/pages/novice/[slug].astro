@@ -4,6 +4,7 @@
 // The cover is shown whole (no crop, height capped) and is the share image as a 1200×630 crop.
 import { getImage, Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import ArrowLink from "../../components/ArrowLink.astro";
 import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
 import { formatDate } from "../../lib/format.ts";
@@ -49,7 +50,7 @@ const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.
       widths={[640, 960, 1280]}
       sizes="(min-width: 48rem) 42rem, 100vw"
       priority
-      class="mt-8 block h-auto max-h-[36rem] w-auto max-w-full rounded-md"
+      class="mt-8 block h-auto max-h-[36rem] w-auto max-w-full rounded-card"
     />
 
     <div class="mt-8 prose">
@@ -57,7 +58,7 @@ const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.
     </div>
 
     <p class="mt-12">
-      <a href="/novice/" class="inline-flex min-h-11 items-center font-semibold">Vse novice</a>
+      <ArrowLink href="/novice/">Vse novice</ArrowLink>
     </p>
   </article>
 </Base>

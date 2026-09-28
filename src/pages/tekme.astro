@@ -1,7 +1,7 @@
 ---
 // /tekme: all matches of all teams (SPEC.md §7.3).
 // Upcoming on top, played below (newest first), grouped by week. One filter: team (?s=u15).
-// Without JS every match is shown; the filter script only hides rows of other teams (TeamFilter).
+// Without JS every match is shown; the filter script hides rows of other teams or of the other venue (TeamFilter).
 import { getCollection } from "astro:content";
 import MatchList from "../components/MatchList.astro";
 import TeamFilter from "../components/TeamFilter.astro";
@@ -26,7 +26,7 @@ const filterTeams = teams
   <div class="page-wrap py-12">
     <h1>Tekme</h1>
 
-    <TeamFilter teams={filterTeams} path="/tekme/" groups="[data-week], [data-match-section]" />
+    <TeamFilter teams={filterTeams} path="/tekme/" groups="[data-week], [data-match-section]" venue />
 
     {
       prihodnje.length > 0 && (

@@ -4,6 +4,7 @@
 // The whole card opens the team page through the name link (stretched ::after), so there is one link per card.
 // Facts without data are left out (SPEC.md §1). The next match is picked in the browser (script on /ekipe).
 import type { CollectionEntry } from "astro:content";
+import ArrowIcon from "./ArrowIcon.astro";
 import { formatDayShort, formatTime } from "../lib/format.ts";
 import { joinSl } from "../lib/schedule.ts";
 import { isSet } from "../lib/site.ts";
@@ -39,9 +40,10 @@ const slots = [...new Set(trainings.map((t) => `${DAY_SHORT[t.dan] ?? t.dan} ${t
 const coachLabel = coaches.length === 1 ? "Trener" : coaches.length === 2 ? "Trenerja" : "Trenerji";
 ---
 
-<li class="team-card relative flex flex-col rounded-md border border-line bg-paper p-6">
-  <h2 class="text-h2">
+<li class="team-card relative flex flex-col rounded-card border border-line bg-paper p-6">
+  <h2 class="flex items-center justify-between gap-4 text-h2">
     <a href={`/ekipe/${team.id}/`} class="team-link">{ime}</a>
+    <ArrowIcon class="team-arrow size-6" />
   </h2>
   <p class="mt-3">{kratekOpis}</p>
 
@@ -120,7 +122,14 @@ const coachLabel = coaches.length === 1 ? "Trener" : coaches.length === 2 ? "Tre
   }
 
   .team-card {
-    transition: border-color var(--dur-hover) ease;
+    transition:
+      border-color var(--dur-hover) ease,
+      box-shadow var(--dur-hover) ease,
+      transform var(--dur-hover) var(--ease-out);
+  }
+
+  .team-arrow {
+    transition: transform var(--dur-hover) var(--ease-out);
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -130,6 +139,21 @@ const coachLabel = coaches.length === 1 ? "Trener" : coaches.length === 2 ? "Tre
 
     .team-card:hover .team-link {
       text-decoration: underline;
+    }
+
+    .team-card:hover {
+      box-shadow: var(--shadow-lift);
+    }
+  }
+
+  /* The card rises 2 px and the arrow moves: the whole card is one link. Never with reduced motion. */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .team-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .team-card:hover .team-arrow {
+      transform: translateX(4px);
     }
   }
 </style>

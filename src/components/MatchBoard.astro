@@ -91,7 +91,7 @@ const venueOf = (match: Match) =>
             <article class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-slide data-start={match.zacetek} hidden={index > 0}>
               <div>
                 <p class="flex flex-wrap items-center gap-3">
-                  <span class="rounded-md bg-ball px-2 py-1 font-bold text-ink" data-today hidden>
+                  <span class="rounded-full bg-ball px-3 py-1 font-bold text-ink" data-today hidden>
                     Danes igramo
                   </span>
                   <span>
@@ -118,7 +118,7 @@ const venueOf = (match: Match) =>
                   <a href={match.ffUrl} class="inline-flex min-h-11 items-center font-bold hover:text-ball" data-live hidden>
                     V živo na FloorballFlash
                   </a>
-                  <Button href="/tekme/" variant="on-ink">
+                  <Button href="/tekme/" variant="on-ink" arrow>
                     Vse tekme
                   </Button>
                 </div>
@@ -146,7 +146,7 @@ const venueOf = (match: Match) =>
             <div class="md:text-right">
               <p class="text-h1 font-extrabold text-ball tabular-nums">{scoreForLoka(last)}</p>
               <div class="mt-6">
-                <Button href="/tekme/" variant="on-ink">
+                <Button href="/tekme/" variant="on-ink" arrow>
                   Vse tekme
                 </Button>
               </div>
