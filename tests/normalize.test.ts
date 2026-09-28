@@ -27,8 +27,8 @@ test("playoff placeholders are removed", () => {
   withPlaceholder.phases[0].groups[0].rounds[0].games.push({
     id: 99999,
     state: "BeforeGame",
-    home: { id: null, goals: 0, comment: "Winner Semi 1" },
-    away: { id: 3462, goals: 0, comment: "FBK Loka" },
+    home: { id: null, score: 0, comment: "Winner Semi 1" },
+    away: { id: 3462, score: 0, comment: "FBK Loka" },
     venue: null,
     schedule: { date: { year: 2027, month: 3, day: 1 }, time: null, timezone: "Europe/Vienna" },
   });

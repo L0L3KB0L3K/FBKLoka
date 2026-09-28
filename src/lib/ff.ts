@@ -20,8 +20,8 @@ export const COMPETITION_DETAILS_QUERY = `query competitionDetailsTree($competit
           games {
             id
             state
-            home { id goals comment }
-            away { id goals comment }
+            home { id score comment }
+            away { id score comment }
             venue { id name address { street number postCode city country } }
             schedule {
               date { year month day }
@@ -36,7 +36,8 @@ export const COMPETITION_DETAILS_QUERY = `query competitionDetailsTree($competit
 }`;
 
 // Raw API shapes: only the fields we query.
-type FfSide = { id: number | null; goals: number | null; comment: string | null };
+// FloorballFlash renamed the score field from "goals" to "score" (found 29. 9. 2026: the old name returned HTTP 422).
+type FfSide = { id: number | null; score: number | null; comment: string | null };
 type FfAddress = { street: string | null; number: string | null; postCode: string | null; city: string | null };
 type FfGame = {
   id: number;
@@ -159,7 +160,7 @@ export function normalize(details: FfCompetitionDetails, config: NormalizeConfig
                 }
               : null,
             stanje: finished ? "koncana" : "prihodnja",
-            rezultat: finished ? { loka: ours.goals ?? 0, nasprotnik: theirs.goals ?? 0 } : null,
+            rezultat: finished ? { loka: ours.score ?? 0, nasprotnik: theirs.score ?? 0 } : null,
             faza: phase.name,
             ffUrl: FF_GAME_URL + game.id,
           });

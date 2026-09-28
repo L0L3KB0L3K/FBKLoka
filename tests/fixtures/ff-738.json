@@ -75,12 +75,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -113,12 +113,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -151,12 +151,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -189,12 +189,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -227,12 +227,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -265,12 +265,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -303,12 +303,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -341,12 +341,12 @@
                       "state": "Finished",
                       "home": {
                         "id": 3463,
-                        "goals": 3,
+                        "score": 3,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 7,
+                        "score": 7,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -379,12 +379,12 @@
                       "state": "Finished",
                       "home": {
                         "id": 3463,
-                        "goals": 6,
+                        "score": 6,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 13,
+                        "score": 13,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -417,12 +417,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -455,12 +455,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -493,12 +493,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -531,12 +531,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -569,12 +569,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -607,12 +607,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -645,12 +645,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -683,12 +683,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -721,12 +721,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -759,12 +759,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -797,12 +797,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -835,12 +835,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -873,12 +873,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -911,12 +911,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -949,12 +949,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -987,12 +987,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -1025,12 +1025,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -1063,12 +1063,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -1101,12 +1101,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -1139,12 +1139,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -1177,12 +1177,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -1215,12 +1215,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -1253,12 +1253,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -1291,12 +1291,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -1329,12 +1329,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -1367,12 +1367,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -1405,12 +1405,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -1443,12 +1443,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -1481,12 +1481,12 @@
                       "state": "Finished",
                       "home": {
                         "id": 3464,
-                        "goals": 6,
+                        "score": 6,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 12,
+                        "score": 12,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -1519,12 +1519,12 @@
                       "state": "Finished",
                       "home": {
                         "id": 3464,
-                        "goals": 10,
+                        "score": 10,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 8,
+                        "score": 8,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -1557,12 +1557,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -1595,12 +1595,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -1633,12 +1633,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -1671,12 +1671,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "venue": {
@@ -1709,12 +1709,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -1747,12 +1747,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -1785,12 +1785,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -1823,12 +1823,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -1861,12 +1861,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -1899,12 +1899,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -1937,12 +1937,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3464,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Phoenix Fireball"
                       },
                       "venue": {
@@ -1975,12 +1975,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3463,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "IBK Cartoon Heroes"
                       },
                       "venue": {
@@ -2013,12 +2013,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3460,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Borovnica"
                       },
                       "venue": {
@@ -2051,12 +2051,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3459,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "SU Wiener FV"
                       },
                       "venue": {
@@ -2089,12 +2089,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3461,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBC Dragons"
                       },
                       "venue": {
@@ -2127,12 +2127,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3462,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "FBK Loka"
                       },
                       "venue": {
@@ -2165,12 +2165,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": 3457,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "C.Hamp VSV Unihockey"
                       },
                       "away": {
                         "id": 3458,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "KAC Floorball"
                       },
                       "venue": {
@@ -2225,12 +2225,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "3rd seeded "
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "5th or 6th"
                       },
                       "venue": null,
@@ -2249,12 +2249,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "4th seeded"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "5th or 6th"
                       },
                       "venue": null,
@@ -2295,12 +2295,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Play In B"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "1st seeded"
                       },
                       "venue": null,
@@ -2319,12 +2319,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Play in A"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "2nd seeded"
                       },
                       "venue": null,
@@ -2343,12 +2343,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "1st seeded"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Play in B"
                       },
                       "venue": null,
@@ -2367,12 +2367,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "2nd seeded"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Play in A"
                       },
                       "venue": null,
@@ -2391,12 +2391,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "1st seeded"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Play in B"
                       },
                       "venue": null,
@@ -2415,12 +2415,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "2nd seeded"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Play in A"
                       },
                       "venue": null,
@@ -2461,12 +2461,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 2"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 1"
                       },
                       "venue": null,
@@ -2485,12 +2485,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 1"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 2"
                       },
                       "venue": null,
@@ -2509,12 +2509,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 1"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Looser Semi 2"
                       },
                       "venue": null,
@@ -2555,12 +2555,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 2"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 1"
                       },
                       "venue": null,
@@ -2579,12 +2579,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 1"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 2"
                       },
                       "venue": null,
@@ -2603,12 +2603,12 @@
                       "state": "BeforeGame",
                       "home": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 1"
                       },
                       "away": {
                         "id": null,
-                        "goals": 0,
+                        "score": 0,
                         "comment": "Winner Semi 2"
                       },
                       "venue": null,
