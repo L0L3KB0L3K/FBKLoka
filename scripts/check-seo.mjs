@@ -28,6 +28,9 @@ for (const file of htmlFiles(DIST)) {
   const h1 = (html.match(/<h1[\s>]/gi) ?? []).length;
   if (h1 !== 1) fail(`${h1} <h1> elements, expected exactly 1`);
 
+  // The hidden team pages are shared only in the team group (SPEC.md §19.5): no public page links to them.
+  if (html.includes('href="/ekipa/')) fail("link to the hidden /ekipa/ pages");
+
   for (const img of html.match(/<img\b[^>]*>/gi) ?? []) {
     // A decorative image has an empty alt, which Astro writes as a bare `alt` attribute.
     const required = { alt: /\salt(=|\s|\/?>)/i, width: /\swidth=/i, height: /\sheight=/i };

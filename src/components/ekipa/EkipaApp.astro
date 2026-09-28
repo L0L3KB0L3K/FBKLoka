@@ -1,0 +1,498 @@
+---
+// Hidden team page body for /ekipa/plato and /ekipa/prevoz (SPEC.md §19.5). A static shell; the data comes from the
+// Apps Script web app in the browser, only with the team code. The only part of the site that needs JavaScript.
+// States: not connected (no URL yet) -> team code -> loading -> list, or an error with "Poskusi znova".
+// "My name" is picked once in a dialog and kept in this browser only (localStorage, wrapped in try/catch).
+// Names are written with textContent, never as HTML.
+import { EKIPA } from "../../config/ekipa.ts";
+import { isSet } from "../../lib/site.ts";
+import Button from "../ui/Button.astro";
+
+interface Props {
+  mode: "plato" | "prevoz";
+}
+
+const { mode } = Astro.props;
+const endpoint = isSet(EKIPA.appsScriptUrl) ? EKIPA.appsScriptUrl : "";
+const pages = [
+  { href: "/ekipa/plato/", label: "Plato", id: "plato" },
+  { href: "/ekipa/prevoz/", label: "Prevoz", id: "prevoz" },
+];
+const intro =
+  mode === "plato"
+    ? "Kdo prinese plato na tekmo članov. Za vsako tekmo en igralec: kdor prvi izbere, jo ima."
+    : "Kdo vozi na gostujoče tekme članov. Na tekmo lahko vozi več igralcev.";
+---
+
+<div class="page-wrap py-12" data-ekipa data-mode={mode} data-endpoint={endpoint}>
+  <nav aria-label="Ekipa">
+    <ul class="flex flex-wrap gap-2">
+      {
+        pages.map((page) => (
+          <li>
+            <a href={page.href} aria-current={page.id === mode ? "page" : undefined} class="ekipa-chip">
+              {page.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <h1 class="mt-8">{mode === "plato" ? "Plato" : "Prevoz"}</h1>
+  <p class="mt-6 max-w-[60ch]">{intro} <span data-deadline hidden></span></p>
+
+  <noscript><p class="mt-6 font-semibold">Ta stran potrebuje JavaScript. Vklopi ga in osveži stran.</p></noscript>
+
+  {/* Accessible announcements after an action (the visible message is also shown at the match). */}
+  <p class="sr-only" aria-live="polite" data-announce></p>
+
+  <p class="mt-8 max-w-[60ch] rounded-card bg-court p-6" data-state="setup" hidden>
+    Stran še ni povezana z ekipno tabelo. Skrbnik mora objaviti Apps Script (navodila v repozitoriju).
+  </p>
+
+  <form class="mt-8 max-w-md rounded-card bg-court p-6" data-code-form hidden novalidate>
+    <label for="ekipa-koda" class="block font-semibold">Ekipna koda</label>
+    <p id="ekipa-koda-hint" class="text-small text-muted">Kodo najdeš v ekipni skupini.</p>
+    <input
+      id="ekipa-koda"
+      name="koda"
+      type="text"
+      autocomplete="off"
+      autocapitalize="none"
+      spellcheck="false"
+      aria-describedby="ekipa-koda-hint ekipa-koda-error"
+      class="mt-2 block min-h-12 w-full rounded-field border border-input-border bg-paper px-4 py-3"
+      data-code-input
+    />
+    <p id="ekipa-koda-error" class="mt-2 font-semibold text-error" role="alert" data-code-error></p>
+    <div class="mt-6">
+      <Button type="submit" variant="on-paper">Odpri</Button>
+    </div>
+  </form>
+
+  <p class="mt-8" data-loading hidden>Nalagam podatke…</p>
+
+  <div class="mt-8 max-w-[60ch] rounded-card bg-court p-6" data-load-error hidden>
+    <p>Podatkov trenutno ni mogoče naložiti. Poskusi znova čez minuto.</p>
+    <div class="mt-4">
+      <Button variant="on-paper">
+        <span data-retry>Poskusi znova</span>
+      </Button>
+    </div>
+  </div>
+
+  <div data-content hidden>
+    <p class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2" data-me hidden>
+      <span>Ti si: <strong data-me-name></strong></span>
+      <button type="button" class="inline-flex min-h-11 items-center font-semibold underline" data-not-me>Nisem jaz</button>
+    </p>
+    <p class="mt-8 text-muted" data-me-empty>Ob prvi prijavi izbereš svoje ime.</p>
+
+    <h2 class="heading-bar mt-10">Tekme</h2>
+    <ul class="mt-6 grid gap-4 md:grid-cols-2" data-matches></ul>
+    <p class="mt-6" data-empty hidden>
+      {mode === "plato" ? "Ni prihodnjih tekem." : "Ni prihodnjih gostujočih tekem."}
+    </p>
+
+    <h2 class="heading-bar mt-14">{mode === "plato" ? "Kdo je že prinesel plato" : "Kdo je že vozil"}</h2>
+    <p class="mt-4 text-small text-muted">Šteje samo tekme, ki so že bile.</p>
+    <div class="mt-4 max-w-md overflow-hidden rounded-card border border-line">
+      <table class="w-full">
+        <caption class="sr-only">{mode === "plato" ? "Kolikokrat je kdo prinesel plato" : "Kolikokrat je kdo vozil"}</caption>
+        <thead class="bg-court text-small">
+          <tr>
+            <th scope="col" class="px-4 py-2 text-left">Igralec</th>
+            <th scope="col" class="px-4 py-2 text-right">{mode === "plato" ? "Plato" : "Vožnje"}</th>
+          </tr>
+        </thead>
+        <tbody data-counters></tbody>
+      </table>
+    </div>
+  </div>
+
+  <dialog class="ekipa-dialog rounded-card p-0" aria-labelledby="ekipa-ime-naslov" data-name-dialog>
+    <form method="dialog" class="p-6">
+      <h2 id="ekipa-ime-naslov" class="text-h3">Kdo si?</h2>
+      <p class="mt-2 text-small text-muted">Izberi svoje ime. Ta brskalnik si ga zapomni.</p>
+      <label for="ekipa-ime" class="mt-4 block font-semibold">Ime in priimek</label>
+      <select id="ekipa-ime" class="mt-2 block min-h-12 w-full rounded-field border border-input-border bg-paper px-4" data-name-select
+      ></select>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button type="submit" value="ok" class="ekipa-btn ekipa-btn-primary">Potrdi</button>
+        <button type="submit" value="cancel" class="ekipa-btn">Prekliči</button>
+      </div>
+    </form>
+  </dialog>
+</div>
+
+<style>
+  .ekipa-chip {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    padding-inline: 1.125rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ekipa-chip[aria-current="page"] {
+    border-color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .ekipa-dialog {
+    width: min(26rem, calc(100vw - 2rem));
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    overscroll-behavior: contain;
+  }
+
+  .ekipa-dialog::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  }
+
+  /* Buttons created by the script (sign up, cancel) and in the dialog: pills, as every control. */
+  :global(.ekipa-btn) {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1.25rem;
+    border: 1px solid var(--color-ink);
+    border-radius: 9999px;
+    font-weight: 700;
+    transition:
+      background-color var(--dur-hover) ease,
+      color var(--dur-hover) ease;
+  }
+
+  :global(.ekipa-btn-primary) {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  :global(.ekipa-btn:disabled) {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(.ekipa-btn:not(.ekipa-btn-primary):hover) {
+      background-color: var(--color-court);
+    }
+
+    :global(.ekipa-btn-primary:hover) {
+      color: var(--color-ball);
+    }
+  }
+</style>
+
+<script>
+  import {
+    canCancel,
+    matchesFor,
+    messageFor,
+    MESSAGE_BAD_CODE,
+    MESSAGE_NOT_SAVED,
+    teamsLine,
+    whenLine,
+    type EkipaData,
+    type EkipaMatch,
+    type Mode,
+  } from "../../lib/ekipa.ts";
+
+  const CODE_KEY = "fbk-ekipa-code";
+  const NAME_KEY = "fbk-ekipa-ime";
+
+  // localStorage can be missing or blocked (private mode): fall back to memory for this visit.
+  const memory = new Map<string, string>();
+  const store = {
+    get(key: string): string | null {
+      try {
+        return localStorage.getItem(key) ?? memory.get(key) ?? null;
+      } catch {
+        return memory.get(key) ?? null;
+      }
+    },
+    set(key: string, value: string) {
+      memory.set(key, value);
+      try {
+        localStorage.setItem(key, value);
+      } catch {
+        /* memory only */
+      }
+    },
+    remove(key: string) {
+      memory.delete(key);
+      try {
+        localStorage.removeItem(key);
+      } catch {
+        /* nothing stored */
+      }
+    },
+  };
+
+  const root = document.querySelector<HTMLElement>("[data-ekipa]");
+  if (root) start(root);
+
+  function start(root: HTMLElement) {
+    const mode = root.dataset.mode as Mode;
+    const endpoint = root.dataset.endpoint ?? "";
+    const $ = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector)!;
+    const setupNote = $("[data-state=setup]");
+    const codeForm = $<HTMLFormElement>("[data-code-form]");
+    const codeInput = $<HTMLInputElement>("[data-code-input]");
+    const codeError = $("[data-code-error]");
+    const loading = $("[data-loading]");
+    const loadError = $("[data-load-error]");
+    const content = $("[data-content]");
+    const announce = $("[data-announce]");
+    const dialog = $<HTMLDialogElement>("[data-name-dialog]");
+    const nameSelect = $<HTMLSelectElement>("[data-name-select]");
+
+    let data: EkipaData | null = null;
+    // Per-match message after an action, kept across re-renders for 4 s.
+    const notes = new Map<number, string>();
+
+    const show = (visible: HTMLElement | null) => {
+      for (const el of [setupNote, codeForm, loading, loadError, content]) el.hidden = el !== visible;
+    };
+
+    async function api(body: object): Promise<EkipaData> {
+      // A string body is sent as text/plain: a "simple" request, so the browser sends no CORS preflight
+      // (Apps Script cannot answer one). The web app redirects to googleusercontent.com; fetch follows it.
+      const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(body) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return (await response.json()) as EkipaData;
+    }
+
+    function askCode(message = "") {
+      codeError.textContent = message;
+      codeInput.setAttribute("aria-invalid", String(message !== ""));
+      show(codeForm);
+      codeInput.focus();
+    }
+
+    async function load() {
+      const code = store.get(CODE_KEY);
+      if (!code) return askCode();
+      show(loading);
+      try {
+        const result = await api({ code });
+        if (result.error === "bad_code") {
+          store.remove(CODE_KEY);
+          return askCode(MESSAGE_BAD_CODE);
+        }
+        if (result.error) throw new Error(result.error);
+        data = result;
+        render();
+        show(content);
+      } catch {
+        show(loadError);
+      }
+    }
+
+    codeForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const code = codeInput.value.trim();
+      if (!code) return askCode("Vpiši ekipno kodo.");
+      const button = codeForm.querySelector<HTMLButtonElement>("button[type=submit]")!;
+      button.disabled = true;
+      button.textContent = "Preverjam…";
+      try {
+        const result = await api({ code });
+        if (result.error === "bad_code") return askCode(MESSAGE_BAD_CODE);
+        if (result.error) throw new Error(result.error);
+        store.set(CODE_KEY, code);
+        data = result;
+        render();
+        show(content);
+      } catch {
+        askCode("Povezava ni uspela. Poskusi znova čez minuto.");
+      } finally {
+        button.disabled = false;
+        button.textContent = "Odpri";
+      }
+    });
+
+    loadError.querySelector("button")!.addEventListener("click", () => load());
+
+    $("[data-not-me]").addEventListener("click", () => {
+      store.remove(NAME_KEY);
+      render();
+    });
+
+    /** Opens the "Kdo si?" dialog and resolves with the chosen name, or null when cancelled. */
+    function askName(): Promise<string | null> {
+      nameSelect.replaceChildren(
+        ...(data?.igralci ?? []).map((name) => {
+          const option = document.createElement("option");
+          option.value = name;
+          option.textContent = name;
+          return option;
+        }),
+      );
+      return new Promise((resolve) => {
+        dialog.addEventListener(
+          "close",
+          () => {
+            if (dialog.returnValue !== "ok" || !nameSelect.value) return resolve(null);
+            store.set(NAME_KEY, nameSelect.value);
+            resolve(nameSelect.value);
+          },
+          { once: true },
+        );
+        dialog.returnValue = "";
+        dialog.showModal();
+      });
+    }
+
+    function me(): string | null {
+      const name = store.get(NAME_KEY);
+      return name && data?.igralci.includes(name) ? name : null;
+    }
+
+    function actionButton(label: string, type: "prijava" | "odjava", match: EkipaMatch, primary: boolean) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = primary ? "ekipa-btn ekipa-btn-primary" : "ekipa-btn";
+      button.textContent = label;
+      button.addEventListener("click", () => act(button, type, match));
+      return button;
+    }
+
+    function renderMatch(match: EkipaMatch, myName: string | null) {
+      const li = document.createElement("li");
+      li.className = "rounded-card border border-line bg-paper p-5";
+      li.dataset.matchId = String(match.id);
+
+      const when = document.createElement("p");
+      when.className = "text-small text-muted";
+      when.textContent = `${whenLine(match)} · ${match.tekmovanje}`;
+      const teams = document.createElement("p");
+      teams.className = "mt-1 font-bold";
+      teams.textContent = teamsLine(match);
+      const place = document.createElement("p");
+      // Away matches: the place matters for the drive, so it is bold on the prevoz page.
+      place.className = mode === "prevoz" ? "font-semibold" : "text-small text-muted";
+      place.textContent = match.prizorisce;
+      li.append(when, teams, place);
+
+      const status = document.createElement("p");
+      status.className = "mt-4";
+      status.tabIndex = -1;
+      status.dataset.status = "";
+      const actions = document.createElement("div");
+      actions.className = "mt-3 flex flex-wrap items-center gap-3";
+      const hours = data?.pravila.odjavaRokUr ?? 0;
+      const now = new Date();
+
+      if (mode === "plato") {
+        if (match.plato) {
+          status.textContent = `Prinese: ${match.plato}`;
+          if (match.plato === myName) {
+            if (canCancel(mode, match, hours, now)) actions.append(actionButton("Odjavi", "odjava", match, false));
+            else actions.append(Object.assign(document.createElement("p"), { className: "text-small text-muted", textContent: "Odjava ni več mogoča. Piši skrbniku." }));
+          }
+        } else {
+          status.textContent = "Prosto";
+          actions.append(actionButton("Prinesem jaz", "prijava", match, true));
+        }
+      } else {
+        const drivers = match.prevoz ?? [];
+        status.textContent = drivers.length ? `Vozijo: ${drivers.join(", ")}` : "Še nihče ne vozi.";
+        if (myName && drivers.includes(myName)) actions.append(actionButton("Odjavi", "odjava", match, false));
+        else actions.append(actionButton("Vozim jaz", "prijava", match, true));
+      }
+      li.append(status, actions);
+
+      const note = notes.get(match.id);
+      if (note) {
+        const p = document.createElement("p");
+        p.className = "mt-3 font-semibold";
+        p.dataset.note = "";
+        p.textContent = note;
+        li.append(p);
+      }
+      return li;
+    }
+
+    function render() {
+      if (!data) return;
+      const myName = me();
+      $("[data-me]").hidden = !myName;
+      $("[data-me-empty]").hidden = Boolean(myName);
+      $("[data-me-name]").textContent = myName ?? "";
+
+      const deadline = $("[data-deadline]");
+      deadline.hidden = !(mode === "plato" && data.pravila.odjavaRokUr > 0);
+      deadline.textContent = `Odjava je mogoča najkasneje ${data.pravila.odjavaRokUr} ur pred tekmo.`;
+
+      const list = $("[data-matches]");
+      const matches = matchesFor(mode, data);
+      list.replaceChildren(...matches.map((match) => renderMatch(match, myName)));
+      $("[data-empty]").hidden = matches.length > 0;
+
+      const rows = (mode === "plato" ? data.stevci.plato : data.stevci.prevoz).map(({ ime, n }) => {
+        const tr = document.createElement("tr");
+        tr.className = ime === myName ? "border-t border-line font-bold" : "border-t border-line";
+        const name = document.createElement("td");
+        name.className = "px-4 py-2";
+        name.textContent = ime;
+        const count = document.createElement("td");
+        count.className = "px-4 py-2 text-right tabular-nums";
+        count.textContent = String(n);
+        tr.append(name, count);
+        return tr;
+      });
+      $("[data-counters]").replaceChildren(...rows);
+    }
+
+    async function act(button: HTMLButtonElement, type: "prijava" | "odjava", match: EkipaMatch) {
+      const name = me() ?? (await askName());
+      if (!name) return;
+      const label = button.textContent;
+      button.disabled = true;
+      button.textContent = "Shranjujem…";
+
+      let message: string;
+      try {
+        const code = store.get(CODE_KEY) ?? "";
+        const result = await api({ code, action: { type, vloga: mode, ime: name, tekmaId: match.id } });
+        if (result.error === "bad_code") {
+          store.remove(CODE_KEY);
+          return askCode(MESSAGE_BAD_CODE);
+        }
+        if (result.error || !result.result) throw new Error(result.error ?? "no result");
+        data = result;
+        message = result.result.ok ? (type === "prijava" ? "Prijavljen." : "Odjavljen.") : messageFor(result.result.razlog);
+      } catch {
+        button.disabled = false;
+        button.textContent = label;
+        announce.textContent = MESSAGE_NOT_SAVED;
+        notes.set(match.id, MESSAGE_NOT_SAVED);
+        render();
+        return;
+      }
+
+      notes.set(match.id, message);
+      render();
+      announce.textContent = message;
+      // Focus stays at the same match: its first button, or its status line.
+      const item = root.querySelector<HTMLElement>(`[data-match-id="${match.id}"]`);
+      (item?.querySelector<HTMLElement>("button") ?? item?.querySelector<HTMLElement>("[data-status]"))?.focus();
+      // After 4 s only the message goes; no re-render, so keyboard focus stays where it is.
+      setTimeout(() => {
+        notes.delete(match.id);
+        root.querySelector(`[data-match-id="${match.id}"] [data-note]`)?.remove();
+      }, 4000);
+    }
+
+    if (!endpoint) show(setupNote);
+    else load();
+  }
+</script>

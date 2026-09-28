@@ -12,6 +12,8 @@ export default defineConfig({
     url: "http://localhost:4330",
     timeout: 180_000,
     reuseExistingServer: false,
+    // /ekipa/* pages call this address; tests/e2e/ekipa.spec.ts answers it with a mock (never a real request).
+    env: { PUBLIC_EKIPA_URL: "https://ekipa.test/exec" },
   },
   use: { baseURL: "http://localhost:4330" },
   projects: [

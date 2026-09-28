@@ -14,6 +14,7 @@ Stanje: 28. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Avtor fotografij s stare strani (člani na /klub in na strani članov). Ali ga navedemo ob fotografiji?
 - [ ] Domena fbkloka.si: kdo v klubu jo ima? Ta oseba mora ob objavi nastaviti DNS ali domeno prenesti. Zapisi MX za e-pošto info@fbkloka.si morajo ostati, sicer pošta ne pride več.
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
+- [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta, ekipna koda (štiri naključne besede).
 - [ ] Preberite 11 novic na /novice (pripravljene iz objav na Instagramu) in opise slik (alt) v datotekah. Popravite, kar ne drži.
 - [ ] Najnovejša novica je vabilo na tekmo 26. 9., ki je že mimo. Na naslovnici je prva. Potrebujemo novico z rezultatom ali novo objavo.
 - [ ] Stara stran fbkloka.si pri ekipi prikazuje izmišljene igralce (npr. Žiga Pavlič, Marko Jenko), trenerja "Janez Trener" in "Marko Pomočnik" ter napačne treninge. Do preklopa domene naj jo skrbnik popravi ali skrije.

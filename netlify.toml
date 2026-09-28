@@ -44,8 +44,11 @@
     # (turned off in Project configuration > General) broke it. frame-ancestors replaces X-Frame-Options.
     # Stricter than SPEC.md §13.1: the build has no inline styles, no data: images and no inline
     # scripts, and opponent logos are local, so none of those sources are needed.
-    # /ekipa/* (phase 2) will need connect-src for Apps Script in its own [[headers]] block.
-    Content-Security-Policy = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+    # connect-src also allows the Apps Script web app of /ekipa/plato and /ekipa/prevoz (SPEC.md §19): script.google.com
+    # answers with a redirect to script.googleusercontent.com. It is in the site-wide policy on purpose: Netlify does not
+    # document which value wins when two [[headers]] rules set the same header, and two CSP headers would both apply
+    # (the stricter one blocking). The risk is small: script-src stays 'self', so only our own scripts can call out.
+    Content-Security-Policy = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
 
 # Files in /_astro/ have a content hash in their name, so browsers may keep them for a year.
 # Fewer requests and less bandwidth, which also saves credits.

@@ -1,0 +1,10 @@
+---
+// /ekipa/prevoz (SPEC.md §19.5): hidden team page. Not in the menu, the sitemap (astro.config.mjs) or search
+// engines (noindex, nofollow; robots.txt Disallow). Shared in the team group with the team code.
+import EkipaApp from "../../components/ekipa/EkipaApp.astro";
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Prevoz" description="Interna stran članske ekipe FBK Loka." noindex>
+  <EkipaApp mode="prevoz" />
+</Base>

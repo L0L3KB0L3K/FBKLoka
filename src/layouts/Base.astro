@@ -15,7 +15,7 @@ interface Props {
   title: string;
   /** Unique meta description for the page. */
   description: string;
-  /** Keep the page out of search results (/hvala, /404). */
+  /** Keep the page out of search results and link following (/hvala, /404, /ekipa/*). */
   noindex?: boolean;
   /** Structured data for this page (schema.org objects). */
   jsonLd?: object | object[];
@@ -42,7 +42,7 @@ const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, hei
     <meta name="theme-color" content="#0b0b0c" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="FBK Loka" />
