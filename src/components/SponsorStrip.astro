@@ -1,39 +1,129 @@
 ---
 // Sponsor logos under the black footer on every page, on a white background (SPEC.md §7.1, §9.5).
-// Order: main sponsors first, then gold, then supporting; alphabetical within a level.
+// Order: by level when the club sets one (it has none now), then by vrstniRed, then by name.
 // No sponsors -> nothing is rendered (SPEC.md §1).
+//
+// The logos scroll slowly in a loop, as on the old club site (owner, 28. 9. 2026). This is more motion
+// than SPEC.md §9.6 allows, so it follows WCAG 2.2.2: a button stops it, hover and keyboard focus pause it,
+// and with "reduce motion" or without JS the logos stand still and wrap. The second copy of the list only
+// makes the loop seamless: hidden from screen readers and from the keyboard (inert).
 import { Image } from "astro:assets";
 import { loadCollection } from "../lib/content.ts";
 
 const LEVEL_ORDER = { glavni: 0, zlati: 1, podporni: 2 } as const;
+// Missing level or order goes last, so a new sponsor without them never jumps ahead.
+const level = (raven?: keyof typeof LEVEL_ORDER) => (raven ? LEVEL_ORDER[raven] : 3);
+const order = (vrstniRed?: number) => vrstniRed ?? Number.MAX_SAFE_INTEGER;
 
 const sponzorji = (await loadCollection("sponzorji")).sort(
   (a, b) =>
-    LEVEL_ORDER[a.data.raven] - LEVEL_ORDER[b.data.raven] || a.data.ime.localeCompare(b.data.ime, "sl"),
+    level(a.data.raven) - level(b.data.raven) ||
+    order(a.data.vrstniRed) - order(b.data.vrstniRed) ||
+    a.data.ime.localeCompare(b.data.ime, "sl"),
 );
+// Every logo gets the same box and keeps its shape inside it (object-contain), so wide and square logos
+// look equally strong. Logo files are trimmed to their content.
+const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
 ---
 
 {
   sponzorji.length > 0 && (
-    <section aria-labelledby="sponsors-title" class="bg-paper text-ink">
+    <section aria-labelledby="sponsors-title" class="bg-paper text-ink" data-sponsors>
       <div class="page-wrap py-8">
-        <h2 id="sponsors-title" class="text-small">
-          Sponzorji
-        </h2>
-        <ul class="mt-4 flex flex-wrap items-center gap-x-10 gap-y-6">
-          {sponzorji.map(({ data }) => (
-            <li>
-              {data.povezava ? (
-                <a href={data.povezava} class="inline-flex min-h-11 items-center">
-                  <Image src={data.logo} alt={data.ime} height={48} densities={[1, 2]} class="h-12 w-auto" />
-                </a>
-              ) : (
-                <Image src={data.logo} alt={data.ime} height={48} densities={[1, 2]} class="h-12 w-auto" />
-              )}
-            </li>
-          ))}
-        </ul>
+        <div class="flex items-center justify-between gap-4">
+          <h2 id="sponsors-title" class="text-small">
+            Sponzorji
+          </h2>
+          <button type="button" class="inline-flex min-h-11 items-center text-small font-semibold underline" data-sponsors-toggle hidden>
+            <span data-sponsors-label>Ustavi</span>
+            <span class="sr-only"> pomikanje logotipov</span>
+          </button>
+        </div>
+        <div class="sponsor-viewport mt-4">
+          <div class="sponsor-track">
+            {[false, true].map((copy) => (
+              <ul
+                class="sponsor-list flex flex-wrap items-center gap-x-8 gap-y-4"
+                aria-hidden={copy ? "true" : undefined}
+                inert={copy}
+                hidden={copy}
+                data-sponsors-copy={copy ? "" : undefined}
+              >
+                {sponzorji.map(({ data }) => (
+                  <li class="shrink-0">
+                    {data.povezava ? (
+                      <a href={data.povezava} class="flex min-h-11 items-center">
+                        <Image src={data.logo} alt={data.ime} class={logoClass} />
+                      </a>
+                    ) : (
+                      <Image src={data.logo} alt={data.ime} class={logoClass} />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
 }
+
+<style>
+  /* Only with JS and without "reduce motion" (the script sets data-marquee). One row, both copies side by side;
+     moving by half the track lands on the start of the copy, so the loop has no jump. */
+  [data-marquee] .sponsor-viewport {
+    overflow: hidden;
+  }
+
+  [data-marquee] .sponsor-track {
+    display: flex;
+    width: max-content;
+    animation: sponsors-scroll 35s linear infinite;
+  }
+
+  /* padding = gap-x-8, so the space after the last logo equals the space between logos. */
+  [data-marquee] .sponsor-list {
+    flex-wrap: nowrap;
+    padding-right: calc(var(--spacing) * 8);
+  }
+
+  [data-marquee="paused"] .sponsor-track,
+  [data-marquee] .sponsor-viewport:hover .sponsor-track,
+  [data-marquee] .sponsor-viewport:focus-within .sponsor-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes sponsors-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sponsor-track {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Starts the scrolling and wires the stop button. Nothing happens with "reduce motion":
+  // the logos then stay a still list, and the copy and the button stay hidden.
+  const section = document.querySelector<HTMLElement>("[data-sponsors]");
+  const copy = section?.querySelector<HTMLElement>("[data-sponsors-copy]");
+  const toggle = section?.querySelector<HTMLButtonElement>("[data-sponsors-toggle]");
+  const label = section?.querySelector<HTMLElement>("[data-sponsors-label]");
+
+  if (section && copy && toggle && label && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    copy.hidden = false;
+    toggle.hidden = false;
+    section.dataset.marquee = "on";
+
+    toggle.addEventListener("click", () => {
+      const paused = section.dataset.marquee === "paused";
+      section.dataset.marquee = paused ? "on" : "paused";
+      label.textContent = paused ? "Ustavi" : "Nadaljuj";
+    });
+  }
+</script>

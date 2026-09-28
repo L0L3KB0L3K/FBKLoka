@@ -17,3 +17,46 @@ export type Match = {
   faza: string; // phase name, e.g. "Qualification Round"
   ffUrl: string;
 };
+
+/** One row of a league table, normalised from FloorballFlash competitionStandings. */
+export type StandingsRow = {
+  mesto: number;
+  ekipa: string;
+  // Same as Match.nasprotnik.logo: FF URL from normalizeStandings(), local file name after fetch-ff.ts.
+  logo: string | null;
+  loka: boolean; // one of our teams
+  tekme: number;
+  zmage: number; // in regular time
+  zmagePodaljsek: number; // after overtime or penalty shots
+  poraziPodaljsek: number;
+  porazi: number; // in regular time
+  remi: number;
+  goliDani: number;
+  goliPrejeti: number;
+  tocke: number;
+};
+
+/** The league tables of one configured competition that include one of our teams. */
+export type Standings = {
+  selekcija: string; // team slug
+  tekmovanje: string; // label from src/config/ff.ts, e.g. "IFL"
+  competitionId: number;
+  tabele: { ime: string; vrstice: StandingsRow[] }[];
+};
+
+/** Written to src/data/ff/standings.json. `posodobljeno` changes only when a table changes. */
+export type StandingsFile = { posodobljeno: string; tekmovanja: Standings[] };
+
+export type Position = "vratar" | "branilec" | "napadalec";
+
+/**
+ * One player of the FloorballFlash competition roster (src/data/ff/roster.json).
+ * Only name, number and position: the birth date is never fetched, so it can never leak (SPEC.md §4.5).
+ */
+export type RosterPlayer = {
+  selekcija: string;
+  ffId: number;
+  ime: string;
+  stevilka: number | null;
+  pozicija: Position | null;
+};

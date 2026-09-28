@@ -1,10 +1,8 @@
 ---
 // /vpis: for a new parent (SPEC.md §7.5). First free trainings, what to bring, the main button
-// "Vpiši se" (EOS registration), when and where the youth train, questions and a short form.
+// "Vpiši se" (EOS registration), when and where the youth train, questions and a link to the contact form.
 // Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
-import Field from "../components/forms/Field.astro";
-import NetlifyForm from "../components/forms/NetlifyForm.astro";
 import TrainingTable from "../components/TrainingTable.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
@@ -89,44 +87,10 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       )
     }
 
-    <section aria-labelledby="imam-vprasanje" class="mt-14 max-w-xl">
-      <h2 id="imam-vprasanje" class="heading-bar">Imam vprašanje</h2>
-      <p class="mt-4">Napišite nam in odgovorimo po e-pošti.</p>
-      <div class="mt-6">
-        <NetlifyForm name="vpis-vprasanje" submitLabel="Pošlji vprašanje">
-          <Field id="vpis-ime" name="ime" label="Vaše ime" autocomplete="name" required error="Vpiši svoje ime." />
-          <Field
-            id="vpis-email"
-            name="email"
-            type="email"
-            label="E-mail"
-            autocomplete="email"
-            required
-            error="Vpiši e-mail v obliki ime@domena.si."
-          />
-          <Field
-            id="vpis-letnik"
-            name="letnik"
-            label="Letnik otroka"
-            inputmode="numeric"
-            pattern="(19|20)[0-9]{2}"
-            maxlength={4}
-            autocomplete="off"
-            hint="Na primer 2017."
-            error="Vpiši letnik s štirimi številkami, na primer 2017."
-          />
-          <Field
-            id="vpis-sporocilo"
-            name="sporocilo"
-            as="textarea"
-            label="Sporočilo"
-            required
-            maxlength={2000}
-            error="Napiši sporočilo."
-          />
-        </NetlifyForm>
-      </div>
-    </section>
+    {/* One form for all questions is on /kontakt (owner, 28. 9. 2026), so parents do not choose between two. */}
+    <p class="mt-14 max-w-xl">
+      Imate vprašanje? Pišite nam na strani <a href="/kontakt/">Kontakt</a>.
+    </p>
   </div>
 </Base>
 

@@ -1,9 +1,10 @@
 ---
 // /tekme: all matches of all teams (SPEC.md §7.3).
 // Upcoming on top, played below (newest first), grouped by week. One filter: team (?s=u15).
-// Without JS every match is shown; the script only hides rows of other teams.
+// Without JS every match is shown; the filter script only hides rows of other teams (TeamFilter).
 import { getCollection } from "astro:content";
 import MatchList from "../components/MatchList.astro";
+import TeamFilter from "../components/TeamFilter.astro";
 import Base from "../layouts/Base.astro";
 import { allMatches } from "../lib/match-data.ts";
 import { sportsEvents } from "../lib/jsonld.ts";
@@ -15,34 +16,17 @@ const games = uniqueGames(allMatches);
 const { prihodnje, odigrane } = splitByState(games);
 const jsonLd = sportsEvents(prihodnje);
 
-// The filter lists only teams with matches; with a single team it would be useless.
-const filterTeams = teams.filter((team) => games.some((game) => game.selekcija === team.id));
+// The filter lists only teams with matches.
+const filterTeams = teams
+  .filter((team) => games.some((game) => game.selekcija === team.id))
+  .map((team) => ({ id: team.id, ime: team.data.ime }));
 ---
 
 <Base title="Tekme" jsonLd={jsonLd} description="Razpored in rezultati tekem vseh selekcij FBK Loka, od članov v IFL do mladih.">
   <div class="page-wrap py-12">
     <h1>Tekme</h1>
 
-    {
-      filterTeams.length > 1 && (
-        <nav aria-label="Izberi selekcijo" class="mt-8" data-match-filter>
-          <ul class="flex flex-wrap gap-2">
-            <li>
-              <a href="/tekme/" data-team="" aria-current="true" class="filter-chip">
-                Vse
-              </a>
-            </li>
-            {filterTeams.map((team) => (
-              <li>
-                <a href={`/tekme/?s=${team.id}`} data-team={team.id} class="filter-chip">
-                  {team.data.ime}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )
-    }
+    <TeamFilter teams={filterTeams} path="/tekme/" groups="[data-week], [data-match-section]" />
 
     {
       prihodnje.length > 0 && (
@@ -63,65 +47,3 @@ const filterTeams = teams.filter((team) => games.some((game) => game.selekcija =
     }
   </div>
 </Base>
-
-<style>
-  /* Filter chips: 44 px targets, black when selected (SPEC.md §9.2, §13.3). */
-  .filter-chip {
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
-    padding-inline: 1rem;
-    border: 1px solid var(--color-input-border);
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .filter-chip[aria-current="true"] {
-    border-color: var(--color-ink);
-    background-color: var(--color-ink);
-    color: var(--color-paper);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .filter-chip:not([aria-current="true"]):hover {
-      border-color: var(--color-ink);
-    }
-  }
-</style>
-
-<script>
-  // Team filter (SPEC.md §7.3): reads ?s=, hides other teams' rows, empty weeks and empty sections.
-  // No animation, instant switch (SPEC.md §9.6). The URL is updated without a reload.
-  const filter = document.querySelector<HTMLElement>("[data-match-filter]");
-
-  if (filter) {
-    const chips = [...filter.querySelectorAll<HTMLAnchorElement>("[data-team]")];
-    const known = new Set(chips.map((chip) => chip.dataset.team));
-
-    const apply = (team: string) => {
-      const active = known.has(team) ? team : "";
-      for (const chip of chips) {
-        if (chip.dataset.team === active) chip.setAttribute("aria-current", "true");
-        else chip.removeAttribute("aria-current");
-      }
-      for (const row of document.querySelectorAll<HTMLElement>("[data-selekcija]")) {
-        row.hidden = active !== "" && row.dataset.selekcija !== active;
-      }
-      for (const group of document.querySelectorAll<HTMLElement>("[data-week], [data-match-section]")) {
-        group.hidden = !group.querySelector("[data-selekcija]:not([hidden])");
-      }
-    };
-
-    for (const chip of chips) {
-      chip.addEventListener("click", (event) => {
-        event.preventDefault();
-        const team = chip.dataset.team ?? "";
-        history.replaceState(null, "", team ? `?s=${team}` : location.pathname);
-        apply(team);
-      });
-    }
-
-    apply(new URLSearchParams(location.search).get("s") ?? "");
-  }
-</script>

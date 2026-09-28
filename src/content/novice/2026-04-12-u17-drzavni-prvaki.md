@@ -3,6 +3,7 @@ naslov: "U17 državni prvak"
 datum: 2026-04-12
 povzetek: "U17 je v Kranjski Gori osvojila naslov državnega prvaka z golom dve sekundi pred koncem podaljška."
 naslovnaSlika: ./img/2026-04-12-u17-drzavni-prvaki.jpg
+slikaAlt: "Ekipa U17 z medaljami in pokalom državnih prvakov v Kranjski Gori."
 selekcija: u17
 vir: instagram
 ---

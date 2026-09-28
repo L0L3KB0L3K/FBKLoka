@@ -11,10 +11,7 @@ Upravljavec osebnih podatkov je FLOORBALL KLUB LOKA, Podlubnik 1c, 4220 Škofja 
 
 ## Katere podatke zbiramo
 
-Samo podatke, ki jih sami vpišete v obrazec:
-
-- obrazec na strani Kontakt: ime, e-mail, zadeva in sporočilo,
-- obrazec Imam vprašanje na strani Vpis: ime, e-mail, letnik otroka in sporočilo.
+Samo podatke, ki jih sami vpišete v obrazec na strani Kontakt: ime, e-mail, zadeva in sporočilo.
 
 Stran ne uporablja piškotkov in ne meri obiska.
 
@@ -32,7 +29,7 @@ Na strani objavljamo imena, številke in fotografije igralcev ter rezultate teke
 
 ## Povezave na druge strani
 
-Razpored in rezultati tekem so s strani FloorballFlash, vpis in članarina potekata v aplikaciji EOS, zemljevidi vodijo na Google Maps. Ko odprete te povezave, velja zasebnost tistih strani.
+Razpored in rezultati tekem, lestvice in sestava ekip (ime, številka, položaj) so s strani FloorballFlash, vpis in članarina potekata v aplikaciji EOS, zemljevidi vodijo na Google Maps. Ko odprete te povezave, velja zasebnost tistih strani.
 
 ## Vaše pravice
 

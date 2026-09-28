@@ -1,7 +1,8 @@
 import { cleanPath } from "../lib/paths.ts";
 
-// Main menu (SPEC.md §7). Only pages of phase 1: a page from a later phase is not in the menu.
-// "Novice" joins in phase 2. Pages under /ekipa/ are never linked from public pages (SPEC.md §19).
+// Main menu (SPEC.md §7). Only pages that are built: a page of a later phase joins when it exists.
+// Novice are built ahead of phase 2 (the owner may decide so, SPEC.md §15).
+// Pages under /ekipa/ are never linked from public pages (SPEC.md §19).
 export const MAIN_NAV = [
   { href: "/", label: "Domov" },
   { href: "/klub/", label: "Klub" },
@@ -9,6 +10,7 @@ export const MAIN_NAV = [
   { href: "/tekme/", label: "Tekme" },
   { href: "/treningi/", label: "Treningi" },
   { href: "/vpis/", label: "Vpis" },
+  { href: "/novice/", label: "Novice" },
   { href: "/kontakt/", label: "Kontakt" },
 ] as const;
 

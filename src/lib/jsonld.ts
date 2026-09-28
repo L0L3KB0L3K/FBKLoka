@@ -57,3 +57,19 @@ export function sportsEvents(matches: Match[]) {
       };
     });
 }
+
+/** One news post (schema.org NewsArticle). The club is author and publisher; posts have no named author. */
+export function newsArticle(site: URL, url: URL, headline: string, datum: Date, imageUrl: URL) {
+  const club = { "@type": "SportsOrganization", name: "FBK Loka", url: site.href, logo: new URL("/og.png", site).href };
+  return {
+    "@context": CONTEXT,
+    "@type": "NewsArticle",
+    headline,
+    datePublished: datum.toISOString().slice(0, 10),
+    image: [imageUrl.href],
+    url: url.href,
+    mainEntityOfPage: url.href,
+    author: club,
+    publisher: club,
+  };
+}

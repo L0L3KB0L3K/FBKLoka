@@ -130,6 +130,8 @@ const novice = defineCollection({
       datum: z.coerce.date(),
       povzetek: z.string().min(1),
       naslovnaSlika: image(),
+      // Alt text of the cover (SPEC.md §13.3). Required: a cover always shows something, and a poster carries text.
+      slikaAlt: z.string().min(1),
       selekcija: refTo("selekcije").optional(),
       vir: z.enum(["instagram", "facebook", "rocno"]).optional(),
     }),
@@ -143,7 +145,9 @@ const sponzorji = defineCollection({
       ime: z.string().min(1),
       logo: image(), // SVG or PNG
       povezava: z.url().optional(),
-      raven: z.enum(["glavni", "zlati", "podporni"]),
+      // The club has no sponsor levels (28. 9. 2026). Kept optional, as in SPEC.md §4.7, in case it adds them.
+      raven: z.enum(["glavni", "zlati", "podporni"]).optional(),
+      vrstniRed: z.number().int().positive().optional(), // order in the strip; sponsors without it follow by name
     }),
 });
 
@@ -180,32 +184,43 @@ const dokumenti = defineCollection({
 // §4.7 Text pages (Markdown): /klub, /vpis, /kodeks, /zasebnost, /podpri-nas, /o-floorballu.
 const strani = defineCollection({
   loader: glob({ pattern: "*.md", base: "./src/content/strani" }),
-  schema: z.object({
-    naslov: z.string().min(1),
-    opis: z.string().min(1), // meta description
-    // Frequently asked questions, shown as <details> (SPEC.md §7.5). An answer with TODO is hidden.
-    vprasanja: z.array(z.object({ vprasanje: z.string().min(1), odgovor: z.string().min(1) })).default([]),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      naslov: z.string().min(1),
+      opis: z.string().min(1), // meta description
+      // Frequently asked questions, shown as <details> (SPEC.md §7.5). An answer with TODO is hidden.
+      vprasanja: z.array(z.object({ vprasanje: z.string().min(1), odgovor: z.string().min(1) })).default([]),
+      // Photo under the page title, e.g. the senior team on /klub (SPEC.md §9.1a). 3:2, from src/assets/foto/.
+      foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+    }),
 });
 
 // §4.7 Club settings. One file: site.yaml (entry id "site").
 const nastavitve = defineCollection({
   loader: glob({ pattern: "*.yaml", base: "./src/content/nastavitve" }),
-  schema: z.object({
-    imeKluba: z.string().min(1),
-    email: z.union([todo, z.email()]),
-    telefon: z.union([todo, z.string().min(6)]),
-    naslov: z.union([todo, z.string().min(1)]),
-    eos: z.object({
-      portal: z.union([todo, z.url()]), // header button "Za starše in člane"
-      registracija: z.union([todo, z.url()]), // button "Vpiši se" on /vpis
+  schema: ({ image }) =>
+    z.object({
+      imeKluba: z.string().min(1),
+      email: z.union([todo, z.email()]),
+      telefon: z.union([todo, z.string().min(6)]),
+      naslov: z.union([todo, z.string().min(1)]),
+      // Shown in the footer and on /kontakt. Quote them in YAML, otherwise they are read as numbers.
+      davcna: z.union([todo, z.string().regex(/^[0-9]{8}$/, "Davčna številka ima 8 številk.")]),
+      maticna: z.union([todo, z.string().regex(/^[0-9]{10}$/, "Matična številka ima 10 številk.")]),
+      eos: z.object({
+        portal: z.union([todo, z.url()]), // header button "Za starše in člane"
+        registracija: z.union([todo, z.url()]), // button "Vpiši se" on /vpis
+      }),
+      socialna: z.object({
+        instagram: z.url().optional(),
+        facebook: z.url().optional(),
+        tiktok: z.url().optional(),
+        youtube: z.url().optional(),
+      }),
+      // Photos behind the match board on the home page, shown one after another (owner, 28. 9. 2026).
+      // 3:2, at least 2000 px wide, from src/assets/foto/. None = the plain black board.
+      naslovnaFotografije: z.array(image()).max(5).default([]),
     }),
-    socialna: z.object({
-      instagram: z.url().optional(),
-      facebook: z.url().optional(),
-      youtube: z.url().optional(),
-    }),
-  }),
 });
 
 export const collections = {

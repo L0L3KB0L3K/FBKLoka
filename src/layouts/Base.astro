@@ -18,14 +18,16 @@ interface Props {
   noindex?: boolean;
   /** Structured data for this page (schema.org objects). */
   jsonLd?: object | object[];
+  /** Share image instead of the logo, e.g. a news cover. url is absolute. */
+  ogImage?: { url: URL; width: number; height: number; alt: string };
 }
 
-const { title, description, noindex = false, jsonLd } = Astro.props;
+const { title, description, noindex = false, jsonLd, ogImage } = Astro.props;
 // Title pattern "Treningi | FBK Loka" (SPEC.md §13.2).
 const fullTitle = `${title} | FBK Loka`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-// Default share image: the logo on black (SPEC.md §13.2). Match-specific images follow in phase 3.
-const ogImage = new URL("/og.png", Astro.site);
+// Default share image: the logo on black (SPEC.md §13.2). A page may pass its own (news covers).
+const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, height: 630, alt: "Logo FBK Loka" };
 ---
 
 <!doctype html>
@@ -43,10 +45,10 @@ const ogImage = new URL("/og.png", Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Logo FBK Loka" />
+    <meta property="og:image" content={share.url} />
+    <meta property="og:image:width" content={String(share.width)} />
+    <meta property="og:image:height" content={String(share.height)} />
+    <meta property="og:image:alt" content={share.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <JsonLd data={jsonLd} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

@@ -1,0 +1,73 @@
+---
+// One news post in a list (SPEC.md §8): cover, date, team, title, summary. Cards only for news and coaches (§9.2).
+// The whole card is clickable through the title link (stretched with ::after), so there is one link per card
+// and a screen reader hears the title once. The cover is decorative here (alt=""): the title says what it is,
+// the article page gives the full alt text.
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/format.ts";
+
+interface Props {
+  post: CollectionEntry<"novice">;
+  /** Team name for the label, when the post belongs to a team. */
+  teamName?: string;
+  /** 2 on /novice (under the h1), 3 on the home page (under "Zadnje novice"). */
+  headingLevel?: 2 | 3;
+}
+
+const { post, teamName, headingLevel = 2 } = Astro.props;
+const { naslov, datum, povzetek, naslovnaSlika, selekcija } = post.data;
+const Heading = `h${headingLevel}` as "h2" | "h3";
+---
+
+<li class="relative flex flex-col" data-selekcija={selekcija ?? ""}>
+  {/* Cropped to 4:3 when the image is built, so all cards line up (covers are square or portrait from Instagram). */}
+  <Image
+    src={naslovnaSlika}
+    alt=""
+    width={640}
+    height={480}
+    widths={[400, 640]}
+    sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 45vw, 100vw"
+    class="aspect-[4/3] w-full rounded-md object-cover"
+  />
+  <p class="mt-4 text-small text-muted">
+    <time datetime={datum.toISOString().slice(0, 10)}>{formatDate(datum.toISOString())}</time>
+    {teamName && <span> · {teamName}</span>}
+  </p>
+  <Heading class="mt-1 text-h3">
+    <a href={`/novice/${post.id}/`} class="news-link">{naslov}</a>
+  </Heading>
+  <p class="mt-2">{povzetek}</p>
+</li>
+
+<style>
+  /* Stretched link: the title's ::after covers the card, so a click anywhere opens the post. */
+  .news-link {
+    text-decoration: none;
+  }
+
+  .news-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  .news-link:focus-visible {
+    outline: none;
+  }
+
+  /* The focus ring goes around the whole card, not only the title. */
+  .news-link:focus-visible::after {
+    /* Same ring as everywhere else (global.css), a bit further out so it does not touch the cover. */
+    outline: 2px solid var(--focus-ring, var(--color-ink));
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .news-link:hover {
+      text-decoration: underline;
+    }
+  }
+</style>

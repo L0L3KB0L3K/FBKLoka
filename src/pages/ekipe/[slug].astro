@@ -1,9 +1,11 @@
 ---
 // /ekipe/[slug]: one team (SPEC.md §7.2). Summary on the left (on top on a phone),
-// tabs on the right: Tekme and Sestava. "Lestvica" follows in phase 3.
+// tabs on the right: Tekme, Lestvica and Sestava. Tables and roster come from FloorballFlash (SPEC.md §5.8),
+// the roster is completed by src/content/igralci (teamRoster).
 // Tabs appear only when at least two panels have content; empty panels are not rendered.
 import { getCollection, type CollectionEntry } from "astro:content";
 import RosterList from "../../components/RosterList.astro";
+import StandingsTables from "../../components/StandingsTables.astro";
 import TeamMatches from "../../components/TeamMatches.astro";
 import TeamSummary from "../../components/TeamSummary.astro";
 import TabPanel from "../../components/ui/TabPanel.astro";
@@ -11,9 +13,10 @@ import Tabs from "../../components/ui/Tabs.astro";
 import { FF_CONFIG } from "../../config/ff.ts";
 import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
-import { allMatches } from "../../lib/match-data.ts";
+import { allMatches, ffRoster, standingsFile } from "../../lib/match-data.ts";
 import { splitByState } from "../../lib/matches.ts";
 import { sportsTeam } from "../../lib/jsonld.ts";
+import { teamRoster } from "../../lib/players.ts";
 import { hasSummary } from "../../lib/teams.ts";
 import { getTrainings } from "../../lib/trainings.ts";
 
@@ -36,8 +39,14 @@ const coaches = trenerji
   .filter((coach): coach is CollectionEntry<"trenerji"> => coach !== undefined);
 const trainings = (await getTrainings()).filter((t) => t.selekcija === team.id);
 const players = prikaziSestavo
-  ? (await loadCollection("igralci")).filter((p) => p.data.selekcija === team.id && p.data.aktiven)
+  ? teamRoster(ffRoster, (await loadCollection("igralci")).map((entry) => entry.data), team.id)
   : [];
+
+// League tables of this team. A table where nobody has played yet (start of the season) is left out.
+const standings = standingsFile.tekmovanja
+  .filter((s) => s.selekcija === team.id)
+  .map((s) => ({ ...s, tabele: s.tabele.filter((table) => table.vrstice.some((row) => row.tekme > 0)) }))
+  .filter((s) => s.tabele.length > 0);
 
 // Matches per competition, in the order of src/config/ff.ts. Competitions without matches are left out.
 const competitions = (FF_CONFIG[team.id] ?? [])
@@ -50,6 +59,7 @@ const competitions = (FF_CONFIG[team.id] ?? [])
 
 const panels = [
   competitions.length > 0 && { id: `${team.id}-tekme`, label: "Tekme" },
+  standings.length > 0 && { id: `${team.id}-lestvica`, label: "Lestvica" },
   players.length > 0 && { id: `${team.id}-sestava`, label: "Sestava" },
 ].filter((panel): panel is { id: string; label: string } => Boolean(panel));
 
@@ -79,12 +89,21 @@ const jsonLd = sportsTeam(
         panels.length > 1 && (
           <div class="min-w-0">
             <Tabs label={ime} tabs={panels}>
-              <TabPanel id={`${team.id}-tekme`} title="Tekme">
-                <TeamMatches competitions={competitions} />
-              </TabPanel>
-              <TabPanel id={`${team.id}-sestava`} title="Sestava">
-                <RosterList players={players} />
-              </TabPanel>
+              {competitions.length > 0 && (
+                <TabPanel id={`${team.id}-tekme`} title="Tekme">
+                  <TeamMatches competitions={competitions} />
+                </TabPanel>
+              )}
+              {standings.length > 0 && (
+                <TabPanel id={`${team.id}-lestvica`} title="Lestvica">
+                  <StandingsTables standings={standings} updated={standingsFile.posodobljeno} />
+                </TabPanel>
+              )}
+              {players.length > 0 && (
+                <TabPanel id={`${team.id}-sestava`} title="Sestava">
+                  <RosterList players={players} />
+                </TabPanel>
+              )}
             </Tabs>
           </div>
         )
@@ -95,7 +114,9 @@ const jsonLd = sportsTeam(
           <section aria-labelledby={panels[0].id} class="min-w-0">
             <h2 id={panels[0].id}>{panels[0].label}</h2>
             <div class="mt-6">
-              {competitions.length > 0 ? <TeamMatches competitions={competitions} /> : <RosterList players={players} />}
+              {competitions.length > 0 && <TeamMatches competitions={competitions} />}
+              {standings.length > 0 && <StandingsTables standings={standings} updated={standingsFile.posodobljeno} />}
+              {players.length > 0 && <RosterList players={players} />}
             </div>
           </section>
         )

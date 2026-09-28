@@ -1,0 +1,102 @@
+---
+// Team filter (SPEC.md §7.3, §7.8), shared by /tekme and /novice. One chip per team plus "Vse".
+// Each chip is a real link (?s=u15), so it works without JS: the page then simply shows everything.
+// With JS the script hides items with another data-selekcija, and every group (the `groups` selector)
+// that has no visible item left. No animation, instant switch (SPEC.md §9.6).
+// With fewer than two teams a filter is useless, so nothing is rendered.
+interface Props {
+  /** Teams to offer, already in display order. */
+  teams: { id: string; ime: string }[];
+  /** Page path, e.g. "/tekme/". */
+  path: string;
+  /** CSS selector of groups to hide when they have no visible item, e.g. "[data-week]". Optional. */
+  groups?: string;
+}
+
+const { teams, path, groups = "" } = Astro.props;
+---
+
+{
+  teams.length > 1 && (
+    <nav aria-label="Izberi selekcijo" class="mt-8" data-team-filter data-groups={groups}>
+      <ul class="flex flex-wrap gap-2">
+        <li>
+          <a href={path} data-team="" aria-current="true" class="filter-chip">
+            Vse
+          </a>
+        </li>
+        {teams.map((team) => (
+          <li>
+            <a href={`${path}?s=${team.id}`} data-team={team.id} class="filter-chip">
+              {team.ime}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  /* Filter chips: 44 px targets, black when selected (SPEC.md §9.2, §13.3). */
+  .filter-chip {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    padding-inline: 1rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .filter-chip[aria-current="true"] {
+    border-color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .filter-chip:not([aria-current="true"]):hover {
+      border-color: var(--color-ink);
+    }
+  }
+</style>
+
+<script>
+  // Reads ?s=, marks the chip, hides other teams' items and empty groups. The URL is updated without a reload.
+  const filter = document.querySelector<HTMLElement>("[data-team-filter]");
+
+  if (filter) {
+    const chips = [...filter.querySelectorAll<HTMLAnchorElement>("[data-team]")];
+    const known = new Set(chips.map((chip) => chip.dataset.team));
+    const groups = filter.dataset.groups ?? "";
+
+    const apply = (team: string) => {
+      const active = known.has(team) ? team : "";
+      for (const chip of chips) {
+        if (chip.dataset.team === active) chip.setAttribute("aria-current", "true");
+        else chip.removeAttribute("aria-current");
+      }
+      for (const item of document.querySelectorAll<HTMLElement>("[data-selekcija]")) {
+        item.hidden = active !== "" && item.dataset.selekcija !== active;
+      }
+      if (groups) {
+        for (const group of document.querySelectorAll<HTMLElement>(groups)) {
+          group.hidden = !group.querySelector("[data-selekcija]:not([hidden])");
+        }
+      }
+    };
+
+    for (const chip of chips) {
+      chip.addEventListener("click", (event) => {
+        event.preventDefault();
+        const team = chip.dataset.team ?? "";
+        history.replaceState(null, "", team ? `?s=${team}` : location.pathname);
+        apply(team);
+      });
+    }
+
+    apply(new URLSearchParams(location.search).get("s") ?? "");
+  }
+</script>

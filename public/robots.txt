@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+# Hidden team pages (/ekipa/plato, /ekipa/prevoz, SPEC.md §19).
 Disallow: /ekipa/
+# /ekipa/ itself only redirects the old team page to /ekipe/ (netlify.toml). Crawlers must see that redirect.
+Allow: /ekipa/$
 
 Sitemap: https://fbkloka.si/sitemap-index.xml

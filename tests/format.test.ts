@@ -1,7 +1,7 @@
 // Tests for date formatting in Europe/Ljubljana and match list helpers (SPEC.md §7.3, §10).
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { formatDateLong, formatDayShort, formatTime, formatWeek, weekStart } from "../src/lib/format.ts";
+import { formatDate, formatDateLong, formatDayShort, formatTime, formatWeek, weekStart } from "../src/lib/format.ts";
 import { groupByWeek, scoreForLoka, scoreHomeAway, splitByState, uniqueGames } from "../src/lib/matches.ts";
 import type { Match } from "../src/lib/types.ts";
 
@@ -18,6 +18,11 @@ test("a late game keeps its Ljubljana date even when UTC is already the next day
 
 test("long date", () => {
   assert.equal(formatDateLong("2026-10-25T13:00:00+01:00"), "nedelja, 25. oktober 2026");
+});
+
+test("news date: a date-only value (UTC midnight) stays on the same day in Ljubljana", () => {
+  assert.equal(formatDate("2025-04-07T00:00:00.000Z"), "7. april 2025"); // summer time, +02:00
+  assert.equal(formatDate("2025-12-07T00:00:00.000Z"), "7. december 2025"); // winter time, +01:00
 });
 
 test("weeks start on Monday, also across the DST change", () => {

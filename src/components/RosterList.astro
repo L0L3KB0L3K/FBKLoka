@@ -1,21 +1,24 @@
 ---
-// Team roster (SPEC.md §7.2, §8): active players only, goalkeepers, defenders, forwards.
+// Team roster (SPEC.md §7.2, §8): goalkeepers, defenders, forwards, then players without a position.
+// Comes from teamRoster(): FloorballFlash plus src/content/igralci, inactive players already left out.
 // Minors never show their year of birth (SPEC.md §4.5, §12). Nothing is rendered without players.
-import type { CollectionEntry } from "astro:content";
-import { canShowBirthYear, POSITION_ORDER, POSITION_TITLES } from "../lib/players.ts";
+import { canShowBirthYear, POSITION_ORDER, POSITION_TITLES, type RosterEntry } from "../lib/players.ts";
 
 interface Props {
-  players: CollectionEntry<"igralci">[];
+  players: RosterEntry[];
 }
 
 const { players } = Astro.props;
 const today = new Date();
-const groups = POSITION_ORDER.map((position) => ({
-  title: POSITION_TITLES[position],
-  players: players
-    .filter((p) => p.data.aktiven && p.data.pozicija === position)
-    .sort((a, b) => a.data.stevilka - b.data.stevilka || a.data.ime.localeCompare(b.data.ime, "sl")),
-})).filter((group) => group.players.length > 0);
+// Number order; no number goes last, then by name.
+const byNumber = (a: RosterEntry, b: RosterEntry) =>
+  (a.stevilka ?? 1000) - (b.stevilka ?? 1000) || a.ime.localeCompare(b.ime, "sl");
+const groups = [
+  ...POSITION_ORDER.map((position) => ({ title: POSITION_TITLES[position], players: players.filter((p) => p.pozicija === position) })),
+  { title: "Igralci", players: players.filter((p) => p.pozicija === null) },
+]
+  .map((group) => ({ ...group, players: [...group.players].sort(byNumber) }))
+  .filter((group) => group.players.length > 0);
 ---
 
 {
@@ -23,12 +26,14 @@ const groups = POSITION_ORDER.map((position) => ({
     <section class="mt-6 first:mt-0">
       <h3>{group.title}</h3>
       <ul class="mt-2">
-        {group.players.map(({ data }) => (
+        {group.players.map((player) => (
           <li class="flex gap-4 border-b border-line py-3">
-            <span class="w-8 shrink-0 text-right font-bold tabular-nums">{data.stevilka > 0 ? data.stevilka : ""}</span>
+            <span class="w-8 shrink-0 text-right font-bold tabular-nums">
+              {player.stevilka !== null && player.stevilka > 0 ? player.stevilka : ""}
+            </span>
             <span>
-              {data.ime}
-              {canShowBirthYear(data.letnik, today) && <span class="text-small text-muted"> letnik {data.letnik}</span>}
+              {player.ime}
+              {canShowBirthYear(player.letnik, today) && <span class="text-small text-muted"> letnik {player.letnik}</span>}
             </span>
           </li>
         ))}

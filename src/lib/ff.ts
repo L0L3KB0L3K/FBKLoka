@@ -1,6 +1,6 @@
-// FloorballFlash normalisation (SPEC.md §5.3–5.5).
+// FloorballFlash normalisation (SPEC.md §5.3–5.5, standings and rosters §5.8).
 // Pure functions without network access, so they can be tested (tests/normalize.test.ts).
-import type { Match } from "./types.ts";
+import type { Match, Position, RosterPlayer, Standings } from "./types.ts";
 
 export const FF_LOGO_BASE = "https://storage.googleapis.com/floorballflash.appspot.com/";
 export const FF_GAME_URL = "https://www.floorballflash.at/game/";
@@ -202,4 +202,134 @@ export function mergeWithPrevious(
     failed.some((f) => f.selekcija === match.selekcija && f.label === match.tekmovanje),
   );
   return sortMatches([...fresh, ...kept]);
+}
+
+// --- Standings and rosters (SPEC.md §5.8). Queries found on 28. 9. 2026 in the FloorballFlash schema. ---
+
+export const STANDINGS_QUERY = `query competitionStandings($competitionId: Int!) {
+  competitionStandings(competitionId: $competitionId) {
+    name
+    teams {
+      id
+      rank
+      name
+      logo
+      gamesPlayed
+      winsRegular
+      winsOvertime
+      lossesRegular
+      lossesOvertime
+      ties
+      goalsFor
+      goalsAgainst
+      points
+    }
+  }
+}`;
+
+// The person's birth date is deliberately not in the query: we never need it and never store it.
+export const PLAYERS_QUERY = `query competitionPlayers($filter: CompetitionPlayerFilter, $pagination: Pagination) {
+  competitionPlayers(filter: $filter, pagination: $pagination) {
+    number
+    position
+    person {
+      id
+      firstname
+      lastname
+      incognito
+    }
+  }
+}`;
+
+type FfInt = number | null;
+
+export type FfStandingsTable = {
+  name: string;
+  teams: {
+    id: number;
+    rank: FfInt;
+    name: string;
+    logo: string | null;
+    gamesPlayed: FfInt;
+    winsRegular: FfInt;
+    winsOvertime: FfInt;
+    lossesRegular: FfInt;
+    lossesOvertime: FfInt;
+    ties: FfInt;
+    goalsFor: FfInt;
+    goalsAgainst: FfInt;
+    points: FfInt;
+  }[];
+};
+
+export type FfCompetitionPlayer = {
+  number: FfInt;
+  position: string | null;
+  person: { id: number; firstname: string | null; lastname: string | null; incognito: boolean | null };
+};
+
+/**
+ * Keeps only the tables with one of our teams (IFL also has an Austria-only table) and maps the rows.
+ * Missing numbers count as 0. The table order and FloorballFlash's ranks are kept as they are.
+ */
+export function normalizeStandings(
+  tables: FfStandingsTable[],
+  ourIds: Set<number>,
+  config: { selekcija: string; label: string; competitionId: number },
+): Standings {
+  return {
+    selekcija: config.selekcija,
+    tekmovanje: config.label,
+    competitionId: config.competitionId,
+    tabele: tables
+      .filter((table) => table.teams.some((row) => ourIds.has(row.id)))
+      .map((table) => ({
+        ime: table.name,
+        vrstice: table.teams.map((row) => ({
+          mesto: row.rank ?? 0,
+          ekipa: row.name,
+          logo: row.logo ? FF_LOGO_BASE + row.logo : null,
+          loka: ourIds.has(row.id),
+          tekme: row.gamesPlayed ?? 0,
+          zmage: row.winsRegular ?? 0,
+          zmagePodaljsek: row.winsOvertime ?? 0,
+          poraziPodaljsek: row.lossesOvertime ?? 0,
+          porazi: row.lossesRegular ?? 0,
+          remi: row.ties ?? 0,
+          goliDani: row.goalsFor ?? 0,
+          goliPrejeti: row.goalsAgainst ?? 0,
+          tocke: row.points ?? 0,
+        })),
+      })),
+  };
+}
+
+const POSITIONS: Record<string, Position> = { G: "vratar", D: "branilec", F: "napadalec" };
+
+/** "Miha " + "Triler" -> "Miha Triler": FloorballFlash names sometimes carry extra spaces. */
+function fullName(first: string | null, last: string | null): string {
+  return [first, last].join(" ").split(" ").filter(Boolean).join(" ");
+}
+
+/**
+ * Roster of one team from one or more competitions. Players marked incognito in FloorballFlash are left out,
+ * so are entries without a name. A player in two competitions (IFL and 1. SFL) is listed once:
+ * the first competition in src/config/ff.ts wins, so the number from IFL is kept.
+ */
+export function normalizeRoster(lists: FfCompetitionPlayer[][], selekcija: string): RosterPlayer[] {
+  const players = new Map<number, RosterPlayer>();
+  for (const list of lists) {
+    for (const entry of list) {
+      const ime = fullName(entry.person.firstname, entry.person.lastname);
+      if (entry.person.incognito || !ime || players.has(entry.person.id)) continue;
+      players.set(entry.person.id, {
+        selekcija,
+        ffId: entry.person.id,
+        ime,
+        stevilka: entry.number,
+        pozicija: POSITIONS[entry.position ?? ""] ?? null,
+      });
+    }
+  }
+  return [...players.values()].sort((a, b) => a.ime.localeCompare(b.ime, "sl") || a.ffId - b.ffId);
 }

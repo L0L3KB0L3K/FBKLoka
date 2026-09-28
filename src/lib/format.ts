@@ -1,5 +1,5 @@
 // Date and time formatting in Europe/Ljubljana (SPEC.md §10):
-// "sob 10. 10.", "17:00", "sobota, 10. oktober 2026", weeks "5.–11. oktober".
+// "sob 10. 10.", "17:00", "sobota, 10. oktober 2026", "7. april 2025", weeks "5.–11. oktober".
 // Uses Intl with an explicit time zone, so the result does not depend on the server's zone.
 const TIME_ZONE = "Europe/Ljubljana";
 const DAY_SHORT = ["ned", "pon", "tor", "sre", "čet", "pet", "sob"];
@@ -48,6 +48,12 @@ export function formatTime(iso: string): string {
 export function formatDateLong(iso: string): string {
   const p = partsInLjubljana(iso);
   return `${DAY_LONG[p.weekday]}, ${p.day}. ${MONTHS[p.month - 1]} ${p.year}`;
+}
+
+/** "7. april 2025": news dates, where the weekday adds nothing. */
+export function formatDate(iso: string): string {
+  const p = partsInLjubljana(iso);
+  return `${p.day}. ${MONTHS[p.month - 1]} ${p.year}`;
 }
 
 /** Monday of the Ljubljana week the instant falls in, as "YYYY-MM-DD". */

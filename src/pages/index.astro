@@ -1,25 +1,28 @@
 ---
 // Home page (SPEC.md §7.1). In 3 seconds: when the next match is, and the way in for a new parent.
-// 1. Match board (hero)  2. Next matches (up to 5)  3. Join call to action.
-// News and Instagram follow in phase 2; sponsors are in the footer of every page.
+// 1. Match board (hero)  2. Next matches (up to 5)  3. Join call to action  4. Latest news (3, hidden below 3 posts).
+// Instagram follows in phase 2; sponsors are in the footer of every page.
 import MatchBoard from "../components/MatchBoard.astro";
 import MatchRow from "../components/MatchRow.astro";
+import NewsCard from "../components/NewsCard.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
 import { loadCollection } from "../lib/content.ts";
 import { allMatches } from "../lib/match-data.ts";
 import { organization } from "../lib/jsonld.ts";
 import { uniqueGames } from "../lib/matches.ts";
-import { getSettings, isSet } from "../lib/site.ts";
+import { homeNews } from "../lib/news.ts";
+import { getSettings, isSet, socialLinks } from "../lib/site.ts";
 
 const teamNames = Object.fromEntries((await loadCollection("selekcije")).map((team) => [team.id, team.data.ime]));
 const games = uniqueGames(allMatches);
 // The browser drops matches that started more than 3 hours ago (src/lib/upcoming.ts).
 const upcoming = games.filter((game) => game.stanje === "prihodnja").slice(0, 5);
 const last = games.filter((game) => game.stanje === "koncana").at(-1) ?? null;
+const news = homeNews(await loadCollection("novice"));
 
-const { naslov, socialna } = await getSettings();
-const sameAs = [socialna.instagram, socialna.facebook, socialna.youtube].filter((url): url is string => isSet(url));
+const { naslov, socialna, naslovnaFotografije } = await getSettings();
+const sameAs = socialLinks(socialna).map((link) => link.href);
 const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sameAs);
 ---
 
@@ -30,7 +33,7 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
 >
   <h1 class="sr-only">FBK Loka, floorball klub iz Škofje Loke</h1>
 
-  <MatchBoard upcoming={upcoming} last={last} teamNames={teamNames} />
+  <MatchBoard upcoming={upcoming} last={last} teamNames={teamNames} photos={naslovnaFotografije} />
 
   {
     upcoming.length > 0 && (
@@ -66,4 +69,28 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
       </div>
     </div>
   </section>
+
+  {
+    news.length > 0 && (
+      <section aria-labelledby="zadnje-novice" class="page-wrap py-12">
+        <h2 id="zadnje-novice" class="heading-bar">
+          Zadnje novice
+        </h2>
+        <ul class="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {news.map((post) => (
+            <NewsCard
+              post={post}
+              headingLevel={3}
+              teamName={post.data.selekcija ? teamNames[post.data.selekcija] : undefined}
+            />
+          ))}
+        </ul>
+        <p class="mt-8">
+          <a href="/novice/" class="inline-flex min-h-11 items-center font-semibold">
+            Vse novice
+          </a>
+        </p>
+      </section>
+    )
+  }
 </Base>

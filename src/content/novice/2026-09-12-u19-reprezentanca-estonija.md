@@ -3,6 +3,7 @@ naslov: "Sedem igralcev FBK Loka v reprezentanci U19"
 datum: 2026-09-12
 povzetek: "V Estoniji je za reprezentanco U19 igralo sedem igralcev FBK Loka, Gašper Triler je bil pomočnik trenerja."
 naslovnaSlika: ./img/2026-09-12-u19-reprezentanca-estonija.jpg
+slikaAlt: "Reprezentanca U19 z igralci FBK Loka v Estoniji."
 selekcija: u19
 vir: instagram
 ---

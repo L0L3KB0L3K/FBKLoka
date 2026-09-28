@@ -1,8 +1,10 @@
 ---
 // /klub (SPEC.md §7.6): about the club (Markdown), coaches as cards with their teams, and the halls
 // with a map link. "Vodstvo" follows when the club sends it; /zgodovina is linked in phase 3.
+// The senior team photo (SPEC.md §9.1a) sits under the title when klub.md has one.
 import { Image } from "astro:assets";
 import { render } from "astro:content";
+import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
 import { getPage, loadCollection } from "../lib/content.ts";
 import { joinSl } from "../lib/schedule.ts";
@@ -27,6 +29,7 @@ const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden"
 <Base title="Klub" description={page.data.opis}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
+    {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} priority class="mt-8" />}
     <div class="mt-8 prose">
       <Content />
     </div>

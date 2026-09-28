@@ -1,12 +1,20 @@
 # Club settings (SPEC.md §4.7). A value "TODO" is hidden on the site until the club confirms it.
 imeKluba: FBK Loka
-email: "TODO"
-telefon: "TODO"
-naslov: "Podlubnik 1c, 4220 Škofja Loka" # seat in the business register (FLOORBALL KLUB LOKA), club to confirm
+email: "info@fbkloka.si" # from the old club site fbkloka.si (28. 9. 2026); needs the MX records kept at the domain switch
+telefon: "TODO" # the number on the old site is wrong (Maj, 28. 9. 2026); waiting for the right one
+naslov: "Podlubnik 1c, 4220 Škofja Loka" # seat in the business register (FLOORBALL KLUB LOKA), same on the old site
+davcna: "29559588" # from the old club site
+maticna: "1677055000" # business register and the old club site
 eos:
   portal: https://eos.fbkloka.si # header button "Za starše in člane"
   registracija: https://eos.fbkloka.si/registration # button "Vpiši se" on /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/
   facebook: https://www.facebook.com/FloorballInsport/ # official club page (confirmed 27. 9. 2026)
+  tiktok: https://www.tiktok.com/@fbk.loka # from the old club site
   youtube: https://www.youtube.com/user/FBKInsport
+# Photos behind the match board on the home page, from the old club site (permission 28. 9. 2026).
+naslovnaFotografije:
+  - ../../assets/foto/clani-veselje.jpg
+  - ../../assets/foto/clani-akcija.jpg
+  - ../../assets/foto/clani-postava.jpg

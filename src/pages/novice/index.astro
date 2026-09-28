@@ -1,0 +1,39 @@
+---
+// /novice (SPEC.md §7.8): all posts, newest first, as cards. Filter by team (?s=u15), the same as on /tekme.
+// Without JS every post is shown. A post without a team (e.g. U16 at a tournament) shows only under "Vse".
+import NewsCard from "../../components/NewsCard.astro";
+import TeamFilter from "../../components/TeamFilter.astro";
+import Base from "../../layouts/Base.astro";
+import { loadCollection } from "../../lib/content.ts";
+import { newestFirst } from "../../lib/news.ts";
+
+const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
+const teamNames: Record<string, string> = Object.fromEntries(teams.map((team) => [team.id, team.data.ime]));
+const posts = newestFirst(await loadCollection("novice"));
+
+// The filter lists only teams that have posts.
+const filterTeams = teams
+  .filter((team) => posts.some((post) => post.data.selekcija === team.id))
+  .map((team) => ({ id: team.id, ime: team.data.ime }));
+---
+
+<Base title="Novice" description="Novice floorball kluba FBK Loka: rezultati, turnirji, naslovi in dogodki vseh selekcij.">
+  <div class="page-wrap py-12">
+    <h1>Novice</h1>
+
+    {
+      posts.length > 0 ? (
+        <>
+          <TeamFilter teams={filterTeams} path="/novice/" />
+          <ul class="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <NewsCard post={post} teamName={post.data.selekcija ? teamNames[post.data.selekcija] : undefined} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p class="mt-6">Novic še ni.</p>
+      )
+    }
+  </div>
+</Base>

@@ -15,3 +15,18 @@ export async function getSettings() {
 export function isSet(value: string | null | undefined): value is string {
   return typeof value === "string" && value.trim() !== "" && !value.includes("TODO");
 }
+
+type Social = Awaited<ReturnType<typeof getSettings>>["socialna"];
+
+/**
+ * Social profiles that are set, in display order.
+ * One list for the footer, /kontakt and the JSON-LD "sameAs", so a new network is added in one place.
+ */
+export function socialLinks(socialna: Social): { href: string; label: string }[] {
+  return [
+    { href: socialna.instagram, label: "Instagram" },
+    { href: socialna.facebook, label: "Facebook" },
+    { href: socialna.tiktok, label: "TikTok" },
+    { href: socialna.youtube, label: "YouTube" },
+  ].filter((item): item is { href: string; label: string } => isSet(item.href));
+}

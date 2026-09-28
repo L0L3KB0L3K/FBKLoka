@@ -1,0 +1,196 @@
+{
+  "data": {
+    "competitionStandings": [
+      {
+        "name": "Qualification Round - Main Group - IFL",
+        "teams": [
+          {
+            "id": 3462,
+            "rank": 1,
+            "name": "FBK Loka",
+            "logo": "uploads/public/d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+            "gamesPlayed": 4,
+            "winsRegular": 3,
+            "winsOvertime": 0,
+            "lossesRegular": 1,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 37,
+            "goalsAgainst": 24,
+            "points": 9
+          },
+          {
+            "id": 3460,
+            "rank": 2,
+            "name": "FBC Borovnica",
+            "logo": "uploads/public/4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png",
+            "gamesPlayed": 4,
+            "winsRegular": 2,
+            "winsOvertime": 0,
+            "lossesRegular": 2,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 27,
+            "goalsAgainst": 24,
+            "points": 6
+          },
+          {
+            "id": 3457,
+            "rank": 3,
+            "name": "C.Hamp VSV Unihockey",
+            "logo": "uploads/public/f701d553-c8d9-4aa1-a425-78f99da52eb1.png",
+            "gamesPlayed": 1,
+            "winsRegular": 1,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 8,
+            "goalsAgainst": 7,
+            "points": 3
+          },
+          {
+            "id": 3464,
+            "rank": 4,
+            "name": "Phoenix Fireball",
+            "logo": "uploads/public/f2afc842-b849-5f4b-9f0c-5ccf1df8c204.jpg",
+            "gamesPlayed": 2,
+            "winsRegular": 1,
+            "winsOvertime": 0,
+            "lossesRegular": 1,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 16,
+            "goalsAgainst": 20,
+            "points": 3
+          },
+          {
+            "id": 3461,
+            "rank": 5,
+            "name": "FBC Dragons",
+            "logo": "uploads/public/5e2168bf-4f00-557b-a520-3dcf83db797e.png",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          },
+          {
+            "id": 3459,
+            "rank": 5,
+            "name": "SU Wiener FV",
+            "logo": "uploads/public/869f543d-34c6-5b97-bd6a-311fca9c2f83.svg",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          },
+          {
+            "id": 3458,
+            "rank": 7,
+            "name": "KAC Floorball",
+            "logo": "uploads/public/c0346a77-eb6d-5c86-93ea-4f13db7f026f.png",
+            "gamesPlayed": 1,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 1,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 6,
+            "goalsAgainst": 8,
+            "points": 0
+          },
+          {
+            "id": 3463,
+            "rank": 8,
+            "name": "IBK Cartoon Heroes",
+            "logo": "uploads/public/340e60df-c47f-52d9-8ed5-eaa04e804235.png",
+            "gamesPlayed": 2,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 2,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 9,
+            "goalsAgainst": 20,
+            "points": 0
+          }
+        ]
+      },
+      {
+        "name": "Qualification Round - Main Group - Austria",
+        "teams": [
+          {
+            "id": 3458,
+            "rank": 1,
+            "name": "KAC Floorball",
+            "logo": "uploads/public/c0346a77-eb6d-5c86-93ea-4f13db7f026f.png",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          },
+          {
+            "id": 3459,
+            "rank": 1,
+            "name": "SU Wiener FV",
+            "logo": "uploads/public/869f543d-34c6-5b97-bd6a-311fca9c2f83.svg",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          },
+          {
+            "id": 3461,
+            "rank": 1,
+            "name": "FBC Dragons",
+            "logo": "uploads/public/5e2168bf-4f00-557b-a520-3dcf83db797e.png",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          },
+          {
+            "id": 3457,
+            "rank": 1,
+            "name": "C.Hamp VSV Unihockey",
+            "logo": "uploads/public/f701d553-c8d9-4aa1-a425-78f99da52eb1.png",
+            "gamesPlayed": 0,
+            "winsRegular": 0,
+            "winsOvertime": 0,
+            "lossesRegular": 0,
+            "lossesOvertime": 0,
+            "ties": 0,
+            "goalsFor": 0,
+            "goalsAgainst": 0,
+            "points": 0
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -10,6 +10,26 @@
 
 # Node version comes from .nvmrc (24).
 
+# URLs of the old club site (fbkloka.si until the switch), so old links and search results keep working.
+# /kontakt/ and /novice/ keep their paths. Pages with the same path win over these rules.
+# Netlify ignores the trailing slash here, so /o-klubu matches too.
+[[redirects]]
+  from = "/o-klubu/"
+  to = "/klub/"
+  status = 301
+
+# Old public team page. Only this exact path: /ekipa/* is used for the hidden plato and prevoz pages (SPEC.md §19).
+[[redirects]]
+  from = "/ekipa/"
+  to = "/ekipe/"
+  status = 301
+
+# /tekmovanja/ and /tekmovanja/arhiv/
+[[redirects]]
+  from = "/tekmovanja/*"
+  to = "/tekme/"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

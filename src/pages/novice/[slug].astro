@@ -1,0 +1,63 @@
+---
+// /novice/[slug] (SPEC.md §7.8): title, date, team, cover, text and a link back to all news.
+// The URL is the file name, e.g. /novice/2026-04-12-u17-drzavni-prvaki/ (Decap's default slug also starts with the date).
+// The cover is shown whole (no crop, height capped) and is the share image as a 1200×630 crop.
+import { getImage, Image } from "astro:assets";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { loadCollection } from "../../lib/content.ts";
+import { formatDate } from "../../lib/format.ts";
+import { newsArticle } from "../../lib/jsonld.ts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("novice");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<"novice">;
+}
+
+const { post } = Astro.props;
+const { naslov, datum, povzetek, naslovnaSlika, slikaAlt, selekcija } = post.data;
+const { Content } = await render(post);
+const team = selekcija ? (await loadCollection("selekcije")).find((entry) => entry.id === selekcija) : undefined;
+const iso = datum.toISOString();
+
+// Share image for Facebook, WhatsApp and search: a 1.91:1 crop, 1200×630 at most.
+// Astro never upscales and then ignores the crop, so a smaller cover gets the largest 1.91:1 crop it allows.
+// The size is computed here, so og:image:width/height match the real file.
+const shareWidth = Math.min(1200, naslovnaSlika.width, Math.floor((naslovnaSlika.height * 1200) / 630));
+const shareHeight = Math.round((shareWidth * 630) / 1200);
+const share = await getImage({ src: naslovnaSlika, width: shareWidth, height: shareHeight, format: "jpg" });
+const ogImage = { url: new URL(share.src, Astro.site), width: shareWidth, height: shareHeight, alt: slikaAlt };
+const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.site), naslov, datum, ogImage.url);
+---
+
+<Base title={naslov} description={povzetek} ogImage={ogImage} jsonLd={jsonLd}>
+  <article class="page-wrap py-12">
+    <h1 class="max-w-[30ch]">{naslov}</h1>
+    <p class="mt-6 text-small text-muted">
+      <time datetime={iso.slice(0, 10)}>{formatDate(iso)}</time>
+      {team && <span> · <a href={`/ekipe/${team.id}/`}>{team.data.ime}</a></span>}
+    </p>
+
+    {/* Top of the page, so it loads first (priority), never lazy. */}
+    <Image
+      src={naslovnaSlika}
+      alt={slikaAlt}
+      widths={[640, 960, 1280]}
+      sizes="(min-width: 48rem) 42rem, 100vw"
+      priority
+      class="mt-8 block h-auto max-h-[36rem] w-auto max-w-full rounded-md"
+    />
+
+    <div class="mt-8 prose">
+      <Content />
+    </div>
+
+    <p class="mt-12">
+      <a href="/novice/" class="inline-flex min-h-11 items-center font-semibold">Vse novice</a>
+    </p>
+  </article>
+</Base>

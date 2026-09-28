@@ -1,0 +1,209 @@
+{
+  "posodobljeno": "2026-09-28T02:06:02.833Z",
+  "tekmovanja": [
+    {
+      "selekcija": "clani",
+      "tekmovanje": "IFL",
+      "competitionId": 738,
+      "tabele": [
+        {
+          "ime": "Qualification Round - Main Group - IFL",
+          "vrstice": [
+            {
+              "mesto": 1,
+              "ekipa": "FBK Loka",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": true,
+              "tekme": 4,
+              "zmage": 3,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 37,
+              "goliPrejeti": 24,
+              "tocke": 9
+            },
+            {
+              "mesto": 2,
+              "ekipa": "FBC Borovnica",
+              "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png",
+              "loka": false,
+              "tekme": 4,
+              "zmage": 2,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 2,
+              "remi": 0,
+              "goliDani": 27,
+              "goliPrejeti": 24,
+              "tocke": 6
+            },
+            {
+              "mesto": 3,
+              "ekipa": "C.Hamp VSV Unihockey",
+              "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png",
+              "loka": false,
+              "tekme": 1,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 8,
+              "goliPrejeti": 7,
+              "tocke": 3
+            },
+            {
+              "mesto": 4,
+              "ekipa": "Phoenix Fireball",
+              "logo": "f2afc842-b849-5f4b-9f0c-5ccf1df8c204.jpg",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 16,
+              "goliPrejeti": 20,
+              "tocke": 3
+            },
+            {
+              "mesto": 5,
+              "ekipa": "FBC Dragons",
+              "logo": "5e2168bf-4f00-557b-a520-3dcf83db797e.png",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 5,
+              "ekipa": "SU Wiener FV",
+              "logo": "869f543d-34c6-5b97-bd6a-311fca9c2f83.svg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 7,
+              "ekipa": "KAC Floorball",
+              "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png",
+              "loka": false,
+              "tekme": 1,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 6,
+              "goliPrejeti": 8,
+              "tocke": 0
+            },
+            {
+              "mesto": 8,
+              "ekipa": "IBK Cartoon Heroes",
+              "logo": "340e60df-c47f-52d9-8ed5-eaa04e804235.png",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 2,
+              "remi": 0,
+              "goliDani": 9,
+              "goliPrejeti": 20,
+              "tocke": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "selekcija": "clani",
+      "tekmovanje": "1. SFL",
+      "competitionId": 760,
+      "tabele": [
+        {
+          "ime": "Redni del - Redni del - Redni del",
+          "vrstice": [
+            {
+              "mesto": 1,
+              "ekipa": "FBC Borovnica",
+              "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 1,
+              "ekipa": "FBK Loka",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": true,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 1,
+              "ekipa": "FBK Polanska banka",
+              "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 1,
+              "ekipa": "ŠD Zelenci",
+              "logo": "a8b7bde3-a2ca-52ce-9f52-f4ca56502425.svg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

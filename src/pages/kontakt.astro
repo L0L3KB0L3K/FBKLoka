@@ -6,9 +6,9 @@ import NetlifyForm from "../components/forms/NetlifyForm.astro";
 import Base from "../layouts/Base.astro";
 import { loadCollection } from "../lib/content.ts";
 import { joinSl } from "../lib/schedule.ts";
-import { getSettings, isSet } from "../lib/site.ts";
+import { getSettings, isSet, socialLinks } from "../lib/site.ts";
 
-const { naslov, email, telefon, socialna } = await getSettings();
+const { naslov, email, telefon, davcna, maticna, socialna } = await getSettings();
 const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
 
 // Head coaches with the teams they lead, in team order (SPEC.md §7.7 "odgovorne osebe po selekcijah").
@@ -22,11 +22,7 @@ const heads = (await loadCollection("trenerji"))
   .filter((coach) => coach.teams.length > 0)
   .sort((a, b) => a.order - b.order);
 
-const social = [
-  { href: socialna.instagram, label: "Instagram" },
-  { href: socialna.facebook, label: "Facebook" },
-  { href: socialna.youtube, label: "YouTube" },
-].filter((item): item is { href: string; label: string } => isSet(item.href));
+const social = socialLinks(socialna);
 ---
 
 <Base title="Kontakt" description="Kontakt floorball kluba FBK Loka iz Škofje Loke: trenerji po selekcijah in obrazec za sporočilo.">
@@ -67,6 +63,22 @@ const social = [
                       {telefon}
                     </a>
                   </dd>
+                </div>
+              )
+            }
+            {
+              isSet(davcna) && (
+                <div>
+                  <dt class="text-small text-muted">Davčna številka</dt>
+                  <dd>{davcna}</dd>
+                </div>
+              )
+            }
+            {
+              isSet(maticna) && (
+                <div>
+                  <dt class="text-small text-muted">Matična številka</dt>
+                  <dd>{maticna}</dd>
                 </div>
               )
             }

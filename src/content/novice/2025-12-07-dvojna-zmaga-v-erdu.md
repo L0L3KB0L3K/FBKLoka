@@ -3,6 +3,7 @@ naslov: "Dve zmagi v Érdu"
 datum: 2025-12-07
 povzetek: "Člani so v IFL na gostovanju premagali Phoenix Fireball in IBK Cartoon Heroes."
 naslovnaSlika: ./img/2025-12-07-dvojna-zmaga-v-erdu.jpg
+slikaAlt: "Člani FBK Loka skupaj za mizo v Érdu."
 selekcija: clani
 vir: instagram
 ---

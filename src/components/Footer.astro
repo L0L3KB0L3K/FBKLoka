@@ -3,10 +3,10 @@
 // and a membership line with a link to the federation. Contact is one click away from every page.
 // Under it, the sponsor strip on a white background.
 import { MAIN_NAV } from "../config/nav";
-import { getSettings, isSet } from "../lib/site";
+import { getSettings, isSet, socialLinks } from "../lib/site";
 import SponsorStrip from "./SponsorStrip.astro";
 
-const { email, telefon, naslov, eos, socialna } = await getSettings();
+const { email, telefon, naslov, davcna, maticna, eos, socialna } = await getSettings();
 
 // Same links as the main menu (also the no-JS fallback for the mobile menu), plus privacy.
 // /kodeks is added in phase 2, when the page exists.
@@ -16,11 +16,7 @@ const links = [
 ];
 const eosUrl = isSet(eos.portal) ? eos.portal : null;
 
-const social = [
-  { href: socialna.instagram, label: "Instagram" },
-  { href: socialna.facebook, label: "Facebook" },
-  { href: socialna.youtube, label: "YouTube" },
-].filter((item): item is { href: string; label: string } => isSet(item.href));
+const social = socialLinks(socialna);
 
 const year = new Date().getFullYear();
 ---
@@ -42,6 +38,9 @@ const year = new Date().getFullYear();
             )
           }
           {isSet(naslov) && <li>{naslov}</li>}
+          {/* For sponsors and invoices; the old club site showed them too. */}
+          {isSet(davcna) && <li class="mt-2 text-small">Davčna številka: {davcna}</li>}
+          {isSet(maticna) && <li class="text-small">Matična številka: {maticna}</li>}
           <li><a href="/kontakt/" class="inline-flex min-h-11 min-w-11 items-center hover:text-ball">Vsi kontakti</a></li>
         </ul>
       </section>

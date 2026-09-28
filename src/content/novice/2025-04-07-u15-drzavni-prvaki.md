@@ -3,6 +3,7 @@ naslov: "U15 A ekipa državni prvak"
 datum: 2025-04-07
 povzetek: "U15 A ekipa je v dvorani Vitranc osvojila naslov državnega prvaka z zlatim golom v podaljšku."
 naslovnaSlika: ./img/2025-04-07-u15-drzavni-prvaki.jpg
+slikaAlt: "Igralci U15 slavijo naslov državnih prvakov na igrišču dvorane Vitranc."
 selekcija: u15
 vir: instagram
 ---
