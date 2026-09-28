@@ -39,7 +39,7 @@ const slots = [...new Set(trainings.map((t) => `${DAY_SHORT[t.dan] ?? t.dan} ${t
 const coachLabel = coaches.length === 1 ? "Trener" : coaches.length === 2 ? "Trenerja" : "Trenerji";
 ---
 
-<li class="team-card relative flex flex-col rounded-md border border-line p-6">
+<li class="team-card relative flex flex-col rounded-md border border-line bg-paper p-6">
   <h2 class="text-h2">
     <a href={`/ekipe/${team.id}/`} class="team-link">{ime}</a>
   </h2>

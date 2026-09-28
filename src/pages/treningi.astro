@@ -28,7 +28,7 @@ const cards = teams
       cards.length > 0 && (
         <div class="mt-10 grid gap-6 md:grid-cols-2">
           {cards.map(({ team, trainings, coaches }) => (
-            <section aria-labelledby={`treningi-${team.id}`} class="border border-line p-5">
+            <section aria-labelledby={`treningi-${team.id}`} class="border border-line bg-paper p-5">
               <h2 id={`treningi-${team.id}`} class="text-h3">
                 <a href={`/ekipe/${team.id}/`}>{team.data.ime}</a>
               </h2>
