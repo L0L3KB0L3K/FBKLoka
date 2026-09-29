@@ -1340,7 +1340,7 @@ Vsaka tekma ima tudi uradnega MVP (`events.mps`). Oseba ima `incognito` in `imag
 **Narejeno:** testi zeleni (vratar nad pragom, vratar s premalo streli, mladinska tekmovanja se ne štejejo, izločen
 igralec, sezonske točke samo iz članskih tekem); kartica samo ob podatku; `npm run verify` zelen.
 
-### 20.4 "Odigrano" pod tablo (neodločeno)
+### 20.4 "Odigrano" pod tablo (potrjeno 29. 9. 2026)
 
 Tekma izgine s table 3 ure po začetku. `SHOW_AFTER_START_MS` ostane (sicer bi sobotna tekma zakrila naslednjo).
 Pod tablo se doda vrstica "Odigrano" z gumbom "Rezultat na FloorballFlash" za tekmo, ki se je končala (začetek + 3 h)
@@ -1393,6 +1393,5 @@ produkcijski deployi (45 kreditov).
 - Prag vratarja za MVP: 90 % ob 15 strelih ali nižji (deleži v IFL so 64–93 %)?
 - Sezonske točke samo IFL in 1. SFL? Kaj pokal in končnica?
 - Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
-- "Odigrano" pod tablo (20.4): da ali ne?
 - Naslovna slika samodejnega povzetka: fiksna grafika (predlog) ali slika z Instagrama?
 - API ključ za Claude v Actionu: kdo ga plača in hrani?

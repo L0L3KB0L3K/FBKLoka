@@ -1,7 +1,7 @@
 // Tests for the home page match logic (SPEC.md §7.1, §15 step 5).
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { formatCountdown, pick } from "../src/lib/upcoming.ts";
+import { formatCountdown, lastPlayed, pick } from "../src/lib/upcoming.ts";
 
 const KAC = "2026-10-10T17:00:00+02:00"; // Saturday
 const NEXT = "2026-10-11T10:00:00+02:00"; // Sunday
@@ -60,4 +60,12 @@ test("countdown uses Slovenian number forms", () => {
   assert.equal(formatCountdown(45 * min), "še 45 minut");
   assert.equal(formatCountdown(30_000), "še 1 minuto");
   assert.equal(formatCountdown(0), "");
+});
+
+test("played: a match that ended (after 3 h) and started less than 48 h ago; the latest one wins", () => {
+  const starts = ["2026-10-10T15:00:00+02:00", "2026-10-11T13:00:00+02:00"];
+  assert.equal(lastPlayed(starts, at("2026-10-10T17:00:00+02:00")), null); // still on the board (live)
+  assert.equal(lastPlayed(starts, at("2026-10-10T19:00:00+02:00")), 0); // Saturday evening
+  assert.equal(lastPlayed(starts, at("2026-10-11T17:00:00+02:00")), 1); // Sunday: the later match
+  assert.equal(lastPlayed(starts, at("2026-10-13T14:00:00+02:00")), null); // both older than 48 h
 });

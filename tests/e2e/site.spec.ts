@@ -5,7 +5,8 @@
 // 4. the team filter on /novice shows only that team and goes back to all,
 // 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
 // 6. the same for the photos behind the home match board,
-// 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue.
+// 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue,
+// 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4).
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -124,4 +125,24 @@ test("matches filter: Doma shows only home matches, the URL keeps it", async ({ 
   }
   await page.getByRole("link", { name: "Vse", exact: true }).click();
   await expect(visible).toHaveCount(total);
+});
+
+test("played: after a match ends, a line under the board links to the result on FloorballFlash", async ({ page }) => {
+  await page.goto("/");
+  const start = await page.locator("[data-slide]").first().getAttribute("data-start");
+  test.skip(!start, "no upcoming match in the data");
+  const t = Date.parse(start as string);
+
+  // During the match: no line.
+  await page.clock.install({ time: new Date(t + 60 * 60 * 1000) });
+  await page.goto("/");
+  await expect(page.locator("[data-played]")).toBeHidden();
+
+  // Four hours after the start: the line, with the teams and a link that opens in a new tab.
+  await page.clock.setFixedTime(new Date(t + 4 * 60 * 60 * 1000));
+  await page.goto("/");
+  const played = page.locator("[data-played]");
+  await expect(played).toBeVisible();
+  await expect(played.locator("[data-played-teams]")).not.toBeEmpty();
+  await expect(played.getByRole("link", { name: /Rezultat na FloorballFlash/ })).toHaveAttribute("target", "_blank");
 });

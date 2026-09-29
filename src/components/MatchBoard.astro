@@ -4,6 +4,8 @@
 // The HTML holds up to 5 upcoming matches and the last result. The script picks what to show in the
 // browser (src/lib/upcoming.ts): matches that started more than 3 hours ago are skipped, on match day
 // "Danes igramo" appears, and the countdown is refreshed every minute.
+// A match that ended (start + 3 h) less than 48 h ago gets a line "Odigrano" under the board with a link to the result
+// on FloorballFlash (SPEC.md §20.4), until the next data deploy brings the result itself.
 // Without JS the first match is shown with its date and no countdown. No matches at all: nothing is
 // rendered, and the join section below becomes the first thing on the page.
 //
@@ -89,7 +91,14 @@ const venueOf = (match: Match) =>
           const [home, away] = sides(match);
           const venue = venueOf(match);
           return (
-            <article class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-slide data-start={match.zacetek} hidden={index > 0}>
+            <article
+              class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end"
+              data-slide
+              data-start={match.zacetek}
+              data-teams={`${home} – ${away}`}
+              data-ff={match.ffUrl}
+              hidden={index > 0}
+            >
               <div>
                 <p class="flex flex-wrap items-center gap-3">
                   <span class="rounded-full bg-ball px-3 py-1 font-bold text-ink" data-today hidden>
@@ -155,6 +164,23 @@ const venueOf = (match: Match) =>
             </div>
           </article>
         )}
+
+        {upcoming.length > 0 && (
+          <p class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-muted pt-4" data-played hidden>
+            <span class="font-bold">Odigrano:</span>
+            <span data-played-teams />
+            <a
+              href={upcoming[0]?.ffUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-11 items-center gap-1 font-bold hover:text-ball"
+              data-played-link
+            >
+              Rezultat na FloorballFlash
+              <NewTabIcon class="size-4" />
+            </a>
+          </p>
+        )}
       </div>
     </section>
   )
@@ -200,7 +226,7 @@ const venueOf = (match: Match) =>
   // Picks the board match in the browser and keeps the countdown fresh (SPEC.md §7.1).
   // The rows of "Naslednje tekme" ([data-upcoming-row]) follow the same 3-hour rule.
   import { currentTime } from "../lib/clock.ts";
-  import { formatCountdown, pick } from "../lib/upcoming.ts";
+  import { formatCountdown, lastPlayed, pick } from "../lib/upcoming.ts";
 
   const board = document.querySelector<HTMLElement>("[data-board]");
   const upcomingSection = document.querySelector<HTMLElement>("[data-upcoming-section]");
@@ -215,7 +241,19 @@ const venueOf = (match: Match) =>
 
       slides.forEach((slide, i) => (slide.hidden = i !== state.board));
       if (result) result.hidden = state.board !== null;
-      board.hidden = state.board === null && !result;
+
+      // "Odigrano": the latest match that ended less than 48 h ago, until the data deploy brings its result.
+      const playedIndex = lastPlayed(slides.map((slide) => slide.dataset.start ?? ""), now);
+      const playedSlide = playedIndex === null ? null : slides[playedIndex];
+      const played = board.querySelector<HTMLElement>("[data-played]");
+      if (played) {
+        played.hidden = !playedSlide;
+        if (playedSlide) {
+          played.querySelector("[data-played-teams]")!.textContent = playedSlide.dataset.teams ?? "";
+          played.querySelector<HTMLAnchorElement>("[data-played-link]")!.href = playedSlide.dataset.ff ?? "";
+        }
+      }
+      board.hidden = state.board === null && !result && !playedSlide;
 
       const current = state.board === null ? null : slides[state.board];
       if (current) {

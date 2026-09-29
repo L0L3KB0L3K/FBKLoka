@@ -5,6 +5,8 @@ import { partsInLjubljana } from "./format.ts";
 
 /** A match stays on the board and in lists until 3 hours after its start (SPEC.md §7.1). */
 export const SHOW_AFTER_START_MS = 3 * 60 * 60 * 1000;
+/** A match that ended keeps a "Odigrano" line under the board for 48 hours after its start (SPEC.md §20.4). */
+export const PLAYED_UNTIL_MS = 48 * 60 * 60 * 1000;
 
 export type Pick = {
   /** Per input match: still shown (started less than 3 hours ago, or later). */
@@ -28,6 +30,20 @@ export function pick(starts: string[], now: Date): Pick {
 
   const msToStart = Date.parse(starts[index]) - time;
   return { visible, board: index, today: isSameDay(starts[index], now), live: msToStart <= 0, msToStart };
+}
+
+/**
+ * Index of the latest match that has ended (start + 3 h) and started less than 48 h ago, or null (SPEC.md §20.4).
+ * starts: ISO start times in chronological order. The data deploy with the result removes the match from the list.
+ */
+export function lastPlayed(starts: string[], now: Date): number | null {
+  const time = now.getTime();
+  let found: number | null = null;
+  starts.forEach((start, i) => {
+    const t = Date.parse(start);
+    if (t + SHOW_AFTER_START_MS <= time && t + PLAYED_UNTIL_MS > time) found = i;
+  });
+  return found;
 }
 
 /** Same calendar day in Ljubljana (not UTC, not the visitor's time zone). */
