@@ -92,3 +92,10 @@ export function fromSnapshot(raw: string | null, now: number): EkipaData | null 
     return null;
   }
 }
+
+/** A CSS time in ms: "220ms" -> 220, ".22s" -> 220 (the built CSS is minified), empty or broken -> fallback. */
+export function toMs(value: string, fallback: number): number {
+  const n = parseFloat(value);
+  if (Number.isNaN(n)) return fallback;
+  return value.trim().endsWith("ms") ? n : n * 1000;
+}

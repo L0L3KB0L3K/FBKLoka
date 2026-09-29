@@ -73,7 +73,25 @@ const intro =
     </div>
   </form>
 
-  <p class="mt-8" data-loading hidden>Nalagam podatke…</p>
+  {/* Loading without a saved list (SPEC.md §20.1 A3, A4): shown only after 300 ms, so a quick answer never flashes it.
+      The mug fills while we wait. It is not real progress (the server reports none), so it never reaches the top before
+      the answer; then it tops up, the foam rises and the list follows. Decorative: the text carries the message. */}
+  <div class="ekipa-loading mt-8 flex items-center gap-5" data-loading hidden>
+    <svg class="keg shrink-0" viewBox="0 0 120 140" width="72" height="84" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="keg-clip"><path d="M20 30h60v90a10 10 0 0 1-10 10H30a10 10 0 0 1-10-10z"></path></clipPath>
+      </defs>
+      <g clip-path="url(#keg-clip)"><rect class="keg-beer" x="20" y="30" width="60" height="100"></rect></g>
+      <path class="keg-glass" d="M20 30h60v90a10 10 0 0 1-10 10H30a10 10 0 0 1-10-10z"></path>
+      <path class="keg-glass" d="M80 50h15a10 10 0 0 1 10 10v30a10 10 0 0 1-10 10H80"></path>
+      {/* Foam: three bubbles over the rim, shown when the mug is full. */}
+      <path class="keg-foam" d="M18 34A13 13 0 0 1 38 20A13 13 0 0 1 62 20A13 13 0 0 1 82 34Z"></path>
+    </svg>
+    <p role="status">
+      Nalagam podatke…
+      <span class="ekipa-slow block text-small text-muted" data-slow hidden>Prvi vstop na novi napravi rabi malo dlje.</span>
+    </p>
+  </div>
 
   <div class="mt-8 max-w-[60ch] rounded-card bg-court p-6" data-load-error hidden>
     <p>Podatkov trenutno ni mogoče naložiti. Poskusi znova čez minuto.</p>
@@ -147,6 +165,63 @@ const intro =
     color: var(--color-paper);
   }
 
+  /* The beer rises from the bottom. The script animates its transform with WAAPI (no JS on every frame). */
+  .keg-beer {
+    fill: var(--color-ball);
+    transform-box: fill-box;
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+
+  .keg-foam {
+    fill: var(--color-paper);
+    stroke: var(--color-ink);
+    stroke-width: 6;
+    stroke-linejoin: round;
+    transform-box: fill-box;
+    transform-origin: bottom;
+    opacity: 0;
+  }
+
+  .keg-glass {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 6;
+    stroke-linejoin: round;
+  }
+
+  /* Entrance after 300 ms: a fade and a hint of scale, so the loader does not pop in (nothing appears from nothing).
+     The note after 1 s only fades. */
+  .ekipa-loading,
+  .ekipa-slow {
+    transition:
+      opacity var(--dur-menu-in) var(--ease-out),
+      transform var(--dur-menu-in) var(--ease-out);
+    transform-origin: left center;
+  }
+
+  @starting-style {
+    .ekipa-loading,
+    .ekipa-slow {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @starting-style {
+      .ekipa-loading {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  /* Reduced motion: fewer animations, not none. A still, half-full mug says "waiting" without motion; the fade stays. */
+  @media (prefers-reduced-motion: reduce) {
+    .keg-beer {
+      transform: scaleY(0.5);
+    }
+  }
+
   .ekipa-dialog {
     width: min(26rem, calc(100vw - 2rem));
     border: 1px solid var(--color-line);
@@ -206,6 +281,7 @@ const intro =
     MESSAGE_STALE_FAILED,
     SNAPSHOT_KEY,
     teamsLine,
+    toMs,
     toSnapshot,
     whenLine,
     type EkipaData,
@@ -262,6 +338,12 @@ const intro =
     const dialog = $<HTMLDialogElement>("[data-name-dialog]");
     const nameSelect = $<HTMLSelectElement>("[data-name-select]");
     const stale = $("[data-stale]");
+    const slow = $("[data-slow]");
+    const beer = root.querySelector<SVGRectElement>(".keg-beer")!;
+    const foam = root.querySelector<SVGPathElement>(".keg-foam")!;
+    // Motion values from the tokens in global.css (SPEC.md §9.6); the fallbacks are the same values.
+    const token = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const ms = (name: string, fallback: number) => toMs(token(name), fallback);
 
     let data: EkipaData | null = null;
     // True while a saved list is shown and fresh data is on its way: the sign-up buttons wait, so nobody takes a
@@ -307,6 +389,53 @@ const intro =
       store.remove(SNAPSHOT_KEY);
     }
 
+    /**
+     * Loading without a saved list (A3, A4): nothing for 300 ms, then the mug and the text, after 1 s the note that
+     * the first visit takes longer. Returns stop(): with full = true the beer tops up (220 ms), the foam rises with it,
+     * and the list follows right after, with no extra wait (the data is already here). On an error it just stops.
+     * stop() can be called more than once.
+     */
+    function startLoading(): (full: boolean) => Promise<void> {
+      show(null);
+      slow.hidden = true;
+      for (const el of [beer, foam]) for (const animation of el.getAnimations()) animation.cancel();
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let filling: Animation | null = null;
+      let stopped = false;
+      const showTimer = window.setTimeout(() => {
+        show(loading);
+        // Towards 90 % over 8 s (ease-out cubic: about a third after 1 s), never the top: the mug shows that we are
+        // waiting, not real progress. WAAPI interpolates the transform itself, no script runs on every frame.
+        if (!reduce) {
+          filling = beer.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(0.9)" }], {
+            duration: 8000,
+            easing: "cubic-bezier(0.33, 1, 0.68, 1)",
+            fill: "forwards",
+          });
+        }
+      }, 300);
+      const slowTimer = window.setTimeout(() => (slow.hidden = false), 1000);
+      return async (full: boolean) => {
+        if (stopped) return;
+        stopped = true;
+        clearTimeout(showTimer);
+        clearTimeout(slowTimer);
+        if (!filling) return; // answered within 300 ms, or reduced motion (still mug)
+        if (!full) return filling.pause();
+        const easing = token("--ease-out") || "cubic-bezier(0.23, 1, 0.32, 1)";
+        const duration = ms("--dur-menu-in", 220);
+        // From the current height to the top (the running animation is interrupted, not restarted).
+        const from = getComputedStyle(beer).transform;
+        filling.cancel();
+        beer.animate([{ transform: from }, { transform: "scaleY(1)" }], { duration, easing, fill: "forwards" });
+        // The foam rises while the beer reaches the rim: about 260 ms in total, less than the old 350 ms wait.
+        await foam.animate(
+          [{ opacity: 0, transform: "scale(0.9)" }, { opacity: 1, transform: "scale(1)" }],
+          { duration: ms("--dur-hover", 150), delay: duration / 2, easing, fill: "forwards" },
+        ).finished;
+      };
+    }
+
     async function load() {
       const code = store.get(CODE_KEY);
       if (!code) return askCode();
@@ -319,11 +448,11 @@ const intro =
         stale.hidden = false;
         render();
         show(content);
-      } else {
-        show(loading);
       }
+      const stopLoading = snapshot ? null : startLoading();
       try {
         const result = await api({ code });
+        await stopLoading?.(!result.error);
         if (result.error === "bad_code") {
           forgetCode();
           return askCode(MESSAGE_BAD_CODE);
@@ -336,6 +465,7 @@ const intro =
         render();
         show(content);
       } catch {
+        await stopLoading?.(false);
         if (!snapshot) return show(loadError);
         // The saved list stays, and its buttons work again: the server checks every action anyway.
         refreshing = false;

@@ -1272,10 +1272,13 @@ skrajša prvi vnos.
   Strežnik odgovori `bad_code`, nič ne prebere, nič ne zapiše in nič ne zabeleži. Ko uporabnik tipka kodo, se Apps
   Script že zbuja.
 - **A3, A4 Nalaganje brez posnetka:** en sam element `data-loading`, prikazan šele po 300 ms (brez utripa pri hitrem
-  odgovoru). Krigla piva, ki se polni (odločitev kluba): polnjenje ni pravi napredek, krivulja gre proti 90 %, ob
-  odgovoru se dopolni do 100 % in po 350 ms izgine. Po 1 s čakanja še opomba "Prvi vstop na tej napravi traja malo
-  dlje." Pri `prefers-reduced-motion` samo besedilo. Barve iz tokenov (`ball` samo kot polnilo, nikoli kot besedilo).
-  `--fill` se nastavlja prek `element.style.setProperty` (CSSOM), kar CSP `style-src 'self'` dovoli.
+  odgovoru). Krigla piva, ki se polni (odločitev kluba): polnjenje ni pravi napredek, v 8 s gre proti 90 %. Ob odgovoru
+  se od trenutne višine v 220 ms dopolni do vrha, nad robom se dvigne pena in takoj zatem se pokaže seznam (brez
+  dodatnega čakanja, podatki so že tu). Po 1 s čakanja še opomba "Prvi vstop na novi napravi rabi malo dlje."
+  Nalagalnik in opomba se pokažeta mehko (`@starting-style`: prosojnost, pri nalagalniku še `scale(0.97)`). Pri
+  `prefers-reduced-motion` mirujoča krigla, napolnjena do polovice, brez polnjenja. Polnjenje teče prek WAAPI na
+  `transform` piva (brez skripte na vsak kader). Barve iz tokenov (`ball` samo kot polnilo, nikoli kot besedilo).
+  Pregled po načelih emil-design-eng (29. 9. 2026).
 - **A5 Strežnik** (`apps-script/ekipa/Code.gs`): po zapisu akcije se odgovor sestavi iz podatkov, prebranih pod
   zaklepom, in nove vrstice, brez drugega branja štirih zavihkov. Predpomnilnik: vrednosti nad 90 KB ne shrani
   (CacheService sprejme največ 100 KB), napaka predpomnilnika ne podre odgovora. Po spremembi skrbnik v Apps Scriptu

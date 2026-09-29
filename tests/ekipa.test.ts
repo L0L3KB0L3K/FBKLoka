@@ -8,6 +8,7 @@ import {
   messageFor,
   MESSAGE_OTHER,
   teamsLine,
+  toMs,
   toSnapshot,
   whenLine,
   type EkipaData,
@@ -76,4 +77,11 @@ test("snapshot: saved without the action answer, read back without started match
   assert.equal(fromSnapshot("{broken", now), null);
   assert.equal(fromSnapshot(JSON.stringify({ savedAt: now, data: { tekme: [] } }), now), null);
   assert.equal(fromSnapshot(null, now), null);
+});
+
+test("CSS times in ms: minified seconds, milliseconds, fallback", () => {
+  assert.equal(toMs(".22s", 0), 220);
+  assert.equal(toMs("150ms", 0), 150);
+  assert.equal(toMs("", 220), 220);
+  assert.equal(toMs("auto", 150), 150);
 });

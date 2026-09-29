@@ -138,3 +138,31 @@ test("a rejected code forgets the code and the saved list", async ({ page }) => 
   expect(await page.evaluate(() => localStorage.getItem("fbk-ekipa-snapshot"))).toBeNull();
   expect(await page.evaluate(() => localStorage.getItem("fbk-ekipa-code"))).toBeNull();
 });
+
+test("first load on a device: the mug, then the note after 1 s, then the list", async ({ page }) => {
+  const server = await mockBackend(page);
+  server.delayMs = 2000;
+  await page.addInitScript((code) => localStorage.setItem("fbk-ekipa-code", code), CODE);
+  await page.goto("/ekipa/plato/");
+  await expect(page.getByText("Nalagam podatke…")).toBeVisible();
+  await expect(page.locator(".keg")).toBeVisible();
+  // The beer fills through WAAPI (one running animation), not a script on every frame.
+  expect(await page.locator(".keg-beer").evaluate((el) => el.getAnimations().length)).toBe(1);
+  await expect(page.getByText("Prvi vstop na novi napravi rabi malo dlje.")).toBeVisible();
+  await expect(page.locator("[data-match-id='1']")).toBeVisible({ timeout: 6000 });
+  await expect(page.getByText("Nalagam podatke…")).toBeHidden();
+});
+
+test("reduced motion: a still, half-full mug, no filling animation", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const server = await mockBackend(page);
+  server.delayMs = 1500;
+  await page.addInitScript((code) => localStorage.setItem("fbk-ekipa-code", code), CODE);
+  await page.goto("/ekipa/plato/");
+  await expect(page.getByText("Nalagam podatke…")).toBeVisible();
+  await expect(page.locator(".keg")).toBeVisible();
+  const beer = page.locator(".keg-beer");
+  expect(await beer.evaluate((el) => el.getAnimations().length)).toBe(0);
+  expect(await beer.evaluate((el) => getComputedStyle(el).transform)).toBe("matrix(1, 0, 0, 0.5, 0, 0)");
+  await expect(page.locator("[data-match-id='1']")).toBeVisible({ timeout: 6000 });
+});
