@@ -1390,17 +1390,57 @@ objavo (test); podatki in povzetek sta en deploy.
 
 ### 20.6 Netlify krediti
 
-Free: 300 kreditov na mesec, produkcijski deploy stane 15. Meja je trda: ko krediti zmanjkajo, se stran ustavi do
-naslednjega meseca. Deploy Previews so brezplačni.
+Cene (Netlify docs, preverjeno 30. 9. 2026): uspešen produkcijski deploy 15 kreditov, promet 20 kreditov na GB,
+2 kredita na 10.000 zahtevkov. Neuspela gradnja in vrnitev na prejšnji deploy (rollback) ne stane nič. Free ima 300
+kreditov na obdobje in trdo mejo: ko zmanjka, so vse strani ekipe ustavljene ("Site not available") do novega
+obdobja. Netlify pošlje e-pošto lastniku ekipe pri 50 %, 75 % in 100 %. Deploy Previews in branch deployi so
+brezplačni, promet nanje se šteje. Krediti so na Netlify ekipo, ne na stran: druga stran v isti ekipi troši iste.
 
-| Vir | Deployi na mesec | Krediti |
+Teža strani (lokalni build, prvi obisk s praznim predpomnilnikom, besedilo stisnjeno z brotli, 30. 9. 2026):
+
+| Stran | Telefon | Desktop | Zahtevki |
+|---|---|---|---|
+| `/` | 479 KB | 436 KB | 36 |
+| `/tekme/` | 229 KB | 222 KB | 28 |
+| `/novice/` | 882 KB | 524 KB | 31 |
+| `/klub/` | 267 KB | 249 KB | 17 |
+
+Datoteke v `/_astro/` imajo predpomnilnik za eno leto, zato ponovni obisk prenese skoraj samo HTML. Ocena: obisk
+okoli 1 MB in 60 zahtevkov, torej okoli 32 kreditov na 1.000 obiskov.
+
+Proračun na obdobje:
+
+| Vir | Na obdobje | Krediti |
 |---|---|---|
-| Podatki sobota in nedelja (povzetek v nedeljskem commitu) | ~9 | ~135 |
-| Razvoj: vsak push na `main` | po potrebi | 15 na push |
+| Podatki sobota in nedelja, samo ob spremembi (povzetek v nedeljskem commitu) | do 9 deployev | do 135 |
+| Promet | 1.000 obiskov | ~32 |
+| Razvoj: združitev `razvoj` → `main` | 4 (enkrat na teden) | 60 |
+| Rezerva: nujni popravek, več obiskov | | ~70 |
 
-Razvoj zato poteka na veji z Deploy Preview, na `main` gre v paketih. 29. 9. 2026 so bili samo z razvojem trije
-produkcijski deployi (45 kreditov).
+Pravila:
+
+- Razvoj teče na veji `razvoj` z brezplačnim branch deployem (`razvoj--fbkloka.netlify.app`). Na `main` gre
+  združitev največ enkrat na teden, med tednom (ne v soboto ali nedeljo, ko tečejo podatki).
+- Pred združitvijo pogled v Netlify: Usage & billing > Credit balance (poraba in datum novega obdobja).
+- Commit samo z docs, SPEC.md, CLAUDE.md, .github ali .claude ne sproži gradnje (`scripts/netlify-ignore.sh`). Širši
+  seznam (tests, scripts, apps-script) 25.–30. 9. ne bi prihranil nobenega deploya, zato ostane tak.
+
+Ko krediti zmanjkujejo (najprej prvo):
+
+1. Nič več združitev na `main` do novega obdobja.
+2. GitHub > Actions > fetch-floorballflash > Disable workflow: ni podatkovnih deployev, rezultati na strani zastarijo.
+3. Netlify > Deploys > Stop auto publishing: po dokumentaciji potem stane samo objavljen deploy (Publish deploy).
+4. Plan Personal: 9 $ na mesec, 1.000 kreditov.
+
+Stanje 30. 9. 2026 (Usage & billing, obdobje 27. 9.–27. 10.): 14 produkcijskih deployev = 210 kreditov, promet
+1,3 kredita (2.560 zahtevkov), ostane 88,7. Do 27. 10. so še štirje vikendi: sobota in nedelja bi stali do 120
+kreditov, več kot ostane. Zato do 27. 10. ni združitev na `main`; podatki glej 20.7. Sprememba samo v `.github`
+(npr. cron) ne sproži gradnje, torej ne stane.
+
+**Narejeno:** proračun zapisan; veja `razvoj` ima branch deploy; na `main` gre največ enkrat na teden.
 
 ### 20.7 Odprto
 
 - Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
+- Do 27. 10. 2026 ostane 88,7 kredita: samo nedeljski prenos podatkov (4 deployi, 60 kreditov) ali plan Personal
+  (9 $ na mesec)? Sobota in nedelja bi stali do 120 kreditov in stran bi se ustavila pred koncem obdobja.
