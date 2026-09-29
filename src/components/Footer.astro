@@ -1,9 +1,11 @@
 ---
 // Site footer (SPEC.md §8, §9.5): black, three columns (contact, links, social)
-// and a membership line with a link to the federation. Contact is one click away from every page.
+// and a bottom line with the federation and EOS (owner, 29. 9. 2026: EOS is a partner service, not a page of the site).
+// Contact is one click away from every page.
 // Above it, the sponsor strip on a white background (owner, 28. 9. 2026: sponsors before the black block).
 import { MAIN_NAV } from "../config/nav";
 import { getSettings, isSet, socialLinks } from "../lib/site";
+import NewTabIcon from "./NewTabIcon.astro";
 import SponsorStrip from "./SponsorStrip.astro";
 
 const { email, telefon, naslov, davcna, maticna, eos, socialna } = await getSettings();
@@ -60,15 +62,6 @@ const year = new Date().getFullYear();
               </li>
             ))
           }
-          {
-            eosUrl && (
-              <li class="col-span-2">
-                <a href={eosUrl} class="inline-flex min-h-11 min-w-11 items-center hover:text-ball">
-                  Za starše in člane (EOS)
-                </a>
-              </li>
-            )
-          }
         </ul>
       </nav>
 
@@ -95,6 +88,17 @@ const year = new Date().getFullYear();
     <div class="page-wrap">
       <div class="flex flex-col gap-2 border-t border-muted py-6 text-small md:flex-row md:items-center md:justify-between">
         <p>Član <a href="https://floorballslo.si/" class="inline-flex min-h-11 min-w-11 items-center hover:text-ball">Floorball zveze Slovenije</a></p>
+        {
+          eosUrl && (
+            <p>
+              Za starše in člane:{" "}
+              <a href={eosUrl} target="_blank" rel="noopener" class="inline-flex min-h-11 min-w-11 items-center gap-1 hover:text-ball">
+                aplikacija EOS
+                <NewTabIcon class="size-4" />
+              </a>
+            </p>
+          )
+        }
         <p>© {year} FBK Loka</p>
       </div>
     </div>

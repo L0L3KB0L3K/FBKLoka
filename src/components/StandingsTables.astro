@@ -7,6 +7,7 @@
 // if a long name needs it, and takes keyboard focus for that (axe: scrollable-region-focusable).
 import { formatDate } from "../lib/format.ts";
 import type { Standings } from "../lib/types.ts";
+import NewTabIcon from "./NewTabIcon.astro";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -112,8 +113,9 @@ const overtime = `${cell} hidden sm:table-cell`;
     standings.map((competition) => (
       <>
         {" "}
-        <a href={`https://www.floorballflash.at/competition/${competition.competitionId}/standings`}>
+        <a href={`https://www.floorballflash.at/competition/${competition.competitionId}/standings`} target="_blank" rel="noopener">
           Lestvica {competition.tekmovanje} na FloorballFlash
+          <NewTabIcon class="inline size-4 align-[-0.15em]" />
         </a>
         .
       </>

@@ -17,6 +17,7 @@ import { Picture } from "astro:assets";
 import { formatDateLong, formatTime } from "../lib/format.ts";
 import { scoreForLoka } from "../lib/matches.ts";
 import type { Match } from "../lib/types.ts";
+import NewTabIcon from "./NewTabIcon.astro";
 import Button from "./ui/Button.astro";
 
 interface Props {
@@ -115,8 +116,9 @@ const venueOf = (match: Match) =>
                 </p>
                 <p class="mt-2 min-h-[1.5em] text-h3 font-bold text-ball" data-countdown />
                 <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 md:justify-end">
-                  <a href={match.ffUrl} class="inline-flex min-h-11 items-center font-bold hover:text-ball" data-live hidden>
+                  <a href={match.ffUrl} target="_blank" rel="noopener" class="inline-flex min-h-11 items-center gap-1 font-bold hover:text-ball" data-live hidden>
                     V živo na FloorballFlash
+                    <NewTabIcon class="size-4" />
                   </a>
                   <Button href="/tekme/" variant="on-ink" arrow>
                     Vse tekme

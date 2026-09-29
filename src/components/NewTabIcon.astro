@@ -1,0 +1,27 @@
+---
+// Mark for links that open in a new tab (FloorballFlash, EOS): an "external link" icon for sighted users and the
+// same warning for screen readers, so a new tab never comes as a surprise (WCAG G201). The link itself sets
+// target="_blank" rel="noopener". Geometry of "external-link" from Tabler Icons (MIT, tabler.io/icons), like ArrowIcon.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class:list={["shrink-0", className]}
+  viewBox="0 0 24 24"
+  width="18"
+  height="18"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"></path>
+  <path d="M11 13l9 -9"></path>
+  <path d="M15 4h5v5"></path>
+</svg><span class="sr-only"> (odpre se v novem zavihku)</span>

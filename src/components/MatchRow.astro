@@ -10,10 +10,11 @@
 // "Today" depends on the visitor's clock, so the script below decides it, not the build.
 // The whole row opens the match on FloorballFlash (the link's ::after covers the row) and turns grey
 // under the mouse, so it reads as one clickable item. data-kraj feeds the "Doma / V gosteh" filter.
+// FloorballFlash opens in a new tab, marked for sight and screen readers (NewTabIcon).
 import { formatDayShort, formatTime } from "../lib/format.ts";
 import { scoreForLoka, scoreHomeAway } from "../lib/matches.ts";
 import type { Match } from "../lib/types.ts";
-import ArrowIcon from "./ArrowIcon.astro";
+import NewTabIcon from "./NewTabIcon.astro";
 import TeamLogo from "./TeamLogo.astro";
 
 interface Props {
@@ -51,17 +52,18 @@ const score = variant === "vse" ? scoreHomeAway(match) : scoreForLoka(match);
   <p class="text-right md:order-3">
     {
       finished ? (
-        <a href={match.ffUrl} class="match-link inline-flex min-h-11 items-center gap-1 font-bold tabular-nums no-underline">
+        <a href={match.ffUrl} target="_blank" rel="noopener" class="match-link inline-flex min-h-11 items-center gap-1 font-bold tabular-nums no-underline">
           {score}
           <span class="sr-only">, podrobnosti na FloorballFlash</span>
+          <NewTabIcon class="match-arrow size-4" />
         </a>
       ) : (
-        <a href={match.ffUrl} class="match-link inline-flex min-h-11 items-center gap-1 font-semibold no-underline" data-live-link>
+        <a href={match.ffUrl} target="_blank" rel="noopener" class="match-link inline-flex min-h-11 items-center gap-1 font-semibold no-underline" data-live-link>
           <span data-label-default>
             Podrobnosti<span class="sr-only"> tekme na FloorballFlash</span>
           </span>
           <span class="font-bold" data-label-live hidden>V živo na FloorballFlash</span>
-          <ArrowIcon class="match-arrow size-4" />
+          <NewTabIcon class="match-arrow size-4" />
         </a>
       )
     }

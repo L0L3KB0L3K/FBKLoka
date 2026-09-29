@@ -1,6 +1,7 @@
 ---
 // /vpis: for a new parent (SPEC.md §7.5). A black panel first: free first trainings and the large
-// "Vpiši se" button (EOS). Then what to bring, when and where the youth train, questions, a link to the contact form.
+// "Vpiši se" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
+// no repeats), when and where the youth train, and a link to the contact form.
 // Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
@@ -44,7 +45,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
         {
           isSet(eos.registracija) && (
-            <Button href={eos.registracija} variant="on-ink" size="lg" arrow>
+            <Button href={eos.registracija} variant="on-ink" size="lg" newTab>
               Vpiši se
             </Button>
           )
@@ -58,7 +59,16 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       {isSet(eos.registracija) && <p class="mt-4 text-small">Vpis in članarina potekata v aplikaciji EOS.</p>}
     </section>
 
+    {/* Questions first, as headings a parent can scan; extra text from vpis.md follows, if any. */}
     <div class="mt-12 prose">
+      {
+        questions.map((q) => (
+          <>
+            <h2>{q.vprasanje}</h2>
+            <p>{q.odgovor}</p>
+          </>
+        ))
+      }
       <Content />
     </div>
 
@@ -83,26 +93,6 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       )
     }
 
-    {
-      questions.length > 0 && (
-        <section aria-labelledby="vprasanja" class="mt-14 max-w-2xl">
-          <h2 id="vprasanja" class="heading-bar">
-            Pogosta vprašanja
-          </h2>
-          <div class="mt-6 border-t border-line">
-            {questions.map((q) => (
-              <details class="faq-item rounded-field border border-line px-4">
-                <summary class="faq-summary flex min-h-11 cursor-pointer items-center justify-between gap-4 py-3 font-semibold">
-                  {q.vprasanje}
-                </summary>
-                <p class="pb-4">{q.odgovor}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      )
-    }
-
     {/* One form for all questions is on /kontakt (owner, 28. 9. 2026), so parents do not choose between two. */}
     <p class="mt-14 max-w-xl">
       Imate vprašanje? Pišite nam na strani <a href="/kontakt/">Kontakt</a>.
@@ -110,23 +100,3 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
   </div>
 </Base>
 
-<style>
-  /* Questions: a visible + / – instead of the browser marker, which flex hides. */
-  .faq-summary {
-    list-style: none;
-  }
-
-  .faq-summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-summary::after {
-    content: "+";
-    font-size: var(--text-h3);
-    line-height: 1;
-  }
-
-  details[open] > .faq-summary::after {
-    content: "–";
-  }
-</style>

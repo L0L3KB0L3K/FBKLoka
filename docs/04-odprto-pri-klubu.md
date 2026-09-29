@@ -7,6 +7,7 @@ Stanje: 29. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Podatki o klubu v nogi: ali še veljajo davčna številka 29559588, matična številka 1677055000 in e-mail info@fbkloka.si? Potrebujemo pravilno telefonsko številko: številka na stari strani (+386 31 446 644) ne drži, zato je na novi strani ni.
 - [ ] Ali na spletno stran damo e-mail trenerjev (pri trenerjih na /klub in na kontaktu)? Kontaktne osebe po selekcijah: Gorazd Tomc (člani), Gašper Triler (U19–U13), Gašper Dagarin (U11, U9).
 - [ ] Letniki (leta rojstva) za U9, U11, U13, U15, U17 in U19.
+- [ ] Vpis: znesek članarine in približna cena palice, da bo odgovor »Koliko stane?« na /vpis popoln.
 - [ ] Za stran o zasebnosti potrdi uradno ime iz registra: FLOORBALL KLUB LOKA. Naslov, matična in davčna številka so enaki kot na stari strani.
 - [ ] Preberite in potrdite osnutka besedil na straneh O klubu (/klub) in Zasebnost (/zasebnost). Pri zasebnosti: ali drži rok hrambe sporočil največ 12 mesecev? Priporočam, da ga prebere nekdo s pravnim znanjem.
 - [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.

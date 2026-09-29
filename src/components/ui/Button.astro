@@ -6,8 +6,10 @@
 // Renders <a> when href is given, otherwise <button>.
 // size lg: the one main call to action of a page (/vpis, the join band on the home page).
 // arrow: an arrow after the label that moves 4 px on hover, for buttons that lead to another page.
+// newTab: an outside service (EOS) in a new tab, with the new-tab mark instead of the arrow.
 // Shape: a pill, like every control on the site (radius rule in global.css).
 import ArrowIcon from "../ArrowIcon.astro";
+import NewTabIcon from "../NewTabIcon.astro";
 
 interface Props {
   variant: "on-ink" | "on-paper";
@@ -15,10 +17,11 @@ interface Props {
   type?: "button" | "submit";
   size?: "md" | "lg";
   arrow?: boolean;
+  newTab?: boolean;
   class?: string;
 }
 
-const { variant, href, type = "button", size = "md", arrow = false, class: className } = Astro.props;
+const { variant, href, type = "button", size = "md", arrow = false, newTab = false, class: className } = Astro.props;
 
 const classes = [
   "btn group inline-flex items-center justify-center gap-2 rounded-full font-bold whitespace-nowrap no-underline disabled:cursor-not-allowed disabled:opacity-70",
@@ -30,9 +33,9 @@ const classes = [
 
 {
   href ? (
-    <a href={href} class:list={classes}>
+    <a href={href} class:list={classes} target={newTab ? "_blank" : undefined} rel={newTab ? "noopener" : undefined}>
       <slot />
-      {arrow && <ArrowIcon class="btn-arrow" />}
+      {newTab ? <NewTabIcon /> : arrow && <ArrowIcon class="btn-arrow" />}
     </a>
   ) : (
     <button type={type} class:list={classes}>
