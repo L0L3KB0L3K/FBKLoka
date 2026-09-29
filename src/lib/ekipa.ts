@@ -35,6 +35,8 @@ export const MESSAGES: Record<string, string> = {
 export const MESSAGE_OTHER = "Nekaj ni v redu. Osveži stran in poskusi znova.";
 export const MESSAGE_NOT_SAVED = "Ni shranjeno. Poskusi znova.";
 export const MESSAGE_BAD_CODE = "Koda ni pravilna. Preveri jo v ekipni skupini.";
+export const MESSAGE_STALE = "Prikazani so podatki od zadnjič. Osvežujem…";
+export const MESSAGE_STALE_FAILED = "Osvežitev ni uspela. Vidiš podatke od zadnjič.";
 
 export function messageFor(razlog: string): string {
   return MESSAGES[razlog] ?? MESSAGE_OTHER;
@@ -60,4 +62,33 @@ export function canCancel(mode: Mode, match: EkipaMatch, hours: number, now: Dat
   const left = Date.parse(match.zacetek) - now.getTime();
   if (left <= 0) return false;
   return mode === "prevoz" || hours <= 0 || left >= hours * 3600 * 1000;
+}
+
+/** The last answer kept in this browser, so a repeat visit shows the list at once (SPEC.md §20.1 A1). */
+export const SNAPSHOT_KEY = "fbk-ekipa-snapshot";
+export const SNAPSHOT_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+
+/** What is saved: the data and the time, without the one-off answer to an action (no old "Prijavljen."). */
+export function toSnapshot(data: EkipaData, now: number): string {
+  const kept: EkipaData = { ...data };
+  delete kept.result;
+  delete kept.error;
+  return JSON.stringify({ savedAt: now, data: kept });
+}
+
+/**
+ * The saved data, or null when there is none, it is broken or older than 7 days. Matches that have started since
+ * are dropped, so an old snapshot never offers a past match.
+ */
+export function fromSnapshot(raw: string | null, now: number): EkipaData | null {
+  if (!raw) return null;
+  try {
+    const saved = JSON.parse(raw) as { savedAt?: unknown; data?: Partial<EkipaData> };
+    const data = saved.data;
+    if (typeof saved.savedAt !== "number" || now - saved.savedAt > SNAPSHOT_MAX_AGE_MS) return null;
+    if (!data || !Array.isArray(data.tekme) || !Array.isArray(data.igralci) || !data.stevci || !data.pravila) return null;
+    return { ...(data as EkipaData), tekme: data.tekme.filter((match) => Date.parse(match.zacetek) > now) };
+  } catch {
+    return null;
+  }
 }

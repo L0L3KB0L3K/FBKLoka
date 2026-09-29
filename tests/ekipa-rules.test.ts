@@ -24,6 +24,7 @@ const buildDataRaw = sandbox.buildData as (ctx: Ctx) => {
   pravila: { odjavaRokUr: number };
 };
 const buildData = (ctx: Ctx) => plain(buildDataRaw(ctx));
+const withActionRaw = sandbox.withAction as (ctx: Ctx, action: object, decision: Decision, rowNumber: number) => Ctx;
 
 const NOW = Date.parse("2026-10-01T12:00:00+02:00");
 const HOME = { id: 1, zacetek: "2026-10-10T17:00:00+02:00", tekmovanje: "IFL", nasprotnik: "KAC Floorball", doma: true, prizorisce: "Dvorana Poden" };
@@ -151,4 +152,20 @@ test("counters: every active player, 0 included, only matches that have started,
     { ime: "Cene Zupan", n: 0 },
   ]);
   assert.ok(stevci.prevoz.every((p) => p.n === 0));
+});
+
+test("answer after an action equals a fresh read of the Sheet, without reading it again (SPEC.md §20.1 A5)", () => {
+  // Cancelling: the new log row is added and the sign-up it cancels becomes preklicano.
+  const before = ctx([row(2, "Ana Novak", 1, "plato")]);
+  const cancel = act("odjava", "plato", "Ana Novak", 1);
+  const after = withActionRaw(before, cancel, decideRaw(cancel, before), 3);
+  const reread = ctx([row(2, "Ana Novak", 1, "plato", "prijava", "preklicano"), row(3, "Ana Novak", 1, "plato", "odjava", "OK")]);
+  assert.deepEqual(plain(after.rows), reread.rows);
+  assert.deepEqual(buildData(after), buildData(reread));
+
+  // A rejected attempt is logged too and changes nothing on the page.
+  const late = act("prijava", "plato", "Bor Kos", 1);
+  const rejected = plain(withActionRaw(before, late, decideRaw(late, before), 3));
+  assert.equal(rejected.rows.at(-1)?.status, "zavrnjeno");
+  assert.equal(buildData(rejected).tekme.find((m) => m.id === 1)?.plato, "Ana Novak");
 });

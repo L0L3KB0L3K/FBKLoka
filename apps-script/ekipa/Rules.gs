@@ -150,3 +150,25 @@ function buildData(ctx) {
     pravila: { odjavaRokUr: Number(ctx.settings && ctx.settings.odjavaRokUr) || 0 },
   };
 }
+
+/**
+ * The context after an action is written, without reading the Sheet again (SPEC.md §20.1 A5). The new log row is
+ * added exactly as readContext() would read it back (rejected attempts too), and a cancelled sign-up becomes
+ * "preklicano". buildData() of the result equals buildData() of a fresh read.
+ * @param rowNumber sheet row of the new log line (sheet.getLastRow() after appendRow)
+ */
+function withAction(ctx, action, decision, rowNumber) {
+  var rows = ctx.rows.map(function (row) {
+    if (!decision.cancelRow || row.row !== decision.cancelRow) return row;
+    return { row: row.row, ime: row.ime, tekmaId: row.tekmaId, vloga: row.vloga, akcija: row.akcija, status: "preklicano" };
+  });
+  rows.push({
+    row: rowNumber,
+    ime: cleanName(action.ime),
+    tekmaId: Number(action.tekmaId) || 0,
+    vloga: String(action.vloga || "").trim(),
+    akcija: String(action.type || "").trim(),
+    status: decision.status,
+  });
+  return { players: ctx.players, matches: ctx.matches, rows: rows, now: ctx.now, settings: ctx.settings };
+}

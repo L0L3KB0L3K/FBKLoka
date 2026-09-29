@@ -1,7 +1,18 @@
 // Tests for the page helpers of /ekipa/plato and /ekipa/prevoz (SPEC.md §19.5).
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { canCancel, matchesFor, messageFor, MESSAGE_OTHER, teamsLine, whenLine, type EkipaData, type EkipaMatch } from "../src/lib/ekipa.ts";
+import {
+  canCancel,
+  fromSnapshot,
+  matchesFor,
+  messageFor,
+  MESSAGE_OTHER,
+  teamsLine,
+  toSnapshot,
+  whenLine,
+  type EkipaData,
+  type EkipaMatch,
+} from "../src/lib/ekipa.ts";
 
 const match = (id: number, doma: boolean, zacetek = "2026-10-10T17:00:00+02:00"): EkipaMatch => ({
   id,
@@ -53,4 +64,16 @@ test("cancel: plato until 24 h before, drivers until the start, nobody after the
 test("messages: known reasons have their own text, the rest a general one", () => {
   assert.match(messageFor("zasedeno"), /hitrejši/);
   assert.equal(messageFor("neznano ime"), MESSAGE_OTHER);
+});
+
+test("snapshot: saved without the action answer, read back without started matches, ignored after 7 days", () => {
+  const now = Date.parse("2026-10-01T12:00:00+02:00");
+  const withAnswer: EkipaData = { ...data([match(1, true, "2026-09-30T17:00:00+02:00"), match(2, false)]), result: { ok: true } };
+  const raw = toSnapshot(withAnswer, now);
+  assert.equal(JSON.parse(raw).data.result, undefined);
+  assert.deepEqual(fromSnapshot(raw, now)?.tekme.map((m) => m.id), [2]);
+  assert.equal(fromSnapshot(raw, now + 8 * 24 * 60 * 60 * 1000), null);
+  assert.equal(fromSnapshot("{broken", now), null);
+  assert.equal(fromSnapshot(JSON.stringify({ savedAt: now, data: { tekme: [] } }), now), null);
+  assert.equal(fromSnapshot(null, now), null);
 });

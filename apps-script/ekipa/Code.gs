@@ -49,7 +49,7 @@ function doPost(e) {
     var cached = cache.get(CACHE_KEY);
     if (cached) return ContentService.createTextOutput(cached).setMimeType(ContentService.MimeType.JSON);
     var text = JSON.stringify(buildData(readContext()));
-    cache.put(CACHE_KEY, text, CACHE_SECONDS);
+    putCache(cache, text);
     return ContentService.createTextOutput(text).setMimeType(ContentService.MimeType.JSON);
   }
 
@@ -76,9 +76,11 @@ function doPost(e) {
     ]);
     if (decision.cancelRow) sheet.getRange(decision.cancelRow, TABS.Prijave.indexOf("status") + 1).setValue("preklicano");
     SpreadsheetApp.flush();
-    cache.remove(CACHE_KEY);
 
-    var data = buildData(readContext());
+    // The answer comes from what was read under the lock plus this action, without reading the four tabs again
+    // (SPEC.md §20.1 A5). It is also the cached data for the next visitor.
+    var data = buildData(withAction(ctx, body.action, decision, sheet.getLastRow()));
+    putCache(cache, JSON.stringify(data));
     data.result = decision.status === "OK" ? { ok: true } : { ok: false, razlog: decision.razlog };
     return json(data);
   } finally {
@@ -93,6 +95,16 @@ function normalizeCode(value) {
 
 function json(value) {
   return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON);
+}
+
+/** CacheService takes at most 100 KB per value, and a cache error must never break the answer. */
+function putCache(cache, text) {
+  if (text.length > 90000) return;
+  try {
+    cache.put(CACHE_KEY, text, CACHE_SECONDS);
+  } catch (err) {
+    // no cache this time
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------------------

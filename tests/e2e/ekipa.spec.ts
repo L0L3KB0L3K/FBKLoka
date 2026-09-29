@@ -17,9 +17,13 @@ vm.runInContext(readFileSync(new URL("../../apps-script/ekipa/Rules.gs", import.
 
 const inDays = (days: number) => new Date(Date.now() + days * 86_400_000).toISOString();
 
-/** A tiny in-memory Apps Script: the same answers as Code.gs doPost, rules from Rules.gs. */
+/**
+ * A tiny in-memory Apps Script: the same answers as Code.gs doPost, rules from Rules.gs. Returns a handle to slow
+ * the answers down and to see which codes were sent, for the speed tests (SPEC.md §20.1).
+ */
 async function mockBackend(page: Page) {
   const rows: Row[] = [];
+  const server = { delayMs: 0, codes: [] as string[] };
   const ctx = () => ({
     players: ["Ana Novak", "Bor Kos"],
     matches: [
@@ -32,6 +36,8 @@ async function mockBackend(page: Page) {
   });
   await page.route(`${ENDPOINT}**`, async (route) => {
     const body = JSON.parse(route.request().postData() ?? "{}");
+    server.codes.push(body.code);
+    if (server.delayMs) await new Promise((resolve) => setTimeout(resolve, server.delayMs));
     let answer: Record<string, unknown>;
     if (body.code !== CODE) answer = { error: "bad_code" };
     else if (!body.action) answer = rules.buildData(ctx()) as Record<string, unknown>;
@@ -43,6 +49,7 @@ async function mockBackend(page: Page) {
     }
     await route.fulfill({ contentType: "application/json", body: JSON.stringify(answer), headers: { "access-control-allow-origin": "*" } });
   });
+  return server;
 }
 
 async function openWithCode(page: Page, path: string) {
@@ -98,4 +105,36 @@ test("axe: plato page with data", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Tekme" })).toBeVisible();
   const { violations } = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
   expect(violations.map((v) => v.id)).toEqual([]);
+});
+
+test("repeat visit: the saved list shows at once while the server is slow, buttons wait for fresh data", async ({ page }) => {
+  const server = await mockBackend(page);
+  await openWithCode(page, "/ekipa/plato/");
+  await expect(page.locator("[data-match-id='1']")).toBeVisible();
+  server.delayMs = 3000;
+  await page.reload();
+  const first = page.locator("[data-match-id='1']");
+  await expect(first).toBeVisible({ timeout: 1500 });
+  await expect(page.getByText("Prikazani so podatki od zadnjič. Osvežujem…")).toBeVisible();
+  await expect(first.getByRole("button", { name: "Prinesem jaz" })).toBeDisabled();
+  await expect(first.getByRole("button", { name: "Prinesem jaz" })).toBeEnabled({ timeout: 6000 });
+  await expect(page.getByText("Prikazani so podatki od zadnjič. Osvežujem…")).toBeHidden();
+});
+
+test("first visit: one request with an empty code wakes the server", async ({ page }) => {
+  const server = await mockBackend(page);
+  await page.goto("/ekipa/plato/");
+  await expect(page.getByLabel("Ekipna koda")).toBeVisible();
+  await expect.poll(() => server.codes.filter((code) => code === "").length).toBe(1);
+});
+
+test("a rejected code forgets the code and the saved list", async ({ page }) => {
+  await mockBackend(page);
+  await openWithCode(page, "/ekipa/plato/");
+  await expect(page.locator("[data-match-id='1']")).toBeVisible();
+  await page.evaluate(() => localStorage.setItem("fbk-ekipa-code", "stara koda"));
+  await page.reload();
+  await expect(page.getByText("Koda ni pravilna. Preveri jo v ekipni skupini.")).toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem("fbk-ekipa-snapshot"))).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem("fbk-ekipa-code"))).toBeNull();
 });

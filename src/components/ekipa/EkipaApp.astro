@@ -4,6 +4,8 @@
 // States: not connected (no URL yet) -> team code -> loading -> list, or an error with "Poskusi znova".
 // "My name" is picked once in a dialog and kept in this browser only (localStorage, wrapped in try/catch).
 // Names are written with textContent, never as HTML.
+// Speed (SPEC.md §20.1): a repeat visit shows the last answer at once (snapshot, at most 7 days old) and refreshes
+// it; the first visit wakes the Apps Script server with an empty code while the visitor types the real one.
 import { EKIPA } from "../../config/ekipa.ts";
 import { isSet } from "../../lib/site.ts";
 import Button from "../ui/Button.astro";
@@ -83,6 +85,7 @@ const intro =
   </div>
 
   <div data-content hidden>
+    <p class="mt-8 text-small text-muted" role="status" data-stale hidden></p>
     <p class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2" data-me hidden>
       <span>Ti si: <strong data-me-name></strong></span>
       <button type="button" class="inline-flex min-h-11 items-center font-semibold underline" data-not-me>Nisem jaz</button>
@@ -194,11 +197,16 @@ const intro =
 <script>
   import {
     canCancel,
+    fromSnapshot,
     matchesFor,
     messageFor,
     MESSAGE_BAD_CODE,
     MESSAGE_NOT_SAVED,
+    MESSAGE_STALE,
+    MESSAGE_STALE_FAILED,
+    SNAPSHOT_KEY,
     teamsLine,
+    toSnapshot,
     whenLine,
     type EkipaData,
     type EkipaMatch,
@@ -253,8 +261,14 @@ const intro =
     const announce = $("[data-announce]");
     const dialog = $<HTMLDialogElement>("[data-name-dialog]");
     const nameSelect = $<HTMLSelectElement>("[data-name-select]");
+    const stale = $("[data-stale]");
 
     let data: EkipaData | null = null;
+    // True while a saved list is shown and fresh data is on its way: the sign-up buttons wait, so nobody takes a
+    // plato that is already gone (SPEC.md §20.1 A1).
+    let refreshing = false;
+    // A request in this visit has already woken the Apps Script server (A2).
+    let warmed = false;
     // Per-match message after an action, kept across re-renders for 4 s.
     const notes = new Map<number, string>();
 
@@ -263,6 +277,7 @@ const intro =
     };
 
     async function api(body: object): Promise<EkipaData> {
+      warmed = true;
       // A string body is sent as text/plain: a "simple" request, so the browser sends no CORS preflight
       // (Apps Script cannot answer one). The web app redirects to googleusercontent.com; fetch follows it.
       const response = await fetch(endpoint, { method: "POST", body: JSON.stringify(body) });
@@ -273,26 +288,59 @@ const intro =
     function askCode(message = "") {
       codeError.textContent = message;
       codeInput.setAttribute("aria-invalid", String(message !== ""));
+      refreshing = false;
+      stale.hidden = true;
       show(codeForm);
       codeInput.focus();
+      // First visit: an empty code wakes the server while the code is typed. It answers "bad_code" and reads,
+      // writes and logs nothing (SPEC.md §20.1 A2).
+      if (!warmed) api({ code: "" }).catch(() => {});
+    }
+
+    function saveSnapshot(fresh: EkipaData) {
+      store.set(SNAPSHOT_KEY, toSnapshot(fresh, Date.now()));
+    }
+
+    /** A rejected code: the code and the list saved with it both go (a new season brings a new code). */
+    function forgetCode() {
+      store.remove(CODE_KEY);
+      store.remove(SNAPSHOT_KEY);
     }
 
     async function load() {
       const code = store.get(CODE_KEY);
       if (!code) return askCode();
-      show(loading);
+      const snapshot = fromSnapshot(store.get(SNAPSHOT_KEY), Date.now());
+      if (snapshot) {
+        // Repeat visit: the last list at once, the fresh one when the server answers (A1).
+        data = snapshot;
+        refreshing = true;
+        stale.textContent = MESSAGE_STALE;
+        stale.hidden = false;
+        render();
+        show(content);
+      } else {
+        show(loading);
+      }
       try {
         const result = await api({ code });
         if (result.error === "bad_code") {
-          store.remove(CODE_KEY);
+          forgetCode();
           return askCode(MESSAGE_BAD_CODE);
         }
         if (result.error) throw new Error(result.error);
         data = result;
+        saveSnapshot(result);
+        refreshing = false;
+        stale.hidden = true;
         render();
         show(content);
       } catch {
-        show(loadError);
+        if (!snapshot) return show(loadError);
+        // The saved list stays, and its buttons work again: the server checks every action anyway.
+        refreshing = false;
+        stale.textContent = MESSAGE_STALE_FAILED;
+        render();
       }
     }
 
@@ -309,6 +357,7 @@ const intro =
         if (result.error) throw new Error(result.error);
         store.set(CODE_KEY, code);
         data = result;
+        saveSnapshot(result);
         render();
         show(content);
       } catch {
@@ -361,6 +410,7 @@ const intro =
       button.type = "button";
       button.className = primary ? "ekipa-btn ekipa-btn-primary" : "ekipa-btn";
       button.textContent = label;
+      button.disabled = refreshing;
       button.addEventListener("click", () => act(button, type, match));
       return button;
     }
@@ -464,11 +514,12 @@ const intro =
         const code = store.get(CODE_KEY) ?? "";
         const result = await api({ code, action: { type, vloga: mode, ime: name, tekmaId: match.id } });
         if (result.error === "bad_code") {
-          store.remove(CODE_KEY);
+          forgetCode();
           return askCode(MESSAGE_BAD_CODE);
         }
         if (result.error || !result.result) throw new Error(result.error ?? "no result");
         data = result;
+        saveSnapshot(result);
         message = result.result.ok ? (type === "prijava" ? "Prijavljen." : "Odjavljen.") : messageFor(result.result.razlog);
       } catch {
         button.disabled = false;
