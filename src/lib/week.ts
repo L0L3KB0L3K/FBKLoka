@@ -1,7 +1,7 @@
 // Weekly summary (SPEC.md §20.5): the facts of one week as a small JSON (tmp/week.json), a text from a fixed template,
 // and a strict check of any written text against those facts. The summary is published without review, so a text that
 // fails the check is replaced by the template. Pure functions, tested in tests/week.test.ts.
-import { partsInLjubljana } from "./format.ts";
+import { formatTime, partsInLjubljana } from "./format.ts";
 import { statsText, type Mvp, type MvpStats } from "./mvp.ts";
 import type { Match } from "./types.ts";
 
@@ -18,9 +18,23 @@ export type WeekMatch = {
   izid: "zmaga" | "poraz" | "remi";
 };
 
+/** A match of next week, for the preview at the end of the summary. */
+export type WeekUpcoming = {
+  id: number;
+  ekipa: string;
+  tekmovanje: string;
+  zacetek: string;
+  dan: string;
+  ura: string; // "15:00", Ljubljana
+  doma: boolean;
+  nasprotnik: string;
+};
+
 export type Week = {
   teden: { od: string; do: string }; // Monday and Sunday, YYYY-MM-DD
   tekme: WeekMatch[];
+  naslednjiTeden: { od: string; do: string };
+  prihodnje: WeekUpcoming[]; // matches of next week, in order
   mvp: { ime: string; vratar: boolean; tekme: ({ nasprotnik: string } & MvpStats)[]; skupaj: MvpStats } | null;
 };
 
@@ -39,7 +53,7 @@ export function weekBounds(now: Date): { od: string; do: string } {
   return { od: isoDay(monday), do: isoDay(new Date(monday.getTime() + 6 * 86_400_000)) };
 }
 
-/** Finished matches of all our teams in the week, and the MVP when its weekend is in the week. */
+/** Finished matches of all our teams in the week, the MVP when its weekend is in the week, and next week's matches. */
 export function buildWeek(matches: Match[], teamNames: Record<string, string>, mvp: Mvp | null, teden: { od: string; do: string }): Week {
   const tekme = matches
     .filter((m) => m.stanje === "koncana" && m.rezultat && localDay(m.zacetek) >= teden.od && localDay(m.zacetek) <= teden.do)
@@ -67,9 +81,25 @@ export function buildWeek(matches: Match[], teamNames: Record<string, string>, m
     obrambe: list.reduce((n, s) => n + s.obrambe, 0),
     streli: list.reduce((n, s) => n + s.streli, 0),
   });
+  const next = { od: isoDay(new Date(Date.parse(teden.do) + 86_400_000)), do: isoDay(new Date(Date.parse(teden.do) + 7 * 86_400_000)) };
+  const prihodnje = matches
+    .filter((m) => m.stanje === "prihodnja" && localDay(m.zacetek) >= next.od && localDay(m.zacetek) <= next.do)
+    .sort((a, b) => Date.parse(a.zacetek) - Date.parse(b.zacetek))
+    .map((m): WeekUpcoming => ({
+      id: m.id,
+      ekipa: teamNames[m.selekcija] ?? m.selekcija,
+      tekmovanje: m.tekmovanje,
+      zacetek: m.zacetek,
+      dan: DAYS[partsInLjubljana(m.zacetek).weekday]!,
+      ura: formatTime(m.zacetek),
+      doma: m.doma,
+      nasprotnik: m.nasprotnik.ime,
+    }));
   return {
     teden,
     tekme,
+    naslednjiTeden: next,
+    prihodnje,
     mvp: inWeek
       ? {
           ime: mvp.ime,
@@ -89,14 +119,38 @@ export function prepositionFor(n: number): "z" | "s" {
   return "s"; // trideset …
 }
 
-/** Subject and verb endings: "Člani so premagali", "Švigalice so premagale", "Ekipa U17 je premagala". */
+/** Subject and verb forms: "Člani so premagali / igrajo", "Švigalice so premagale / igrajo", "Ekipa U17 je premagala / igra". */
 function grammar(ekipa: string) {
-  if (ekipa === "Člani") return { subject: "Člani", aux: "so", ending: "i" };
-  if (ekipa === "Švigalice") return { subject: "Švigalice", aux: "so", ending: "e" };
-  return { subject: `Ekipa ${ekipa}`, aux: "je", ending: "a" };
+  if (ekipa === "Člani") return { subject: "Člani", aux: "so", ending: "i", play: "igrajo" };
+  if (ekipa === "Švigalice") return { subject: "Švigalice", aux: "so", ending: "e", play: "igrajo" };
+  return { subject: `Ekipa ${ekipa}`, aux: "je", ending: "a", play: "igra" };
 }
 
-/** The fixed-template text: one sentence per match, grouped by team, and the MVP. No AI, so no invented facts. */
+/** "3. 10." */
+function shortDate(iso: string): string {
+  const p = partsInLjubljana(iso);
+  return `${p.day}. ${p.month}.`;
+}
+
+/** Next week's matches as a subheading and one sentence per match, grouped by team, or one sentence when there are none. */
+function nextWeekText(week: Week): string {
+  if (week.prihodnje.length === 0) return "Naslednji teden ni tekem.";
+  const paragraphs: string[] = [];
+  for (const team of [...new Set(week.prihodnje.map((m) => m.ekipa))]) {
+    const g = grammar(team);
+    const sentences = week.prihodnje
+      .filter((m) => m.ekipa === team)
+      .map((m, i) => {
+        const when = `v ${DAYS_ACCUSATIVE[partsInLjubljana(m.zacetek).weekday]}, ${shortDate(m.zacetek)}, ob ${m.ura}`;
+        const rest = `v ${m.tekmovanje} ${m.doma ? "doma" : "v gosteh"} proti ekipi ${m.nasprotnik}.`;
+        return i === 0 ? `${g.subject} ${g.play} ${when} ${rest}` : `${when.charAt(0).toUpperCase()}${when.slice(1)} ${g.play} ${rest}`;
+      });
+    paragraphs.push(sentences.join(" "));
+  }
+  return ["## Naslednji teden", ...paragraphs].join("\n\n");
+}
+
+/** The fixed-template text: one sentence per match, grouped by team, the MVP and next week. No AI, so no invented facts. */
 export function templateSummary(week: Week): string {
   const paragraphs: string[] = [];
   const teams = [...new Set(week.tekme.map((m) => m.ekipa))];
@@ -120,6 +174,7 @@ export function templateSummary(week: Week): string {
     paragraphs.push(sentences.join(" "));
   }
   if (week.mvp) paragraphs.push(`MVP vikenda je ${week.mvp.ime} (${statsText(week.mvp.skupaj, week.mvp.vratar)}).`);
+  paragraphs.push(nextWeekText(week));
   return paragraphs.join("\n\n");
 }
 
@@ -135,6 +190,9 @@ const OPINION = ["odlič", "izjemn", "fantast", "neverjet", "sijaj", "briljant",
  */
 export function verifySummary(text: string, week: Week): string[] {
   const problems: string[] = [];
+  // A start time of next week ("ob 15:00") is not a score; heading marks are not words.
+  const times = new Set(week.prihodnje.map((m) => m.ura));
+  text = text.replace(/^#+\s*/gm, "").replace(/ob (\d{1,2}:\d{2})/g, (all: string, time: string) => (times.has(time) ? " " : all));
   const scores = new Set(week.tekme.flatMap((m) => [`${m.goliLoka}:${m.goliNasprotnik}`, `${m.goliNasprotnik}:${m.goliLoka}`]));
   for (const found of text.match(/\d+\s*:\s*\d+/g) ?? []) {
     if (!scores.has(found.replace(/\s/g, ""))) problems.push(`rezultat ${found} ni v podatkih`);
@@ -153,7 +211,7 @@ export function verifySummary(text: string, week: Week): string[] {
   }
 
   const names = [
-    ...week.tekme.flatMap((m) => [m.ekipa, m.tekmovanje, m.nasprotnik]),
+    ...[...week.tekme, ...week.prihodnje].flatMap((m) => [m.ekipa, m.tekmovanje, m.nasprotnik]),
     ...(week.mvp ? [week.mvp.ime, ...week.mvp.tekme.map((t) => t.nasprotnik)] : []),
     "FBK Loka",
     "MVP",
@@ -165,6 +223,9 @@ export function verifySummary(text: string, week: Week): string[] {
   };
   addDate(week.teden.od);
   addDate(week.teden.do);
+  addDate(week.naslednjiTeden.od);
+  addDate(week.naslednjiTeden.do);
+  for (const m of week.prihodnje) addDate(m.zacetek);
   for (const m of week.tekme) {
     numbers.add(m.goliLoka).add(m.goliNasprotnik);
     addDate(m.zacetek);

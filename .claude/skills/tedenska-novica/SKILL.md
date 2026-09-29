@@ -13,7 +13,11 @@ is published instead.
 ## Input
 
 `tmp/week.json` (made by `node scripts/week-collect.ts`): `teden` (Monday and Sunday), `tekme` (every finished match of
-the week: `ekipa`, `tekmovanje`, `dan`, `doma`, `nasprotnik`, `goliLoka`, `goliNasprotnik`, `izid`) and `mvp` (or null).
+the week: `ekipa`, `tekmovanje`, `dan`, `doma`, `nasprotnik`, `goliLoka`, `goliNasprotnik`, `izid`), `mvp` (or null)
+and `prihodnje` (next week's matches: `ekipa`, `tekmovanje`, `dan`, `ura`, `doma`, `nasprotnik`).
+
+The club publishes the fixed template (`templateSummary` in src/lib/week.ts) by default, because an AI text costs
+API credits; this skill is for a manual or later AI version and must give the same facts.
 Read nothing else. Do not search, do not use what you know about the club, the players or the opponents.
 
 ## Output
@@ -21,7 +25,9 @@ Read nothing else. Do not search, do not use what you know about the club, the p
 Only the Markdown body (no frontmatter), 2 to 5 sentences in total:
 
 1. One short paragraph per team (`ekipa`), in match order.
-2. A last paragraph with the MVP, only when `mvp` is not null.
+2. A paragraph with the MVP, only when `mvp` is not null.
+3. "## Naslednji teden" and one sentence per match of `prihodnje` ("Člani igrajo v soboto, 3. 10., ob 15:00 v IFL v
+   gosteh proti ekipi FBC Dragons."), or "Naslednji teden ni tekem."
 
 If `tekme` is empty, write nothing.
 
