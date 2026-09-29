@@ -1,13 +1,16 @@
 # Časovnica kluba (SPEC.md §4.7). Stran /klub pokaže ustanovitve, imena kluba in naslove; ostali dogodki čakajo na /zgodovina.
-# Viri: Wikipedija (FBK Insport Škofja Loka, uvrstitve 2007/08–2016/17), FloorballFlash (uvrstitve od 2018/19, pregled
-# 29. 9. 2026), IFF arhiv (6. 10. 2020), Instagram @fbk_loka (izvoz 24. 9. 2026), Gorenjski glas (3. 4. 2023),
-# Floorball zveza Slovenije, Facebook Floorball Insport (23. 3. 2025). Sezoni 2024/25 in 2025/26 je potrdil klub (29. 9. 2026).
-# Vnosi s "TODO" v opombi se ne prikažejo, dokler jih klub ne potrdi.
+# Vir je zapisan pri vsakem vnosu z naslovi. Glavni viri:
+# - Wikipedija, članek "Floorball", tabela "Državni prvaki - moški" (2000/01–2019/20), https://sl.wikipedia.org/wiki/Floorball
+# - Wikipedija, članek "FBK Insport Škofja Loka", razdelek Rezultati (2007/08–2016/17, tudi mladi)
+# - IFF arhiv, Slovenia Floorball News, https://archive.floorball.sport/category/member-associations/slovenia-floorball-news/
+# - FloorballFlash (tekme od 2018/19, pregled 29. 9. 2026): številka je ID tekme, https://www.floorballflash.at/game/<ID>
+# - Instagram @fbk_loka (izvoz 24. 9. 2026), Gorenjski glas, Floorball zveza Slovenije, Facebook Floorball Insport.
+# Sezoni 2024/25 in 2025/26 je potrdil klub (29. 9. 2026). Vnosi s "TODO" v opombi se ne prikažejo.
 #
 # vrsta: dogodek (privzeto) | ustanovitev | ime | naslovi.
 # - ustanovitev, ime: "klub" je ime kluba od takrat naprej.
-# - naslovi: "sezona" je npr. "2024/25", "leto" pa njeno drugo leto (2025). Mladinska 1. mesta pred 2018/19 so
-#   z Wikipedije, ki ne loči državnega prvenstva od turnirja, zato piše "1. mesto" in ne "državni prvak".
+# - naslovi: "sezona" je npr. "2024/25", "leto" pa njeno drugo leto (2025). Mladinska 1. mesta pred 2018/19 so samo
+#   iz članka o klubu na Wikipediji, ki ne loči državnega prvenstva od turnirja, zato piše "1. mesto" in ne "državni prvak".
 
 dogodki:
   - leto: 1991
@@ -22,8 +25,39 @@ dogodki:
   - leto: 2001
     vrsta: naslovi
     sezona: "2000/01"
-    dogodek: "Člani so državni prvaki, pokalni prvaki in prvaki mednarodne lige."
-    # Wikipedija: "Spidersi so že v prvem letu obstoja osvojili ..." Sezona je sklep iz leta ustanovitve.
+    dogodek: "Člani so prvi državni prvaki v zgodovini slovenskega floorballa (mali floorball)."
+    # Wikipedija, tabela državnih prvakov; Slovenske novice ("prvi državni prvak pa je bila 2001. ekipa Loka Spiders").
+    # Mednarodna liga in pokal sta bila le v članku o klubu, brez vira: odstranjena (odločitev kluba 29. 9. 2026).
+
+  - leto: 2002
+    vrsta: naslovi
+    sezona: "2001/02"
+    dogodek: "Člani so državni prvaki (mali floorball)."
+    # Wikipedija, tabela državnih prvakov.
+
+  - leto: 2003
+    vrsta: naslovi
+    sezona: "2002/03"
+    dogodek: "Člani so državni prvaki."
+    # Wikipedija, tabela državnih prvakov (prvenstvo v malem in velikem floorballu).
+
+  - leto: 2005
+    vrsta: naslovi
+    sezona: "2004/05"
+    dogodek: "Člani so državni prvaki."
+    # Wikipedija, tabela državnih prvakov: finale proti FBK Jesenice, 3:0 v zmagah.
+
+  - leto: 2006
+    vrsta: naslovi
+    sezona: "2005/06"
+    dogodek: "Člani so državni prvaki."
+    # IFF arhiv, "FBC Loka Spiders Dewalt is Slovenian Champion", 2. 5. 2006 (finale proti Thunder Jesenice 2:1 v zmagah).
+
+  - leto: 2007
+    vrsta: naslovi
+    sezona: "2006/07"
+    dogodek: "Člani so državni prvaki."
+    # Wikipedija, tabela državnih prvakov; Gorenjski glas, 24. 4. 2007 (dve zmagi v finalu).
 
   - leto: 2007
     vrsta: ustanovitev
@@ -34,41 +68,50 @@ dogodki:
     vrsta: naslovi
     sezona: "2007/08"
     dogodek: "Člani in članice so državni prvaki. Članice osvojijo še mednarodno ligo."
+    # Člani: Wikipedija, tabela (finale proti Borovnici 2:0). Članice: samo članek o klubu na Wikipediji.
 
   - leto: 2009
     vrsta: naslovi
     sezona: "2008/09"
     dogodek: "Člani so državni prvaki. U15: 1. mesto."
+    # Člani: Wikipedija, tabela (finale proti Zelencem 2:0); IFF arhiv, 8. 4. 2009, naslov članka
+    # "Insport Škofja Loka and FBC Borovnica are Slovenian champions" (besedilo ni več dostopno). U15: članek o klubu.
 
   - leto: 2011
     vrsta: naslovi
     sezona: "2010/11"
     dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+    # Člani: Wikipedija, tabela (finale proti Zelencem 2:0). Mladi: članek o klubu.
 
   - leto: 2012
     vrsta: naslovi
     sezona: "2011/12"
     dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+    # Člani: Wikipedija, tabela (finale proti Olimpiji 6:5 po kazenskih strelih). Mladi: članek o klubu.
 
   - leto: 2013
     vrsta: naslovi
     sezona: "2012/13"
     dogodek: "U15, U13 in U11: 1. mesto."
+    # Članek o klubu na Wikipediji.
 
   - leto: 2014
     vrsta: naslovi
     sezona: "2013/14"
     dogodek: "Člani so državni prvaki, druga ekipa osvoji 1. SFL, takrat drugo ligo. U15, U13, U11 in U9: 1. mesto."
+    # Člani: Wikipedija, tabela (finale proti Borovnici 5:3). Druga ekipa in mladi: članek o klubu.
 
   - leto: 2015
     vrsta: naslovi
     sezona: "2014/15"
     dogodek: "U16 in U13: 1. mesto."
+    # Članek o klubu na Wikipediji.
 
   - leto: 2016
     vrsta: naslovi
     sezona: "2015/16"
     dogodek: "Druga ekipa osvoji 2. SFL. U19, U16, U13 in U11: 1. mesto."
+    # Članek o klubu na Wikipediji.
 
   - leto: 2016
     dogodek: "Dvorana Poden gosti kvalifikacije za svetovno prvenstvo za moške."
@@ -77,6 +120,7 @@ dogodki:
     vrsta: naslovi
     sezona: "2016/17"
     dogodek: "Člani so državni prvaki. U19 in U16: 1. mesto."
+    # Člani: Wikipedija, tabela (finale proti Polanski bandi 2:1 v zmagah). Mladi: članek o klubu.
 
   - leto: 2018
     dogodek: "Klub, takrat FBK Insport, odpre Instagram profil."
@@ -84,7 +128,9 @@ dogodki:
   - leto: 2019
     vrsta: naslovi
     sezona: "2018/19"
-    dogodek: "Člani osvojijo IFL in so državni prvaki. Oba finala sta bila na Podnu."
+    dogodek: "Člani osvojijo IFL in so državni prvaki. Finale državnega prvenstva je bilo na Podnu."
+    # IFF arhiv, "Polanska Banda and Insport champions in Slovenia", 24. 4. 2019 (finale 13. 4. 2019 na Podnu, 3:0,
+    # oba naslova). FloorballFlash: finale IFL 6460.
 
   - leto: 2019
     dogodek: "Branilec Rok Prevodnik podpiše za IBF Falun kot prvi Slovenec v elitni švedski ligi."
@@ -95,8 +141,9 @@ dogodki:
   - leto: 2020
     vrsta: naslovi
     sezona: "2019/20"
-    dogodek: "Člani ubranijo naslov državnih prvakov in so prvi v IFL, kjer zaključni turnir zaradi epidemije ni bil odigran. Ekipa Outsport osvoji 2. SFL. U19 in U16 sta državna prvaka."
-    # Državni naslov: IFF arhiv, "Insport Škofja Loka defends title in Slovenia", 6. 10. 2020.
+    dogodek: "Člani ubranijo naslov državnih prvakov in naslov v IFL, kjer je zaradi epidemije štel redni del. Ekipa Outsport osvoji 2. SFL. U19 in U16 sta državna prvaka."
+    # IFF arhiv, "Insport Škofja Loka defends title in Slovenia", 6. 10. 2020 (tudi IFL: redni del šteje kot končni vrstni red).
+    # FloorballFlash: DP 7401, 7402; 2. SFL 8024, 8027; U16 8036, 8039; U19 1. v rednem delu (tekmovanje 394).
 
   - leto: 2021
     dogodek: "Sezona 2020/21 zaradi epidemije ni bila odigrana."
@@ -105,16 +152,19 @@ dogodki:
     vrsta: naslovi
     sezona: "2021/22"
     dogodek: "Člani osvojijo IFL in so državni prvaki, druga ekipa je tretja. U19 je državni prvak."
+    # FloorballFlash: IFL 9449; DP 9531, 9532 (druga ekipa 9530, 9533); U19 1. od 2 (tekmovanje 479).
 
   - leto: 2023
     vrsta: naslovi
     sezona: "2022/23"
     dogodek: "Člani osvojijo IFL in so državni prvaki. V finalu na Podnu prva ekipa premaga drugo z 10:3. Švigalice osvojijo 2. SFL. U19 je državni prvak."
+    # FloorballFlash: IFL 9964; DP 10813; 2. SFL 10763, 10765; U19 1. od 3 (tekmovanje 519).
 
   - leto: 2024
     vrsta: naslovi
     sezona: "2023/24"
     dogodek: "Člani osvojijo IFL in so državni prvaki. Švigalice osvojijo 2. SFL."
+    # FloorballFlash: IFL 11557; DP 12740; 2. SFL 12423, 12425. Gorenjski glas, 10. 4. 2024.
 
   - leto: 2024
     dogodek: "Dvorana Poden drugič gosti kvalifikacije za svetovno prvenstvo za moške."
@@ -132,6 +182,7 @@ dogodki:
     vrsta: naslovi
     sezona: "2024/25"
     dogodek: "Člani šestič zapored osvojijo IFL in šestič zapored postanejo državni prvaki. Švigalice osvojijo 2. SFL. U15 je državni prvak."
+    # FloorballFlash: IFL 14288; DP 14251; 2. SFL 14247; U15 14268. Facebook Floorball Insport, 23. 3. 2025. Potrdil klub.
 
   - leto: 2025
     dogodek: "U17 osvoji bron v državnem prvenstvu."
@@ -140,6 +191,7 @@ dogodki:
     vrsta: naslovi
     sezona: "2025/26"
     dogodek: "U17 je državni prvak."
+    # FloorballFlash: 16001. Facebook Floorball zveze Slovenije, 12. 4. 2026.
 
   - leto: 2026
     dogodek: "Člani so drugi v državnem prvenstvu po finalu proti Borovnici in peti v IFL. U15 osvoji srebro."
