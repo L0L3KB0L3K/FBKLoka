@@ -1,0 +1,82 @@
+---
+// Club timeline beside the text on /klub (SPEC.md §7.6): foundings, name changes and titles by season, oldest first.
+// A founding or a name change is a bigger marker with the club name, so the titles below it read as that club's.
+// Nothing is rendered without entries (SPEC.md §1). No links or controls: plain text in an ordered list.
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  /** Already filtered and sorted by clubTimeline() (src/lib/timeline.ts). */
+  entries: CollectionEntry<"zgodovina">["data"][];
+  class?: string;
+}
+
+const { entries, class: className } = Astro.props;
+---
+
+{
+  entries.length > 0 && (
+    <section aria-labelledby="casovnica" class={className}>
+      <h2 id="casovnica" class="heading-bar">
+        Časovnica
+      </h2>
+      <ol class="timeline mt-8">
+        {entries.map((entry) =>
+          entry.vrsta === "naslovi" ? (
+            <li class="timeline-item">
+              <p class="font-semibold tabular-nums">{entry.sezona}</p>
+              <p class="mt-1">{entry.dogodek}</p>
+            </li>
+          ) : (
+            <li class="timeline-item timeline-club">
+              <p class="text-small text-muted">
+                <span class="tabular-nums">{entry.leto}</span> · {entry.vrsta === "ime" ? "Novo ime" : "Ustanovitev"}
+              </p>
+              <p class="text-h3 font-bold">{entry.klub}</p>
+              <p class="mt-1 text-small">{entry.dogodek}</p>
+            </li>
+          ),
+        )}
+      </ol>
+    </section>
+  )
+}
+
+<style>
+  /* One vertical line with a dot per entry. The line and dots are decoration: the text carries the meaning. */
+  .timeline {
+    margin-left: 0.5rem;
+    border-left: 2px solid var(--color-line);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-left: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Small ink dot centred on the line, level with the first text line. */
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 0.55em;
+    left: calc(-0.3125rem - 1px);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background-color: var(--color-ink);
+  }
+
+  /* Founding or new name: bigger yellow dot with an ink ring (yellow as a shape only, never as text). */
+  .timeline-club::before {
+    top: 0.2rem;
+    left: calc(-0.625rem - 1px);
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 3px solid var(--color-ink);
+    background-color: var(--color-ball);
+  }
+</style>

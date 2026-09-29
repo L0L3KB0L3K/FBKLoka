@@ -1,11 +1,10 @@
 ---
-// Left column of a team page (SPEC.md §7.2, §8): age, coaches, captain, training times,
-// titles and "Dodaj v koledar". Each item appears only with real content;
+// Left column of a team page (SPEC.md §7.2, §8): age, coaches, captain, training times
+// and "Dodaj v koledar". Titles are on the /klub timeline (SPEC.md §7.6). Each item appears only with real content;
 // with no content at all, nothing is rendered (SPEC.md §1).
 import type { CollectionEntry } from "astro:content";
 import { isSet } from "../lib/site.ts";
 import { hasSummary } from "../lib/teams.ts";
-import { groupTitles } from "../lib/titles.ts";
 import type { Training } from "../lib/trainings.ts";
 import CalendarButton from "./CalendarButton.astro";
 import TrainingTable from "./TrainingTable.astro";
@@ -19,7 +18,7 @@ interface Props {
 }
 
 const { team, coaches, trainings, calendarSlug } = Astro.props;
-const { starostniRazpon, kapetan, naslovi, treningiOpomba } = team.data;
+const { starostniRazpon, kapetan, treningiOpomba } = team.data;
 const hasContent = hasSummary(team, coaches, trainings, Boolean(calendarSlug));
 ---
 
@@ -56,17 +55,6 @@ const hasContent = hasSummary(team, coaches, trainings, Boolean(calendarSlug));
               <TrainingTable trainings={trainings} compact />
               {isSet(treningiOpomba) && <p>{treningiOpomba}</p>}
             </dd>
-          </div>
-        )}
-        {naslovi.length > 0 && (
-          <div>
-            <dt class="text-small text-muted">Naslovi</dt>
-            {groupTitles(naslovi).map((group) => (
-              <dd>
-                <span class="font-semibold">{group.naziv}</span>{" "}
-                <span class="tabular-nums">{group.leta.join(", ")}</span>
-              </dd>
-            ))}
           </div>
         )}
       </dl>

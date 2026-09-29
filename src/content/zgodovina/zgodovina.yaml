@@ -1,37 +1,90 @@
-# Časovnica kluba. Viri: Instagram @fbk_loka (izvoz 24. 9. 2026), Wikipedija (FBK Insport Škofja Loka),
-# Gorenjski glas (3. 4. 2023), Floorball zveza Slovenije (arhiv novic, zgodovina, reprezentanca), floorball.sport,
-# Facebook Floorball Insport (23. 3. 2025). Sezoni 2024/25 in 2025/26 je potrdil klub (29. 9. 2026).
-# Vnosi s "TODO" potrdi s klubom pred objavo.
+# Časovnica kluba (SPEC.md §4.7). Stran /klub pokaže ustanovitve, imena kluba in naslove; ostali dogodki čakajo na /zgodovina.
+# Viri: Wikipedija (FBK Insport Škofja Loka, uvrstitve 2007/08–2016/17), FloorballFlash (uvrstitve od 2018/19, pregled
+# 29. 9. 2026), IFF arhiv (6. 10. 2020), Instagram @fbk_loka (izvoz 24. 9. 2026), Gorenjski glas (3. 4. 2023),
+# Floorball zveza Slovenije, Facebook Floorball Insport (23. 3. 2025). Sezoni 2024/25 in 2025/26 je potrdil klub (29. 9. 2026).
+# Vnosi s "TODO" v opombi se ne prikažejo, dokler jih klub ne potrdi.
+#
+# vrsta: dogodek (privzeto) | ustanovitev | ime | naslovi.
+# - ustanovitev, ime: "klub" je ime kluba od takrat naprej.
+# - naslovi: "sezona" je npr. "2024/25", "leto" pa njeno drugo leto (2025). Mladinska 1. mesta pred 2018/19 so
+#   z Wikipedije, ki ne loči državnega prvenstva od turnirja, zato piše "1. mesto" in ne "državni prvak".
 
 dogodki:
   - leto: 1991
     dogodek: "V Škofji Loki se na delavskih igrah prvič igra floorball, s prirejenimi pravili."
 
   - leto: 2000
-    dogodek: "Ustanovljen FBK Loka Spiders. Klub je 17. decembra 2000 med ustanovitelji Floorball zveze Slovenije."
+    vrsta: ustanovitev
+    klub: "FBK Loka Spiders"
+    dogodek: "Klub je med ustanovitelji Floorball zveze Slovenije."
+    # Wikipedija: zveza ustanovljena 17. 12. 2000. Zveza sama piše "est. 2001" (plakat 25 let), zato brez datuma.
 
   - leto: 2001
-    dogodek: "Spiders v prvem letu obstoja osvojijo mednarodno ligo, državno prvenstvo in slovenski pokal."
-    opomba: "TODO: vir je Wikipedija. Potrdi sezono."
+    vrsta: naslovi
+    sezona: "2000/01"
+    dogodek: "Člani so državni prvaki, pokalni prvaki in prvaki mednarodne lige."
+    # Wikipedija: "Spidersi so že v prvem letu obstoja osvojili ..." Sezona je sklep iz leta ustanovitve.
 
   - leto: 2007
-    dogodek: "Večina igralcev Spidersov ustanovi FBK Insport Škofja Loka. Spiders prenehajo delovati."
+    vrsta: ustanovitev
+    klub: "FBK Insport Škofja Loka"
+    dogodek: "Večina igralcev Spidersov ustanovi nov klub. Spiders prenehajo delovati."
+
+  - leto: 2008
+    vrsta: naslovi
+    sezona: "2007/08"
+    dogodek: "Člani in članice so državni prvaki. Članice osvojijo še mednarodno ligo."
 
   - leto: 2009
-    dogodek: "Insport Škofja Loka je državni prvak."
-    opomba: "TODO: floorball.sport piše o osmem naslovu v zgodovini, Wikipedija o šestih naslovih Insporta do 2024. Razlika so verjetno naslovi Spidersov. Potrdi seznam vseh naslovov po letih."
+    vrsta: naslovi
+    sezona: "2008/09"
+    dogodek: "Člani so državni prvaki. U15: 1. mesto."
+
+  - leto: 2011
+    vrsta: naslovi
+    sezona: "2010/11"
+    dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+
+  - leto: 2012
+    vrsta: naslovi
+    sezona: "2011/12"
+    dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+
+  - leto: 2013
+    vrsta: naslovi
+    sezona: "2012/13"
+    dogodek: "U15, U13 in U11: 1. mesto."
+
+  - leto: 2014
+    vrsta: naslovi
+    sezona: "2013/14"
+    dogodek: "Člani so državni prvaki, druga ekipa osvoji 1. SFL, takrat drugo ligo. U15, U13, U11 in U9: 1. mesto."
+
+  - leto: 2015
+    vrsta: naslovi
+    sezona: "2014/15"
+    dogodek: "U16 in U13: 1. mesto."
+
+  - leto: 2016
+    vrsta: naslovi
+    sezona: "2015/16"
+    dogodek: "Druga ekipa osvoji 2. SFL. U19, U16, U13 in U11: 1. mesto."
 
   - leto: 2016
     dogodek: "Dvorana Poden gosti kvalifikacije za svetovno prvenstvo za moške."
+
+  - leto: 2017
+    vrsta: naslovi
+    sezona: "2016/17"
+    dogodek: "Člani so državni prvaki. U19 in U16: 1. mesto."
 
   - leto: 2018
     dogodek: "Klub, takrat FBK Insport, odpre Instagram profil."
 
   - leto: 2019
-    dogodek: "Člani osvojijo mednarodno ligo IFL. Finale proti VSV Unihockey je bilo na Podnu."
-
-  - leto: 2019
-    dogodek: "Člani so državni prvaki (finale 1. SFL na Podnu)."
+    vrsta: naslovi
+    sezona: "2018/19"
+    dogodek: "Člani osvojijo IFL in so državni prvaki. Oba finala sta bila na Podnu."
 
   - leto: 2019
     dogodek: "Branilec Rok Prevodnik podpiše za IBF Falun kot prvi Slovenec v elitni švedski ligi."
@@ -40,57 +93,56 @@ dogodki:
     dogodek: "Vratar Jaka Zupančič prejme malo športno plaketo občine Medvode."
 
   - leto: 2020
-    dogodek: "Člani drugič zapored osvojijo IFL."
+    vrsta: naslovi
+    sezona: "2019/20"
+    dogodek: "Člani ubranijo naslov državnih prvakov in so prvi v IFL, kjer zaključni turnir zaradi epidemije ni bil odigran. Ekipa Outsport osvoji 2. SFL. U19 in U16 sta državna prvaka."
+    # Državni naslov: IFF arhiv, "Insport Škofja Loka defends title in Slovenia", 6. 10. 2020.
 
-  - leto: 2020
-    dogodek: "Člani ubranijo naslov državnih prvakov."
-    # Source: IFF archive, "Insport Škofja Loka defends title in Slovenia", 6. 10. 2020.
+  - leto: 2021
+    dogodek: "Sezona 2020/21 zaradi epidemije ni bila odigrana."
 
   - leto: 2022
-    dogodek: "Tretji zaporedni naslov IFL."
-
-  - leto: 2022
-    dogodek: "Insport A je državni prvak 1. SFL, Insport B osvoji 3. mesto."
-
-  - leto: 2023
-    dogodek: "Četrti zaporedni naslov IFL."
+    vrsta: naslovi
+    sezona: "2021/22"
+    dogodek: "Člani osvojijo IFL in so državni prvaki, druga ekipa je tretja. U19 je državni prvak."
 
   - leto: 2023
-    dogodek: "V finalu 1. SFL na Podnu igrata obe ekipi kluba. Insport A premaga Insport B z 10:3 in ubrani naslov."
-
-  - leto: 2023
-    dogodek: "Ekipa Švigalice je prvak 2. SFL."
+    vrsta: naslovi
+    sezona: "2022/23"
+    dogodek: "Člani osvojijo IFL in so državni prvaki. V finalu na Podnu prva ekipa premaga drugo z 10:3. Švigalice osvojijo 2. SFL. U19 je državni prvak."
 
   - leto: 2024
-    dogodek: "Švigalice ubranijo naslov v 2. SFL."
+    vrsta: naslovi
+    sezona: "2023/24"
+    dogodek: "Člani osvojijo IFL in so državni prvaki. Švigalice osvojijo 2. SFL."
 
   - leto: 2024
     dogodek: "Dvorana Poden drugič gosti kvalifikacije za svetovno prvenstvo za moške."
 
   - leto: 2024
-    dogodek: "Člani na zaključnem turnirju v Gorenji vasi ubranijo naslov državnih prvakov."
-
-  - leto: 2024
-    dogodek: "Peti zaporedni naslov IFL."
-
-  - leto: 2024
     dogodek: "Člani zmagajo na turnirju Torpedo Cup v Budimpešti."
 
-  - leto: 2025
-    dogodek: "Šesti zaporedni naslov IFL."
+  - leto: 2024
+    vrsta: ime
+    klub: "FBK Loka"
+    dogodek: "Klub se preimenuje. Od sezone 2024/25 nastopa kot FBK Loka."
+    # FloorballFlash: sezono 2023/24 je ekipa igrala kot FBK Insport Škofja Loka, 2024/25 že kot FBK Loka.
 
   - leto: 2025
-    dogodek: "Člani ubranijo naslov državnih prvakov, šesti zapored."
+    vrsta: naslovi
+    sezona: "2024/25"
+    dogodek: "Člani šestič zapored osvojijo IFL in šestič zapored postanejo državni prvaki. Švigalice osvojijo 2. SFL. U15 je državni prvak."
 
   - leto: 2025
-    dogodek: "U15 A je državni prvak, U17 osvoji bron."
-
-  - leto: 2025
-    dogodek: "Klub nastopa pod imenom FBK Loka."
-    opomba: "TODO: točno leto preimenovanja. Aprila 2024 še FBK Insport (Gorenjski glas), aprila 2025 že FBK Loka (novice)."
+    dogodek: "U17 osvoji bron v državnem prvenstvu."
 
   - leto: 2026
-    dogodek: "U17 je državni prvak, U15 osvoji srebro. Člani so drugi v državnem prvenstvu po finalu proti Borovnici in peti v IFL."
+    vrsta: naslovi
+    sezona: "2025/26"
+    dogodek: "U17 je državni prvak."
+
+  - leto: 2026
+    dogodek: "Člani so drugi v državnem prvenstvu po finalu proti Borovnici in peti v IFL. U15 osvoji srebro."
 
   - leto: 2026
     dogodek: "Sedem igralcev kluba igra za reprezentanco U19."

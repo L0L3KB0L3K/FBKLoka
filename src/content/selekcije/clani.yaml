@@ -4,16 +4,5 @@ vrstniRed: 1
 starostniRazpon: "18+" # shown to parents
 kapetan: "Nejc Peklaj"
 trenerji: [gorazd-tomc]
-naslovi: # confirmed titles only; titles before 2019 wait for the club
-  - { leto: 2019, naziv: "Prvaki IFL" }
-  - { leto: 2020, naziv: "Prvaki IFL" }
-  - { leto: 2022, naziv: "Prvaki IFL" }
-  - { leto: 2023, naziv: "Prvaki IFL" }
-  - { leto: 2024, naziv: "Prvaki IFL" }
-  - { leto: 2019, naziv: "Državni prvaki" }
-  - { leto: 2020, naziv: "Državni prvaki" }
-  - { leto: 2022, naziv: "Državni prvaki" }
-  - { leto: 2023, naziv: "Državni prvaki" }
-  - { leto: 2024, naziv: "Državni prvaki" }
 kratekOpis: "Člani igrajo v mednarodni ligi 3 Nations – IFL in v 1. slovenski floorball ligi."
 prikaziSestavo: true

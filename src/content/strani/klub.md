@@ -14,11 +14,11 @@ FBK Loka je floorball klub iz Škofje Loke. Domača dvorana je Poden, kjer ima s
 
 ## Zgodovina v kratkem
 
-Floorball se je v Škofji Loki prvič igral leta 1991 na delavskih igrah. Leta 2000 je bil ustanovljen FBK Loka Spiders, ki je bil med ustanovitelji Floorball zveze Slovenije. Leta 2007 je večina igralcev ustanovila FBK Insport Škofja Loka. Klub danes nastopa kot FBK Loka.
+Floorball se je v Škofji Loki prvič igral leta 1991 na delavskih igrah. Leta 2000 je bil ustanovljen FBK Loka Spiders, ki je bil med ustanovitelji Floorball zveze Slovenije. Leta 2007 je večina igralcev ustanovila FBK Insport Škofja Loka. Od leta 2024 klub nastopa kot FBK Loka.
 
 ## Člani
 
-Člani igrajo v mednarodni ligi 3 Nations – IFL in v 1. slovenski floorball ligi. V IFL imajo pet zaporednih naslovov (2019, 2020, 2022, 2023, 2024). Državni prvaki so bili tudi v letih 2019, 2020, 2022, 2023 in 2024.
+Člani igrajo v mednarodni ligi 3 Nations – IFL in v 1. slovenski floorball ligi. V IFL imajo šest zaporednih naslovov, v državnem prvenstvu prav tako šest zaporednih. Vse naslove po sezonah kaže časovnica.
 
 ## Mladi
 

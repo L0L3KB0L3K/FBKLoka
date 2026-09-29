@@ -57,9 +57,6 @@ const selekcije = defineCollection({
     starostniRazpon: z.string().min(1), // shown to parents, e.g. "18+"
     kapetan: z.string().default(""), // name, empty or "TODO"
     trenerji: z.array(refTo("trenerji")).default([]),
-    naslovi: z
-      .array(z.object({ leto: z.number().int().min(1990).max(2100), naziv: z.string().min(1) }))
-      .default([]),
     kratekOpis: z.string().min(1), // 1–2 sentences
     prikaziSestavo: z.boolean().default(true),
     treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
@@ -160,12 +157,21 @@ const zgodovina = defineCollection({
     parser: listUnder("dogodki", (e, index) => `${e.leto}-${index}`),
   }),
   schema: ({ image }) =>
-    z.object({
-      leto: z.number().int().min(1900).max(2100),
-      dogodek: z.string().min(1),
-      foto: image().optional(),
-      opomba: z.string().optional(),
-    }),
+    z
+      .object({
+        leto: z.number().int().min(1900).max(2100),
+        dogodek: z.string().min(1),
+        foto: image().optional(),
+        opomba: z.string().optional(),
+        // The /klub timeline shows foundings, name changes and titles; plain events wait for /zgodovina (phase 3).
+        vrsta: z.enum(["dogodek", "ustanovitev", "ime", "naslovi"]).default("dogodek"),
+        klub: z.string().min(1).optional(), // club name from a founding or a name change on, e.g. "FBK Loka"
+        sezona: z.string().regex(/^\d{4}\/\d{2}$/).optional(), // titles: "2024/25", leto is its second year
+      })
+      .refine((entry) => (entry.vrsta !== "ustanovitev" && entry.vrsta !== "ime") || entry.klub, {
+        message: "ustanovitev and ime need klub (the club name)",
+      })
+      .refine((entry) => entry.vrsta !== "naslovi" || entry.sezona, { message: "naslovi need sezona, e.g. 2024/25" }),
 });
 
 // §4.7 Documents: a link to an external source OR a local club file in public/dokumenti/.

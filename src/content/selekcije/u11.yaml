@@ -4,6 +4,5 @@ vrstniRed: 7
 starostniRazpon: "TODO" # shown to parents
 kapetan: "TODO"
 trenerji: [gasper-dagarin, anze-habjan]
-naslovi: [] # TODO: titles from the club, e.g. [{ leto: 2024, naziv: "Državni prvaki" }]
 kratekOpis: "Selekcija U11 igra v državnem prvenstvu U11."
 prikaziSestavo: true

@@ -23,8 +23,8 @@ Stanje: 28. 9. 2026. Kar je odkljukano, je vneseno na stran.
 ## Lahko pride kasneje
 
 - [ ] Švigalice: termini treningov, ko bodo znani.
-- [ ] Državni naslovi članov pred 2019. Wikipedija navaja 1. mesto članov A v sezonah 2007/08, 2008/09, 2010/11, 2011/12, 2013/14 in 2016/17. Ali so to državni naslovi? Ali so bili še kakšni (FBK Loka Spiders 2001)?
-- [ ] Točno leto preimenovanja iz FBK Insport v FBK Loka (aprila 2024 še Insport, aprila 2025 že Loka).
+- [ ] Časovnica na /klub: naslovi pred 2018/19 so z Wikipedije. Preverite sezono 2000/01 (Spiders), članske naslove 2007/08–2016/17 in ali so mladinska 1. mesta iz tistih let državna prvenstva ali turnirji.
+- [x] Leto preimenovanja v FBK Loka: 2024 (FloorballFlash: sezona 2023/24 še Insport, 2024/25 že Loka).
 - [ ] Sponzorji: ali je seznam s stare strani še aktualen (Oblaček, Elekom Košir, OSM, Peklaj, Šofer, Tein, Adriatic Slovenica)? Ali naj logotip vodi na spletno stran sponzorja? Adriatic Slovenica je zdaj del Generali: ali sponzor želi nov logotip?
 - [ ] Fotografije: skupinska fotografija članov v dresih FBK Loka (na sedanjih je še napis Insport), še ena ali dve akciji s tekme, portreti trenerjev, otroci na treningu, dvorana od zunaj.
 - [ ] TRR s stare strani (SI56 0430 2000 1376 802, OTP banka): ali ga objavimo na strani Podpri nas (faza 2)?

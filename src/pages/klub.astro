@@ -2,16 +2,21 @@
 // /klub (SPEC.md §7.6): about the club (Markdown), coaches as cards with their teams, and the halls
 // with a map link. "Vodstvo" follows when the club sends it; /zgodovina is linked in phase 3.
 // The senior team photo (SPEC.md §9.1a) sits under the title when klub.md has one.
+// The club timeline (foundings, names, titles) sits right of text, coaches and halls from 1024 px, under them on phones.
+// Coaches and halls are two per row in the left column, so the timeline has room beside them (club decision 29. 9. 2026).
 import { Image } from "astro:assets";
 import { render } from "astro:content";
+import ClubTimeline from "../components/ClubTimeline.astro";
 import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
 import { getPage, loadCollection } from "../lib/content.ts";
 import { joinSl } from "../lib/schedule.ts";
 import { isSet } from "../lib/site.ts";
+import { clubTimeline } from "../lib/timeline.ts";
 
 const page = await getPage("klub");
 const { Content } = await render(page);
+const timeline = clubTimeline((await loadCollection("zgodovina")).map((entry) => entry.data));
 
 const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
 const coaches = (await loadCollection("trenerji"))
@@ -29,57 +34,62 @@ const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden"
 <Base title="Klub" description={page.data.opis}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
-    {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} priority class="mt-8" />}
-    <div class="mt-8 prose">
-      <Content />
+    <div class:list={[timeline.length > 0 && "lg:grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16"]}>
+      <div>
+        {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} priority class="mt-8" />}
+        <div class="mt-8 prose">
+          <Content />
+        </div>
+
+        {
+          coaches.length > 0 && (
+            <section aria-labelledby="trenerji" class="mt-14">
+              <h2 id="trenerji" class="heading-bar">
+                Trenerji
+              </h2>
+              <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+                {coaches.map((coach) => (
+                  <li class="rounded-card border border-line p-5">
+                    {coach.foto && (
+                      <Image src={coach.foto} alt={coach.ime} width={320} class="mb-4 aspect-[4/5] w-full rounded-field object-cover" />
+                    )}
+                    <h3>{coach.ime}</h3>
+                    <p class="text-small text-muted">{coach.vloga}</p>
+                    <p class="mt-2">{joinSl(coach.teams)}</p>
+                    {isSet(coach.email) && (
+                      <a href={`mailto:${coach.email}`} class="inline-flex min-h-11 items-center">
+                        {coach.email}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        {
+          halls.length > 0 && (
+            <section aria-labelledby="dvorane" class="mt-14">
+              <h2 id="dvorane" class="heading-bar">
+                Dvorane
+              </h2>
+              <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+                {halls.map(({ data }) => (
+                  <li>
+                    <h3>{data.ime}</h3>
+                    <p class="mt-1">{data.naslov}</p>
+                    <a href={data.zemljevid} class="inline-flex min-h-11 items-center">
+                      Zemljevid<span class="sr-only"> za {data.ime}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </div>
+      <ClubTimeline entries={timeline} class="mt-16 lg:mt-8" />
     </div>
-
-    {
-      coaches.length > 0 && (
-        <section aria-labelledby="trenerji" class="mt-16">
-          <h2 id="trenerji" class="heading-bar">
-            Trenerji
-          </h2>
-          <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {coaches.map((coach) => (
-              <li class="rounded-card border border-line p-5">
-                {coach.foto && (
-                  <Image src={coach.foto} alt={coach.ime} width={320} class="mb-4 aspect-[4/5] w-full rounded-field object-cover" />
-                )}
-                <h3>{coach.ime}</h3>
-                <p class="text-small text-muted">{coach.vloga}</p>
-                <p class="mt-2">{joinSl(coach.teams)}</p>
-                {isSet(coach.email) && (
-                  <a href={`mailto:${coach.email}`} class="inline-flex min-h-11 items-center">
-                    {coach.email}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    {
-      halls.length > 0 && (
-        <section aria-labelledby="dvorane" class="mt-16">
-          <h2 id="dvorane" class="heading-bar">
-            Dvorane
-          </h2>
-          <ul class="mt-8 grid gap-6 sm:grid-cols-2">
-            {halls.map(({ data }) => (
-              <li>
-                <h3>{data.ime}</h3>
-                <p class="mt-1">{data.naslov}</p>
-                <a href={data.zemljevid} class="inline-flex min-h-11 items-center">
-                  Zemljevid<span class="sr-only"> za {data.ime}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
   </div>
 </Base>

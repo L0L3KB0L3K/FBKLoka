@@ -146,7 +146,6 @@ vrstniRed: 1
 starostniRazpon: "18+"          # prikaz za starše
 kapetan: "TODO"                  # ime ali prazno
 trenerji: [ "TODO" ]             # reference na zbirko trenerji (slug)
-naslovi: []                      # npr. [{ leto: 2009, naziv: "Državni prvaki" }]
 kratekOpis: "..."                # 1–2 stavka
 prikaziSestavo: true
 ```
@@ -234,7 +233,7 @@ Besedilo novice.
 | Zbirka | Vsebina |
 |---|---|
 | `sponzorji` | ime, logo (SVG ali PNG), povezava, raven (glavni / zlati / podporni) |
-| `zgodovina` | leto, dogodek, neobvezna fotka, neobvezna `opomba`. Vnos z opombo, ki vsebuje `TODO`, se ne prikaže. |
+| `zgodovina` | leto, dogodek, neobvezna fotka, neobvezna `opomba`, `vrsta` (dogodek, ustanovitev, ime, naslovi), `klub` (ime po ustanovitvi ali preimenovanju), `sezona` (pri naslovih, npr. 2024/25). Vnos z opombo, ki vsebuje `TODO`, se ne prikaže. |
 | `dokumenti` | naslov, kategorija (pravila, obrazci, klubski), povezava ALI lokalna datoteka |
 | `strani` | Markdown za `/klub`, `/kodeks`, `/zasebnost`, `/podpri-nas` |
 | `nastavitve` | ena YAML datoteka: kontakt, e-mail, telefon, socialna omrežja, EOS povezave, povezava na plato/prevoz |
@@ -459,7 +458,7 @@ Strani `/ekipa/*` niso v meniju, nogi, sitemapu ali kjerkoli drugje na javni str
 | Pot | Faza | Vir |
 |---|---|---|
 | `/` | 1 | FF, novice, IG, sponzorji |
-| `/klub` | 1 | `strani`, `trenerji`, `dvorane` |
+| `/klub` | 1 | `strani`, `zgodovina`, `trenerji`, `dvorane` |
 | `/ekipe` | 1 | `selekcije` |
 | `/ekipe/[slug]` | 1 | `selekcije`, FF, `treningi`, `igralci` |
 | `/tekme` | 1 | FF |
@@ -551,7 +550,8 @@ Mobilno: kartica na selekcijo, ne vodoravno drsenje tabele.
 ### 7.6 `/klub`
 
 O klubu (Markdown), vodstvo, trenerji (kartice s fotko), dvorana Poden z naslovom in povezavo na zemljevid.
-V fazi 3 povezava na `/zgodovina`.
+Desno ob besedilu, trenerjih in dvoranah (po dva v vrsti; na telefonu pod njimi) časovnica: ustanovitvi, imena kluba in naslovi po sezonah iz zbirke
+`zgodovina` (odločitev kluba 29. 9. 2026). Naslovi niso na straneh ekip. V fazi 3 povezava na `/zgodovina`.
 
 ### 7.7 `/kontakt`
 
@@ -565,8 +565,7 @@ Kontakt je dosegljiv z enim klikom z vsake strani (noga).
 - `/podpri-nas`: zakaj podpreti klub, doseg (TODO številke), sponzorski paketi, obrazec za povpraševanje,
   donacija dela dohodnine (TODO: ali je klub upravičenec).
 - `/kodeks`: kdo vodi katero ekipo, pravila ravnanja do otrok, kontakt za prijavo težav.
-- `/zgodovina`: navpična časovnica, leto levo, dogodek desno. Znano: InSport Škofja Loka, 8 državnih
-  naslovov do 2009 (TODO: potrdi, da je to predhodnik kluba, in dopolni leta).
+- `/zgodovina`: navpična časovnica z vsemi vnosi zbirke `zgodovina`, tudi z vrsto `dogodek`.
 - `/igralci/[slug]`: fotka, ime, številka, pozicija, statistika po tekmovanjih.
 
 ---
@@ -1036,7 +1035,7 @@ Ugotovitve iz strani Floorball zveze Slovenije:
 - Razpis državnih prvenstev 2026/27 je potrjen 3. 9. 2026. Tekmovanja v FloorballFlash (organizator 86) se pričakujejo kmalu, takrat poženi `scan-fbk-loka.ts`.
 
 Ugotovitve iz objav, ki vplivajo na stran:
-- Klub je do približno 2025 nastopal kot **FBK Insport** (FB stran se še imenuje "Floorball Insport"). Besedila uporabljajo "FBK Loka", zgodovina omeni prejšnje ime.
+- Klub je do sezone 2023/24 nastopal kot **FBK Insport**, od 2024/25 kot FBK Loka (FloorballFlash; FB stran se še imenuje "Floorball Insport"). Besedila uporabljajo "FBK Loka", zgodovina omeni prejšnje ime.
 - Klubski barvi v objavah sta rumena in črna, kar potrjuje paleto.
 - Mladi nastopajo tudi kot U16 (Prague Games 2026). TODO: ali je U16 ločena selekcija ali del U17.
 - Reprezentanti U19 (2026): Tadej Tomažin, Tilen Tomažin, Matija Notar, Bine Lang, Miha Triler, Žak Kankel Kular, Tim Kankel Kular; Gašper Triler pomočnik trenerja. Kandidat za razdelek "Reprezentanti" na `/klub`.

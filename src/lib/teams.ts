@@ -13,14 +13,13 @@ export function hasSummary(
   trainings: Training[],
   hasCalendar: boolean,
 ): boolean {
-  const { starostniRazpon, kapetan, naslovi, treningiOpomba } = team.data;
+  const { starostniRazpon, kapetan, treningiOpomba } = team.data;
   return (
     isSet(starostniRazpon) ||
     coaches.length > 0 ||
     isSet(kapetan) ||
     trainings.length > 0 ||
     isSet(treningiOpomba) ||
-    naslovi.length > 0 ||
     hasCalendar
   );
 }

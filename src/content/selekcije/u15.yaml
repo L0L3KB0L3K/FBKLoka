@@ -4,7 +4,5 @@ vrstniRed: 5
 starostniRazpon: "TODO" # shown to parents
 kapetan: "TODO"
 trenerji: [gasper-triler, maj-oman, nik-oman]
-naslovi: # confirmed titles only; titles before 2019 wait for the club
-  - { leto: 2025, naziv: "Državni prvaki" }
 kratekOpis: "Selekcija U15 igra v državnem prvenstvu U15."
 prikaziSestavo: true

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { formatDate, formatDateLong, formatDayShort, formatTime, formatWeek, weekStart } from "../src/lib/format.ts";
 import { groupByWeek, scoreForLoka, scoreHomeAway, splitByState, uniqueGames } from "../src/lib/matches.ts";
+import type { TimelineEntry } from "../src/lib/timeline.ts";
 import type { Match } from "../src/lib/types.ts";
 
 test("short date and time in Ljubljana", () => {
@@ -87,17 +88,19 @@ test("birth year is shown only when the player is certainly an adult", async () 
   assert.equal(canShowBirthYear(undefined, today), false);
 });
 
-test("titles are grouped by name with years ascending", async () => {
-  const { groupTitles } = await import("../src/lib/titles.ts");
-  const groups = groupTitles([
-    { leto: 2020, naziv: "Prvaki IFL" },
-    { leto: 2019, naziv: "Prvaki IFL" },
-    { leto: 2019, naziv: "Državni prvaki" },
-  ]);
-  assert.deepEqual(groups, [
-    { naziv: "Prvaki IFL", leta: [2019, 2020] },
-    { naziv: "Državni prvaki", leta: [2019] },
-  ]);
+test("club timeline: foundings, names and titles only, unconfirmed hidden, titles before a name change", async () => {
+  const { clubTimeline } = await import("../src/lib/timeline.ts");
+  const input: TimelineEntry[] = [
+    { leto: 2024, vrsta: "ime", klub: "FBK Loka", dogodek: "Novo ime." },
+    { leto: 2024, vrsta: "naslovi", sezona: "2023/24", dogodek: "IFL." },
+    { leto: 2019, vrsta: "dogodek", dogodek: "Prestop." },
+    { leto: 2001, vrsta: "naslovi", sezona: "2000/01", dogodek: "DP.", opomba: "TODO: potrdi" },
+    { leto: 2000, vrsta: "ustanovitev", klub: "FBK Loka Spiders", dogodek: "Ustanovitev." },
+  ];
+  assert.deepEqual(
+    clubTimeline(input).map((entry) => entry.dogodek),
+    ["Ustanovitev.", "IFL.", "Novo ime."],
+  );
 });
 
 test("clean page paths for canonical URLs and the menu", async () => {
