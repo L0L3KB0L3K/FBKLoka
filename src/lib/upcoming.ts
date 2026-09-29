@@ -1,7 +1,7 @@
 // "Next match" logic for the home page (SPEC.md §7.1). It runs in the browser, not at build time:
 // the site is built only when data changes, so a "today" or a countdown from build time would be wrong.
 // Pure functions, tested in tests/upcoming.test.ts.
-import { partsInLjubljana } from "./format.ts";
+import { partsInLjubljana, plural } from "./format.ts";
 
 /** A match stays on the board and in lists until 3 hours after its start (SPEC.md §7.1). */
 export const SHOW_AFTER_START_MS = 3 * 60 * 60 * 1000;
@@ -61,10 +61,7 @@ const FORMS = {
 } as const;
 
 function withForm(n: number, word: keyof typeof FORMS): string {
-  const rest = n % 100;
-  const forms = FORMS[word];
-  const form = rest === 1 ? forms[0] : rest === 2 ? forms[1] : rest === 3 || rest === 4 ? forms[2] : forms[3];
-  return `${n} ${form}`;
+  return plural(n, FORMS[word]);
 }
 
 /** "še 2 dneva 4 ure", "še 5 ur 10 minut", "še 1 minuto". Empty once the match has started. */

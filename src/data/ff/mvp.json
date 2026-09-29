@@ -1,0 +1,36 @@
+{
+  "razlicica": "LBS-MVPI 1.0",
+  "vikend": {
+    "od": "2026-09-26",
+    "do": "2026-09-27"
+  },
+  "ffId": 2643,
+  "ime": "Nejc Peklaj",
+  "vratar": false,
+  "tekme": [
+    {
+      "nasprotnik": "C.Hamp VSV Unihockey",
+      "zacetek": "2026-09-26T17:00:00+02:00",
+      "goli": 3,
+      "podaje": 1,
+      "obrambe": 0,
+      "streli": 0
+    },
+    {
+      "nasprotnik": "FBC Borovnica",
+      "zacetek": "2026-09-27T17:00:00+02:00",
+      "goli": 2,
+      "podaje": 1,
+      "obrambe": 0,
+      "streli": 0
+    }
+  ],
+  "sezona": {
+    "goli": 12,
+    "podaje": 7,
+    "obrambe": 0,
+    "streli": 0
+  },
+  "sezonaTekmovanje": "IFL",
+  "slika": "2643.jpeg"
+}

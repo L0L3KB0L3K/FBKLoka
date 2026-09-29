@@ -22,6 +22,13 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 });
 
 /** Calendar parts of an instant as seen in Ljubljana. weekday: 0 = Sunday … 6 = Saturday. */
+/** Slovenian number form: 1 gol, 2 gola, 3 in 4 goli, 5+ golov (the same for 101, 102 …). forms = [1, 2, 3–4, 5+]. */
+export function plural(n: number, forms: readonly [string, string, string, string]): string {
+  const rest = n % 100;
+  const form = rest === 1 ? forms[0] : rest === 2 ? forms[1] : rest === 3 || rest === 4 ? forms[2] : forms[3];
+  return `${n} ${form}`;
+}
+
 export function partsInLjubljana(iso: string) {
   const parts = formatter.formatToParts(new Date(iso));
   const get = (type: string) => Number(parts.find((part) => part.type === type)?.value);

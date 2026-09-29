@@ -146,3 +146,14 @@ test("played: after a match ends, a line under the board links to the result on 
   await expect(played.locator("[data-played-teams]")).not.toBeEmpty();
   await expect(played.getByRole("link", { name: /Rezultat na FloorballFlash/ })).toHaveAttribute("target", "_blank");
 });
+
+test("MVP vikenda: heading above the photo, one line per match and the season total", async ({ page }) => {
+  await page.goto("/");
+  const card = page.locator("section[aria-labelledby=mvp-vikenda]");
+  test.skip((await card.count()) === 0, "no MVP in src/data/ff/mvp.json");
+  await expect(card.getByRole("heading", { name: "MVP vikenda" })).toBeVisible();
+  await expect(card.getByText(/^Tekma proti /).first()).toBeVisible();
+  await expect(card.getByText(/^Skupaj v sezoni IFL:/)).toBeVisible();
+  const photo = card.locator("img");
+  if ((await photo.count()) > 0) await expect(photo).toHaveAttribute("alt", /\S/);
+});

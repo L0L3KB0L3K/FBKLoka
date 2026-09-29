@@ -1314,31 +1314,41 @@ on:
 **Narejeno:** `tests/ff-gate.test.ts` za poletni in zimski čas: od dveh vnosov na dan teče natanko eden (sobota 22:37,
 nedelja 22:07), zamuda do 45 min še šteje, drugi dnevi ne tečejo, ročni zagon vedno.
 
-### 20.3 Igralec tedna (MVP), samo članske tekme
+### 20.3 MVP vikenda (članske tekme)
 
-**Podatki (preverjeno v API FloorballFlash 29. 9. 2026):** `playerStats` in `goalieStats` z
-`baseFilter: { competitionId, for: "Game" }` vrneta statistiko po tekmah. Igralci: goli, podaje, točke, kazenske
-minute (`pim`). Vratarji: obrambe in streli (`saves`, `shotsAgainst`), vpisani so (npr. 25/31 na tekmi 16488).
-Vsaka tekma ima tudi uradnega MVP (`events.mps`). Oseba ima `incognito` in `imageId` (fotografija, ne pri vseh).
+**Odločitve kluba (29. 9. 2026):** ime "MVP vikenda", s fotografijo; štejejo vsa članska tekmovanja iz `src/config/ff.ts`
+(IFL, 1. SFL s končnico, pokal, ko bo v FloorballFlash). Izračun **LBS-MVPI 1.0** (dokument "Academic MVP Formula for
+Floorball"): brez praga za vratarja, ena zvezna ocena v enoti "goli" za igralce in vratarje. Uteži in različica so v
+`src/config/mvp.ts`; uteži so uredniške, ne izmerjene.
 
-- Šteje samo IFL in 1. SFL (`src/config/mvp.ts`, ID-ji tekmovanj se menjajo vsako sezono). Sezonske točke se seštejejo
-  iz posameznih tekem teh dveh tekmovanj, ne iz skupne statistike (ta vključuje mladinske tekme igralca).
-- Vratar ima prednost, če čez vikend ubrani vsaj 90 % strelov ob vsaj 15 strelih. Pozor: v IFL 2026/27 so deleži
-  vratarjev na tekmo 64–93 %, zato bo vratar redko MVP (odprto, 20.7).
-- Sicer igralec z največ točkami. Izenačenje: več golov, nato manj kazenskih minut, nato ime.
-- Izločanje po ID osebe v FloorballFlash, ne po imenu: `incognito` in seznam umaknjenih privolitev. Zbirka `igralci`
-  je zdaj prazna, zato ta seznam še ne obstaja (odprto).
-- Mladoletni so dovoljeni, če igrajo v članski ekipi (odločitev kluba). Brez letnika, šole in kontakta.
-- Čiste funkcije v `src/lib/mvp.ts`, testi v `tests/mvp.test.ts`. Podatek `src/data/ff/mvp.json` (ali `null`) izračuna
-  `fetch:ff`. Kartica `src/components/sections/MvpCard.astro` na naslovnici se brez podatka ne izriše.
-- Kartica: slika, ime, "MVP tedna", točke na najboljši tekmi, čez vikend in v sezoni. Pri vratarju delež obramb čez
-  vikend in v sezoni ter obrambe/streli.
-- Slika: fotografija iz FloorballFlash se ob gradnji shrani lokalno (kot logotipi). Če je ni, silhueta z `alt=""`,
-  ker ne prikazuje te osebe. Repozitorij je javen, slika ostane v zgodovini gita, umik privolitve pomeni brisanje tudi
-  iz zgodovine. Privolitev za objavo slik je še odprta pri vodstvu.
+- Igralec na tekmo: `W × (1,00 × goli + 0,70 × podaje − 0,05 × kazenske minute)`. FloorballFlash nima strelov
+  posameznega igralca, zato člena za strele ni.
+- Vratar na tekmo (vsaj en strel): `W × ((1 − p₀) × streli − prejeti goli + 0,25 za ničlo ob vsaj 8 strelih)`. p₀ je
+  povprečje obramb vseh vratarjev istega tekmovanja v sezoni (IFL 2026/27 na dan 29. 9.: 305/405 = 0,753), dokler
+  tekmovanje nima 100 strelov, pa 0,80.
+- Utež tekme W: razlika 0–1 → 1,15, razlika 2 → 1,05, 3+ → 1,00; zmaga × 1,05, remi × 1,00, poraz × 0,95.
+- Vikend je sobota in nedelja po ljubljanskem času: zadnji vikend s končanimi članskimi tekmami. Ocena vikenda je
+  vsota tekem. Tekma med tednom šteje samo v sezonske številke.
+- Izenačenje (razlika ≤ 0,10): več golov, manj kazenskih minut, več tekem s pozitivno oceno, nato ID (vedno isti izid).
+- Kandidati so samo igralci s seznama članov (`roster.json`, brez oseb z `incognito`) in brez ID-jev v `MVP_EXCLUDED`
+  (umaknjena privolitev). Mladoletni so dovoljeni; brez letnika, šole in kontakta.
+- Omejitev: formula ne vidi obrambe igralcev v polju, zato branilec brez točk ne more biti MVP.
 
-**Narejeno:** testi zeleni (vratar nad pragom, vratar s premalo streli, mladinska tekmovanja se ne štejejo, izločen
-igralec, sezonske točke samo iz članskih tekem); kartica samo ob podatku; `npm run verify` zelen.
+**Podatki (preverjeno 29. 9. 2026):** `playerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
+vrstice ene tekme. Filter `teamId` ne deluje, zato se naši igralci izberejo po `roster.json`. Fotografija:
+`https://storage.googleapis.com/floorballflash.appspot.com/images/crop/ratio3x4/960/<imageId>.jpeg` (tudi 240 in 480).
+
+- `scripts/fetch-mvp.ts` teče za `fetch-ff.ts` v `npm run fetch:ff` (isti korak in commit v workflowu): statistika
+  naših končanih članskih tekem, p₀ po tekmovanju, izbor, `src/data/ff/mvp.json` in fotografija v `src/data/ff/mvp/`
+  (samo trenutni MVP). Piše samo ob spremembi; ob napaki ostanejo stari podatki in workflow ne pade.
+- Kartica `src/components/MvpCard.astro` na naslovnici pod domačimi tekmami: naslov "MVP vikenda" nad fotografijo, ime,
+  vikend, en odstavek za vsako tekmo ("Tekma proti FBC Borovnica: 2 gola, 1 podaja"; vratar: "25 obramb od 31 strelov
+  (81 %)") in "Skupaj v sezoni IFL: …" (samo IFL, `SEASON_LABEL`, odločitev kluba 29. 9. 2026; brez tekme v IFL
+  vrstice ni). Brez podatka se kartica ne izriše; brez fotografije je brez slike.
+- Repozitorij je javen: fotografija ostane v zgodovini gita. Umik privolitve: ID v `MVP_EXCLUDED` in brisanje iz zgodovine.
+
+**Narejeno:** `tests/mvp.test.ts` (primeri iz dokumenta, vikend, izenačenje, izločitev, slovenske oblike), kartica samo
+ob podatku, `npm run verify` in `npm run test:a11y` zelena.
 
 ### 20.4 "Odigrano" pod tablo (potrjeno 29. 9. 2026)
 
@@ -1390,8 +1400,6 @@ produkcijski deployi (45 kreditov).
 
 ### 20.7 Odprto
 
-- Prag vratarja za MVP: 90 % ob 15 strelih ali nižji (deleži v IFL so 64–93 %)?
-- Sezonske točke samo IFL in 1. SFL? Kaj pokal in končnica?
 - Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
 - Naslovna slika samodejnega povzetka: fiksna grafika (predlog) ali slika z Instagrama?
 - API ključ za Claude v Actionu: kdo ga plača in hrani?

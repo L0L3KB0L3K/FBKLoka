@@ -1,10 +1,12 @@
 ---
 // Home page (SPEC.md §7.1). In 3 seconds: when the next match is, and the way in for a new parent.
 // 1. Match board (hero, next match of any team)  2. Home matches (up to 5; owner, 28. 9. 2026: the full list
-// is on /tekme)  3. Join call to action  4. Latest news (3, hidden below 3 posts).
+// is on /tekme)  3. MVP vikenda (SPEC.md §20.3, only with data)  4. Join call to action  5. Latest news (3, hidden
+// below 3 posts).
 // Instagram follows in phase 2; sponsors are in the footer of every page.
 import MatchBoard from "../components/MatchBoard.astro";
 import MatchRow from "../components/MatchRow.astro";
+import MvpCard from "../components/MvpCard.astro";
 import NewsCard from "../components/NewsCard.astro";
 import ArrowLink from "../components/ArrowLink.astro";
 import Button from "../components/ui/Button.astro";
@@ -57,6 +59,8 @@ const jsonLd = organization(Astro.site as URL, isSet(naslov) ? naslov : null, sa
       </section>
     )
   }
+
+  <MvpCard />
 
   {/* Black band with the one yellow button: the way in for a new parent (SPEC.md §7.1 point 3). */}
   <section aria-labelledby="pridruzi-se" class="surface-ink">

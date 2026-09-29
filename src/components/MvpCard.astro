@@ -1,0 +1,49 @@
+---
+// MVP vikenda on the home page (SPEC.md §20.3, club decision 29. 9. 2026): heading, the player's photo, the name, the
+// weekend, one line per match ("Tekma proti FBC Borovnica: 2 gola, 1 podaja") and the IFL season total.
+// Data: src/data/ff/mvp.json and the photo in src/data/ff/mvp/ (scripts/fetch-mvp.ts). Nothing is rendered without
+// data (SPEC.md §1). Only the name, the photo and match numbers: never a birth year, school or contact.
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import data from "../data/ff/mvp.json";
+import { statsText, weekendText, type Mvp } from "../lib/mvp.ts";
+
+const mvp = data as unknown as Mvp | null;
+const photos = import.meta.glob<{ default: ImageMetadata }>("/src/data/ff/mvp/*.{jpeg,jpg,png,webp}", { eager: true });
+const photo = mvp?.slika ? photos[`/src/data/ff/mvp/${mvp.slika}`]?.default : undefined;
+---
+
+{
+  mvp && (
+    <section aria-labelledby="mvp-vikenda" class="page-wrap py-12">
+      <h2 id="mvp-vikenda" class="heading-bar">
+        MVP vikenda
+      </h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-[14rem_1fr] sm:items-start">
+        {photo && (
+          <Image
+            src={photo}
+            alt={mvp.ime}
+            widths={[224, 448]}
+            sizes="14rem"
+            class="aspect-[3/4] w-56 rounded-card object-cover"
+          />
+        )}
+        <div>
+          <p class="text-h2 font-bold">{mvp.ime}</p>
+          <p class="mt-1 text-small text-muted">Vikend {weekendText(mvp.vikend)}</p>
+          {mvp.tekme.map((tekma) => (
+            <p class="mt-4">
+              Tekma proti {tekma.nasprotnik}: <strong>{statsText(tekma, mvp.vratar)}</strong>
+            </p>
+          ))}
+          {mvp.sezona && (
+            <p class="mt-4 border-t border-line pt-4">
+              Skupaj v sezoni {mvp.sezonaTekmovanje}: <strong>{statsText(mvp.sezona, mvp.vratar)}</strong>
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
