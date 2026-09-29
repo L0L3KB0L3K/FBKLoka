@@ -17,6 +17,8 @@
     "check:links": "linkinator dist --config linkinator.config.json",
     "check:seo": "node scripts/check-seo.mjs",
     "fetch:ff": "node scripts/fetch-ff.ts && node scripts/fetch-mvp.ts",
+    "week:collect": "node scripts/week-collect.ts",
+    "week:verify": "node scripts/week-verify.ts",
     "scan:ff": "node scripts/scan-fbk-loka.ts",
     "verify": "npm run check && npm test && npm run check:contrast && npm run build && npm run check:html && npm run check:links && npm run check:seo",
     "test:a11y": "playwright test"
