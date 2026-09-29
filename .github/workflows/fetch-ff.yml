@@ -2,6 +2,9 @@
 # The commit triggers a Netlify build; no change means no commit and no build.
 # The Sunday run also writes the weekly summary into src/content/novice (SPEC.md §20.5), in the same commit.
 #
+# Until 27. 10. 2026 only Sunday: 88.7 credits were left for the period on 30. 9. (SPEC.md §20.6). To turn Saturday
+# back on, restore its cron line below; scripts/ff-gate.ts still has the Saturday window.
+#
 # Schedule (SPEC.md §20.2): Saturday 22:30 and Sunday 22:00, Ljubljana time. Saturday brings the day's results if they
 # are already entered in FloorballFlash; Sunday covers the whole weekend. Each production deploy costs 15 of the 300
 # monthly credits on Netlify Free, so data only changes (and deploys) at these two times.
@@ -17,7 +20,7 @@ name: fetch-floorballflash
 
 on:
   schedule:
-    - cron: "37 20,21 * * 6" # Saturday 22:37 Ljubljana: 20:37 UTC in summer time, 21:37 UTC in winter time
+    # - cron: "37 20,21 * * 6" # Saturday 22:37 Ljubljana: 20:37 UTC in summer time, 21:37 UTC in winter time
     - cron: "7 20,21 * * 0" # Sunday 22:07 Ljubljana: 20:07 UTC in summer time, 21:07 UTC in winter time
   workflow_dispatch: {}
 

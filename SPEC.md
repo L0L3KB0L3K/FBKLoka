@@ -1292,6 +1292,7 @@ pobriše kodo in posnetek; `npm run verify` in `tests/e2e/ekipa.spec.ts` zelena.
 ### 20.2 Urnik osveževanja FloorballFlash
 
 Zdaj nedelja 22:00 (`.github/workflows/fetch-ff.yml`). Novo: sobota ob 22:37 in nedelja ob 22:07 po ljubljanskem času.
+Do 27. 10. 2026 je sobotni cron izklopljen zaradi kreditov (20.6); vratca sobotno okno še poznajo.
 GitHub cron teče samo v UTC, zato sta na dan dva vnosa in vratca, ki spustijo samo pravo uro. Minute niso :00 in :30,
 ker GitHub ob polni in pol ure najbolj zamuja.
 
@@ -1434,13 +1435,12 @@ Ko krediti zmanjkujejo (najprej prvo):
 
 Stanje 30. 9. 2026 (Usage & billing, obdobje 27. 9.–27. 10.): 14 produkcijskih deployev = 210 kreditov, promet
 1,3 kredita (2.560 zahtevkov), ostane 88,7. Do 27. 10. so še štirje vikendi: sobota in nedelja bi stali do 120
-kreditov, več kot ostane. Zato do 27. 10. ni združitev na `main`; podatki glej 20.7. Sprememba samo v `.github`
-(npr. cron) ne sproži gradnje, torej ne stane.
+kreditov, več kot ostane. Zato do 27. 10. ni združitev na `main` in podatki samo v nedeljo (odločitev 30. 9.: 4
+deployi, 60 kreditov; sobotni rezultati so na strani v nedeljo zvečer). Sprememba samo v `.github` (npr. cron) ne
+sproži gradnje, torej ne stane. Po 27. 10. se odloči, ali se sobota vrne (proračun zgoraj jo dopušča).
 
 **Narejeno:** proračun zapisan; veja `razvoj` ima branch deploy; na `main` gre največ enkrat na teden.
 
 ### 20.7 Odprto
 
 - Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
-- Do 27. 10. 2026 ostane 88,7 kredita: samo nedeljski prenos podatkov (4 deployi, 60 kreditov) ali plan Personal
-  (9 $ na mesec)? Sobota in nedelja bi stali do 120 kreditov in stran bi se ustavila pred koncem obdobja.
