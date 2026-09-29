@@ -444,7 +444,7 @@ query competitionsCurrentSeason($organizerId: Int) {
   4. osveži žeton, preden poteče (velja 60 dni),
   5. ob napaki pusti stare podatke in konča z izhodno kodo 1.
 - Skrivnosti: `IG_USER_ID`, `IG_ACCESS_TOKEN` kot GitHub Secrets. Nikoli v repo.
-- **Samodejnega uvoza v novice ne gradimo.** Novice piše urednik v Decap.
+- **Samodejnega uvoza objav z Instagrama v novice ne gradimo.** Novice piše urednik v Decap. Izjema je tedenski povzetek iz podatkov FloorballFlash (§20.5).
 
 ---
 
@@ -1010,7 +1010,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 - Aktualni igralci in trenerji kluba v članski reprezentanci in strokovnem vodstvu.
 - Klubski Google račun za Sheet, Form in Apps Script, ter vsaj dva urednika Sheeta.
 - Ekipna koda (štiri naključne besede) in admin skrbnik za popravke.
-- Odločitev: rok za odjavo platoja (predlog 24 ur pred tekmo) ali brez roka.
+- ~~Odločitev: rok za odjavo platoja~~ Odločeno: 24 ur pred tekmo (§19.1).
 
 ---
 
@@ -1051,6 +1051,8 @@ Ugotovitve iz objav, ki vplivajo na stran:
 - **Števca:** kolikokrat je kdo prinesel plato in kolikokrat je vozil. Prikazani so vsi aktivni igralci, tudi z 0.
 - **Velja samo za člansko ekipo**, v tekmovanjih 3 Nations – IFL in 1. SFL. Mladinske selekcije niso vključene.
 - Pri vsaki tekmi je oznaka tekmovanja (`IFL` ali `1. SFL`).
+- **Odločitve kluba (28. 9. 2026):** plato na vseh tekmah, doma in v gosteh; prevoz samo na gostujoče tekme; prijavijo se
+  samo aktivni igralci, tudi kot vozniki; plato se lahko odjavi najkasneje 24 ur pred tekmo (`odjavaRokUr`).
 
 ### 19.2 Arhitektura
 
@@ -1239,3 +1241,154 @@ export const EKIPA = {
 - [ ] Ročna sprememba `status` v Sheetu se pokaže na strani v največ 60 s.
 - [ ] Gumb med shranjevanjem ne sprejme drugega klika; sporočila berejo bralniki zaslona (`aria-live`).
 - [ ] `/ekipa/` ni v sitemapu, ima `noindex`, `robots.txt` vsebuje `Disallow: /ekipa/`, iskanje "ekipa" po HTML javnih strani ne najde povezave.
+
+## 20. Nadgradnje po zagonu (29. 9. 2026)
+
+Vrstni red: 20.1 (A1, A2, A5) → 20.2 → 20.1 (A3, A4) → 20.4 (če potrjeno) → 20.3 → 20.5 (najprej ročni poskus).
+Po vsakem koraku se ustavi.
+
+**Predpostavke:** točke = gol + podaja; vikend = sobota in nedelja po ljubljanskem času; Netlify Free ostane;
+repozitorij ostane javen; tedenski povzetek se objavi samodejno (odločitev kluba 29. 9. 2026).
+
+### 20.1 Plato in prevoz: hitrost
+
+Vzrok počasnosti: stran ob odprtju čaka na Apps Script (hladen zagon 1–3 s in preusmeritev) in pred tem ne pokaže
+ničesar. Vsaka akcija dvakrat prebere Sheet.
+
+Cilj: ponovni obisk pokaže seznam v manj kot 1 s, klik takoj pokaže "Shranjujem…". Hladnega zagona ne odpravimo
+(Google po nekaj minutah nedejavnosti strežnik spet uspava). Posnetek ga skrije pri ponovnih obiskih, prazen klic
+skrajša prvi vnos.
+
+- **A1 Posnetek zadnjega odgovora** (`src/components/ekipa/EkipaApp.astro`): ključ `fbk-ekipa-snapshot` v localStorage,
+  prek obstoječega `store` (try/catch, rezerva v pomnilniku). Shrani se po uspešni kodi, po vsaki osvežitvi in po vsaki
+  akciji, brez polja `result` (da se star "Prijavljen." ne pokaže znova).
+  - Ob odprtju: posnetek, ki ni starejši od 7 dni, se takoj prikaže, tekme, ki so že mimo, se skrijejo. Opomba
+    "Prikazani so podatki od zadnjič. Osvežujem…" (`role="status"`). Vzporedno gre klic na strežnik.
+  - **Med osveževanjem so gumbi za prijavo in odjavo onemogočeni**, da nihče ne klikne na plato, ki ga je nekdo že vzel.
+  - Zavrnjena koda pobriše kodo in posnetek. Neuspešna osvežitev: "Osvežitev ni uspela. Vidiš podatke od zadnjič."
+  - Posnetek hrani imena igralcev v brskalniku. To je enako občutljivo kot koda, ki je tam že shranjena: novega
+    tveganja ne doda, a ga tudi ne zmanjša.
+- **A2 Prazen klic za bujenje strežnika:** ob prvem prikazu obrazca za kodo stran pošlje `api({ code: "" })`.
+  Strežnik odgovori `bad_code`, nič ne prebere, nič ne zapiše in nič ne zabeleži. Ko uporabnik tipka kodo, se Apps
+  Script že zbuja.
+- **A3, A4 Nalaganje brez posnetka:** en sam element `data-loading`, prikazan šele po 300 ms (brez utripa pri hitrem
+  odgovoru). Krigla piva, ki se polni (odločitev kluba): polnjenje ni pravi napredek, krivulja gre proti 90 %, ob
+  odgovoru se dopolni do 100 % in po 350 ms izgine. Po 1 s čakanja še opomba "Prvi vstop na tej napravi traja malo
+  dlje." Pri `prefers-reduced-motion` samo besedilo. Barve iz tokenov (`ball` samo kot polnilo, nikoli kot besedilo).
+  `--fill` se nastavlja prek `element.style.setProperty` (CSSOM), kar CSP `style-src 'self'` dovoli.
+- **A5 Strežnik** (`apps-script/ekipa/Code.gs`): po zapisu akcije se odgovor sestavi iz podatkov, prebranih pod
+  zaklepom, in nove vrstice, brez drugega branja štirih zavihkov. Predpomnilnik: vrednosti nad 90 KB ne shrani
+  (CacheService sprejme največ 100 KB), napaka predpomnilnika ne podre odgovora. Po spremembi skrbnik v Apps Scriptu
+  naredi novo različico uvedbe (URL ostane isti).
+
+**Narejeno:** ponovni obisk pokaže seznam pod 1 s; klik takoj pokaže "Shranjujem…", rezultat pod 3 s; zavrnjena koda
+pobriše kodo in posnetek; `npm run verify` in `tests/e2e/ekipa.spec.ts` zelena. Playwright z lažnim strežnikom:
+(1) strežnik odgovarja 3 s, pri drugem obisku se seznam vidi v 1,5 s, gumbi so do odgovora onemogočeni;
+(2) prvi obisk pošlje en klic s prazno kodo.
+
+### 20.2 Urnik osveževanja FloorballFlash
+
+Zdaj nedelja 22:00 (`.github/workflows/fetch-ff.yml`). Novo: sobota ob 22:37 in nedelja ob 22:07 po ljubljanskem času.
+GitHub cron teče samo v UTC, zato sta na dan dva vnosa in vratca, ki spustijo samo pravo uro. Minute niso :00 in :30,
+ker GitHub ob polni in pol ure najbolj zamuja.
+
+```yaml
+on:
+  schedule:
+    - cron: "37 20,21 * * 6" # sobota: 22:37 poleti (20:37 UTC), pozimi (21:37 UTC)
+    - cron: "7 20,21 * * 0"  # nedelja: 22:07
+  workflow_dispatch: {}
+```
+
+- Vratca (prvi korak): ročni zagon vedno teče. Sicer teče samo, če je v Ljubljani sobota med 22:30 in 23:15 ali
+  nedelja med 22:00 in 22:45 (`TZ=Europe/Ljubljana date`). Vsi ostali koraki imajo `if: steps.gate.outputs.run == 'true'`.
+- Commit in deploy samo ob spremembi podatkov, kot zdaj. V nedeljo gre povzetek iz 20.5 v isti commit (en deploy).
+- Prehod na zimski čas je 25. 10. 2026. Vratca poskrbijo, da v obeh obdobjih teče samo eden od dveh vnosov.
+- Sobotni rezultat morda še ni vnesen v FloorballFlash. Nedelja to pokrije.
+- GitHub po 60 dneh brez commitov izklopi načrtovane workflowe v javnem repozitoriju. Pred sezono jih znova vklopi.
+
+**Narejeno:** simulacija z `date` spusti natanko en zagon na dan: sobota 22:37 (poleti in pozimi) teče, sobota 23:37
+ne, nedelja 22:07 teče, nedelja 23:07 ne.
+
+### 20.3 Igralec tedna (MVP), samo članske tekme
+
+**Podatki (preverjeno v API FloorballFlash 29. 9. 2026):** `playerStats` in `goalieStats` z
+`baseFilter: { competitionId, for: "Game" }` vrneta statistiko po tekmah. Igralci: goli, podaje, točke, kazenske
+minute (`pim`). Vratarji: obrambe in streli (`saves`, `shotsAgainst`), vpisani so (npr. 25/31 na tekmi 16488).
+Vsaka tekma ima tudi uradnega MVP (`events.mps`). Oseba ima `incognito` in `imageId` (fotografija, ne pri vseh).
+
+- Šteje samo IFL in 1. SFL (`src/config/mvp.ts`, ID-ji tekmovanj se menjajo vsako sezono). Sezonske točke se seštejejo
+  iz posameznih tekem teh dveh tekmovanj, ne iz skupne statistike (ta vključuje mladinske tekme igralca).
+- Vratar ima prednost, če čez vikend ubrani vsaj 90 % strelov ob vsaj 15 strelih. Pozor: v IFL 2026/27 so deleži
+  vratarjev na tekmo 64–93 %, zato bo vratar redko MVP (odprto, 20.7).
+- Sicer igralec z največ točkami. Izenačenje: več golov, nato manj kazenskih minut, nato ime.
+- Izločanje po ID osebe v FloorballFlash, ne po imenu: `incognito` in seznam umaknjenih privolitev. Zbirka `igralci`
+  je zdaj prazna, zato ta seznam še ne obstaja (odprto).
+- Mladoletni so dovoljeni, če igrajo v članski ekipi (odločitev kluba). Brez letnika, šole in kontakta.
+- Čiste funkcije v `src/lib/mvp.ts`, testi v `tests/mvp.test.ts`. Podatek `src/data/ff/mvp.json` (ali `null`) izračuna
+  `fetch:ff`. Kartica `src/components/sections/MvpCard.astro` na naslovnici se brez podatka ne izriše.
+- Kartica: slika, ime, "MVP tedna", točke na najboljši tekmi, čez vikend in v sezoni. Pri vratarju delež obramb čez
+  vikend in v sezoni ter obrambe/streli.
+- Slika: fotografija iz FloorballFlash se ob gradnji shrani lokalno (kot logotipi). Če je ni, silhueta z `alt=""`,
+  ker ne prikazuje te osebe. Repozitorij je javen, slika ostane v zgodovini gita, umik privolitve pomeni brisanje tudi
+  iz zgodovine. Privolitev za objavo slik je še odprta pri vodstvu.
+
+**Narejeno:** testi zeleni (vratar nad pragom, vratar s premalo streli, mladinska tekmovanja se ne štejejo, izločen
+igralec, sezonske točke samo iz članskih tekem); kartica samo ob podatku; `npm run verify` zelen.
+
+### 20.4 "Odigrano" pod tablo (neodločeno)
+
+Tekma izgine s table 3 ure po začetku. `SHOW_AFTER_START_MS` ostane (sicer bi sobotna tekma zakrila naslednjo).
+Pod tablo se doda vrstica "Odigrano" z gumbom "Rezultat na FloorballFlash" za tekmo, ki se je končala (začetek + 3 h)
+in ni starejša od 48 ur (`lastPlayed()` v `src/lib/upcoming.ts`, test v `tests/upcoming.test.ts`). Vrstico osvežuje
+isti `setInterval` kot tablo. Ko je rezultat v deployu, vrstica izgine.
+
+### 20.5 Tedenski povzetek (nedelja, samodejna objava)
+
+**Odločitev kluba (29. 9. 2026): povzetek se objavi samodejno, brez pregleda.** Kratek je (2–5 stavkov). AI podatke
+samo spravi v logične stavke: brez ocen ("odlična igra"), napovedi, citatov in lastnosti igralcev.
+
+Cevovod v nedeljskem zagonu iz 20.2:
+
+1. **Zbiranje** (skript, determinističen): tekme tedna z rezultati iz FloorballFlash, MVP iz 20.3 → `tmp/week.json`.
+   Brez odigranih tekem ni povzetka.
+2. **Pisanje:** Claude dobi samo `week.json`, ničesar ne išče sam. Skill `.claude/skills/tedenska-novica/SKILL.md`:
+   samo dejstva iz `week.json`, mladoletnim brez letnika, šole in kontakta, frontmatter po shemi `novice`, dva dobra in
+   en slab primer.
+3. **Preverjanje** (skript, strogo): vsak rezultat `a:b` mora biti rezultat tekme iz `week.json`; vsako število mora
+   biti vrednost številskega polja v `week.json` (ne podniz celotnega JSON, ki bi spustil skoraj vse); vsako ime osebe
+   ali ekipe mora biti na seznamu imen v `week.json`. Če preverjanje pade, se objavi besedilo iz fiksne predloge brez
+   AI (npr. "Člani so v IFL premagali KAC Floorball s 5:3.").
+4. **Objava:** novica v `src/content/novice/` z `vir: samodejno` (nova vrednost v shemi), v istem commitu kot podatki
+   iz 20.2, torej en deploy.
+
+- Naslovna slika: fiksna klubska grafika brez ljudi. Samodejna objava ne izbira fotografij otrok. Slike z Instagrama
+  ostanejo pri ročno napisanih novicah (odprto, 20.7).
+- Claude v Actionu uporablja API ključ, ki se plača posebej (plačana naročnina ga ne pokrije). Ključ je skrivnost v
+  GitHubu.
+- Najprej ročni poskus: en teden podatkov, povzetek s skillom, ocena kakovosti. Šele nato avtomatika.
+
+**Narejeno:** vsako nedeljo po odigranih tekmah se objavi povzetek; izmišljeno število ali ime sproži predlogo namesto
+AI besedila (test); brez tekem ni novice; podatki in povzetek sta en deploy.
+
+### 20.6 Netlify krediti
+
+Free: 300 kreditov na mesec, produkcijski deploy stane 15. Meja je trda: ko krediti zmanjkajo, se stran ustavi do
+naslednjega meseca. Deploy Previews so brezplačni.
+
+| Vir | Deployi na mesec | Krediti |
+|---|---|---|
+| Podatki sobota in nedelja (povzetek v nedeljskem commitu) | ~9 | ~135 |
+| Razvoj: vsak push na `main` | po potrebi | 15 na push |
+
+Razvoj zato poteka na veji z Deploy Preview, na `main` gre v paketih. 29. 9. 2026 so bili samo z razvojem trije
+produkcijski deployi (45 kreditov).
+
+### 20.7 Odprto
+
+- Prag vratarja za MVP: 90 % ob 15 strelih ali nižji (deleži v IFL so 64–93 %)?
+- Sezonske točke samo IFL in 1. SFL? Kaj pokal in končnica?
+- Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
+- "Odigrano" pod tablo (20.4): da ali ne?
+- Naslovna slika samodejnega povzetka: fiksna grafika (predlog) ali slika z Instagrama?
+- API ključ za Claude v Actionu: kdo ga plača in hrani?
