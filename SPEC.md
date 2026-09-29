@@ -1303,15 +1303,16 @@ on:
   workflow_dispatch: {}
 ```
 
-- Vratca (prvi korak): ročni zagon vedno teče. Sicer teče samo, če je v Ljubljani sobota med 22:30 in 23:15 ali
-  nedelja med 22:00 in 22:45 (`TZ=Europe/Ljubljana date`). Vsi ostali koraki imajo `if: steps.gate.outputs.run == 'true'`.
+- Vratca (`scripts/ff-gate.ts`, korak za `setup-node`): ročni zagon vedno teče. Sicer teče samo, če je v Ljubljani
+  sobota med 22:30 in 23:15 ali nedelja med 22:00 in 22:45 (`Intl` s časovnim pasom `Europe/Ljubljana`). Skripta zapiše
+  `run=true|false` v `$GITHUB_OUTPUT`, vsi ostali koraki imajo `if: steps.gate.outputs.run == 'true'`.
 - Commit in deploy samo ob spremembi podatkov, kot zdaj. V nedeljo gre povzetek iz 20.5 v isti commit (en deploy).
 - Prehod na zimski čas je 25. 10. 2026. Vratca poskrbijo, da v obeh obdobjih teče samo eden od dveh vnosov.
 - Sobotni rezultat morda še ni vnesen v FloorballFlash. Nedelja to pokrije.
 - GitHub po 60 dneh brez commitov izklopi načrtovane workflowe v javnem repozitoriju. Pred sezono jih znova vklopi.
 
-**Narejeno:** simulacija z `date` spusti natanko en zagon na dan: sobota 22:37 (poleti in pozimi) teče, sobota 23:37
-ne, nedelja 22:07 teče, nedelja 23:07 ne.
+**Narejeno:** `tests/ff-gate.test.ts` za poletni in zimski čas: od dveh vnosov na dan teče natanko eden (sobota 22:37,
+nedelja 22:07), zamuda do 45 min še šteje, drugi dnevi ne tečejo, ročni zagon vedno.
 
 ### 20.3 Igralec tedna (MVP), samo članske tekme
 
