@@ -122,3 +122,11 @@ test("post: waits while a match of the week has started without a result", () =>
   );
   assert.deepEqual(unfinishedMatches(late, teden, new Date("2026-09-27T15:00:00Z")), []); // not started yet
 });
+
+test("next week: a summary made later for an old week still lists that next week's matches, played or not", () => {
+  const old = buildWeek(matches, { clani: "Člani" }, null, { od: "2026-09-14", do: "2026-09-20" });
+  assert.deepEqual(
+    old.prihodnje.map((m) => m.id),
+    [16493, 16450],
+  );
+});

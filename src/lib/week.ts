@@ -84,8 +84,9 @@ export function buildWeek(matches: Match[], teamNames: Record<string, string>, m
     streli: list.reduce((n, s) => n + s.streli, 0),
   });
   const next = { od: isoDay(new Date(Date.parse(teden.do) + 86_400_000)), do: isoDay(new Date(Date.parse(teden.do) + 7 * 86_400_000)) };
+  // Every match of next week, played or not: a summary made later for an old week lists them as they were planned.
   const prihodnje = matches
-    .filter((m) => m.stanje === "prihodnja" && localDay(m.zacetek) >= next.od && localDay(m.zacetek) <= next.do)
+    .filter((m) => localDay(m.zacetek) >= next.od && localDay(m.zacetek) <= next.do)
     .sort((a, b) => Date.parse(a.zacetek) - Date.parse(b.zacetek))
     .map((m): WeekUpcoming => ({
       id: m.id,
