@@ -132,7 +132,8 @@ const novice = defineCollection({
       // Alt text of the cover (SPEC.md §13.3). Required: a cover always shows something, and a poster carries text.
       slikaAlt: z.string().min(1),
       selekcija: refTo("selekcije").optional(),
-      vir: z.enum(["instagram", "facebook", "rocno"]).optional(),
+      // "samodejno": the weekly summary from the fixed template (SPEC.md §20.5, scripts/week-publish.ts).
+      vir: z.enum(["instagram", "facebook", "rocno", "samodejno"]).optional(),
     }),
 });
 

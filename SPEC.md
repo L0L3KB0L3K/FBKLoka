@@ -1359,31 +1359,34 @@ isti `setInterval` kot tablo. Ko je rezultat v deployu, vrstica izgine.
 
 ### 20.5 Tedenski povzetek (nedelja, samodejna objava)
 
-**Odločitev kluba (29. 9. 2026): povzetek se objavi samodejno, brez pregleda.** Kratek je (2–5 stavkov). AI podatke
-samo spravi v logične stavke: brez ocen ("odlična igra"), napovedi, citatov in lastnosti igralcev.
+**Odločitev kluba (29. 9. 2026): povzetek se objavi samodejno, brez pregleda, iz fiksne predloge. Brez AI**, ker API
+stane. Samo dejstva: brez ocen ("odlična igra"), napovedi, citatov in lastnosti igralcev.
 
-Cevovod v nedeljskem zagonu iz 20.2:
+Cevovod v nedeljskem zagonu iz 20.2 (samo nedeljski cron, ročni zagon povzetka ne piše):
 
-1. **Zbiranje** (skript, determinističen): tekme tedna z rezultati iz FloorballFlash, MVP iz 20.3 → `tmp/week.json`.
-   Brez odigranih tekem ni povzetka.
-2. **Pisanje:** Claude dobi samo `week.json`, ničesar ne išče sam. Skill `.claude/skills/tedenska-novica/SKILL.md`:
-   samo dejstva iz `week.json`, mladoletnim brez letnika, šole in kontakta, frontmatter po shemi `novice`, dva dobra in
-   en slab primer.
-3. **Preverjanje** (skript, strogo): vsak rezultat `a:b` mora biti rezultat tekme iz `week.json`; vsako število mora
-   biti vrednost številskega polja v `week.json` (ne podniz celotnega JSON, ki bi spustil skoraj vse); vsako ime osebe
-   ali ekipe mora biti na seznamu imen v `week.json`. Če preverjanje pade, se objavi besedilo iz fiksne predloge brez
-   AI (npr. "Člani so v IFL premagali KAC Floorball s 5:3.").
-4. **Objava:** novica v `src/content/novice/` z `vir: samodejno` (nova vrednost v shemi), v istem commitu kot podatki
-   iz 20.2, torej en deploy.
+1. **Podatki** (`buildWeek` v `src/lib/week.ts`): tekme tedna (ponedeljek–nedelja, Ljubljana) z rezultati iz
+   FloorballFlash, MVP iz 20.3 in tekme naslednjega tedna.
+2. **Besedilo** (`templateSummary`): en stavek na tekmo po ekipah, MVP, nato "## Naslednji teden" z dnevom, datumom,
+   uro, tekmovanjem, doma ali v gosteh in nasprotnikom (ali "Naslednji teden ni tekem.").
+3. **Varovalka** (`verifySummary`): predloga mora prestati isto strogo preverjanje kot pisano besedilo. Vsak rezultat
+   in izid, vsako število in ime iz podatkov, brez besed mnenja. Če ne prestane, se nič ne objavi (napaka v kodi).
+4. **Objava** (`npm run week:publish`): `src/content/novice/<nedelja>-povzetek-tedna.md` z `vir: samodejno`, v istem
+   commitu kot podatki iz 20.2, torej en deploy.
 
-- Naslovna slika: fiksna klubska grafika brez ljudi. Samodejna objava ne izbira fotografij otrok. Slike z Instagrama
-  ostanejo pri ročno napisanih novicah (odprto, 20.7).
-- Claude v Actionu uporablja API ključ, ki se plača posebej (plačana naročnina ga ne pokrije). Ključ je skrivnost v
-  GitHubu.
-- Najprej ročni poskus: en teden podatkov, povzetek s skillom, ocena kakovosti. Šele nato avtomatika.
+- Brez povzetka: teden brez odigranih tekem; tekma tedna se je začela, a v FloorballFlash še nima rezultata (raje nič
+  kot napačno, opozorilo v GitHub Actions); novica je bila ročno urejena (`vir` ni več `samodejno`).
+- Naslov "Povzetek tedna 21.–27. 9.", datum je nedelja, povzetek za kartico je prvi odstavek. Oznaka ekipe samo, ko
+  je igrala ena ekipa.
+- Naslovna slika: fiksna klubska grafika brez ljudi, `src/content/novice/img/povzetek-tedna.webp` (logotip na črni
+  podlagi z vzorcem žogice, `node scripts/summary-cover.ts` iz tokenov). Samodejna objava ne izbira fotografij otrok.
+- Instagram (slika ali objava) je opuščen 29. 9. 2026: registracija v Meta for Developers ne pošlje SMS kode na
+  slovensko številko.
+- Zamujen povzetek ročno: `WEEK_END=2026-09-27 npm run week:publish`, commit, push.
+- Skill `.claude/skills/tedenska-novica/SKILL.md`, `week:collect` in `week:verify` ostanejo za ročno ali kasnejšo AI
+  različico. Dejstva morajo biti enaka kot v predlogi.
 
-**Narejeno:** vsako nedeljo po odigranih tekmah se objavi povzetek; izmišljeno število ali ime sproži predlogo namesto
-AI besedila (test); brez tekem ni novice; podatki in povzetek sta en deploy.
+**Narejeno:** vsako nedeljo po odigranih tekmah se objavi povzetek; brez tekem ni novice; tekma brez rezultata ustavi
+objavo (test); podatki in povzetek sta en deploy.
 
 ### 20.6 Netlify krediti
 
@@ -1401,5 +1404,3 @@ produkcijski deployi (45 kreditov).
 ### 20.7 Odprto
 
 - Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
-- Naslovna slika samodejnega povzetka: fiksna grafika (predlog) ali slika z Instagrama?
-- API ključ za Claude v Actionu: kdo ga plača in hrani?

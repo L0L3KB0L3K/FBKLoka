@@ -4,7 +4,16 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import type { Mvp } from "../src/lib/mvp.ts";
 import type { Match } from "../src/lib/types.ts";
-import { buildWeek, prepositionFor, templateSummary, verifySummary, weekBounds } from "../src/lib/week.ts";
+import {
+  buildWeek,
+  prepositionFor,
+  summaryPost,
+  templateSummary,
+  unfinishedMatches,
+  verifySummary,
+  weekBounds,
+  weekRange,
+} from "../src/lib/week.ts";
 
 const match = (o: Partial<Match>): Match => ({
   id: 1,
@@ -82,4 +91,34 @@ test("check: an invented score, number, name or opinion fails", () => {
   assert.deepEqual(verifySummary("Člani igrajo v soboto, 3. 10., ob 15:00 v IFL doma.", week), []);
   assert.match(verifySummary("Člani igrajo v soboto, 3. 10., ob 16:00.", week).join(), /16:00/);
   assert.deepEqual(verifySummary("V nedeljo so v gosteh premagali ekipo FBC Borovnica s 5:4.", week), []);
+});
+
+test("post: named by the Sunday, dates in the title, first paragraph as teaser, fixed cover, label for one team", () => {
+  const post = summaryPost(week);
+  assert.equal(post.file, "2026-09-27-povzetek-tedna.md");
+  assert.equal(
+    post.markdown.split("---\n")[1],
+    'naslov: "Povzetek tedna 21.–27. 9."\n' +
+      "datum: 2026-09-27\n" +
+      'povzetek: "Člani so v soboto v IFL doma izgubili proti ekipi C.Hamp VSV Unihockey s 7:8. V nedeljo so v IFL v gosteh premagali ekipo FBC Borovnica s 5:4."\n' +
+      "naslovnaSlika: ./img/povzetek-tedna.webp\n" +
+      'slikaAlt: "Logotip FBK Loka na črni podlagi."\n' +
+      "selekcija: clani\n" +
+      "vir: samodejno\n",
+  );
+  assert.ok(post.markdown.endsWith(`---\n${templateSummary(week)}\n`));
+  const two = buildWeek([...matches, match({ id: 9, selekcija: "u17", tekmovanje: "U17" })], { clani: "Člani", u17: "U17" }, mvp, teden);
+  assert.doesNotMatch(summaryPost(two).markdown, /selekcija:/);
+  assert.equal(weekRange({ od: "2026-09-28", do: "2026-10-04" }), "28. 9.–4. 10.");
+});
+
+test("post: waits while a match of the week has started without a result", () => {
+  const sundayNight = new Date("2026-09-27T20:07:00Z");
+  assert.deepEqual(unfinishedMatches(matches, teden, sundayNight), []);
+  const late = [...matches, match({ id: 17, zacetek: "2026-09-27T18:00:00+02:00", stanje: "prihodnja", rezultat: null })];
+  assert.deepEqual(
+    unfinishedMatches(late, teden, sundayNight).map((m) => m.id),
+    [17],
+  );
+  assert.deepEqual(unfinishedMatches(late, teden, new Date("2026-09-27T15:00:00Z")), []); // not started yet
 });

@@ -7,6 +7,7 @@ import type { Match } from "./types.ts";
 
 export type WeekMatch = {
   id: number;
+  selekcija: string; // team slug for the news label, e.g. "clani"
   ekipa: string; // team name, e.g. "Člani", "U17"
   tekmovanje: string; // e.g. "IFL", "1. SFL"
   zacetek: string;
@@ -63,6 +64,7 @@ export function buildWeek(matches: Match[], teamNames: Record<string, string>, m
       const them = m.rezultat!.nasprotnik;
       return {
         id: m.id,
+        selekcija: m.selekcija,
         ekipa: teamNames[m.selekcija] ?? m.selekcija,
         tekmovanje: m.tekmovanje,
         zacetek: m.zacetek,
@@ -252,4 +254,41 @@ export function verifySummary(text: string, week: Week): string[] {
   const lower = text.toLowerCase();
   for (const stem of OPINION) if (lower.includes(stem)) problems.push(`mnenje ali napoved: "${stem}…"`);
   return problems;
+}
+
+/** Matches of the week that have started but have no result in FloorballFlash yet: the summary waits for them. */
+export function unfinishedMatches(matches: Match[], teden: { od: string; do: string }, now: Date): Match[] {
+  return matches.filter(
+    (m) => m.stanje !== "koncana" && Date.parse(m.zacetek) <= now.getTime() && localDay(m.zacetek) >= teden.od && localDay(m.zacetek) <= teden.do,
+  );
+}
+
+/** The week's dates for the title: "21.–27. 9.", or "28. 9.–4. 10." across two months. */
+export function weekRange(teden: { od: string; do: string }): string {
+  const from = partsInLjubljana(`${teden.od}T12:00:00Z`);
+  const to = partsInLjubljana(`${teden.do}T12:00:00Z`);
+  return from.month === to.month ? `${from.day}.–${to.day}. ${to.month}.` : `${from.day}. ${from.month}.–${to.day}. ${to.month}.`;
+}
+
+/** The fixed cover of every summary (made by scripts/summary-cover.ts), relative to src/content/novice. */
+export const SUMMARY_COVER = { src: "./img/povzetek-tedna.webp", alt: "Logotip FBK Loka na črni podlagi." };
+
+/**
+ * The week as a news post (collection "novice"): file named by the Sunday, title with the dates, the first paragraph as
+ * the teaser, the fixed cover, the team label only when one team played, and vir "samodejno" (a hand edit changes it,
+ * and scripts/week-publish.ts then keeps the post). Strings are JSON-quoted, which is valid YAML.
+ */
+export function summaryPost(week: Week): { file: string; markdown: string } {
+  const body = templateSummary(week);
+  const teams = [...new Set(week.tekme.map((m) => m.selekcija))];
+  const frontmatter = [
+    `naslov: ${JSON.stringify(`Povzetek tedna ${weekRange(week.teden)}`)}`,
+    `datum: ${week.teden.do}`,
+    `povzetek: ${JSON.stringify(body.split("\n\n")[0])}`,
+    `naslovnaSlika: ${SUMMARY_COVER.src}`,
+    `slikaAlt: ${JSON.stringify(SUMMARY_COVER.alt)}`,
+    ...(teams.length === 1 ? [`selekcija: ${teams[0]}`] : []),
+    "vir: samodejno",
+  ];
+  return { file: `${week.teden.do}-povzetek-tedna.md`, markdown: ["---", ...frontmatter, "---", body, ""].join("\n") };
 }
