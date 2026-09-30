@@ -1,8 +1,9 @@
 ---
 naslov: "Podpri nas"
-opis: "Podprite FBK Loka: klub prostovoljcev, ki mlade vzgaja v športu, šoli in prijateljstvu. Člani igrajo v mednarodni ligi IFL."
+opis: "Podprite FBK Loka: klub prostovoljcev z okoli 100 člani, od tega 80 otrok. Mlade vzgajamo v športu, šoli in prijateljstvu."
 # Order (Maj, 1. 10. 2026): achievements first, then what matters more than results, then the costs a sponsor helps with.
-# Instagram numbers left out (Maj, 1. 10. 2026: not strong enough). Prices and the number of members: from the club (docs/04).
+# Instagram numbers left out (Maj, 1. 10. 2026: not strong enough). Members: about 100, about 80 children (Maj, 1. 10. 2026).
+# Prices: from the club (docs/04).
 ---
 
 ## Dosežki zadnjih let
@@ -22,7 +23,7 @@ opis: "Podprite FBK Loka: klub prostovoljcev, ki mlade vzgaja v športu, šoli i
 
 ## Več kot rezultat
 
-V klubu smo vsi prostovoljci. Bolj kot rezultat nam je pomembno, da smo povezani kot družina.
+Klub ima okoli 100 članov, od tega okoli 80 otrok v šestih mladinskih selekcijah (U9–U19). V klubu smo vsi prostovoljci. Bolj kot rezultat nam je pomembno, da smo povezani kot družina.
 
 Pri mladih velja: najprej šola, nato šport. Učimo jih športnega obnašanja, spoštovanja in prijateljstva.
 
