@@ -880,7 +880,11 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
   GitHub računa; brezplačno do 10 urednikov. Git Gateway z Netlify Identity je opuščen. DecapBridge hrani
   fine-grained žeton samo za ta repozitorij, samo **Contents: Read and write**, brez Workflows, z rokom veljavnosti.
 - Shranjevanje gre na vejo **`vsebina`**, ne na `main`. Nedeljski zagon iz 20.2 jo združi v `main` skupaj s podatki
-  in povzetkom: en deploy na teden (20.6). Nujna objava med tednom: ročni zagon workflowa (15 kreditov).
+  in povzetkom: en deploy na teden (20.6). Nujna objava med tednom: ročni zagon workflowa (15 kreditov). Po pushu
+  na `main` workflow poravna `vsebina` z `main` (samo fast-forward). Ob sporu pri združitvi urejanja počakajo,
+  rezultati gredo ven (opozorilo v GitHub Actions).
+- Novica ima polje **`osnutek`**: obkljukana ni nikjer na strani (naslovnica, `/novice`, lastna stran), dokler je
+  urednik ne odkljuka.
 - CSP v dveh delih: Netlify združi vsa pravila za pot, zato bi strog CSP za "/*" veljal tudi za `/admin`, kjer Decap
   rabi `'unsafe-eval'` in inline sloge. Strog CSP strani je `<meta>` v `Base.astro` (`src/config/csp.ts`), glava za
   "/*" ima samo `frame-ancestors`, `base-uri` in `object-src`, `/admin/*` ima svojo glavo.

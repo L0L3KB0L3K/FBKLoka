@@ -5,11 +5,11 @@ import NewsCard from "../../components/NewsCard.astro";
 import TeamFilter from "../../components/TeamFilter.astro";
 import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
-import { newestFirst } from "../../lib/news.ts";
+import { newestFirst, published } from "../../lib/news.ts";
 
 const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
 const teamNames: Record<string, string> = Object.fromEntries(teams.map((team) => [team.id, team.data.ime]));
-const posts = newestFirst(await loadCollection("novice"));
+const posts = newestFirst(published(await loadCollection("novice")));
 
 // The filter lists only teams that have posts.
 const filterTeams = teams

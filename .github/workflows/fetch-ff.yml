@@ -1,6 +1,9 @@
 # Fetches FloorballFlash matches and commits src/data/ff only when the data changed (SPEC.md §5.6).
 # The commit triggers a Netlify build; no change means no commit and no build.
 # The Sunday run also writes the weekly summary into src/content/novice (SPEC.md §20.5), in the same commit.
+# Club edits from Decap are saved on the branch "vsebina" (SPEC.md §13.4). The Sunday run and a manual run merge it into
+# main first, so edits, results and the summary go out in one push and one deploy; then "vsebina" is brought up to
+# date. A manual run is the way to publish an edit at once (15 credits). On a merge conflict the edits wait (warning).
 #
 # Until 27. 10. 2026 only Sunday: 88.7 credits were left for the period on 30. 9. (SPEC.md §20.6). To turn Saturday
 # back on, restore its cron line below; scripts/ff-gate.ts still has the Saturday window.
@@ -37,6 +40,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history: merging the branch vsebina needs it
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -44,6 +49,17 @@ jobs:
       - name: Is it the right time in Ljubljana?
         id: gate
         run: node scripts/ff-gate.ts
+      - name: Merge club edits (branch vsebina)
+        if: steps.gate.outputs.run == 'true' && github.event.schedule != '37 20,21 * * 6'
+        run: |
+          git config user.name "ff-bot"
+          git config user.email "ff-bot@users.noreply.github.com"
+          if git fetch origin vsebina; then
+            git merge --no-edit origin/vsebina || {
+              git merge --abort
+              echo "::warning::Branch vsebina could not be merged (conflict). The edits wait; results go out without them."
+            }
+          fi
       - run: npm ci
         if: steps.gate.outputs.run == 'true'
       - run: npm run fetch:ff
@@ -51,10 +67,18 @@ jobs:
       - name: Weekly summary (Sunday run only)
         if: steps.gate.outputs.run == 'true' && github.event.schedule == '7 20,21 * * 0'
         run: npm run week:publish
-      - name: Commit if changed
+      - name: Commit and push if changed
         if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name "ff-bot"
           git config user.email "ff-bot@users.noreply.github.com"
           git add src/data/ff src/content/novice
-          git diff --cached --quiet || (git commit -m "data: update FloorballFlash (and the weekly summary on Sunday)" && git push)
+          git diff --cached --quiet || git commit -m "data: update FloorballFlash (and the weekly summary on Sunday)"
+          # One push for the merged edits and the data: one deploy. Nothing new: no push, no deploy.
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then git push origin HEAD:main; fi
+      - name: Bring branch vsebina up to date
+        if: steps.gate.outputs.run == 'true' && github.event.schedule != '37 20,21 * * 6'
+        run: |
+          # Fast-forward only: if an editor saved during the run, or the merge was skipped, vsebina stays and catches up
+          # next time. Netlify does not build this branch.
+          git push origin HEAD:vsebina || echo "::warning::Branch vsebina not updated; it catches up on the next run."

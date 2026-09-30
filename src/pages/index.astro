@@ -15,7 +15,7 @@ import { loadCollection } from "../lib/content.ts";
 import { allMatches } from "../lib/match-data.ts";
 import { organization } from "../lib/jsonld.ts";
 import { uniqueGames } from "../lib/matches.ts";
-import { homeNews } from "../lib/news.ts";
+import { homeNews, published } from "../lib/news.ts";
 import { getSettings, isSet, socialLinks } from "../lib/site.ts";
 
 const teamNames = Object.fromEntries((await loadCollection("selekcije")).map((team) => [team.id, team.data.ime]));
@@ -25,7 +25,7 @@ const upcoming = games.filter((game) => game.stanje === "prihodnja").slice(0, 5)
 // Home matches for the list under the board: where fans can come and watch.
 const homeMatches = games.filter((game) => game.stanje === "prihodnja" && game.doma).slice(0, 5);
 const last = games.filter((game) => game.stanje === "koncana").at(-1) ?? null;
-const news = homeNews(await loadCollection("novice"));
+const news = homeNews(published(await loadCollection("novice")));
 
 const { naslov, socialna, naslovnaFotografije } = await getSettings();
 const sameAs = socialLinks(socialna).map((link) => link.href);

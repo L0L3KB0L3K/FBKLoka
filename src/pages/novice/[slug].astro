@@ -9,9 +9,10 @@ import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
 import { formatDate } from "../../lib/format.ts";
 import { newsArticle } from "../../lib/jsonld.ts";
+import { published } from "../../lib/news.ts";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("novice");
+  const posts = published(await getCollection("novice")); // a draft gets no page
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 

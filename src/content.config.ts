@@ -134,6 +134,8 @@ const novice = defineCollection({
       selekcija: refTo("selekcije").optional(),
       // "samodejno": the weekly summary from the fixed template (SPEC.md §20.5, scripts/week-publish.ts).
       vir: z.enum(["instagram", "facebook", "rocno", "samodejno"]).optional(),
+      // Draft (SPEC.md §13.4): Decap saves go live on Sunday, so an unfinished post stays off the site until unticked.
+      osnutek: z.boolean().default(false),
     }),
 });
 

@@ -1,7 +1,7 @@
 // Tests for news order and the home page rule (SPEC.md §7.1).
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { homeNews, newestFirst } from "../src/lib/news.ts";
+import { homeNews, newestFirst, published } from "../src/lib/news.ts";
 
 const post = (id: string, day: string) => ({ id, data: { datum: new Date(`${day}T00:00:00Z`) } });
 
@@ -20,5 +20,13 @@ test("home page shows nothing below 3 posts, then the 3 newest", () => {
   assert.deepEqual(
     homeNews(four).map((p) => p.id),
     ["d", "c", "b"],
+  );
+});
+
+test("drafts: osnutek true is left out, false or missing is shown", () => {
+  const posts = [{ id: "a", data: { osnutek: true } }, { id: "b", data: { osnutek: false } }, { id: "c", data: {} }];
+  assert.deepEqual(
+    published(posts).map((p) => p.id),
+    ["b", "c"],
   );
 });

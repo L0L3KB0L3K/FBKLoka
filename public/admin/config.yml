@@ -99,6 +99,14 @@ collections:
           - { label: Instagram, value: instagram }
           - { label: Facebook, value: facebook }
           - { label: samodejno (povzetek tedna), value: samodejno }
+      - name: osnutek
+        label: Osnutek (še ne objavi)
+        widget: boolean
+        default: false
+        required: false
+        hint: >-
+          Obkljukano: novica je shranjena, a je ni na strani. Ko je pripravljena, odkljukaj in shrani. Na stran gre
+          v nedeljo zvečer.
       - name: body
         label: Besedilo
         widget: markdown

@@ -5,6 +5,11 @@ interface Dated {
   data: { datum: Date };
 }
 
+/** Posts that are not drafts (osnutek: true in Decap); only these are on the site. */
+export function published<T extends { data: { osnutek?: boolean } }>(posts: readonly T[]): T[] {
+  return posts.filter((post) => !post.data.osnutek);
+}
+
 /** Posts on the home page. */
 export const HOME_NEWS = 3;
 
