@@ -60,10 +60,11 @@
     Content-Type = "text/calendar; charset=utf-8"
 
 # Decap CMS (SPEC.md §13.4). Its own CSP, on top of the "/*" one: Decap needs 'unsafe-eval' and inline styles, loads
-# from unpkg (pinned version with an SRI hash in public/admin/index.html), talks to the GitHub API and shows images
-# from the repository. No page of the site loads anything from /admin.
+# from unpkg (pinned version with an SRI hash in public/admin/index.html), and talks only to DecapBridge (login and
+# the gateway to GitHub); images of the repository come through the gateway as blob: URLs. The login itself is a
+# page on auth.decapbridge.com, a navigation that CSP does not limit. No page of the site loads anything from /admin.
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://raw.githubusercontent.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://api.github.com; form-action 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://auth.decapbridge.com https://gateway.decapbridge.com; form-action 'self'"
     Cache-Control = "no-cache"

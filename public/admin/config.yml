@@ -2,12 +2,34 @@
 # same name, same type, same required status. A change in one needs the same change in the other.
 #
 # Saves go to the branch "vsebina", not to main. The Sunday FloorballFlash run merges it into main together with the
-# results and the weekly summary, so the club's edits cost no extra deploy (SPEC.md §20.6). Editors log in through
-# DecapBridge (step 4 replaces the backend block below with its settings).
+# results and the weekly summary, so the club's edits cost no extra deploy (SPEC.md §20.6).
+#
+# Editors log in through DecapBridge (invite them in its dashboard), with Google or an e-mail and password. DecapBridge
+# writes to GitHub with a fine-grained token of this repository only (Contents: Read and write), renewed once a year.
 backend:
-  name: github
+  name: git-gateway
   repo: L0L3KB0L3K/FBKLoka
   branch: vsebina
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/46764179-f27e-419c-a2ee-5870093d76d4/pkce
+  auth_token_endpoint: /sites/46764179-f27e-419c-a2ee-5870093d76d4/token
+  gateway_url: https://gateway.decapbridge.com
+  # Who changed what, by name only: the login can be an e-mail address, and the repository is public.
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} via DecapBridge
+    openAuthoring: Message {{message}} - {{author-name}} via DecapBridge
+
+# Name and picture of the editor from the DecapBridge login.
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
 
 # Local test without login: `npx decap-server` in the project folder and the dev server, then /admin/ on localhost.
 # Decap uses it only on localhost; saves then go straight into the files of the local copy.

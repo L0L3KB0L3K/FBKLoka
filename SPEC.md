@@ -879,6 +879,9 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 - Prijava (odločitev 30. 9. 2026): **DecapBridge**. Uredniki iz kluba se prijavijo z Googlom ali e-pošto, brez
   GitHub računa; brezplačno do 10 urednikov. Git Gateway z Netlify Identity je opuščen. DecapBridge hrani
   fine-grained žeton samo za ta repozitorij, samo **Contents: Read and write**, brez Workflows, z rokom veljavnosti.
+  Nastavljeno 30. 9. 2026 (backend `git-gateway` s PKCE, prijava z Googlom ali e-pošto). Sporočila commitov imajo
+  samo ime urednika, brez prijavnega imena (lahko je e-naslov, repozitorij je javen). Login URL v DecapBridge je
+  zdaj `razvoj--fbkloka.netlify.app/admin/index.html`; ob objavi ga zamenjaj z glavnim naslovom.
 - Shranjevanje gre na vejo **`vsebina`**, ne na `main`. Nedeljski zagon iz 20.2 jo združi v `main` skupaj s podatki
   in povzetkom: en deploy na teden (20.6). Nujna objava med tednom: ročni zagon workflowa (15 kreditov). Po pushu
   na `main` workflow poravna `vsebina` z `main` (samo fast-forward). Ob sporu pri združitvi urejanja počakajo,
