@@ -21,6 +21,7 @@ const PAGES = [
   "/kontakt/",
   "/klub/",
   "/zasebnost/",
+  "/podpri-nas/",
   "/novice/",
   "/novice/2026-04-12-u17-drzavni-prvaki/",
 ];

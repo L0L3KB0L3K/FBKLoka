@@ -10,10 +10,11 @@ import SponsorStrip from "./SponsorStrip.astro";
 
 const { email, telefon, naslov, davcna, maticna, eos, socialna } = await getSettings();
 
-// Same links as the main menu (also the no-JS fallback for the mobile menu), plus privacy.
+// Same links as the main menu (also the no-JS fallback for the mobile menu), plus the page for sponsors and privacy.
 // /kodeks is added in phase 2, when the page exists.
 const links = [
   ...MAIN_NAV.filter((link) => link.href !== "/"),
+  { href: "/podpri-nas/", label: "Podpri nas" },
   { href: "/zasebnost/", label: "Zasebnost" },
 ];
 const eosUrl = isSet(eos.portal) ? eos.portal : null;

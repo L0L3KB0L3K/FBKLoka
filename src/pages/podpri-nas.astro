@@ -1,0 +1,54 @@
+---
+// /podpri-nas (SPEC.md §7.8, phase 2): why support the club, its reach and where a sponsor's name is seen (Markdown in
+// src/content/strani/podpri-nas.md), and a form for sponsors. Sponsor packages and prices follow when the club sends them
+// (docs/04-odprto-pri-klubu.md); until then the form asks the company to write. Linked from the footer and the sponsor strip.
+import { render } from "astro:content";
+import Field from "../components/forms/Field.astro";
+import NetlifyForm from "../components/forms/NetlifyForm.astro";
+import Base from "../layouts/Base.astro";
+import { getPage } from "../lib/content.ts";
+
+const page = await getPage("podpri-nas");
+const { Content } = await render(page);
+---
+
+<Base title={page.data.naslov} description={page.data.opis}>
+  <div class="page-wrap py-12">
+    <h1>{page.data.naslov}</h1>
+
+    <div class="mt-10 grid gap-12 lg:grid-cols-2">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <section aria-labelledby="postanite-sponzor" class="max-w-xl self-start rounded-card bg-court p-6 md:p-8">
+        <h2 id="postanite-sponzor" class="heading-bar">Postanite sponzor</h2>
+        <p class="mt-4 text-muted">Pišite nam in predstavimo vam možnosti sodelovanja. Odgovorimo po e-pošti.</p>
+        <div class="mt-6">
+          <NetlifyForm name="sponzorstvo" submitLabel="Pošlji povpraševanje">
+            <Field id="sponzor-podjetje" name="podjetje" label="Podjetje" autocomplete="organization" required error="Vpiši ime podjetja." />
+            <Field id="sponzor-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpiši svoje ime." />
+            <Field
+              id="sponzor-email"
+              name="email"
+              type="email"
+              label="E-mail"
+              autocomplete="email"
+              placeholder="npr. ime@podjetje.si"
+              required
+              error="Vpiši e-mail v obliki ime@podjetje.si."
+            />
+            <Field
+              id="sponzor-sporocilo"
+              name="sporocilo"
+              as="textarea"
+              label="Sporočilo"
+              maxlength={2000}
+              error="Sporočilo je predolgo."
+            />
+          </NetlifyForm>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>

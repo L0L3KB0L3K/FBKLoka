@@ -15,6 +15,7 @@ Stanje: 29. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Avtor fotografij s stare strani (člani na /klub in na strani članov). Ali ga navedemo ob fotografiji?
 - [ ] Domena fbkloka.si: kdo v klubu jo ima? Ta oseba mora ob objavi nastaviti DNS ali domeno prenesti. Zapisi MX za e-pošto info@fbkloka.si morajo ostati, sicer pošta ne pride več.
 - [ ] Aktualni sponzorji: imena, logotipi v SVG in spletne strani, če jih imajo. Ali je seznam s stare strani še aktualen (Oblaček, Elekom Košir, OSM, Peklaj, Šofer, Tein, Adriatic Slovenica)? Adriatic Slovenica je zdaj del Generali: ali sponzor želi nov logotip?
+- [ ] Sponzorski paketi in cene za stran Podpri nas (/podpri-nas). Do takrat stran podjetje prosi, naj piše. Ali je klub upravičenec do donacije dela dohodnine?
 - [ ] Fotografije: ali ima kdo nove fotografije, primerne za pasico na naslovnici (ležeče, kakovostne, vsaj 2400 px široke)? Poleg tega skupinska fotografija članov v dresih FBK Loka (na sedanjih je še napis Insport), ena ali dve akciji s tekme, portreti trenerjev, otroci na treningu, dvorana od zunaj. Priložnost: praznovanje 25 let floorballa na Podnu 18. 10. 2026.
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
 - [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta, ekipna koda (štiri naključne besede).
