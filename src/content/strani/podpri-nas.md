@@ -26,7 +26,9 @@ V klubu smo vsi prostovoljci. Bolj kot rezultat nam je pomembno, da smo povezani
 
 Pri mladih velja: najprej šola, nato šport. Učimo jih športnega obnašanja, spoštovanja in prijateljstva.
 
-Za otroke organiziramo tradicionalni klubski piknik in priprave na morju. Letos smo mlade po dolgem času peljali tudi na turnir Prague Games v Pragi.
+Ob koncu sezone pripravimo tradicionalni klubski piknik, na katerem se družimo vsi: ves klub, starši in sponzorji.
+
+Za otroke organiziramo priprave na morju. Letos smo jih prvič po dolgem času peljali na Prague Games v Prago, enega največjih mladinskih turnirjev.
 
 Vse to stane. Sponzorska sredstva nam pomagajo pokriti te stroške, da lažje treniramo in napredujemo kot klub.
 
