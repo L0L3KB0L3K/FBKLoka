@@ -411,7 +411,12 @@ GitHub ustavi načrtovane Actione v javnih repozitorijih po 60 dneh brez aktivno
 Commit sproži Netlify build. Ker se commita samo ob spremembi, gradimo le, ko se rezultat res spremeni
 (Netlify free ima 300 build minut na mesec).
 
-### 5.7 `scan-fbk-loka.ts` (enkrat na sezono, ročno)
+### 5.7 `scan-fbk-loka.ts` (ročno ob začetku sezone, preverjanje vsako nedeljo)
+
+**Tedensko preverjanje (1. 10. 2026):** zadnji korak nedeljskega zagona (`node scripts/scan-fbk-loka.ts --check`) poišče
+tekmovanja tekoče sezone z ekipo FBK Loka, ki jih `src/config/ff.ts` še nima (npr. mladinske lige, ko začnejo). Takrat
+korak pade, GitHub pošlje e-pošto o neuspelem zagonu, podatki so ta čas že objavljeni. Ponavlja se vsako nedeljo, dokler
+tekmovanja ne dodaš. Samodejno se ne doda, ker bi lahko narobe povezal ekipi A in B.
 
 Za organizatorje `[55, 86]` pokliče `competitionsCurrentSeason(organizerId)`, za vsako tekmovanje
 `competitionDetailsTree` in izpiše vsa tekmovanja, kjer se ime ekipe začne s `"FBK Loka"`.
@@ -562,8 +567,10 @@ Kontakt je dosegljiv z enim klikom z vsake strani (noga).
 
 - `/novice`: seznam, filter po selekciji. `/novice/[slug]`: naslov, datum, slika, besedilo, povezava nazaj.
 - `/dokumenti`: kategorije, povezave na vire pri FZS in IFF. Lokalno samo klubski dokumenti.
-- `/podpri-nas`: zakaj podpreti klub, doseg (TODO številke), sponzorski paketi, obrazec za povpraševanje,
-  donacija dela dohodnine (TODO: ali je klub upravičenec).
+- `/podpri-nas` (zgrajena 1. 10. 2026): zakaj FBK Loka (naslovi, mladi, reprezentanca, ustanovitev zveze), doseg na
+  Instagramu, kje je ime sponzorja vidno, obrazec `sponzorstvo` (podjetje, ime, e-mail, sporočilo). Povezava v nogi
+  in "Postanite sponzor" ob pasu sponzorjev, ne v glavnem meniju. Odprto: sponzorski paketi in cene, donacija dela
+  dohodnine (ali je klub upravičenec).
 - `/kodeks`: kdo vodi katero ekipo, pravila ravnanja do otrok, kontakt za prijavo težav.
 - `/zgodovina`: navpična časovnica z vsemi vnosi zbirke `zgodovina`, tudi z vrsto `dogodek`.
 - `/igralci/[slug]`: fotka, ime, številka, pozicija, statistika po tekmovanjih.

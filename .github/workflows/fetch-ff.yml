@@ -82,3 +82,9 @@ jobs:
           # Fast-forward only: if an editor saved during the run, or the merge was skipped, vsebina stays and catches up
           # next time. Netlify does not build this branch.
           git push origin HEAD:vsebina || echo "::warning::Branch vsebina not updated; it catches up on the next run."
+      # Last, so it never holds back the data: a FloorballFlash competition with an FBK Loka team that src/config/ff.ts
+      # does not have yet (e.g. the youth leagues when they start) fails this step, and GitHub e-mails the owner about
+      # the failed run. It keeps failing every Sunday until the competition is added (SPEC.md §5.7).
+      - name: New FloorballFlash competitions?
+        if: steps.gate.outputs.run == 'true' && github.event.schedule == '7 20,21 * * 0'
+        run: node scripts/scan-fbk-loka.ts --check
