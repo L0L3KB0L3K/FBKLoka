@@ -1,7 +1,7 @@
 // Tests for the roster rules (SPEC.md §4.5). The year-of-birth rule is tested in format.test.ts.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { hiddenFfIds, teamRoster, type ManualPlayer } from "../src/lib/players.ts";
+import { hiddenFfIds, isHiddenName, teamRoster, type ManualPlayer } from "../src/lib/players.ts";
 import type { RosterPlayer } from "../src/lib/types.ts";
 
 const ff = (ime: string, stevilka: number | null, selekcija = "clani"): RosterPlayer => ({
@@ -63,4 +63,11 @@ test("hidden ids: aktiven: false by name and team, the same player is gone from 
     ["Bor Kos"],
   );
   assert.deepEqual(hiddenFfIds(ffList, [{ ime: "Bor Kos", selekcija: "clani" }], "clani"), []);
+});
+
+test("hidden name: the captain line follows aktiven: false of the same team", () => {
+  const manualList = [manual("Nejc Peklaj", { aktiven: false })];
+  assert.equal(isHiddenName(" nejc peklaj ", manualList, "clani"), true);
+  assert.equal(isHiddenName("Nejc Peklaj", manualList, "u19"), false);
+  assert.equal(isHiddenName("Nejc Peklaj", [manual("Nejc Peklaj")], "clani"), false);
 });

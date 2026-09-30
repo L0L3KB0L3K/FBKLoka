@@ -49,7 +49,18 @@ export function teamRoster(ff: RosterPlayer[], manual: ManualPlayer[], selekcija
  * by name like teamRoster(). The MVP (scripts/fetch-mvp.ts) skips them, so one entry hides a player everywhere on the
  * site (SPEC.md §20.7). An entry without aktiven counts as shown, as in the collection schema.
  */
-export function hiddenFfIds(ff: RosterPlayer[], manual: { ime: string; selekcija: string; aktiven?: boolean }[], selekcija: string): number[] {
-  const hidden = new Set(manual.filter((player) => player.selekcija === selekcija && player.aktiven === false).map((player) => key(player.ime)));
+export function hiddenFfIds(ff: RosterPlayer[], manual: HideEntry[], selekcija: string): number[] {
+  const hidden = hiddenKeys(manual, selekcija);
   return ff.filter((player) => player.selekcija === selekcija && hidden.has(key(player.ime))).map((player) => player.ffId);
+}
+
+/** True when `name` is hidden with aktiven: false for the team, e.g. the captain line of the team page (SPEC.md §20.7). */
+export function isHiddenName(name: string, manual: HideEntry[], selekcija: string): boolean {
+  return hiddenKeys(manual, selekcija).has(key(name));
+}
+
+type HideEntry = { ime: string; selekcija: string; aktiven?: boolean };
+
+function hiddenKeys(manual: HideEntry[], selekcija: string): Set<string> {
+  return new Set(manual.filter((player) => player.selekcija === selekcija && player.aktiven === false).map((player) => key(player.ime)));
 }

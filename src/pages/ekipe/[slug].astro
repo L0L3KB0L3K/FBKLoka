@@ -16,7 +16,7 @@ import { loadCollection } from "../../lib/content.ts";
 import { allMatches, ffRoster, standingsFile } from "../../lib/match-data.ts";
 import { splitByState } from "../../lib/matches.ts";
 import { sportsTeam } from "../../lib/jsonld.ts";
-import { teamRoster } from "../../lib/players.ts";
+import { isHiddenName, teamRoster } from "../../lib/players.ts";
 import { hasSummary } from "../../lib/teams.ts";
 import { getTrainings } from "../../lib/trainings.ts";
 
@@ -38,9 +38,12 @@ const coaches = trenerji
   .map((id) => allCoaches.find((coach) => coach.id === id))
   .filter((coach): coach is CollectionEntry<"trenerji"> => coach !== undefined);
 const trainings = (await getTrainings()).filter((t) => t.selekcija === team.id);
-const players = prikaziSestavo
-  ? teamRoster(ffRoster, (await loadCollection("igralci")).map((entry) => entry.data), team.id)
-  : [];
+const manualPlayers = (await loadCollection("igralci")).map((entry) => entry.data);
+const players = prikaziSestavo ? teamRoster(ffRoster, manualPlayers, team.id) : [];
+// A captain hidden with aktiven: false (consent withdrawn, SPEC.md §20.7) is not named either.
+const summaryTeam = isHiddenName(team.data.kapetan, manualPlayers, team.id)
+  ? { ...team, data: { ...team.data, kapetan: "" } }
+  : team;
 
 // League tables of this team. A table where nobody has played yet (start of the season) is left out.
 const standings = standingsFile.tekmovanja
@@ -83,7 +86,7 @@ const jsonLd = sportsTeam(
     <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>
 
     <div class:list={["mt-10 grid gap-10", twoColumns && "lg:grid-cols-[18rem_1fr] lg:items-start"]}>
-      <TeamSummary team={team} coaches={coaches} trainings={trainings} calendarSlug={calendarSlug} />
+      <TeamSummary team={summaryTeam} coaches={coaches} trainings={trainings} calendarSlug={calendarSlug} />
 
       {
         panels.length > 1 && (

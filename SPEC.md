@@ -888,7 +888,9 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 - CSP v dveh delih: Netlify združi vsa pravila za pot, zato bi strog CSP za "/*" veljal tudi za `/admin`, kjer Decap
   rabi `'unsafe-eval'` in inline sloge. Strog CSP strani je `<meta>` v `Base.astro` (`src/config/csp.ts`), glava za
   "/*" ima samo `frame-ancestors`, `base-uri` in `object-src`, `/admin/*` ima svojo glavo.
-- Urejljive zbirke (po korakih): novice (1. korak), nato treningi, sponzorji, trenerji, igralci. Ostale ostanejo v
+- Urejljive zbirke: novice, treningi, sponzorji, trenerji (brez brisanja: ekipa kaže na datoteko), igralci (letnik
+  samo za polnoletne, `max` v Decap = leto − 19; repozitorij je javen). Decap pri shranjevanju izbriše komentarje na
+  vrhu YAML datotek. Ostale ostanejo v
   kodi, dokler jih klub res ne ureja: selekcije, dvorane, zgodovina, strani (zasebnost je pravno besedilo), nastavitve.
 - **Ne** urejljivo: `src/data/ff/*`, `src/config/ff.ts`, postavitev strani.
 - Vsaka zbirka ima v Decap kratko pomoč (`hint`) v slovenščini.
@@ -1457,12 +1459,13 @@ sproži gradnje, torej ne stane. Po 27. 10. se odloči, ali se sobota vrne (pror
 ### 20.7 Umik privolitve
 
 Ena oznaka skrije igralca povsod na strani: `aktiven: false` v `src/content/igralci/<ime>.yaml`. Velja za sestavo
-ekipe in za MVP, z njim tudi za tedenski povzetek. `MVP_EXCLUDED` je odstranjen (30. 9. 2026), da nista dva seznama.
+ekipe, vrstico "Kapetan" in za MVP, z njim tudi za tedenski povzetek. `MVP_EXCLUDED` je odstranjen (30. 9. 2026), da nista dva seznama.
 
 Koraki ob umiku:
 
-1. `src/content/igralci/<ime>.yaml` z `aktiven: false`. Ime točno kot na FloorballFlash; številka in pozicija sta v
-   shemi obvezni, prepiši ju s strani ekipe. Push na `main` (en deploy).
+1. Decap → Igralci: igralec z odkljukanim "Prikazan na strani" (ali `src/content/igralci/<ime>.yaml` z
+   `aktiven: false`). Ime točno kot na FloorballFlash; številka in pozicija sta obvezni, prepiši ju s strani ekipe.
+   Na stran gre v nedeljo; ker je umik nujen, ga objavi ročni zagon workflowa (en deploy).
 2. Sheet `Igralci`: `aktiven` na `FALSE` (plato in prevoz).
 3. Če je trenutni MVP: `npm run fetch:ff` ali nedeljski zagon. Nov izbor zbriše njegovo fotografijo iz
    `src/data/ff/mvp/`.

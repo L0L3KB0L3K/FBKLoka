@@ -18,6 +18,14 @@ const DAYS = ["ponedeljek", "torek", "sreda", "četrtek", "petek", "sobota", "ne
 const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Čas vpiši v obliki HH:MM, npr. 17:00.");
 
 /**
+ * An optional field that Decap edits (SPEC.md §13.4). Decap writes a field the editor left empty as "" (or null), not as
+ * a missing key; both mean "not set" here, so an empty optional field does not stop the build.
+ */
+function optional<T extends z.ZodType>(schema: T) {
+  return z.preprocess((value) => (value === "" || value === null ? undefined : value), schema.optional());
+}
+
+/**
  * Link to an entry of a folder collection, checked against its file names.
  * Used instead of Astro's reference(): on Astro 7.3 a broken reference is only logged
  * and the build still succeeds, so a typo like "u16" would reach the live site.
@@ -89,7 +97,7 @@ const trenerji = defineCollection({
     z.object({
       ime: z.string().min(1),
       vloga: z.string().min(1),
-      foto: image().optional(),
+      foto: optional(image()),
       email: z.union([z.literal(""), z.email()]).default(""), // shown only when filled in
     }),
 });
@@ -114,8 +122,8 @@ const igralci = defineCollection({
       selekcija: refTo("selekcije"),
       stevilka: z.number().int().min(0).max(99),
       pozicija: z.enum(["vratar", "branilec", "napadalec"]),
-      foto: image().optional(),
-      letnik: z.number().int().min(1950).max(2100).optional(),
+      foto: optional(image()),
+      letnik: optional(z.number().int().min(1950).max(2100)),
       aktiven: z.boolean().default(true), // false = hidden everywhere (consent withdrawn)
     }),
 });
@@ -131,9 +139,9 @@ const novice = defineCollection({
       naslovnaSlika: image(),
       // Alt text of the cover (SPEC.md §13.3). Required: a cover always shows something, and a poster carries text.
       slikaAlt: z.string().min(1),
-      selekcija: refTo("selekcije").optional(),
+      selekcija: optional(refTo("selekcije")),
       // "samodejno": the weekly summary from the fixed template (SPEC.md §20.5, scripts/week-publish.ts).
-      vir: z.enum(["instagram", "facebook", "rocno", "samodejno"]).optional(),
+      vir: optional(z.enum(["instagram", "facebook", "rocno", "samodejno"])),
       // Draft (SPEC.md §13.4): Decap saves go live on Sunday, so an unfinished post stays off the site until unticked.
       osnutek: z.boolean().default(false),
     }),
@@ -146,10 +154,10 @@ const sponzorji = defineCollection({
     z.object({
       ime: z.string().min(1),
       logo: image(), // SVG or PNG
-      povezava: z.url().optional(),
+      povezava: optional(z.url()),
       // The club has no sponsor levels (28. 9. 2026). Kept optional, as in SPEC.md §4.7, in case it adds them.
       raven: z.enum(["glavni", "zlati", "podporni"]).optional(),
-      vrstniRed: z.number().int().positive().optional(), // order in the strip; sponsors without it follow by name
+      vrstniRed: optional(z.number().int().positive()), // order in the strip; sponsors without it follow by name
     }),
 });
 

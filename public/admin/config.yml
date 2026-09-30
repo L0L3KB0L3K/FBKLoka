@@ -113,3 +113,204 @@ collections:
         buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list]
         editor_components: []
         hint: Naslov strani je že zgoraj, zato v besedilu uporabljaj samo podnaslove (H2, H3).
+  # §4.2 Training slots: one file, a list under "termini". Saving removes the comments at the top of the file.
+  - name: treningi
+    label: Treningi
+    description: Termini treningov za stran Treningi in strani ekip. Sprememba gre na stran v nedeljo zvečer.
+    files:
+      - name: treningi
+        label: Termini treningov
+        file: src/content/treningi/treningi.yaml
+        format: yaml
+        fields:
+          - name: termini
+            label: Termini
+            label_singular: Termin
+            widget: list
+            summary: "{{fields.selekcija}} · {{fields.dan}} {{fields.od}}–{{fields.do}}"
+            fields:
+              - name: selekcija
+                label: Ekipa
+                widget: select
+                options:
+                - { label: Člani, value: clani }
+                - { label: Švigalice, value: svigalice }
+                - { label: U19, value: u19 }
+                - { label: U17, value: u17 }
+                - { label: U15, value: u15 }
+                - { label: U13, value: u13 }
+                - { label: U11, value: u11 }
+                - { label: U9, value: u9 }
+              - name: dan
+                label: Dan
+                widget: select
+                options: [ponedeljek, torek, sreda, četrtek, petek, sobota, nedelja]
+              - name: od
+                label: Začetek
+                widget: string
+                pattern: ['^([01]\d|2[0-3]):[0-5]\d$', 'Čas vpiši v obliki HH:MM, npr. 17:00.']
+              - name: do
+                label: Konec
+                widget: string
+                pattern: ['^([01]\d|2[0-3]):[0-5]\d$', 'Čas vpiši v obliki HH:MM, npr. 18:30.']
+                hint: Konec mora biti za začetkom, sicer se stran ne posodobi.
+              - name: dvorana
+                label: Dvorana
+                widget: select
+                options:
+                  - { label: Dvorana Poden, value: poden }
+                  - { label: Dvorana Trata, value: trata }
+              - name: opomba
+                label: Opomba
+                widget: string
+                required: false
+                default: ""
+                hint: Kratko, npr. "samo tretjina dvorane". Prikaže se ob terminu.
+
+  # §4.7 Sponsors: one YAML file each, the logo in ./logos. The schema's optional "raven" is left out: the club has no
+  # sponsor levels (28. 9. 2026).
+  - name: sponzorji
+    label: Sponzorji
+    label_singular: Sponzor
+    description: Pas logotipov nad nogo vsake strani. Sprememba gre na stran v nedeljo zvečer.
+    folder: src/content/sponzorji
+    extension: yaml
+    format: yaml
+    create: true
+    slug: "{{slug}}"
+    identifier_field: ime
+    summary: "{{ime}}"
+    sortable_fields: [vrstniRed, ime]
+    media_folder: logos
+    public_folder: ./logos
+    fields:
+      - name: ime
+        label: Ime
+        widget: string
+        hint: Uradno ime podjetja, tudi za bralnike zaslona.
+      - name: logo
+        label: Logotip
+        widget: image
+        hint: SVG ali PNG s prozornim ozadjem, ležeč, vsaj 400 px širok.
+      - name: povezava
+        label: Spletna stran
+        widget: string
+        required: false
+        pattern: ['^https?://\S+$', 'Cel naslov, npr. https://www.primer.si']
+        hint: Pusti prazno, če je nima. Logotip je potem brez povezave.
+      - name: vrstniRed
+        label: Vrstni red
+        widget: number
+        value_type: int
+        min: 1
+        required: false
+        hint: 1 = prvi v pasu. Sponzorji brez številke so za oštevilčenimi, po abecedi.
+
+  # §4.3 Coaches: one YAML file each, the photo in ./foto. Which team a coach has is set in src/content/selekcije (code).
+  # No delete: a team points at the coach's file, and a missing file stops the build.
+  - name: trenerji
+    label: Trenerji
+    label_singular: Trener
+    description: >-
+      Trenerji na strani O klubu in pri ekipah. Novemu trenerju ekipo določi Maj. Trenerja se tu ne da izbrisati;
+      za to piši Maju.
+    folder: src/content/trenerji
+    extension: yaml
+    format: yaml
+    create: true
+    delete: false
+    slug: "{{slug}}"
+    identifier_field: ime
+    summary: "{{ime}} · {{vloga}}"
+    media_folder: foto
+    public_folder: ./foto
+    fields:
+      - name: ime
+        label: Ime in priimek
+        widget: string
+      - name: vloga
+        label: Vloga
+        widget: string
+        hint: Npr. "Glavni trener" ali "Pomočnik trenerja".
+      - name: foto
+        label: Fotografija
+        widget: image
+        required: false
+        hint: Portret, pokončen, vsaj 600 px širok. Samo z dovoljenjem trenerja.
+      - name: email
+        label: E-pošta
+        widget: string
+        required: false
+        default: ""
+        pattern: ['^$|^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Veljaven e-naslov ali prazno.']
+        hint: Prikaže se na strani. Vpiši samo, če trener to dovoli.
+
+  # §4.5 Players: additions to the FloorballFlash roster (number, position, photo) and hiding a player (§20.7).
+  - name: igralci
+    label: Igralci
+    label_singular: Igralec
+    description: >-
+      Seznam igralcev pride s FloorballFlash. Tu dodaš številko, pozicijo ali fotografijo, ali igralca skriješ ob umiku
+      privolitve. Sprememba gre na stran v nedeljo zvečer.
+    folder: src/content/igralci
+    extension: yaml
+    format: yaml
+    create: true
+    slug: "{{slug}}"
+    identifier_field: ime
+    summary: "{{ime}} · {{selekcija}} · {{stevilka}}"
+    media_folder: foto
+    public_folder: ./foto
+    fields:
+      - name: ime
+        label: Ime in priimek
+        widget: string
+        hint: Točno tako kot na FloorballFlash, sicer se vnos ne poveže z igralcem.
+      - name: selekcija
+        label: Ekipa
+        widget: select
+        options:
+          - { label: Člani, value: clani }
+          - { label: Švigalice, value: svigalice }
+          - { label: U19, value: u19 }
+          - { label: U17, value: u17 }
+          - { label: U15, value: u15 }
+          - { label: U13, value: u13 }
+          - { label: U11, value: u11 }
+          - { label: U9, value: u9 }
+      - name: stevilka
+        label: Številka dresa
+        widget: number
+        value_type: int
+        min: 0
+        max: 99
+      - name: pozicija
+        label: Pozicija
+        widget: select
+        options:
+          - { label: Vratar, value: vratar }
+          - { label: Branilec, value: branilec }
+          - { label: Napadalec, value: napadalec }
+      - name: foto
+        label: Fotografija
+        widget: image
+        required: false
+        hint: Samo s privolitvijo (za mladoletne podpišejo starši). Pokončna, vsaj 600 px široka.
+      # max = this year - 19: the site shows a year only for adults (SPEC.md §4.5), and the repository is public, so a
+      # minor's year must not be saved at all. A stale max is safe: it only blocks the youngest adults. 2007 = for 2026.
+      - name: letnik
+        label: Letnik
+        widget: number
+        value_type: int
+        min: 1950
+        max: 2007
+        required: false
+        hint: Samo za polnoletne. Mladoletnim letnika ne vpisuj.
+      - name: aktiven
+        label: Prikazan na strani
+        widget: boolean
+        default: true
+        required: false
+        hint: >-
+          Odkljukaj, ko igralec ali starši prekličejo privolitev: igralec izgine s strani ekipe in iz izbora MVP.
+          Če mora iti takoj, piši Maju (objava pred nedeljo).
