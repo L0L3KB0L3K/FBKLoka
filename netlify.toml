@@ -63,8 +63,11 @@
 # from unpkg (pinned version with an SRI hash in public/admin/index.html), and talks only to DecapBridge (login and
 # the gateway to GitHub); images of the repository come through the gateway as blob: URLs. The login itself is a
 # page on auth.decapbridge.com, a navigation that CSP does not limit. No page of the site loads anything from /admin.
+# Found with the first live save (30. 9. 2026): Decap reads an uploaded image with fetch(blob:) before sending it
+# (connect-src blob:), shows the editor's picture from auth.decapbridge.com, and its preview frame runs one inline
+# script, allowed by its hash only. The hash belongs to Decap 3.16.3: after a Decap update, check the console for a new one.
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://auth.decapbridge.com https://gateway.decapbridge.com; form-action 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com 'sha256-Ob/z7smzKJGFdMGHiYHvik0pzOqdUCQ9Qa2zSrkvshs='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://auth.decapbridge.com; font-src 'self' data:; connect-src 'self' blob: https://auth.decapbridge.com https://gateway.decapbridge.com; form-action 'self'"
     Cache-Control = "no-cache"
