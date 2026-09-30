@@ -9,6 +9,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CourtLines from "../components/CourtLines.astro";
 import JsonLd from "../components/JsonLd.astro";
+import { SITE_CSP } from "../config/csp.ts";
 
 interface Props {
   /** Page name, e.g. "Treningi". */
@@ -37,6 +38,9 @@ const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, hei
 <html lang="sl">
   <head>
     <meta charset="utf-8" />
+    {/* Site CSP (src/config/csp.ts), first so it covers every script and style. Only in the build: the dev server
+        injects its own inline scripts. */}
+    {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={SITE_CSP} />}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {/* Browser bar colour on phones = the header. Same value as --color-ink in global.css (a meta tag cannot read CSS). */}
     <meta name="theme-color" content="#0b0b0c" />

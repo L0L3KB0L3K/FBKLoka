@@ -1,6 +1,6 @@
 // Pages from SPEC.md §13.5 plus /klub, /zasebnost and the news pages:
 // 1. axe finds no WCAG 2.2 A/AA violations,
-// 2. no CSP violation with the policy from netlify.toml,
+// 2. no CSP violation: the site policy is the <meta> tag in the built page (src/config/csp.ts), plus the "/*" header,
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button,
 // 4. the team filter on /novice shows only that team and goes back to all,
 // 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
@@ -25,7 +25,7 @@ const PAGES = [
   "/novice/2026-04-12-u17-drzavni-prvaki/",
 ];
 
-// The same policy Netlify sends, read from netlify.toml so the test cannot drift from it.
+// The header policy Netlify sends for "/*" (the first CSP in netlify.toml), read from there so the test cannot drift.
 const policy = readFileSync(new URL("../../netlify.toml", import.meta.url), "utf8").match(
   /Content-Security-Policy = "([^"]+)"/,
 )?.[1];

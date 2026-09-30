@@ -1,12 +1,13 @@
 // Checks the built pages in dist/ (SPEC.md §13.5). Runs in `npm run verify` after the build.
 // Every page: <html lang>, exactly one <h1>, alt + width + height on every <img>, no visible "TODO".
 // Pages without noindex: a unique <title>, a meta description, a canonical URL and og:image.
-// dist/admin/ and dist/ekipa/ are skipped (Decap and the hidden team pages).
+// Every page, the hidden team pages in dist/ekipa/ too: the site CSP <meta> tag (src/config/csp.ts).
+// dist/admin/ (Decap, its own CSP header) is skipped; dist/ekipa/ gets only the CSP check.
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 const DIST = "dist";
-const SKIP = ["admin", "ekipa"];
+const SKIP = ["admin"];
 
 function htmlFiles(dir) {
   return readdirSync(dir).flatMap((name) => {
@@ -23,6 +24,10 @@ for (const file of htmlFiles(DIST)) {
   const page = relative(DIST, file);
   const html = readFileSync(file, "utf8");
   const fail = (message) => errors.push(`${page}: ${message}`);
+
+  // The site CSP is a <meta> tag, not a Netlify header (netlify.toml): a page without it would run without the policy.
+  if (!/<meta\s+http-equiv="Content-Security-Policy"\s+content="[^"]+"/i.test(html)) fail("missing CSP <meta> (src/layouts/Base.astro)");
+  if (page.split(sep)[0] === "ekipa") continue; // hidden team pages: only the CSP check
 
   if (!/<html[^>]*\slang="[a-z-]+"/i.test(html)) fail("missing <html lang>");
   const h1 = (html.match(/<h1[\s>]/gi) ?? []).length;

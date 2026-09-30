@@ -39,16 +39,12 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    # Enforced since 28. 9. 2026 (SPEC.md §15, step 8): no violations with the enforced policy in
-    # tests/e2e/site.spec.ts, and on the live site only the injected "Powered by Netlify" badge
-    # (turned off in Project configuration > General) broke it. frame-ancestors replaces X-Frame-Options.
-    # Stricter than SPEC.md §13.1: the build has no inline styles, no data: images and no inline
-    # scripts, and opponent logos are local, so none of those sources are needed.
-    # connect-src also allows the Apps Script web app of /ekipa/plato and /ekipa/prevoz (SPEC.md §19): script.google.com
-    # answers with a redirect to script.googleusercontent.com. It is in the site-wide policy on purpose: Netlify does not
-    # document which value wins when two [[headers]] rules set the same header, and two CSP headers would both apply
-    # (the stricter one blocking). The risk is small: script-src stays 'self', so only our own scripts can call out.
-    Content-Security-Policy = "default-src 'self'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+    # CSP in two parts (30. 9. 2026). Netlify combines every rule that matches a path (it has no "except"), and two
+    # CSP headers both apply, the stricter one blocking. A strict policy here would also cover /admin, where Decap needs
+    # 'unsafe-eval' and inline styles. So this header keeps only what every path can live with, frame-ancestors
+    # included (a <meta> cannot set it; it replaces X-Frame-Options). The strict site policy is a <meta> tag in every
+    # built page (src/config/csp.ts, src/layouts/Base.astro, checked by scripts/check-seo.mjs), /admin has its own rule.
+    Content-Security-Policy = "frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
 
 # Files in /_astro/ have a content hash in their name, so browsers may keep them for a year.
 # Fewer requests and less bandwidth, which also saves credits.
@@ -63,4 +59,11 @@
   [headers.values]
     Content-Type = "text/calendar; charset=utf-8"
 
-# /admin (Decap, phase 2) needs its own CSP in a separate [[headers]] block. Never loosen "/*".
+# Decap CMS (SPEC.md §13.4). Its own CSP, on top of the "/*" one: Decap needs 'unsafe-eval' and inline styles, loads
+# from unpkg (pinned version with an SRI hash in public/admin/index.html), talks to the GitHub API and shows images
+# from the repository. No page of the site loads anything from /admin.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://raw.githubusercontent.com https://avatars.githubusercontent.com; font-src 'self' data:; connect-src 'self' https://api.github.com; form-action 'self'"
+    Cache-Control = "no-cache"

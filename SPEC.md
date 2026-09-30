@@ -875,8 +875,17 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 
 ### 13.4 Decap CMS (faza 2)
 
-- Admin na `/admin`. Backend GitHub. TODO: preveri trenutno priporočeno avtentikacijo za Decap na Netlify.
-- Urejljive zbirke: novice, treningi, trenerji, selekcije, igralci, sponzorji, dokumenti, zgodovina, strani, nastavitve.
+- Admin na `/admin` (`public/admin/index.html` in `config.yml`). Decap 3.16.3 z unpkg, pripet z SRI hashem.
+- Prijava (odločitev 30. 9. 2026): **DecapBridge**. Uredniki iz kluba se prijavijo z Googlom ali e-pošto, brez
+  GitHub računa; brezplačno do 10 urednikov. Git Gateway z Netlify Identity je opuščen. DecapBridge hrani
+  fine-grained žeton samo za ta repozitorij, samo **Contents: Read and write**, brez Workflows, z rokom veljavnosti.
+- Shranjevanje gre na vejo **`vsebina`**, ne na `main`. Nedeljski zagon iz 20.2 jo združi v `main` skupaj s podatki
+  in povzetkom: en deploy na teden (20.6). Nujna objava med tednom: ročni zagon workflowa (15 kreditov).
+- CSP v dveh delih: Netlify združi vsa pravila za pot, zato bi strog CSP za "/*" veljal tudi za `/admin`, kjer Decap
+  rabi `'unsafe-eval'` in inline sloge. Strog CSP strani je `<meta>` v `Base.astro` (`src/config/csp.ts`), glava za
+  "/*" ima samo `frame-ancestors`, `base-uri` in `object-src`, `/admin/*` ima svojo glavo.
+- Urejljive zbirke (po korakih): novice (1. korak), nato treningi, sponzorji, trenerji, igralci. Ostale ostanejo v
+  kodi, dokler jih klub res ne ureja: selekcije, dvorane, zgodovina, strani (zasebnost je pravno besedilo), nastavitve.
 - **Ne** urejljivo: `src/data/ff/*`, `src/config/ff.ts`, postavitev strani.
 - Vsaka zbirka ima v Decap kratko pomoč (`hint`) v slovenščini.
 

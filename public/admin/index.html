@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+  Decap CMS for the club editors (SPEC.md §13.4). The editor is Decap from unpkg, pinned to one version and checked with
+  its SRI hash (the same file on unpkg and jsDelivr, 30. 9. 2026). To update: change the version in the URL, then
+  compute the new hash: curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A
+  Its own CSP is the [[headers]] rule for "/admin/*" in netlify.toml. Settings and fields: config.yml next to this file.
+-->
+<html lang="sl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Urejanje vsebine | FBK Loka</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <script
+      src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"
+      integrity="sha384-A/Gdn928CNLufmnGWGs9RM4Q9o8bSNLeJERqBFrBjwzL7FRpoLT3MPF8Tl0+Wd2p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

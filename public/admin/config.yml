@@ -1,0 +1,107 @@
+# Decap CMS settings (SPEC.md §13.4). Every field matches the Zod schema of the same collection in src/content.config.ts:
+# same name, same type, same required status. A change in one needs the same change in the other.
+#
+# Saves go to the branch "vsebina", not to main. The Sunday FloorballFlash run merges it into main together with the
+# results and the weekly summary, so the club's edits cost no extra deploy (SPEC.md §20.6). Editors log in through
+# DecapBridge (step 4 replaces the backend block below with its settings).
+backend:
+  name: github
+  repo: L0L3KB0L3K/FBKLoka
+  branch: vsebina
+
+# Local test without login: `npx decap-server` in the project folder and the dev server, then /admin/ on localhost.
+# Decap uses it only on localhost; saves then go straight into the files of the local copy.
+local_backend: true
+
+site_url: https://fbkloka.netlify.app
+display_url: https://fbkloka.netlify.app
+logo_url: /favicon.svg
+
+# File names without č, š, ž and spaces: "Zmaga v Erdu" -> "zmaga-v-erdu".
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# Decap needs a global media folder. Every collection sets its own next to its files, so this one is the news folder.
+media_folder: src/content/novice/img
+public_folder: ./img
+
+collections:
+  # §4.6 News. Markdown with frontmatter; the cover sits in ./img next to the posts.
+  - name: novice
+    label: Novice
+    label_singular: Novica
+    description: >-
+      Shranjena novica gre na stran v nedeljo zvečer, skupaj z rezultati tekem. Povzetkov tedna (vir: samodejno)
+      ne pišeš ti, naredi jih stran sama.
+    folder: src/content/novice
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: naslov
+    summary: "{{datum}} · {{naslov}}"
+    sortable_fields: [datum, naslov]
+    media_folder: img
+    public_folder: ./img
+    fields:
+      - name: naslov
+        label: Naslov
+        widget: string
+        hint: Kratek in jasen, do 70 znakov. Prikaže se na kartici, na strani novice in v Googlu.
+      - name: datum
+        label: Datum
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        picker_utc: true
+        default: "{{now}}"
+        hint: Datum dogodka ali objave. Novice so razvrščene po njem, najnovejša prva.
+      - name: povzetek
+        label: Povzetek
+        widget: text
+        hint: En ali dva stavka. Prikaže se na kartici na naslovnici in v Googlu.
+      - name: naslovnaSlika
+        label: Naslovna slika
+        widget: image
+        hint: >-
+          Ležeča, vsaj 1200 px široka. Na kartici se obreže na razmerje 4:3, zato naj bo pomembno na sredini. Otroci
+          samo s privolitvijo staršev.
+      - name: slikaAlt
+        label: Opis slike
+        widget: string
+        hint: >-
+          Kaj je na sliki, za bralnike zaslona, npr. "Člani z medaljami po finalu". Če je plakat, prepiši njegovo
+          besedilo.
+      - name: selekcija
+        label: Ekipa
+        widget: select
+        required: false
+        hint: Novica se pokaže pri filtru te ekipe. Pusti prazno, če je za cel klub.
+        options:
+          - { label: Člani, value: clani }
+          - { label: Švigalice, value: svigalice }
+          - { label: U19, value: u19 }
+          - { label: U17, value: u17 }
+          - { label: U15, value: u15 }
+          - { label: U13, value: u13 }
+          - { label: U11, value: u11 }
+          - { label: U9, value: u9 }
+      - name: vir
+        label: Vir
+        widget: select
+        required: false
+        default: rocno
+        hint: Od kod je novica. Za novo novico pusti "ročno".
+        options:
+          - { label: ročno, value: rocno }
+          - { label: Instagram, value: instagram }
+          - { label: Facebook, value: facebook }
+          - { label: samodejno (povzetek tedna), value: samodejno }
+      - name: body
+        label: Besedilo
+        widget: markdown
+        buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list]
+        editor_components: []
+        hint: Naslov strani je že zgoraj, zato v besedilu uporabljaj samo podnaslove (H2, H3).
