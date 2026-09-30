@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   canCancel,
+  driversLine,
   fromSnapshot,
   matchesFor,
   messageFor,
@@ -84,4 +85,11 @@ test("CSS times in ms: minified seconds, milliseconds, fallback", () => {
   assert.equal(toMs("150ms", 0), 150);
   assert.equal(toMs("", 220), 220);
   assert.equal(toMs("auto", 150), 150);
+});
+
+test("drivers: the verb agrees with the number (vozi, vozita, vozijo)", () => {
+  assert.equal(driversLine([]), "Še nihče ne vozi.");
+  assert.equal(driversLine(["Maj Oman"]), "Vozi: Maj Oman");
+  assert.equal(driversLine(["Maj Oman", "Nejc Peklaj"]), "Vozita: Maj Oman, Nejc Peklaj");
+  assert.equal(driversLine(["Maj Oman", "Nejc Peklaj", "Tim Luznar"]), "Vozijo: Maj Oman, Nejc Peklaj, Tim Luznar");
 });

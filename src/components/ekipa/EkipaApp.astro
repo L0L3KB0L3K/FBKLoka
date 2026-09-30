@@ -272,6 +272,7 @@ const intro =
 <script>
   import {
     canCancel,
+    driversLine,
     fromSnapshot,
     matchesFor,
     messageFor,
@@ -584,7 +585,7 @@ const intro =
         }
       } else {
         const drivers = match.prevoz ?? [];
-        status.textContent = drivers.length ? `Vozijo: ${drivers.join(", ")}` : "Še nihče ne vozi.";
+        status.textContent = driversLine(drivers);
         if (myName && drivers.includes(myName)) actions.append(actionButton("Odjavi", "odjava", match, false));
         else actions.append(actionButton("Vozim jaz", "prijava", match, true));
       }

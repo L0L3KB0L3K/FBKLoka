@@ -57,6 +57,13 @@ export function teamsLine(match: EkipaMatch): string {
   return match.doma ? `FBK Loka – ${match.nasprotnik}` : `${match.nasprotnik} – FBK Loka`;
 }
 
+/** "Vozi: Ana", "Vozita: Ana, Bor", "Vozijo: Ana, Bor, Cene" (the verb agrees with the number), or nobody yet. */
+export function driversLine(drivers: string[]): string {
+  if (drivers.length === 0) return "Še nihče ne vozi.";
+  const verb = drivers.length === 1 ? "Vozi" : drivers.length === 2 ? "Vozita" : "Vozijo";
+  return `${verb}: ${drivers.join(", ")}`;
+}
+
 /** A plato can be cancelled until `hours` before the start; 0 = until the start. Drivers always until the start. */
 export function canCancel(mode: Mode, match: EkipaMatch, hours: number, now: Date): boolean {
   const left = Date.parse(match.zacetek) - now.getTime();

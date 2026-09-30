@@ -96,7 +96,7 @@ test("prevoz: only away matches, several drivers", async ({ page }) => {
   await away.getByRole("button", { name: "Vozim jaz" }).click();
   await page.getByLabel("Ime in priimek").selectOption("Bor Kos");
   await page.getByRole("button", { name: "Potrdi" }).click();
-  await expect(away.getByText("Vozijo: Bor Kos")).toBeVisible();
+  await expect(away.getByText("Vozi: Bor Kos")).toBeVisible();
 });
 
 test("axe: plato page with data", async ({ page }) => {
