@@ -1,7 +1,7 @@
 // Tests for the roster rules (SPEC.md §4.5). The year-of-birth rule is tested in format.test.ts.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { teamRoster, type ManualPlayer } from "../src/lib/players.ts";
+import { hiddenFfIds, teamRoster, type ManualPlayer } from "../src/lib/players.ts";
 import type { RosterPlayer } from "../src/lib/types.ts";
 
 const ff = (ime: string, stevilka: number | null, selekcija = "clani"): RosterPlayer => ({
@@ -52,4 +52,15 @@ test("a manual entry without a FloorballFlash match is added", () => {
       ["Cene Zupan", 5],
     ],
   );
+});
+
+test("hidden ids: aktiven: false by name and team, the same player is gone from the roster; no aktiven = shown", () => {
+  const ffList = [ff("Ana Novak", 9), ff("Bor Kos", 1), ff("Ana Novak", 5, "u19")];
+  const manualList = [manual(" ana novak ", { aktiven: false })];
+  assert.deepEqual(hiddenFfIds(ffList, manualList, "clani"), [9]);
+  assert.deepEqual(
+    teamRoster(ffList, manualList, "clani").map((p) => p.ime),
+    ["Bor Kos"],
+  );
+  assert.deepEqual(hiddenFfIds(ffList, [{ ime: "Bor Kos", selekcija: "clani" }], "clani"), []);
 });

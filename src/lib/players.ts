@@ -43,3 +43,13 @@ export function teamRoster(ff: RosterPlayer[], manual: ManualPlayer[], selekcija
     .filter((player) => !("aktiven" in player) || player.aktiven)
     .map(({ ime, stevilka, pozicija, letnik }) => ({ ime, stevilka, pozicija, letnik }));
 }
+
+/**
+ * FloorballFlash ids of the team's players hidden with aktiven: false in src/content/igralci (consent withdrawn), matched
+ * by name like teamRoster(). The MVP (scripts/fetch-mvp.ts) skips them, so one entry hides a player everywhere on the
+ * site (SPEC.md §20.7). An entry without aktiven counts as shown, as in the collection schema.
+ */
+export function hiddenFfIds(ff: RosterPlayer[], manual: { ime: string; selekcija: string; aktiven?: boolean }[], selekcija: string): number[] {
+  const hidden = new Set(manual.filter((player) => player.selekcija === selekcija && player.aktiven === false).map((player) => key(player.ime)));
+  return ff.filter((player) => player.selekcija === selekcija && hidden.has(key(player.ime))).map((player) => player.ffId);
+}

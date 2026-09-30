@@ -22,6 +22,8 @@ Stanje: 29. 9. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Najnovejša novica je vabilo na tekmo 26. 9., ki je že mimo. Na naslovnici je prva. Potrebujemo novico z rezultatom ali novo objavo.
 - [ ] Stara stran fbkloka.si pri ekipi prikazuje izmišljene igralce (npr. Žiga Pavlič, Marko Jenko), trenerja "Janez Trener" in "Marko Pomočnik" ter napačne treninge. Do preklopa domene naj jo skrbnik popravi ali skrije.
 - [ ] Sestava članov je z uradnega seznama igralcev IFL na FloorballFlash (23 igralcev, tudi mladoletni). Ali kdo ne želi biti objavljen? Tak igralec se skrije z vnosom `aktiven: false`.
+- [ ] Kdo v klubu sprejme preklic privolitve (igralec ali starši) in ga vnese? En vnos (`aktiven: false`) igralca skrije
+  na strani ekipe in pri MVP; plato in prevoz imata svoj seznam v Sheetu. Koraki: SPEC.md §20.7.
 
 ## Lahko pride kasneje
 

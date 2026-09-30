@@ -4,12 +4,16 @@
 // photo in src/data/ff/mvp/. Files are written only on a change (every change is a commit and a deploy); on any error
 // the old files stay and the step does not fail the workflow.
 //
+// Players hidden on the site with aktiven: false in src/content/igralci (consent withdrawn) are never MVP (SPEC.md §20.7).
+//
 // FloorballFlash (checked 29. 9. 2026): the stats filter by gameId works, the filter by teamId does not, so our players
 // are picked by the roster. Players marked incognito are never in the roster. Photos: images/crop/ratio3x4/<width>/.
 import { existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { FF_CONFIG } from "../src/config/ff.ts";
-import { MVP_EXCLUDED, SEASON_LABEL } from "../src/config/mvp.ts";
+import yaml from "js-yaml";
+import { SEASON_LABEL } from "../src/config/mvp.ts";
 import { baselineSavePct, pickMvp, type GameLine, type Mvp, type MvpMatch } from "../src/lib/mvp.ts";
+import { hiddenFfIds } from "../src/lib/players.ts";
 import type { Match, RosterPlayer } from "../src/lib/types.ts";
 import { ffRequest, pause } from "./ff-api.ts";
 
@@ -55,11 +59,15 @@ const senior: MvpMatch[] = readJson<Match[]>(new URL("matches.json", OUT_DIR), [
     goalsFor: m.rezultat!.loka,
     goalsAgainst: m.rezultat!.nasprotnik,
   }));
-const names = new Map(
-  readJson<RosterPlayer[]>(new URL("roster.json", OUT_DIR), [])
-    .filter((p) => p.selekcija === "clani")
-    .map((p) => [p.ffId, p.ime]),
-);
+const roster = readJson<RosterPlayer[]>(new URL("roster.json", OUT_DIR), []);
+const names = new Map(roster.filter((p) => p.selekcija === "clani").map((p) => [p.ffId, p.ime]));
+const IGRALCI = new URL("../src/content/igralci/", import.meta.url);
+const manual = existsSync(IGRALCI)
+  ? readdirSync(IGRALCI)
+      .filter((file) => file.endsWith(".yaml"))
+      .map((file) => yaml.load(readFileSync(new URL(file, IGRALCI), "utf8")) as { ime: string; selekcija: string; aktiven?: boolean })
+  : [];
+const excluded = new Set(hiddenFfIds(roster, manual, "clani"));
 
 async function run(): Promise<Mvp | null> {
   const lines: GameLine[] = [];
@@ -108,7 +116,7 @@ async function run(): Promise<Mvp | null> {
 
   const seasonId = competitionByLabel.get(SEASON_LABEL);
   const season = seasonId === undefined ? null : { competitionId: seasonId, label: SEASON_LABEL };
-  const picked = pickMvp(lines, senior, baselines, new Set(MVP_EXCLUDED), season);
+  const picked = pickMvp(lines, senior, baselines, excluded, season);
   if (!picked) {
     await photo(0, null); // no MVP: no photo stays behind
     return null;

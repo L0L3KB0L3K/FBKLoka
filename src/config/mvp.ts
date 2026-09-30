@@ -20,8 +20,3 @@ export const SEASON_LABEL = "IFL";
 /** Weekend scores this close are a tie: more goals, then fewer penalty minutes, then more matches with a positive score. */
 export const TIE_MARGIN = 0.1;
 
-/**
- * FloorballFlash person ids that are never shown as MVP (consent withdrawn). Players marked incognito in FloorballFlash
- * are not in the roster at all, so they never need to be listed here.
- */
-export const MVP_EXCLUDED: readonly number[] = [];

@@ -1331,8 +1331,8 @@ Floorball"): brez praga za vratarja, ena zvezna ocena v enoti "goli" za igralce 
 - Vikend je sobota in nedelja po ljubljanskem času: zadnji vikend s končanimi članskimi tekmami. Ocena vikenda je
   vsota tekem. Tekma med tednom šteje samo v sezonske številke.
 - Izenačenje (razlika ≤ 0,10): več golov, manj kazenskih minut, več tekem s pozitivno oceno, nato ID (vedno isti izid).
-- Kandidati so samo igralci s seznama članov (`roster.json`, brez oseb z `incognito`) in brez ID-jev v `MVP_EXCLUDED`
-  (umaknjena privolitev). Mladoletni so dovoljeni; brez letnika, šole in kontakta.
+- Kandidati so samo igralci s seznama članov (`roster.json`, brez oseb z `incognito`) in brez igralcev, skritih z
+  `aktiven: false` v `src/content/igralci` (umaknjena privolitev, 20.7). Mladoletni so dovoljeni; brez letnika, šole in kontakta.
 - Omejitev: formula ne vidi obrambe igralcev v polju, zato branilec brez točk ne more biti MVP.
 
 **Podatki (preverjeno 29. 9. 2026):** `playerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
@@ -1346,7 +1346,7 @@ vrstice ene tekme. Filter `teamId` ne deluje, zato se naši igralci izberejo po 
   vikend, en odstavek za vsako tekmo ("Tekma proti FBC Borovnica: 2 gola, 1 podaja"; vratar: "25 obramb od 31 strelov
   (81 %)") in "Skupaj v sezoni IFL: …" (samo IFL, `SEASON_LABEL`, odločitev kluba 29. 9. 2026; brez tekme v IFL
   vrstice ni). Brez podatka se kartica ne izriše; brez fotografije je brez slike.
-- Repozitorij je javen: fotografija ostane v zgodovini gita. Umik privolitve: ID v `MVP_EXCLUDED` in brisanje iz zgodovine.
+- Repozitorij je javen: fotografija ostane v zgodovini gita. Umik privolitve: 20.7.
 
 **Narejeno:** `tests/mvp.test.ts` (primeri iz dokumenta, vikend, izenačenje, izločitev, slovenske oblike), kartica samo
 ob podatku, `npm run verify` in `npm run test:a11y` zelena.
@@ -1441,6 +1441,20 @@ sproži gradnje, torej ne stane. Po 27. 10. se odloči, ali se sobota vrne (pror
 
 **Narejeno:** proračun zapisan; veja `razvoj` ima branch deploy; na `main` gre največ enkrat na teden.
 
-### 20.7 Odprto
+### 20.7 Umik privolitve
 
-- Kdo vodi seznam umaknjenih privolitev (ID oseb v FloorballFlash)?
+Ena oznaka skrije igralca povsod na strani: `aktiven: false` v `src/content/igralci/<ime>.yaml`. Velja za sestavo
+ekipe in za MVP, z njim tudi za tedenski povzetek. `MVP_EXCLUDED` je odstranjen (30. 9. 2026), da nista dva seznama.
+
+Koraki ob umiku:
+
+1. `src/content/igralci/<ime>.yaml` z `aktiven: false`. Ime točno kot na FloorballFlash; številka in pozicija sta v
+   shemi obvezni, prepiši ju s strani ekipe. Push na `main` (en deploy).
+2. Sheet `Igralci`: `aktiven` na `FALSE` (plato in prevoz).
+3. Če je trenutni MVP: `npm run fetch:ff` ali nedeljski zagon. Nov izbor zbriše njegovo fotografijo iz
+   `src/data/ff/mvp/`.
+4. Objavljeni povzetki z njegovim imenom (`src/content/novice/*-povzetek-tedna.md`): odstrani stavek z MVP in
+   nastavi `vir: rocno`.
+5. Ime in fotografija ostaneta v javni zgodovini gita. Prepis zgodovine je ločena odločitev.
+
+Odprto pri klubu: kdo sprejme preklic (igralec ali starši) in ga vnese (`docs/04-odprto-pri-klubu.md`).
