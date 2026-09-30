@@ -2,7 +2,7 @@
 naslov: "Podpri nas"
 opis: "Podprite FBK Loka: klub prostovoljcev, ki mlade vzgaja v športu, šoli in prijateljstvu. Člani igrajo v mednarodni ligi IFL."
 # Order (Maj, 1. 10. 2026): achievements first, then what matters more than results, then the costs a sponsor helps with.
-# Instagram numbers for 26. 6.–23. 9. 2026: refresh every season. Sponsor packages and prices: from the club (docs/04).
+# Instagram numbers left out (Maj, 1. 10. 2026: not strong enough). Prices and the number of members: from the club (docs/04).
 ---
 
 ## Dosežki zadnjih let
@@ -36,17 +36,9 @@ Vse to stane. Sponzorska sredstva nam pomagajo pokriti te stroške, da lažje tr
 
 Članska ekipa igra v mednarodni ligi IFL z gostovanji v Avstriji in na Madžarskem. Prevoz, hrana in hoteli so velik strošek, ki ga igralci zdaj pokrivajo sami. Novi sponzorji bi pomagali pokriti tudi te stroške.
 
-## Kje je vaše ime vidno
+## Kaj ponujamo sponzorjem
 
-- Tekme v dvorani Poden: člani v ligi IFL in 1. SFL ter mladinske selekcije
-- Spletna stran, objave na Instagramu in Facebooku
-- Gostovanja v Avstriji in na Madžarskem
-
-## Doseg kluba na Instagramu
-
-Zadnji trije meseci (26. 6.–23. 9. 2026):
-
-- 532 sledilcev, rast 5 % v zadnjem četrtletju
-- 3.376 doseženih računov, 89 % od teh ne sledi klubu
-- 35.726 prikazov objav
-- 33 % sledilcev je iz Škofje Loke, sledijo Ljubljana ter Gorenja vas – Poljane
+- Napis na bandah v dvorani Poden, na domačih tekmah članov in mladih
+- Napis na dresih, ki ga vidijo tudi na gostovanjih v Avstriji in na Madžarskem
+- Promocija na klubskem Instagramu in Facebooku
+- Logotip s povezavo na vašo spletno stran na dnu vsake strani kluba

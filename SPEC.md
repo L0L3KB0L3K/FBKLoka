@@ -567,8 +567,9 @@ Kontakt je dosegljiv z enim klikom z vsake strani (noga).
 
 - `/novice`: seznam, filter po selekciji. `/novice/[slug]`: naslov, datum, slika, besedilo, povezava nazaj.
 - `/dokumenti`: kategorije, povezave na vire pri FZS in IFF. Lokalno samo klubski dokumenti.
-- `/podpri-nas` (zgrajena 1. 10. 2026): zakaj FBK Loka (naslovi, mladi, reprezentanca, ustanovitev zveze), doseg na
-  Instagramu, kje je ime sponzorja vidno, obrazec `sponzorstvo` (podjetje, ime, e-mail, sporočilo). Povezava v nogi
+- `/podpri-nas` (zgrajena 1. 10. 2026): dosežki (člani, nato mladi), več kot rezultat (prostovoljci, družina, najprej
+  šola, piknik, priprave, Prague Games), stroški članov v IFL, kaj ponujamo (bande, dresi, Instagram in Facebook, logotip
+  na strani), obrazec `sponzorstvo` (podjetje, ime, e-mail, sporočilo). Povezava v nogi
   in "Postanite sponzor" ob pasu sponzorjev, ne v glavnem meniju. Odprto: sponzorski paketi in cene, donacija dela
   dohodnine (ali je klub upravičenec).
 - `/kodeks`: kdo vodi katero ekipo, pravila ravnanja do otrok, kontakt za prijavo težav.
@@ -1051,7 +1052,7 @@ in **brez EXIF podatkov** (vsaj ena izvorna slika je imela GPS koordinate).
 | `novice/img/*.jpg` | Naslovne slike novic | Pripravljeno |
 | `zgodovina/zgodovina.yaml` | Časovnica 1991–2026 (Loka Spiders, Insport, FBK Loka) | Vnosi z `opomba: TODO` potrebujejo potrditev |
 | `strani/klub.md` | Osnutek strani O klubu | Osnutek, TODO v komentarjih |
-| `strani/podpri-nas.md` | Doseg na Instagramu (26. 6.–23. 9. 2026) za sponzorje | Številke osveži vsako sezono |
+| `strani/podpri-nas.md` | Dosežki, vrednote kluba in ponudba za sponzorje (številke z Instagrama izpuščene 1. 10. 2026) | Dosežke osveži vsako sezono |
 | `strani/o-floorballu.md` | Kaj je floorball, za starše | Osnutek |
 
 Ugotovitve iz strani Floorball zveze Slovenije:
