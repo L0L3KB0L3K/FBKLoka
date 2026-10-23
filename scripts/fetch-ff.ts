@@ -26,6 +26,7 @@ import {
   type FfCompetitionPlayer,
   type FfStandingsTable,
 } from "../src/lib/ff.ts";
+import { shareTwinResults } from "../src/lib/matches.ts";
 import type { Match, RosterPlayer, Standings, StandingsFile } from "../src/lib/types.ts";
 import { ffRequest, pause } from "./ff-api.ts";
 
@@ -122,7 +123,7 @@ const report: { selekcija: string; label: string; competitionId: number; name: s
 let attempted = 0;
 
 for (const [selekcija, competitions] of Object.entries(FF_CONFIG)) {
-  for (const { competitionId, label, teamNames } of competitions) {
+  for (const { competitionId, label, teamNames, site } of competitions) {
     if (competitionId === null) continue;
     attempted++;
 
@@ -144,7 +145,7 @@ for (const [selekcija, competitions] of Object.entries(FF_CONFIG)) {
         throw new Error(`team ${teamNames.join(" / ")} not found in "${details.name}"`);
       }
 
-      const matches = normalize(details, { selekcija, label, teamNames });
+      const matches = normalize(details, { selekcija, label, teamNames, site });
       fresh.push(...matches);
       report.push({ selekcija, label, competitionId, name: details.name, ok: true });
       console.log(`OK    ${selekcija} ${label} (${competitionId}): ${matches.length} matches`);
@@ -239,7 +240,8 @@ if (existsSync(ROSTER_FILE) && readFileSync(ROSTER_FILE, "utf8") === rosterText)
 
 const previousText = existsSync(MATCHES_FILE) ? readFileSync(MATCHES_FILE, "utf8") : "";
 const previous: Match[] = previousText ? JSON.parse(previousText) : [];
-const merged = await useLocalLogos(mergeWithPrevious(fresh, previous, failed));
+// A twin game (IFL game that also counts for 1. SFL) gets the result its other entry has (src/lib/matches.ts).
+const merged = shareTwinResults(await useLocalLogos(mergeWithPrevious(fresh, previous, failed)));
 removeUnusedLogos(
   new Set([
     ...merged.map((match) => match.nasprotnik.logo),

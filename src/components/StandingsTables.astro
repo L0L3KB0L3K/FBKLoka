@@ -5,6 +5,7 @@
 // Tables where nobody has played yet are left out by the page (SPEC.md §1: no empty sections).
 // On a phone the overtime columns are hidden, so the table fits 320 px; the box still scrolls sideways
 // if a long name needs it, and takes keyboard focus for that (axe: scrollable-region-focusable).
+import { ffCompetitionWeb } from "../config/ff.ts";
 import { formatDate } from "../lib/format.ts";
 import type { Standings } from "../lib/types.ts";
 import NewTabIcon from "./NewTabIcon.astro";
@@ -113,7 +114,7 @@ const overtime = `${cell} hidden sm:table-cell`;
     standings.map((competition) => (
       <>
         {" "}
-        <a href={`https://www.floorballflash.at/competition/${competition.competitionId}/standings`} target="_blank" rel="noopener">
+        <a href={`${ffCompetitionWeb(competition.competitionId)}/standings`} target="_blank" rel="noopener">
           Lestvica {competition.tekmovanje} na FloorballFlash
           <NewTabIcon class="inline size-4 align-[-0.15em]" />
         </a>

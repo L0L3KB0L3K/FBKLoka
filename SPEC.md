@@ -428,6 +428,16 @@ query competitionsCurrentSeason($organizerId: Int) {
 }
 ```
 
+### 5.7a Slovenska tekmovanja, dvojne tekme (23. 10. 2026)
+
+- Tekmovanja Floorball zveze Slovenije so na **floorballflash.si**, IFL na floorballflash.at. V `src/config/ff.ts` ima
+  vsako tekmovanje `site` (`si` ali `at`) in `teamId` naše ekipe. Povezave na tekmo, lestvico in vse tekme ekipe
+  (`/competition/<id>/games?team=<teamId>`, pod tekmami na strani ekipe) gredo na pravo stran.
+- Švigalice igrajo mešano 2. SFL (761) kot "Švigalice Loka". Tedensko preverjanje išče vse ekipe z besedo "Loka".
+- Tekma IFL med slovenskima ekipama (npr. z Borovnico) šteje tudi za 1. SFL in je na FloorballFlash dvakrat, z
+  rezultatom samo v enem tekmovanju. Prenos rezultat prepiše dvojnici (`shareTwinResults`), seznami, koledar, MVP in
+  povzetek jo štejejo enkrat (`uniqueGames`, ključ: ekipa, začetek, nasprotnik). Na strani ekipe je v obeh zavihkih.
+
 ### 5.8 Faza 3: lestvica, statistika, rezultat v živo
 
 - **Lestvica** in **statistika igralcev**: poizvedbi še nista znani. TODO: lastnik ujame Payload in
@@ -1317,6 +1327,21 @@ pobriše kodo in posnetek; `npm run verify` in `tests/e2e/ekipa.spec.ts` zelena.
 
 ### 20.2 Urnik osveževanja FloorballFlash
 
+**Izpad in popravek (23. 10. 2026):** 4., 11. in 18. 10. je GitHub edini nedeljski zagon začel 2 do 3,5 ure pozno
+(ob 00:22–01:35 po ljubljanskem času), vratca pa so dovolila le 45 minut. Vsi trije so se končali brez prenosa, kot
+uspešni, zato ni bilo e-pošte: rezultati in povzetki treh vikendov niso bili objavljeni. Popravek:
+
+- Več vnosov cron na noč: nedelja 20:07–23:07 UTC in ponedeljek 00:07–03:07 UTC (ponovni poskusi, ko GitHub zagon izpusti).
+- Vratca spustijo zagon od nedelje 22:00 do ponedeljka 06:00 (sobota 22:30–06:30), dokler bot v tem oknu še ni objavil
+  podatkov (`LAST_DATA_COMMIT` iz `git log`): največ en deploy na noč.
+- Vratca zapišejo tudi `window=saturday|sunday|manual`; povzetek, združitev veje `vsebina` in preverjanje novih tekmovanj
+  so vezani na okno, ne več na niz cron.
+- Povzetek tedna gleda teden pred 12 urami, zato zagon po polnoči še vedno objavi teden, ki se je končal v nedeljo.
+- Zamujeno: podatki prenešeni 23. 10., povzetka 28. 9.–4. 10. in 5.–11. 10. z MVP objavljena za nazaj (12.–18. 10. ni
+  bilo tekem).
+
+Prvotni načrt:
+
 Zdaj nedelja 22:00 (`.github/workflows/fetch-ff.yml`). Novo: sobota ob 22:37 in nedelja ob 22:07 po ljubljanskem času.
 Do 27. 10. 2026 je sobotni cron izklopljen zaradi kreditov (20.6); vratca sobotno okno še poznajo.
 GitHub cron teče samo v UTC, zato sta na dan dva vnosa in vratca, ki spustijo samo pravo uro. Minute niso :00 in :30,
@@ -1361,7 +1386,8 @@ Floorball"): brez praga za vratarja, ena zvezna ocena v enoti "goli" za igralce 
   `aktiven: false` v `src/content/igralci` (umaknjena privolitev, 20.7). Mladoletni so dovoljeni; brez letnika, šole in kontakta.
 - Omejitev: formula ne vidi obrambe igralcev v polju, zato branilec brez točk ne more biti MVP.
 
-**Podatki (preverjeno 29. 9. 2026):** `playerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
+**Podatki (preverjeno 29. 9. 2026; 23. 10. je FloorballFlash `playerStats` preimenoval v `fieldPlayerStats`, kar je od
+4. 10. podiralo MVP s HTTP 422):** `fieldPlayerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
 vrstice ene tekme. Filter `teamId` ne deluje, zato se naši igralci izberejo po `roster.json`. Fotografija:
 `https://storage.googleapis.com/floorballflash.appspot.com/images/crop/ratio3x4/960/<imageId>.jpeg` (tudi 240 in 480).
 

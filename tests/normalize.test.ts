@@ -8,7 +8,7 @@ import type { Match } from "../src/lib/types.ts";
 
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/ff-738.json", import.meta.url), "utf8"));
 const details: FfCompetitionDetails = fixture.data.competitionDetails;
-const config = { selekcija: "clani", label: "IFL", teamNames: ["FBK Loka"] };
+const config = { selekcija: "clani", label: "IFL", teamNames: ["FBK Loka"], site: "at" as const };
 const matches = normalize(details, config);
 const byId = (id: number) => {
   const match = matches.find((m) => m.id === id);

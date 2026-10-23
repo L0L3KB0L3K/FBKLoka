@@ -10,7 +10,7 @@ import TeamMatches from "../../components/TeamMatches.astro";
 import TeamSummary from "../../components/TeamSummary.astro";
 import TabPanel from "../../components/ui/TabPanel.astro";
 import Tabs from "../../components/ui/Tabs.astro";
-import { FF_CONFIG } from "../../config/ff.ts";
+import { FF_CONFIG, ffCompetitionWeb } from "../../config/ff.ts";
 import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
 import { allMatches, ffRoster, standingsFile } from "../../lib/match-data.ts";
@@ -53,9 +53,11 @@ const standings = standingsFile.tekmovanja
 
 // Matches per competition, in the order of src/config/ff.ts. Competitions without matches are left out.
 const competitions = (FF_CONFIG[team.id] ?? [])
-  .map(({ label }) => ({
+  .map(({ label, competitionId, teamId }) => ({
     id: `${team.id}-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
     label,
+    // All games of our team in this competition on FloorballFlash.
+    ffUrl: competitionId !== null && teamId !== null ? `${ffCompetitionWeb(competitionId)}/games?team=${teamId}` : null,
     ...splitByState(allMatches.filter((m) => m.selekcija === team.id && m.tekmovanje === label)),
   }))
   .filter((c) => c.prihodnje.length + c.odigrane.length > 0);

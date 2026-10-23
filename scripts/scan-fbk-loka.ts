@@ -1,4 +1,5 @@
-// Lists every current-season competition where a team name starts with "FBK Loka" (SPEC.md §5.7).
+// Lists every current-season competition with a team whose name has the word "Loka", e.g. "FBK Loka A" or "Švigalice Loka"
+// (SPEC.md §5.7; until 23. 10. 2026 only names starting with "FBK Loka", which missed Švigalice).
 // By hand: `npm run scan:ff`, then copy the IDs into src/config/ff.ts.
 // With --check (the last step of the Sunday run in .github/workflows/fetch-ff.yml): prints only the competitions that
 // src/config/ff.ts does not have yet and exits 1 when there are any, so the run fails and GitHub e-mails the owner.
@@ -44,7 +45,7 @@ for (const organizerId of ORGANIZERS) {
       const { competitionDetails } = await ffRequest<Details>("competitionTeams", TEAMS_QUERY, {
         competitionId: competition.id,
       });
-      const loka = competitionDetails.teams.filter((team) => team.name.startsWith("FBK Loka"));
+      const loka = competitionDetails.teams.filter((team) => /\bLoka\b/.test(team.name));
       if (loka.length) {
         found.push({ id: competition.id, name: competition.name, teams: loka.map((team) => team.name) });
         if (!CHECK) {

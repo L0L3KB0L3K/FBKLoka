@@ -3,7 +3,7 @@
 import type { Match, Position, RosterPlayer, Standings } from "./types.ts";
 
 export const FF_LOGO_BASE = "https://storage.googleapis.com/floorballflash.appspot.com/";
-export const FF_GAME_URL = "https://www.floorballflash.at/game/";
+import { FF_WEB, type FfSite } from "../config/ff.ts";
 
 /** GraphQL query for fixtures and results of one competition (SPEC.md §5.3). */
 export const COMPETITION_DETAILS_QUERY = `query competitionDetailsTree($competitionId: Int!) {
@@ -60,7 +60,7 @@ export type FfCompetitionDetails = {
 };
 
 /** What normalize() needs to know about one configured competition. */
-export type NormalizeConfig = { selekcija: string; label: string; teamNames: string[] };
+export type NormalizeConfig = { selekcija: string; label: string; teamNames: string[]; site: FfSite };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -162,7 +162,7 @@ export function normalize(details: FfCompetitionDetails, config: NormalizeConfig
             stanje: finished ? "koncana" : "prihodnja",
             rezultat: finished ? { loka: ours.score ?? 0, nasprotnik: theirs.score ?? 0 } : null,
             faza: phase.name,
-            ffUrl: FF_GAME_URL + game.id,
+            ffUrl: `${FF_WEB[config.site]}/game/${game.id}`,
           });
         }
       }

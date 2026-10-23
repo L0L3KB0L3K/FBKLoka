@@ -2,6 +2,7 @@
 // Matches on a team page (SPEC.md §7.2): upcoming on top, played below (newest first),
 // result from the club's side. One tab per competition, but only when more than one has matches.
 import type { Match } from "../lib/types.ts";
+import FfGamesLink from "./FfGamesLink.astro";
 import MatchRow from "./MatchRow.astro";
 import TabPanel from "./ui/TabPanel.astro";
 import Tabs from "./ui/Tabs.astro";
@@ -11,6 +12,7 @@ interface Competition {
   label: string;
   prihodnje: Match[];
   odigrane: Match[];
+  ffUrl: string | null; // all games of the team in this competition on FloorballFlash
 }
 
 interface Props {
@@ -44,6 +46,7 @@ const ListHeading = nested ? "h4" : "h3";
               </ul>
             </section>
           )}
+          {c.ffUrl && <FfGamesLink href={c.ffUrl} label={c.label} />}
         </TabPanel>
       ))}
     </Tabs>
@@ -66,6 +69,7 @@ const ListHeading = nested ? "h4" : "h3";
             </ul>
           </section>
         )}
+        {c.ffUrl && <FfGamesLink href={c.ffUrl} label={c.label} />}
       </Fragment>
     ))
   )

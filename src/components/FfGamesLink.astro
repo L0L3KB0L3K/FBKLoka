@@ -1,0 +1,20 @@
+---
+// Link under a competition's matches on a team page: all games of our team in that competition on FloorballFlash,
+// on the competition's own site (floorballflash.si for the Slovenian federation). Opens in a new tab.
+import NewTabIcon from "./NewTabIcon.astro";
+
+interface Props {
+  href: string;
+  /** Competition label from src/config/ff.ts, e.g. "1. SFL". */
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<p class="mt-8 text-small">
+  <a href={href} target="_blank" rel="noopener" class="inline-flex min-h-11 items-center gap-1 font-semibold">
+    Vse tekme {label} na FloorballFlash
+    <NewTabIcon class="inline size-4" />
+  </a>
+</p>

@@ -13,6 +13,7 @@ import { FF_CONFIG } from "../src/config/ff.ts";
 import yaml from "js-yaml";
 import { SEASON_LABEL } from "../src/config/mvp.ts";
 import { baselineSavePct, pickMvp, type GameLine, type Mvp, type MvpMatch } from "../src/lib/mvp.ts";
+import { uniqueGames } from "../src/lib/matches.ts";
 import { hiddenFfIds } from "../src/lib/players.ts";
 import type { Match, RosterPlayer } from "../src/lib/types.ts";
 import { ffRequest, pause } from "./ff-api.ts";
@@ -26,8 +27,9 @@ const MAX_PHOTO_BYTES = 2_000_000;
 
 type Value = { value: number | null } | null;
 type Person = { id: number; imageId: string | null };
-const PLAYERS_QUERY = `query mvpPlayers($q: PlayerStatsFilter!) {
-  playerStats(query: $q) { player { id imageId } stats { goals { value } assists { value } pim { value } } }
+// fieldPlayerStats: renamed from playerStats by FloorballFlash (HTTP 422 from 4. 10. 2026, fixed 23. 10.).
+const PLAYERS_QUERY = `query mvpPlayers($q: FieldPlayerStatsFilter!) {
+  fieldPlayerStats(query: $q) { player { id imageId } stats { goals { value } assists { value } pim { value } } }
 }`;
 const GOALIES_QUERY = `query mvpGoalies($q: GoalieStatsFilter!) {
   goalieStats(query: $q) { player { id imageId } stats { saves { value } shotsAgainst { value } goalsAgainst { value } } }
@@ -49,7 +51,8 @@ const filter = (baseFilter: object, orderBy: string) => ({
 const competitionByLabel = new Map(
   (FF_CONFIG.clani ?? []).flatMap((c) => (c.competitionId === null ? [] : [[c.label, c.competitionId] as const])),
 );
-const senior: MvpMatch[] = readJson<Match[]>(new URL("matches.json", OUT_DIR), [])
+// uniqueGames: a game that counts for IFL and 1. SFL is one game, scored once.
+const senior: MvpMatch[] = uniqueGames(readJson<Match[]>(new URL("matches.json", OUT_DIR), []))
   .filter((m) => m.selekcija === "clani" && m.stanje === "koncana" && m.rezultat && competitionByLabel.has(m.tekmovanje))
   .map((m) => ({
     id: m.id,
@@ -74,7 +77,7 @@ async function run(): Promise<Mvp | null> {
   const images = new Map<number, string | null>();
   for (const match of senior) {
     await pause();
-    const { playerStats } = await ffRequest<{ playerStats: PlayerRow[] }>("mvpPlayers", PLAYERS_QUERY, {
+    const { fieldPlayerStats: playerStats } = await ffRequest<{ fieldPlayerStats: PlayerRow[] }>("mvpPlayers", PLAYERS_QUERY, {
       q: filter({ gameId: match.id, for: "Game" }, "points"),
     });
     await pause();

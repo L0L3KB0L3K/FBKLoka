@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { formatDate, formatDateLong, formatDayShort, formatTime, formatWeek, weekStart } from "../src/lib/format.ts";
-import { groupByWeek, scoreForLoka, scoreHomeAway, splitByState, uniqueGames } from "../src/lib/matches.ts";
+import { groupByWeek, scoreForLoka, scoreHomeAway, shareTwinResults, splitByState, uniqueGames } from "../src/lib/matches.ts";
 import type { TimelineEntry } from "../src/lib/timeline.ts";
 import type { Match } from "../src/lib/types.ts";
 
@@ -55,7 +55,7 @@ const base: Match = {
 test("a game between our two teams is listed once, from the home team's side", () => {
   const home = base;
   const away: Match = { ...base, tekmovanje: "U17 B", doma: false, ekipaLoka: "FBK Loka B", nasprotnik: { ime: "FBK Loka A", logo: null } };
-  const other: Match = { ...base, id: 2 };
+  const other: Match = { ...base, id: 2, zacetek: "2026-10-11T10:00:00+02:00" }; // another game, another day
   const unique = uniqueGames([away, home, other]);
   assert.equal(unique.length, 2);
   assert.equal(unique.find((m) => m.id === 1)?.ekipaLoka, "FBK Loka A");
@@ -111,4 +111,18 @@ test("clean page paths for canonical URLs and the menu", async () => {
   assert.equal(cleanPath("/tekme"), "/tekme");
   assert.equal(cleanPath("/ekipe/clani.html"), "/ekipe/clani");
   assert.equal(cleanPath("/ekipe/"), "/ekipe");
+});
+
+test("a game that counts for IFL and 1. SFL: the twin gets the result, lists show it once (IFL first)", () => {
+  const ifl: Match = { ...base, id: 16450, tekmovanje: "IFL", rezultat: { loka: 5, nasprotnik: 4 } };
+  const sfl: Match = { ...base, id: 17645, tekmovanje: "1. SFL", stanje: "prihodnja", rezultat: null };
+  const shared = shareTwinResults([ifl, sfl]);
+  assert.equal(shared[1]?.stanje, "koncana");
+  assert.deepEqual(shared[1]?.rezultat, { loka: 5, nasprotnik: 4 });
+  assert.deepEqual(
+    uniqueGames(shared).map((m) => m.id),
+    [16450],
+  );
+  const other: Match = { ...sfl, id: 17000, zacetek: "2026-10-31T17:00:00+01:00" }; // another day: no twin
+  assert.equal(shareTwinResults([ifl, other])[1]?.rezultat, null);
 });

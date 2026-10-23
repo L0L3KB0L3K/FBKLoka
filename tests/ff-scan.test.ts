@@ -6,10 +6,10 @@ import { newCompetitions } from "../src/lib/ff-scan.ts";
 
 const config: Record<string, FfCompetition[]> = {
   clani: [
-    { competitionId: 738, label: "IFL", teamNames: ["FBK Loka"] },
-    { competitionId: 760, label: "1. SFL", teamNames: ["FBK Loka"] },
+    { competitionId: 738, label: "IFL", teamNames: ["FBK Loka"], site: "at", teamId: 3462 },
+    { competitionId: 760, label: "1. SFL", teamNames: ["FBK Loka"], site: "si", teamId: 3597 },
   ],
-  u17: [{ competitionId: null, label: "U17 A", teamNames: ["FBK Loka A"] }], // not in FloorballFlash yet
+  u17: [{ competitionId: null, label: "U17 A", teamNames: ["FBK Loka A"], site: "si", teamId: null }], // not in FloorballFlash yet
 };
 
 test("new: a competition with FBK Loka that no team of the config has", () => {
