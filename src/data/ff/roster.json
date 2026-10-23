@@ -159,5 +159,110 @@
     "ime": "Žak Kankel Kular",
     "stevilka": 92,
     "pozicija": "branilec"
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 160,
+    "ime": "Anže Burnik",
+    "stevilka": 9,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 1013,
+    "ime": "Anže Križaj",
+    "stevilka": 27,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 163,
+    "ime": "Gašper Egart",
+    "stevilka": 18,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 6481,
+    "ime": "Gašper Kalan",
+    "stevilka": 3,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 5283,
+    "ime": "Gašper Masnec",
+    "stevilka": 45,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 166,
+    "ime": "Jan Dolenc",
+    "stevilka": 5,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 1074,
+    "ime": "Jan Eržen",
+    "stevilka": 39,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 740,
+    "ime": "Jure Kržišnik",
+    "stevilka": 34,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 926,
+    "ime": "Luka Košenina",
+    "stevilka": 8,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 157,
+    "ime": "Metod Proj",
+    "stevilka": 7,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 165,
+    "ime": "Nejc Košir",
+    "stevilka": 97,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 173,
+    "ime": "Nik Oman",
+    "stevilka": 98,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 1043,
+    "ime": "Rok Prevodnik",
+    "stevilka": 11,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 153,
+    "ime": "Rok Ritonja",
+    "stevilka": 61,
+    "pozicija": null
+  },
+  {
+    "selekcija": "svigalice",
+    "ffId": 171,
+    "ime": "Tadej Žontar",
+    "stevilka": 21,
+    "pozicija": null
   }
 ]

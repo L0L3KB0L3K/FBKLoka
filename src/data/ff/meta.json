@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-27T20:09:47.104Z",
+  "fetchedAt": "2026-10-23T14:35:11.256Z",
   "competitions": [
     {
       "selekcija": "clani",
@@ -13,6 +13,55 @@
       "label": "1. SFL",
       "competitionId": 760,
       "name": "SLO 1.SFL - DP VF",
+      "ok": true
+    },
+    {
+      "selekcija": "svigalice",
+      "label": "2. SFL",
+      "competitionId": 761,
+      "name": "SLO 2.SFL - DP MF",
+      "ok": true
+    },
+    {
+      "selekcija": "u19",
+      "label": "DP U19",
+      "competitionId": 762,
+      "name": "SLO DP U19",
+      "ok": true
+    },
+    {
+      "selekcija": "u17",
+      "label": "DP U17 A",
+      "competitionId": 763,
+      "name": "SLO DP U17",
+      "ok": true
+    },
+    {
+      "selekcija": "u17",
+      "label": "DP U17 B",
+      "competitionId": 763,
+      "name": "SLO DP U17",
+      "ok": true
+    },
+    {
+      "selekcija": "u15",
+      "label": "DP U15",
+      "competitionId": 764,
+      "name": "SLO DP U15",
+      "ok": true
+    },
+    {
+      "selekcija": "u13",
+      "label": "DP U13",
+      "competitionId": 765,
+      "name": "SLO DP U13",
+      "ok": true
+    },
+    {
+      "selekcija": "u11",
+      "label": "DP U11",
+      "competitionId": 766,
+      "name": "SLO DP U11",
       "ok": true
     }
   ]
