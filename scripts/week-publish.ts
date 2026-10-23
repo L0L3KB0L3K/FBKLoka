@@ -13,7 +13,8 @@ const NEWS = new URL("../src/content/novice/", import.meta.url);
 
 const { matches, mvp, teamNames } = loadWeekData();
 const end = process.env.WEEK_END;
-const teden = weekBounds(end ? new Date(`${end}T12:00:00Z`) : new Date());
+// 12 hours back: a run after midnight (GitHub starts late, until Monday 06:00) still means the week that ended on Sunday.
+const teden = weekBounds(end ? new Date(`${end}T12:00:00Z`) : new Date(Date.now() - 12 * 3_600_000));
 const label = `${teden.od} – ${teden.do}`;
 
 const pending = unfinishedMatches(matches, teden, new Date());

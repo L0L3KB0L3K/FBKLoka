@@ -10,10 +10,11 @@
 #
 # Schedule (SPEC.md §20.2): Saturday 22:30 and Sunday 22:00, Ljubljana time. Saturday brings the day's results if they
 # are already entered in FloorballFlash; Sunday covers the whole weekend. Each production deploy costs 15 of the 300
-# monthly credits on Netlify Free, so data only changes (and deploys) at these two times.
-# GitHub cron runs in UTC, which has no summer time: each time has two cron entries, and scripts/ff-gate.ts lets through
-# only the one that falls at the Ljubljana time (tested in tests/ff-gate.test.ts). Minutes :07 and :37, not :00 and :30,
-# because GitHub delays runs most at the full and half hour.
+# monthly credits on Netlify Free, so data only changes (and deploys) at these times.
+# GitHub starts scheduled runs late or drops them: on 4., 11. and 18. 10. 2026 the only Sunday run started 2 to 3.5
+# hours late and the old 45-minute window skipped it, so three weekends were never published. So: several cron entries
+# per night (UTC, no summer time), and scripts/ff-gate.ts lets through every run from Sunday 22:00 to Monday 06:00
+# Ljubljana, until the bot has published data in that window (one deploy a night). Tested in tests/ff-gate.test.ts.
 # For a change during the week (a moved match): GitHub > Actions > fetch-floorballflash > Run workflow (always runs,
 # never writes a summary). A missed summary by hand: WEEK_END=2026-09-27 npm run week:publish, commit, push.
 #
@@ -24,7 +25,8 @@ name: fetch-floorballflash
 on:
   schedule:
     # - cron: "37 20,21 * * 6" # Saturday 22:37 Ljubljana: 20:37 UTC in summer time, 21:37 UTC in winter time
-    - cron: "7 20,21 * * 0" # Sunday 22:07 Ljubljana: 20:07 UTC in summer time, 21:07 UTC in winter time
+    - cron: "7 20,21,22,23 * * 0" # Sunday 22:07-01:07 Ljubljana in summer, 21:07-00:07 in winter (21:07 is skipped)
+    - cron: "7 0,1,2,3 * * 1" # Monday 02:07-05:07 in summer, 01:07-04:07 in winter: retries when GitHub drops a run
   workflow_dispatch: {}
 
 permissions:
@@ -48,9 +50,12 @@ jobs:
           cache: npm
       - name: Is it the right time in Ljubljana?
         id: gate
-        run: node scripts/ff-gate.ts
+        run: |
+          # The bot's last data commit: a later run of the same night has nothing left to do (one deploy a night).
+          export LAST_DATA_COMMIT=$(git log -1 --author='^ff-bot ' --grep='^data:' --format=%ct origin/main)
+          node scripts/ff-gate.ts
       - name: Merge club edits (branch vsebina)
-        if: steps.gate.outputs.run == 'true' && github.event.schedule != '37 20,21 * * 6'
+        if: steps.gate.outputs.run == 'true' && steps.gate.outputs.window != 'saturday'
         run: |
           git config user.name "ff-bot"
           git config user.email "ff-bot@users.noreply.github.com"
@@ -65,7 +70,7 @@ jobs:
       - run: npm run fetch:ff
         if: steps.gate.outputs.run == 'true'
       - name: Weekly summary (Sunday run only)
-        if: steps.gate.outputs.run == 'true' && github.event.schedule == '7 20,21 * * 0'
+        if: steps.gate.outputs.window == 'sunday'
         run: npm run week:publish
       - name: Commit and push if changed
         if: steps.gate.outputs.run == 'true'
@@ -77,7 +82,7 @@ jobs:
           # One push for the merged edits and the data: one deploy. Nothing new: no push, no deploy.
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then git push origin HEAD:main; fi
       - name: Bring branch vsebina up to date
-        if: steps.gate.outputs.run == 'true' && github.event.schedule != '37 20,21 * * 6'
+        if: steps.gate.outputs.run == 'true' && steps.gate.outputs.window != 'saturday'
         run: |
           # Fast-forward only: if an editor saved during the run, or the merge was skipped, vsebina stays and catches up
           # next time. Netlify does not build this branch.
@@ -86,5 +91,5 @@ jobs:
       # does not have yet (e.g. the youth leagues when they start) fails this step, and GitHub e-mails the owner about
       # the failed run. It keeps failing every Sunday until the competition is added (SPEC.md §5.7).
       - name: New FloorballFlash competitions?
-        if: steps.gate.outputs.run == 'true' && github.event.schedule == '7 20,21 * * 0'
+        if: steps.gate.outputs.window == 'sunday'
         run: node scripts/scan-fbk-loka.ts --check
