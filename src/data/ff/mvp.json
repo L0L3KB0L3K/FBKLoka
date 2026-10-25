@@ -1,25 +1,33 @@
 {
   "razlicica": "LBS-MVPI 1.0",
   "vikend": {
-    "od": "2026-10-10",
-    "do": "2026-10-11"
+    "od": "2026-10-24",
+    "do": "2026-10-25"
   },
   "ffId": 2643,
   "ime": "Nejc Peklaj",
   "vratar": false,
   "tekme": [
     {
-      "nasprotnik": "KAC Floorball",
-      "zacetek": "2026-10-10T17:00:00+02:00",
+      "nasprotnik": "SU Wiener FV",
+      "zacetek": "2026-10-24T17:00:00+02:00",
       "goli": 3,
-      "podaje": 2,
+      "podaje": 0,
+      "obrambe": 0,
+      "streli": 0
+    },
+    {
+      "nasprotnik": "FBC Dragons",
+      "zacetek": "2026-10-25T13:00:00+01:00",
+      "goli": 0,
+      "podaje": 3,
       "obrambe": 0,
       "streli": 0
     }
   ],
   "sezona": {
-    "goli": 18,
-    "podaje": 11,
+    "goli": 21,
+    "podaje": 14,
     "obrambe": 0,
     "streli": 0
   },

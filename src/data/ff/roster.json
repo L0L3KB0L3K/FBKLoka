@@ -207,14 +207,14 @@
     "ffId": 1074,
     "ime": "Jan Eržen",
     "stevilka": 39,
-    "pozicija": null
+    "pozicija": "vratar"
   },
   {
     "selekcija": "svigalice",
     "ffId": 740,
     "ime": "Jure Kržišnik",
     "stevilka": 34,
-    "pozicija": null
+    "pozicija": "vratar"
   },
   {
     "selekcija": "svigalice",
@@ -235,7 +235,7 @@
     "ffId": 165,
     "ime": "Nejc Košir",
     "stevilka": 97,
-    "pozicija": null
+    "pozicija": "vratar"
   },
   {
     "selekcija": "svigalice",

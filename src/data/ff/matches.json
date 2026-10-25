@@ -207,8 +207,11 @@
       "kraj": "Škofja Loka",
       "naslov": "Podlubnik 1c, 4220 Škofja Loka"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 5,
+      "nasprotnik": 2
+    },
     "faza": "Qualification Round",
     "ffUrl": "https://www.floorballflash.at/game/16495"
   },
@@ -228,8 +231,11 @@
       "kraj": "Škofja Loka",
       "naslov": "Podlubnik 1c, 4220 Škofja Loka"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 9,
+      "nasprotnik": 2
+    },
     "faza": "Qualification Round",
     "ffUrl": "https://www.floorballflash.at/game/16496"
   },
@@ -286,7 +292,11 @@
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -303,7 +313,11 @@
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -320,7 +334,11 @@
       "ime": "FBK Loka B",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -337,7 +355,11 @@
       "ime": "FBK Loka A",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -365,6 +387,27 @@
     "ffUrl": "https://www.floorballflash.at/game/16497"
   },
   {
+    "id": 17881,
+    "selekcija": "u13",
+    "tekmovanje": "DP U13",
+    "zacetek": "2026-11-08T11:30:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "VSV Unihockey B",
+      "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+    },
+    "prizorisce": {
+      "ime": "Waidmannsdorf",
+      "kraj": "Klagenfurt",
+      "naslov": "Obirstraße 6, 9020 Klagenfurt"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round Robin",
+    "ffUrl": "https://floorballflash.si/game/17881"
+  },
+  {
     "id": 16498,
     "selekcija": "clani",
     "tekmovanje": "IFL",
@@ -384,6 +427,27 @@
     "rezultat": null,
     "faza": "Qualification Round",
     "ffUrl": "https://www.floorballflash.at/game/16498"
+  },
+  {
+    "id": 17875,
+    "selekcija": "u13",
+    "tekmovanje": "DP U13",
+    "zacetek": "2026-11-08T13:10:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "KAC Floorball A",
+      "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
+    },
+    "prizorisce": {
+      "ime": "Waidmannsdorf",
+      "kraj": "Klagenfurt",
+      "naslov": "Obirstraße 6, 9020 Klagenfurt"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round Robin",
+    "ffUrl": "https://floorballflash.si/game/17875"
   },
   {
     "id": 17833,
@@ -554,52 +618,10 @@
     "ffUrl": "https://floorballflash.si/game/17623"
   },
   {
-    "id": 17845,
-    "selekcija": "u15",
-    "tekmovanje": "DP U15",
-    "zacetek": "2026-11-29T09:00:00+01:00",
-    "doma": true,
-    "ekipaLoka": "FBK Loka",
-    "nasprotnik": {
-      "ime": "FBC Borovnica",
-      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
-    },
-    "prizorisce": {
-      "ime": "Dvorana Poden",
-      "kraj": "Škofja Loka",
-      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
-    },
-    "stanje": "prihodnja",
-    "rezultat": null,
-    "faza": "Redni del - Round Robin",
-    "ffUrl": "https://floorballflash.si/game/17845"
-  },
-  {
-    "id": 17934,
-    "selekcija": "u11",
-    "tekmovanje": "DP U11",
-    "zacetek": "2026-11-29T09:00:00+01:00",
-    "doma": true,
-    "ekipaLoka": "FBK Loka",
-    "nasprotnik": {
-      "ime": "KAC Floorball",
-      "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
-    },
-    "prizorisce": {
-      "ime": "Dvorana Poden",
-      "kraj": "Škofja Loka",
-      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
-    },
-    "stanje": "prihodnja",
-    "rezultat": null,
-    "faza": "Redni del - Round robin",
-    "ffUrl": "https://floorballflash.si/game/17934"
-  },
-  {
     "id": 17936,
     "selekcija": "u11",
     "tekmovanje": "DP U11",
-    "zacetek": "2026-11-29T10:30:00+01:00",
+    "zacetek": "2026-11-29T09:45:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
@@ -620,7 +642,7 @@
     "id": 17846,
     "selekcija": "u15",
     "tekmovanje": "DP U15",
-    "zacetek": "2026-11-29T11:30:00+01:00",
+    "zacetek": "2026-11-29T09:50:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
@@ -636,6 +658,48 @@
     "rezultat": null,
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17846"
+  },
+  {
+    "id": 17934,
+    "selekcija": "u11",
+    "tekmovanje": "DP U11",
+    "zacetek": "2026-11-29T12:00:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "KAC Floorball",
+      "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round robin",
+    "ffUrl": "https://floorballflash.si/game/17934"
+  },
+  {
+    "id": 17845,
+    "selekcija": "u15",
+    "tekmovanje": "DP U15",
+    "zacetek": "2026-11-29T13:10:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Borovnica",
+      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+    },
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round Robin",
+    "ffUrl": "https://floorballflash.si/game/17845"
   },
   {
     "id": 17887,
@@ -662,7 +726,7 @@
     "id": 17883,
     "selekcija": "u13",
     "tekmovanje": "DP U13",
-    "zacetek": "2026-12-06T11:15:00+01:00",
+    "zacetek": "2026-12-06T11:30:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
@@ -806,17 +870,42 @@
     "ffUrl": "https://floorballflash.si/game/17650"
   },
   {
+    "id": 17890,
+    "selekcija": "u13",
+    "tekmovanje": "DP U13",
+    "zacetek": "2027-01-09T09:00:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBK Polanska banda",
+      "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
+    },
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round Robin",
+    "ffUrl": "https://floorballflash.si/game/17890"
+  },
+  {
     "id": 17778,
     "selekcija": "u17",
     "tekmovanje": "DP U17 A",
-    "zacetek": "2027-01-09T09:00:00+01:00",
+    "zacetek": "2027-01-09T10:00:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka A",
     "nasprotnik": {
       "ime": "FBK Loka B",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -826,14 +915,18 @@
     "id": 17778,
     "selekcija": "u17",
     "tekmovanje": "DP U17 B",
-    "zacetek": "2027-01-09T09:00:00+01:00",
+    "zacetek": "2027-01-09T10:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka B",
     "nasprotnik": {
       "ime": "FBK Loka A",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -843,14 +936,18 @@
     "id": 17776,
     "selekcija": "u17",
     "tekmovanje": "DP U17 B",
-    "zacetek": "2027-01-09T10:00:00+01:00",
+    "zacetek": "2027-01-09T11:00:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka B",
     "nasprotnik": {
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -860,18 +957,43 @@
     "id": 17777,
     "selekcija": "u17",
     "tekmovanje": "DP U17 A",
-    "zacetek": "2027-01-09T11:00:00+01:00",
+    "zacetek": "2027-01-09T12:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka A",
     "nasprotnik": {
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/17777"
+  },
+  {
+    "id": 17889,
+    "selekcija": "u13",
+    "tekmovanje": "DP U13",
+    "zacetek": "2027-01-09T12:20:00+01:00",
+    "doma": true,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "VSV Unihockey A",
+      "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+    },
+    "prizorisce": {
+      "ime": "Osnovna šola Poljane nad Škofjo Loko",
+      "kraj": "Poljane nad Škofjo Loko",
+      "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round Robin",
+    "ffUrl": "https://floorballflash.si/game/17889"
   },
   {
     "id": 16499,
@@ -1045,35 +1167,43 @@
     "id": 17896,
     "selekcija": "u13",
     "tekmovanje": "DP U13",
-    "zacetek": "2027-01-23T10:30:00+01:00",
-    "doma": true,
+    "zacetek": "2027-01-23T10:40:00+01:00",
+    "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
-      "ime": "FBK Polanska banda",
-      "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
+      "ime": "KAC Floorball B",
+      "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Waidmannsdorf",
+      "kraj": "Klagenfurt",
+      "naslov": "Obirstraße 6, 9020 Klagenfurt"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17896"
   },
   {
-    "id": 17899,
+    "id": 17902,
     "selekcija": "u13",
     "tekmovanje": "DP U13",
-    "zacetek": "2027-01-23T12:45:00+01:00",
+    "zacetek": "2027-01-23T14:00:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
       "ime": "VSV Unihockey A",
       "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Waidmannsdorf",
+      "kraj": "Klagenfurt",
+      "naslov": "Obirstraße 6, 9020 Klagenfurt"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del - Round Robin",
-    "ffUrl": "https://floorballflash.si/game/17899"
+    "ffUrl": "https://floorballflash.si/game/17902"
   },
   {
     "id": 16505,
@@ -1226,14 +1356,18 @@
     "id": 17780,
     "selekcija": "u17",
     "tekmovanje": "DP U17 A",
-    "zacetek": "2027-02-14T09:00:00+01:00",
+    "zacetek": "2027-02-14T10:00:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka A",
     "nasprotnik": {
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -1243,14 +1377,18 @@
     "id": 17781,
     "selekcija": "u17",
     "tekmovanje": "DP U17 A",
-    "zacetek": "2027-02-14T10:00:00+01:00",
+    "zacetek": "2027-02-14T11:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka A",
     "nasprotnik": {
       "ime": "FBK Loka B",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -1260,14 +1398,18 @@
     "id": 17781,
     "selekcija": "u17",
     "tekmovanje": "DP U17 B",
-    "zacetek": "2027-02-14T10:00:00+01:00",
+    "zacetek": "2027-02-14T11:00:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka B",
     "nasprotnik": {
       "ime": "FBK Loka A",
       "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
@@ -1277,50 +1419,33 @@
     "id": 17779,
     "selekcija": "u17",
     "tekmovanje": "DP U17 B",
-    "zacetek": "2027-02-14T11:00:00+01:00",
+    "zacetek": "2027-02-14T12:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka B",
     "nasprotnik": {
       "ime": "FBK Polanska banda",
       "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
-    "prizorisce": null,
+    "prizorisce": {
+      "ime": "Dvorana Poden",
+      "kraj": "Škofja Loka",
+      "naslov": "Podlubnik 1c, 4220 Škofja Loka"
+    },
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/17779"
   },
   {
-    "id": 17963,
-    "selekcija": "u11",
-    "tekmovanje": "DP U11",
-    "zacetek": "2027-02-20T09:45:00+01:00",
-    "doma": false,
-    "ekipaLoka": "FBK Loka",
-    "nasprotnik": {
-      "ime": "VSV Unihockey B",
-      "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
-    },
-    "prizorisce": {
-      "ime": "Sankt Martin",
-      "kraj": "Villach",
-      "naslov": "St.Martiner-Straße 11, 9500 Villach"
-    },
-    "stanje": "prihodnja",
-    "rezultat": null,
-    "faza": "Redni del - Round robin",
-    "ffUrl": "https://floorballflash.si/game/17963"
-  },
-  {
-    "id": 17863,
+    "id": 17867,
     "selekcija": "u15",
     "tekmovanje": "DP U15",
-    "zacetek": "2027-02-20T10:40:00+01:00",
+    "zacetek": "2027-02-20T11:30:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
-      "ime": "FBC Borovnica",
-      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+      "ime": "FBK Polanska banda",
+      "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
     },
     "prizorisce": {
       "ime": "Sankt Martin",
@@ -1330,13 +1455,13 @@
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del - Round Robin",
-    "ffUrl": "https://floorballflash.si/game/17863"
+    "ffUrl": "https://floorballflash.si/game/17867"
   },
   {
     "id": 17965,
     "selekcija": "u11",
     "tekmovanje": "DP U11",
-    "zacetek": "2027-02-20T11:15:00+01:00",
+    "zacetek": "2027-02-20T12:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
@@ -1354,15 +1479,15 @@
     "ffUrl": "https://floorballflash.si/game/17965"
   },
   {
-    "id": 17867,
+    "id": 17863,
     "selekcija": "u15",
     "tekmovanje": "DP U15",
     "zacetek": "2027-02-20T13:10:00+01:00",
     "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
-      "ime": "FBK Polanska banda",
-      "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg"
+      "ime": "FBC Borovnica",
+      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
     },
     "prizorisce": {
       "ime": "Sankt Martin",
@@ -1372,7 +1497,28 @@
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del - Round Robin",
-    "ffUrl": "https://floorballflash.si/game/17867"
+    "ffUrl": "https://floorballflash.si/game/17863"
+  },
+  {
+    "id": 17963,
+    "selekcija": "u11",
+    "tekmovanje": "DP U11",
+    "zacetek": "2027-02-20T13:30:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "VSV Unihockey B",
+      "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png"
+    },
+    "prizorisce": {
+      "ime": "Sankt Martin",
+      "kraj": "Villach",
+      "naslov": "St.Martiner-Straße 11, 9500 Villach"
+    },
+    "stanje": "prihodnja",
+    "rezultat": null,
+    "faza": "Redni del - Round robin",
+    "ffUrl": "https://floorballflash.si/game/17963"
   },
   {
     "id": 17976,
@@ -1630,7 +1776,7 @@
     "id": 17911,
     "selekcija": "u13",
     "tekmovanje": "DP U13",
-    "zacetek": "2027-03-21T14:00:00+01:00",
+    "zacetek": "2027-03-21T13:10:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
