@@ -20,8 +20,8 @@ Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Vpis: znesek članarine in približna cena palice, da bo odgovor »Koliko stane?« na /vpis popoln.
 - [ ] Za stran o zasebnosti potrdi uradno ime iz registra: FLOORBALL KLUB LOKA. Naslov, matična in davčna številka so enaki kot na stari strani.
 - [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.
-- [ ] Avtor fotografij s stare strani (člani na /klub in na strani članov). Ali ga navedemo ob fotografiji?
-- [ ] Fotografije: ali ima kdo nove fotografije, primerne za pasico na naslovnici (ležeče, kakovostne, vsaj 2400 px široke)? Poleg tega skupinska fotografija članov v dresih FBK Loka (na sedanjih je še napis Insport), ena ali dve akciji s tekme, portreti trenerjev, otroci na treningu, dvorana od zunaj. Priložnost: praznovanje 25 let floorballa na Podnu 18. 10. 2026.
+- [ ] Avtor fotografij s finala državnega prvenstva 2026 (naslovnica in /klub; dovoljenje imamo): ali ga navedemo ob fotografiji, in s kakšnim imenom?
+- [ ] Fotografije: ali ima kdo nove fotografije, primerne za pasico na naslovnici (ležeče, kakovostne, vsaj 2400 px široke)? Poleg tega postavljena skupinska fotografija članov, portreti trenerjev, otroci na treningu, dvorana od zunaj. Priložnost: praznovanje 25 let floorballa na Podnu 18. 10. 2026.
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
 - [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta.
 - [ ] Preberite 11 novic na /novice (pripravljene iz objav na Instagramu) in opise slik (alt) v datotekah. Popravite, kar ne drži.
@@ -51,11 +51,11 @@ Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [x] Rok: ni določen.
 - [x] E-mail info@fbkloka.si, davčna številka 29559588, matična številka 1677055000, TikTok @fbk.loka (s stare strani).
 - [x] Sponzorji s stare strani: 7 logotipov, v enakem vrstnem redu. Klub nima ravni sponzorjev.
-- [x] Dve fotografiji članov s stare strani: /klub in stran članov.
+- [x] Fotografije s finala državnega prvenstva 22. 3. 2026 v dresih FBK Loka: tri na naslovnici, postava na /klub (26. 10. 2026). Fotografije s stare strani (dresi Insport) so odstranjene.
 - [x] Stari naslovi strani (/o-klubu/, /ekipa/, /tekmovanja/) vodijo na nove strani.
 - [x] Novice: seznam s filtrom po selekciji, stran vsake novice, zadnje 3 na naslovnici, Novice v meniju.
 - [x] Lestvica in sestava članov iz FloorballFlash, osvežita se vsako nedeljo. Lestvica 1. SFL se pokaže po prvi tekmi.
-- [x] Naslovnica: tri fotografije s stare strani se menjajo za tablo z naslednjo tekmo. Sponzorji se pomikajo.
+- [x] Naslovnica: tri fotografije se menjajo za tablo z naslednjo tekmo. Sponzorji se pomikajo.
 - [x] Vpis: obrazec odstranjen, vprašanja gredo prek obrazca na strani Kontakt.
 - [x] Obrazec na strani Kontakt preizkušen do prejetega e-maila, obvestila delujejo (1. 10. 2026).
 - [x] Povzetek tedna in MVP vikenda se objavita sama vsako nedeljo; povzetka za 14.–20. 9. in 21.–27. 9. sta objavljena.

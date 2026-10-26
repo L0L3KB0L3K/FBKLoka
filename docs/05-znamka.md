@@ -89,7 +89,7 @@ Dresi: na fotografijah 2025/26 rumeni s črnim; starejši beli dresi Insport. [M
 
 ## 6. Fotografije
 
-- 3 fotografije članov s stare strani, 2000 px, še v dresih Insport. Uporabljene na naslovnici in /klub. [MANJKA] avtor.
+- 4 fotografije s finala državnega prvenstva 22. 3. 2026, 2400 px, v dresih FBK Loka (dovoljenje 26. 10. 2026): tri na naslovnici, postava na /klub. Fotografije s stare strani v dresih Insport so odstranjene. [MANJKA] ali navedemo avtorja.
 - 11 slik iz objav na Instagramu (novice), 720–1600 px, kvadratne ali pokončne.
 - Manjka (SPEC 9.1a): skupinska v dresih FBK Loka, akcija s tekme, portreti trenerjev, otroci na treningu
   (s privolitvijo), dvorana od zunaj.

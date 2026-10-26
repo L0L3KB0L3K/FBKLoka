@@ -13,8 +13,9 @@ socialna:
   facebook: https://www.facebook.com/FloorballInsport/ # official club page (confirmed 27. 9. 2026)
   tiktok: https://www.tiktok.com/@fbk.loka # from the old club site
   youtube: https://www.youtube.com/user/FBKInsport
-# Photos behind the match board on the home page, from the old club site (permission 28. 9. 2026).
+# Photos behind the match board on the home page: state championship final, 22. 3. 2026, FBK Loka jerseys
+# (permission 26. 10. 2026). 2400 x 1600, without EXIF.
 naslovnaFotografije:
-  - ../../assets/foto/clani-veselje.jpg
-  - ../../assets/foto/clani-akcija.jpg
-  - ../../assets/foto/clani-postava.jpg
+  - ../../assets/foto/clani-finale-2026-dvoboj.jpg
+  - ../../assets/foto/clani-finale-2026-z-zogico.jpg
+  - ../../assets/foto/clani-finale-2026-napad.jpg

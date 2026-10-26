@@ -4,10 +4,10 @@ opis: "FBK Loka je floorball klub iz Škofje Loke z domačo dvorano Poden. Član
 # DRAFT. Sources: Instagram @fbk_loka, Wikipedia, Gorenjski glas, Floorball zveza Slovenije, IFF archive.
 # The club reads and confirms it before launch (docs/04-odprto-pri-klubu.md).
 # TODO: club players and staff in the national team for the 2026 World Championship in Tampere.
-# Photo from the old club site fbkloka.si (permission 28. 9. 2026). Jerseys still show the old name Insport.
+# Photo: the senior team lined up before the state championship final, 22. 3. 2026 (permission 26. 10. 2026).
 foto:
-  src: ../../assets/foto/clani-veselje.jpg
-  alt: "Igralci članske ekipe FBK Loka v belih dresih si v dvorani dajejo petke."
+  src: ../../assets/foto/clani-finale-2026-postava.jpg
+  alt: "Članska ekipa FBK Loka v rumeno-črnih dresih stoji v vrsti pred finalom državnega prvenstva."
 ---
 
 FBK Loka je floorball klub iz Škofje Loke. Domača dvorana je Poden, kjer ima sedež tudi Floorball zveza Slovenije.
