@@ -66,15 +66,17 @@ const venueOf = (match: Match) =>
                 loading={index === 0 ? undefined : "eager"}
                 fetchpriority={index === 0 ? undefined : "low"}
                 pictureAttributes={{ class: "contents" }}
-                class="size-full object-cover"
+                class="size-full object-cover object-top"
               />
             </div>
           ))}
-          {/* Darkest at the bottom, where the text sits. */}
+          {/* Photos are aligned to the top (object-top): the wide board crops them, and the faces are in the upper part.
+              Darkest at the bottom, where the text sits. */}
           <div class="absolute inset-0 bg-linear-to-t from-ink via-ink/75 to-ink/45" />
         </div>
       )}
-      <div class:list={["board-pattern", photos.length > 0 && "board-pattern-soft"]} aria-hidden="true" />
+      {/* The ball-hole pattern only on the plain black board: over a photo it reads as spots on faces (Maj, 26. 10. 2026). */}
+      {photos.length === 0 && <div class="board-pattern" aria-hidden="true" />}
       <div class:list={["page-wrap relative py-12 md:py-16", photos.length > 0 && "flex w-full flex-1 flex-col justify-end pt-20 md:pt-24"]}>
         {photos.length > 1 && (
           <button
@@ -214,11 +216,6 @@ const venueOf = (match: Match) =>
     mask-image: url("../assets/ball-holes.svg");
     mask-size: 240px 240px;
     mask-repeat: repeat;
-  }
-
-  /* Over a photo the full pattern reads as spots on faces: half the strength keeps the club mark. */
-  .board-pattern-soft {
-    opacity: 0.06;
   }
 </style>
 

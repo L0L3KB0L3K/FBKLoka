@@ -699,7 +699,8 @@ Preveri, da paket vsebuje os `wdth`; če je ne, uporabi `@fontsource-variable/ar
 ### 9.4 Grafični elementi iz loga
 
 - **Luknje žogice:** statičen SVG vzorec (krogi in ovali kot na žogici v logu) v ozadju tekmovalne table,
-  rumen na črni, prosojnost ~12 %. Nikjer drugje. Ne animira se.
+  rumen na črni, prosojnost ~12 %. Nikjer drugje. Ne animira se. Na tabli s fotografijami ga ni (26. 10. 2026): na
+  fotografiji deluje kot pike po obrazih. Fotografije za tablo so poravnane na vrh, zato naj bodo obrazi v zgornji polovici.
 - **Vodoravna črta:** debela črna črta pod napisom v logu je ločilo pod naslovom H1 na vsaki strani
   (debelina 6 px, širina 64 px, levo poravnana).
 - Palica iz loga se ne uporablja kot dekoracija.
