@@ -1,6 +1,6 @@
 # Odprto pri klubu
 
-Stanje: 1. 10. 2026. Kar je odkljukano, je vneseno na stran.
+Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 
 ## Najprej: za vodjo kluba
 
@@ -26,7 +26,7 @@ Stanje: 1. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta.
 - [ ] Preberite 11 novic na /novice (pripravljene iz objav na Instagramu) in opise slik (alt) v datotekah. Popravite, kar ne drži.
 - [ ] Stara stran fbkloka.si pri ekipi prikazuje izmišljene igralce (npr. Žiga Pavlič, Marko Jenko), trenerja "Janez Trener" in "Marko Pomočnik" ter napačne treninge. Do preklopa domene naj jo skrbnik popravi ali skrije.
-- [ ] Sestava članov je z uradnega seznama igralcev IFL na FloorballFlash (23 igralcev, tudi mladoletni). Ali kdo ne želi biti objavljen? Tak igralec se skrije v urejevalniku (Igralci, "Prikazan na strani"). Ko zveza objavi sestave mladih, bodo na straneh ekip tudi oni.
+- [ ] Sestava članov je z uradnega seznama igralcev IFL na FloorballFlash (23 igralcev, tudi mladoletni). Ali kdo ne želi biti objavljen? Tak igralec se skrije v urejevalniku (Igralci, "Prikazan na strani"). Sestava Švigalic (15) je na strani od 23. 10. 2026. Ko zveza objavi sestave mladih, bodo na straneh ekip tudi oni.
 
 ## Lahko pride kasneje
 
@@ -61,4 +61,8 @@ Stanje: 1. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [x] Povzetek tedna in MVP vikenda se objavita sama vsako nedeljo; povzetka za 14.–20. 9. in 21.–27. 9. sta objavljena.
 - [x] Urejevalnik vsebine (/admin): novice z osnutki, treningi, sponzorji, trenerji, igralci. Navodila za urednika so pripravljena.
 - [x] Stran Podpri nas z obrazcem za sponzorje.
-- [x] Mladinska državna prvenstva 2026/27 (U19, U17 A in B, U15, U13, U11) so povezana s FloorballFlash: tekme in lestvice se pokažejo same, ko jih zveza objavi. Novo tekmovanje z ekipo FBK Loka stran javi Maju vsako nedeljo.
+- [x] Mladinska državna prvenstva 2026/27 (U19, U17 A in B, U15, U13, U11) so povezana s FloorballFlash; razpored mladih tekem je na strani od 23. 10. 2026. Novo tekmovanje z ekipo Loka stran javi Maju vsako nedeljo.
+- [x] Švigalice v 2. SFL ("Švigalice Loka"): tekme, lestvica in sestava (23. 10. 2026).
+- [x] Slovenska tekmovanja se odpirajo na floorballflash.si, IFL na floorballflash.at; pod tekmami vsake ekipe je povezava na vse njene tekme.
+- [x] Tekme IFL med slovenskimi ekipami štejejo tudi za 1. SFL: na strani so enkrat, rezultat velja za obe tekmovanji.
+- [x] Povzetki tedna, ki zaradi zamude zagonov 4., 11. in 18. 10. niso izšli, so objavljeni za nazaj (23. 10. 2026).

@@ -16,6 +16,10 @@ nov token `--color-input-border` (stari rob polj je imel 1,30:1); build ukaz `np
 mobilni wireframe in tri glavne naloge (9.5); načrt fotografij (9.1a); `latin-ext`; plato in prevoz z lastnim obrazcem na strani
 namesto Google Forms (19); `docs/01-brief.md` in `CLAUDE.md`.
 
+**Po zagonu (29. 9.–26. 10. 2026):** poglavje 20 (hitrost platoja, urnik podatkov, MVP vikenda, tedenski povzetek,
+krediti, umik privolitve), urejevalnik Decap (13.4), `/podpri-nas` (7.8), slovenska tekmovanja in dvojne tekme (5.7a).
+Pregled za ljudi: `README.md`.
+
 ---
 
 ## 0. Kako delaš (za Claude Code)
@@ -27,7 +31,7 @@ namesto Google Forms (19); `docs/01-brief.md` in `CLAUDE.md`.
 5. Predpostavke vedno izpiši. Če nekaj ni jasno, vprašaj, ne ugibaj.
    Pred kodo, ki uporablja Astro API (collections, slike, config, CSP), preveri trenutno verzijo prek `astro-docs` MCP.
    Namen in merila uspeha so v `docs/01-brief.md`; ko je odločitev nejasna, velja tisto, kar bolj pomaga nalogam iz brifa.
-6. Po vsakem zaključenem koraku predlagaj commit sporočilo (lastnik naredi `git push` po vsakem koraku).
+6. Po vsakem zaključenem koraku predlagaj commit sporočilo. Push na vejo `razvoj`; v `main` samo po dogovoru (20.6).
 7. Za vsak korak najprej zapiši kratek plan v obliki `korak → preverim: ...` in ponavljaj, dokler preverjanje ne uspe.
 8. Ne dodajaj funkcij, ki niso v tem dokumentu. Če vidiš preprostejšo pot, jo predlagaj, ne uvedi je sam.
 9. Različice paketov: uporabi zadnjo stabilno. Za Astro, Tailwind, Decap in Meta API preveri trenutno
@@ -1000,13 +1004,13 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 ### Pogoji za lansiranje (pred prestavitvijo domene)
 
 - [ ] Logo v SVG, svetla in temna različica
-- [ ] Tekme vsaj za člane (IFL) se nalagajo same
+- [x] Tekme vsaj za člane (IFL) se nalagajo same (od 23. 10. 2026 tudi 1. SFL, 2. SFL in mladinske lige)
 - [ ] Treningi, trenerji in kontakti za vse selekcije
-- [ ] Zasebnost v nogi, obrazec za vpis testiran do prejetega e-maila
+- [x] Zasebnost v nogi, obrazec testiran do prejetega e-maila (kontakt, 1. 10. 2026; vpis gre prek EOS)
 - [ ] Vsaka stran ima en jasen naslednji korak
 - [ ] Preverjeno na pravem telefonu z mobilnimi podatki, tri naloge iz 9.5 v predvidenem številu dotikov
 - [ ] `npm run verify` in `npm run test:a11y` zeleno, ročni pregled s tipkovnico in pri 200 %
-- [ ] CSP vsiljen (ne več Report-Only)
+- [x] CSP vsiljen (ne več Report-Only), od 28. 9. 2026; od 30. 9. kot `<meta>` + glava (13.4)
 - [ ] Vsaj ena prava fotografija ekipe (9.1a)
 - [ ] MFA na GitHubu in Netlifyju, domena na imenu kluba
 - [ ] Za vsako sekcijo imenovan lastnik v klubu
@@ -1490,6 +1494,10 @@ Stanje 30. 9. 2026 (Usage & billing, obdobje 27. 9.–27. 10.): 14 produkcijskih
 kreditov, več kot ostane. Zato do 27. 10. ni združitev na `main` in podatki samo v nedeljo (odločitev 30. 9.: 4
 deployi, 60 kreditov; sobotni rezultati so na strani v nedeljo zvečer). Sprememba samo v `.github` (npr. cron) ne
 sproži gradnje, torej ne stane. Po 27. 10. se odloči, ali se sobota vrne (proračun zgoraj jo dopušča).
+
+Obdobje 27. 9.–27. 10. 2026 je minilo brez ustavitve strani: poleg 14 deployev do 30. 9. še združitvi 1. 10. in 23. 10. ter
+nedeljski deploy 25. 10. Od 27. 10. novo obdobje s 300 krediti. Sobotni cron ostaja izklopljen, dokler se ne odločimo
+drugače (proračun zgoraj ga dopušča). Od 26. 10. ne sprožijo gradnje tudi `README.md` in `apps-script/`.
 
 **Narejeno:** proračun zapisan; veja `razvoj` ima branch deploy; na `main` gre največ enkrat na teden.
 

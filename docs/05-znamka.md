@@ -31,7 +31,7 @@ podlagi so obrisi črni, na temni beli.
 | `src/assets/logo/logo-dark.png` | PNG 1772×790, črna podlaga, brez prosojnosti | V glavi strani |
 | `src/assets/logo/logo-light.png` | PNG 1772×790, bela podlaga, brez prosojnosti | Vir za vektor |
 | FloorballFlash »LOGO - FBK Loka - (končni).svg« | JPEG 1812×828 v ovoju SVG. Ni vektor. Podatki v datoteki: ACDSee, 20. 10. 2024, Gorazd Tomc | Na FloorballFlash |
-| `src/assets/logo/*.svg` | Vektor (poti), 28. 9. 2026 | Na strani od 28. 9. 2026: glava, favicon, slika za deljenje, lestvica. Klub še potrdi |
+| `src/assets/logo/*.svg` | Vektor (poti), 28. 9. 2026 | Na strani od 28. 9. 2026: glava, favicon, slika za deljenje, lestvica; od 29. 9. naslovnica povzetka tedna (`scripts/summary-cover.ts`, ob novem logotipu jo zaženi znova). Klub še potrdi |
 
 [MANJKA] izvorna datoteka oblikovalca (AI, PDF, EPS ali SVG s potmi) in avtor znaka.
 

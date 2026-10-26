@@ -15,22 +15,24 @@ Datoteke v tej mapi:
 ## Namestitev (enkrat, okoli 15 minut)
 
 1. **Sheet.** Prijavi se v klubski Google račun. V Google Drive ustvari nov Google Sheet z imenom `FBK Loka – plato in prevoz`.
-2. **Apps Script.** V Sheetu: *Razširitve → Apps Script*. Odpre se urejevalnik, vezan na ta Sheet.
+2. **Apps Script.** V Sheetu: **Extensions → Apps Script**. Odpre se urejevalnik, vezan na ta Sheet.
 3. **Koda.** V urejevalniku:
    - izbriši vsebino datoteke `Code.gs` in prilepi vsebino `Code.gs` iz te mape,
    - z gumbom **+** dodaj datoteki `Rules.gs` in `Ff.gs` (tip *Script*) in prilepi vsebino,
-   - *Nastavitve projekta (zobnik) → Pokaži datoteko manifesta »appsscript.json«*, nato prilepi vsebino `appsscript.json`.
-4. **Ekipna koda.** *Nastavitve projekta → Lastnosti skripta → Dodaj lastnost*: ime `TEAM_CODE`, vrednost štiri naključne besede
+   - **Project Settings** (zobnik) → **Show "appsscript.json" manifest file in editor**, nato prilepi vsebino `appsscript.json`.
+4. **Ekipna koda.** **Project Settings → Script Properties → Add script property**: ime `TEAM_CODE`, vrednost štiri naključne besede
    (npr. `zelena palica hitri gol`, ne te). Koda je edina zaščita, zato naj bo dolga. Velike črke in presledki niso pomembni.
-5. **Prvi zagon.** V urejevalniku izberi funkcijo `setup` in klikni *Zaženi*. Google vpraša za dovoljenja (Sheet, zunanji klic
+5. **Prvi zagon.** V urejevalniku izberi funkcijo `setup` in klikni **Run**. Google vpraša za dovoljenja (Sheet, zunanji klic
    na FloorballFlash, e-pošta ob napaki, sprožilec). Potrdi. `setup` ustvari zavihke, dnevni sprožilec ob 6.00 in napolni tekme
    ter igralce. Preveri zavihka `Tekme` in `Igralci`.
-6. **Objava.** *Uvedi → Nova uvedba → Tip: Spletna aplikacija*. *Izvedi kot: Jaz* (klubski račun), *Kdo ima dostop: Vsi*.
-   Kopiraj URL, ki se konča z `/exec`.
-7. **Povezava s stranjo.** URL vpiši v `src/config/ekipa.ts` namesto `"TODO"` in pushaj. Stran je nato povezana.
+6. **Objava.** **Deploy → New deployment → Select type: Web app**. **Execute as: Me** (klubski račun), **Who has access:
+   Anyone**. Kopiraj URL, ki se konča z `/exec`.
+7. **Povezava s stranjo.** URL vpiši v `src/config/ekipa.ts` (`appsScriptUrl`) in pushaj. Stran je nato povezana.
 8. **Deljenje.** V ekipno skupino pošlji povezavo `https://fbkloka.si/ekipa/plato/` in ekipno kodo. Na javni strani povezave ni.
 
-Ko spremeniš kodo v urejevalniku, naredi *Uvedi → Upravljaj uvedbe → Uredi → Nova različica*, da URL ostane isti.
+Ko spremeniš kodo v urejevalniku: **Deploy → Manage deployments →** obstoječa uvedba **→ Edit** (svinčnik) **→ Version:
+New version → Deploy**. URL ostane isti. **Ne** delaj nove uvedbe (New deployment): ta dobi nov URL, ki ga stran ne pozna
+(29. 9. 2026 je nova uvedba vračala 404).
 
 ## Zavihki v Sheetu
 
@@ -67,13 +69,15 @@ Nastavitve (`setup` jih vpiše sam):
 
 ## Vsako sezono
 
-1. Nova koda: *Lastnosti skripta → TEAM_CODE*. Pošlji jo v ekipno skupino.
+1. Nova koda: **Project Settings → Script Properties → TEAM_CODE**. Pošlji jo v ekipno skupino.
 2. Nova tekmovanja v `Nastavitve → competitionIds` (številke najdeš na FloorballFlash ali z `npm run scan:ff` v repozitoriju).
+   Za spletno stran jih ločeno vpiši še v `src/config/ff.ts`.
 3. Zavihek `Prijave` kopiraj v arhiv (nov zavihek ali nov Sheet) in ga izprazni do glave. Števca se začneta znova.
 
 ## Omejitve
 
 - Kdor ima kodo, se lahko prijavi pod katerim koli imenom. Vse se zapiše s časom, zato skrbnik vidi, kaj se je zgodilo.
   Če bi prišlo do zlorab, lahko dodamo osebne PIN-e.
-- Odgovor Apps Scripta traja 1–3 sekunde. Branje se predpomni 60 sekund.
+- Izmerjeno 30. 9. 2026: branje 1–4 s (hladen strežnik dlje), prijava ali odjava 4–6 s. Ponovni obisk takoj pokaže
+  shranjen seznam in ga osveži v ozadju. Branje se na strežniku predpomni 60 sekund.
 - Ob napaki FloorballFlash ostanejo stare tekme, skrbnik dobi e-pošto.

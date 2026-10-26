@@ -27,11 +27,12 @@ Območje delovanja: Škofja Loka in okolica (Gorenjska). Člani igrajo tudi v Av
 
 ## Dokazi za zaupanje, ki obstajajo
 
-- Pet zaporednih naslovov v IFL (2019, 2020, 2022, 2023, 2024).
-- Državni naslovi članov 2019, 2020, 2022, 2023, 2024 (naslovi pred 2019: TODO od kluba).
+- Šest zaporednih naslovov v IFL (2019, 2020, 2022, 2023, 2024, 2025; 2020/21 ni bila odigrana).
+- Državni naslovi članov 2019, 2020, 2022, 2023, 2024, 2025; podprvaki 2026 (naslovi pred 2019: na časovnici /klub, klub jih še potrdi).
 - U17 državni prvak 2026, U15 državni prvak 2025.
 - Sedem igralcev v reprezentanci U19 (2026).
-- Instagram: 532 sledilcev, 3.376 doseženih računov v zadnjih treh mesecih.
+- Okoli 100 članov, od tega okoli 80 otrok (Maj, 1. 10. 2026).
+- Instagram: 532 sledilcev, 3.376 doseženih računov v zadnjih treh mesecih (na /podpri-nas izpuščeno, ker številke niso prepričljive).
 - Klub je med ustanovitelji Floorball zveze Slovenije (kot Loka Spiders, 2000).
 
 ## Kaj ni v obsegu

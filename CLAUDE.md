@@ -1,11 +1,18 @@
 # FBK Loka — spletna stran
 
 Stack: Astro (zadnja stabilna), Tailwind 4, TypeScript strict, Netlify, Decap (faza 2).
-Ukazi: `npm run dev` | `npm test` | `npm run verify` | `npm run test:a11y`
+Ukazi: `npm run dev` | `npm test` | `npm run verify` | `npm run test:a11y` | `npm run fetch:ff` | `npm run week:publish`
 Specifikacija: `SPEC.md` (kaj gradiš). Namen in merila: `docs/01-brief.md` (zakaj).
 
 Struktura: `src/components/{ui,sections}`, `src/content`, `src/data/ff` (generirano, ne urejaj ročno),
-`src/config`, `src/layouts`, `src/pages`, `src/styles/global.css` (tokeni), `scripts/`, `tests/`, `apps-script/ekipa/`.
+`src/config`, `src/layouts`, `src/pages`, `src/styles/global.css` (tokeni), `scripts/`, `tests/`, `apps-script/ekipa/`,
+`public/admin/` (Decap CMS: polja se ujemajo s shemo v `src/content.config.ts`). Pregled za ljudi: `README.md`.
+
+## Veje in krediti
+
+- Razvoj na veji `razvoj` (brezplačen predogled), push brez vprašanja.
+- V `main` samo po dogovoru, največ enkrat na teden, med tednom: vsak deploy stane 15 od 300 kreditov (SPEC.md §20.6).
+- `vsebina` je veja urejevalnika. Nedeljski zagon jo združi v `main`.
 
 ## Pravila
 
