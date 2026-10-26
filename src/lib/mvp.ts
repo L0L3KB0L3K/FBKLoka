@@ -1,11 +1,11 @@
-// MVP vikenda (SPEC.md §20.3). Pure functions, no network: tested in tests/mvp.test.ts.
+// MVP vikenda (SPEC.md §20.3), from the matches of every team. Pure functions, no network: tested in tests/mvp.test.ts.
 // Skaters score goals and assists, goalies score goals prevented against the competition's average save rate; both are
 // in "goals", weighted by how close the match was and its result, and summed over the weekend (Saturday and Sunday,
 // Ljubljana time). Weights and version: src/config/mvp.ts.
 import { BASELINE_MIN_SHOTS, BASELINE_SAVE_PCT, GOALIE, MVP_VERSION, SKATER, TIE_MARGIN } from "../config/mvp.ts";
 import { formatDate, partsInLjubljana, plural } from "./format.ts";
 
-/** One of our players in one of our senior matches (FloorballFlash playerStats and goalieStats of that game). */
+/** One of our players in one of our matches (FloorballFlash fieldPlayerStats and goalieStats of that game). */
 export type GameLine = {
   gameId: number;
   personId: number;
@@ -18,10 +18,12 @@ export type GameLine = {
   goalsAgainst: number;
 };
 
-/** One of our finished senior matches, from our side. */
+/** One of our finished matches, from our side. */
 export type MvpMatch = {
   id: number;
   competitionId: number;
+  selekcija: string; // team slug, e.g. "u13"
+  tekmovanje: string; // competition label from src/config/ff.ts, e.g. "DP U13"
   zacetek: string;
   nasprotnik: string;
   goalsFor: number;
@@ -36,10 +38,11 @@ export type Mvp = {
   vikend: { od: string; do: string };
   ffId: number;
   ime: string;
+  ekipe: string[]; // team slugs of the matches on the card, in match order, e.g. ["u13"]
   vratar: boolean;
   slika: string | null; // file name in src/data/ff/mvp/, null without a photo
   tekme: ({ nasprotnik: string; zacetek: string } & MvpStats)[];
-  sezona: MvpStats | null; // only the season competition (SEASON_LABEL); null when the player has no match in it
+  sezona: MvpStats | null; // season competition only (IFL for the seniors, else the team's own); null without a match in it
   sezonaTekmovanje: string; // its label, e.g. "IFL"
 };
 
@@ -84,16 +87,17 @@ const totals = (lines: GameLine[]): MvpStats => ({
 });
 
 /**
- * MVP of the latest weekend with finished senior matches, or null when nobody has a positive score.
- * lines: our players in all senior matches of the season so far; baselines: average save rate per competition id;
- * excluded: FloorballFlash person ids never shown; season: the one competition the season totals count (IFL).
+ * MVP of the latest weekend with finished matches of any team, or null when nobody has a positive score.
+ * lines: our players in all matches of the season so far; baselines: average save rate per competition id;
+ * excluded: FloorballFlash person ids never shown; seasonFor: the competition the season totals count, for the
+ * winner's first match of the weekend (IFL for the seniors, the team's own competition otherwise).
  */
 export function pickMvp(
   lines: GameLine[],
   matches: MvpMatch[],
   baselines: ReadonlyMap<number, number>,
   excluded: ReadonlySet<number>,
-  season: { competitionId: number; label: string } | null,
+  seasonFor: (match: MvpMatch) => { competitionId: number; label: string } | null,
 ): Omit<Mvp, "slika"> | null {
   const saturdays = matches.flatMap((match) => weekendOf(match.zacetek)?.od ?? []);
   const latest = saturdays.sort().at(-1);
@@ -127,12 +131,16 @@ export function pickMvp(
   const winner = ranked
     .filter((c) => top.score - c.score <= TIE_MARGIN)
     .sort((a, b) => b.goals - a.goals || a.pim - b.pim || b.positive - a.positive || a.personId - b.personId)[0]!;
+  // The winner has a positive score, so at least one line in a weekend match.
+  const played = weekend.filter((match) => winner.lines.some((line) => line.gameId === match.id));
+  const season = seasonFor(played[0]!);
 
   return {
     razlicica: MVP_VERSION,
     vikend: { od: latest, do: isoDay(new Date(Date.parse(latest) + 86_400_000)) },
     ffId: winner.personId,
     ime: winner.ime,
+    ekipe: [...new Set(played.map((match) => match.selekcija))],
     vratar: winner.lines.some(isGoalie),
     tekme: weekend.flatMap((match) => {
       const line = winner.lines.find((l) => l.gameId === match.id);

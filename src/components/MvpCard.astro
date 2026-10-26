@@ -1,16 +1,21 @@
 ---
-// MVP vikenda on the home page (SPEC.md §20.3, club decision 29. 9. 2026): heading, the player's photo, the name, the
-// weekend, one line per match ("Tekma proti FBC Borovnica: 2 gola, 1 podaja") and the IFL season total.
+// MVP vikenda on the home page (SPEC.md §20.3, club decisions 29. 9. and 26. 10. 2026): heading, the player's photo,
+// the name, the team and the weekend, one line per match ("Tekma proti FBC Borovnica: 2 gola, 1 podaja") and the
+// season total (IFL for a senior, the team's own competition otherwise). Any team's player can be MVP.
 // Data: src/data/ff/mvp.json and the photo in src/data/ff/mvp/ (scripts/fetch-mvp.ts). Nothing is rendered without
 // data (SPEC.md §1). Only the name, the photo and match numbers: never a birth year, school or contact.
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import data from "../data/ff/mvp.json";
+import { loadCollection } from "../lib/content.ts";
 import { statsText, weekendText, type Mvp } from "../lib/mvp.ts";
 
 const mvp = data as unknown as Mvp | null;
 const photos = import.meta.glob<{ default: ImageMetadata }>("/src/data/ff/mvp/*.{jpeg,jpg,png,webp}", { eager: true });
 const photo = mvp?.slika ? photos[`/src/data/ff/mvp/${mvp.slika}`]?.default : undefined;
+// Team names, e.g. "U13". A file from before 26. 10. 2026 has no ekipe: then no team is named.
+const teams = await loadCollection("selekcije");
+const ekipe = (mvp?.ekipe ?? []).map((id) => teams.find((team) => team.id === id)?.data.ime ?? id);
 ---
 
 {
@@ -31,7 +36,9 @@ const photo = mvp?.slika ? photos[`/src/data/ff/mvp/${mvp.slika}`]?.default : un
         )}
         <div>
           <p class="text-h2 font-bold">{mvp.ime}</p>
-          <p class="mt-1 text-small text-muted">Vikend {weekendText(mvp.vikend)}</p>
+          <p class="mt-1 text-small text-muted">
+            {ekipe.length > 0 && `${ekipe.join(", ")} · `}Vikend {weekendText(mvp.vikend)}
+          </p>
           {mvp.tekme.map((tekma) => (
             <p class="mt-4">
               Tekma proti {tekma.nasprotnik}: <strong>{statsText(tekma, mvp.vratar)}</strong>

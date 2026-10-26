@@ -1,7 +1,7 @@
 // MVP vikenda (SPEC.md §20.3): the Limited-Box-Score Floorball MVP Index, version 1.0 ("Academic MVP Formula for
 // Floorball", club decision 29. 9. 2026). The weights are editorial, not fitted to data: change them here and raise the
-// version, so older awards stay reproducible. The senior competitions come from src/config/ff.ts (clani), so the cup and
-// the playoffs count as soon as they are there, and nothing in this file changes with the season.
+// version, so older awards stay reproducible. The competitions of every team come from src/config/ff.ts (all teams count
+// since 26. 10. 2026), so the cup and the playoffs count as soon as they are there, and nothing here changes with the season.
 export const MVP_VERSION = "LBS-MVPI 1.0";
 
 /** Skater, per match: a goal is the unit, an assist 0.7, a penalty minute -0.05. FloorballFlash has no shots per player. */
@@ -14,7 +14,7 @@ export const GOALIE = { shutout: 0.25, shutoutMinShots: 8 } as const;
 export const BASELINE_SAVE_PCT = 0.8;
 export const BASELINE_MIN_SHOTS = 100;
 
-/** "Skupaj v sezoni" on the card counts only this competition (its label in src/config/ff.ts), club decision 29. 9. 2026. */
+/** "Skupaj v sezoni" of a senior counts only this competition (club decision 29. 9. 2026); other teams count their own. */
 export const SEASON_LABEL = "IFL";
 
 /** Weekend scores this close are a tie: more goals, then fewer penalty minutes, then more matches with a positive score. */

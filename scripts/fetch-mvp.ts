@@ -1,13 +1,17 @@
-// MVP vikenda (SPEC.md §20.3). Runs after fetch-ff.ts in `npm run fetch:ff`: reads our finished senior matches
-// (src/data/ff/matches.json) and the senior roster (roster.json), fetches the statistics of each of those matches from
+// MVP vikenda (SPEC.md §20.3). Runs after fetch-ff.ts in `npm run fetch:ff`: reads the finished matches of all our teams
+// (src/data/ff/matches.json) and their rosters (roster.json), fetches the statistics of each of those matches from
 // FloorballFlash, picks the MVP of the latest weekend (src/lib/mvp.ts) and writes src/data/ff/mvp.json and the player's
 // photo in src/data/ff/mvp/. Files are written only on a change (every change is a commit and a deploy); on any error
 // the old files stay and the step does not fail the workflow.
 //
-// Players hidden on the site with aktiven: false in src/content/igralci (consent withdrawn) are never MVP (SPEC.md §20.7).
+// Every team in src/config/ff.ts counts, with the same formula (club decision 26. 10. 2026): a U13 player can be MVP.
+// The seniors play far more often, so the club accepts comparing across ages without a correction.
+// Players hidden on the site with aktiven: false in src/content/igralci (consent withdrawn) are never MVP, whichever team
+// hides them (SPEC.md §20.7).
 //
-// FloorballFlash (checked 29. 9. 2026): the stats filter by gameId works, the filter by teamId does not, so our players
-// are picked by the roster. Players marked incognito are never in the roster. Photos: images/crop/ratio3x4/<width>/.
+// FloorballFlash (checked 29. 9. 2026; youth stats per game 26. 10. 2026): the stats filter by gameId works, the filter
+// by teamId does not, so our players are picked by the rosters. Players marked incognito are never in a roster.
+// Photos: images/crop/ratio3x4/<width>/.
 import { existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { FF_CONFIG } from "../src/config/ff.ts";
 import yaml from "js-yaml";
@@ -47,35 +51,49 @@ const filter = (baseFilter: object, orderBy: string) => ({
   pagination: { start: 0, limit: 200 },
 });
 
-// Senior competitions from the config; our finished matches in them, from our side.
-const competitionByLabel = new Map(
-  (FF_CONFIG.clani ?? []).flatMap((c) => (c.competitionId === null ? [] : [[c.label, c.competitionId] as const])),
+// Competitions of every team from the config (labels repeat across teams only in theory, so the key has the team);
+// our finished matches in them, from our side.
+const competitionKey = (selekcija: string, label: string) => `${selekcija}|${label}`;
+const competitionByKey = new Map(
+  Object.entries(FF_CONFIG).flatMap(([selekcija, competitions]) =>
+    competitions.flatMap((c) => (c.competitionId === null ? [] : [[competitionKey(selekcija, c.label), c.competitionId] as const])),
+  ),
 );
 // uniqueGames: a game that counts for IFL and 1. SFL is one game, scored once.
-const senior: MvpMatch[] = uniqueGames(readJson<Match[]>(new URL("matches.json", OUT_DIR), []))
-  .filter((m) => m.selekcija === "clani" && m.stanje === "koncana" && m.rezultat && competitionByLabel.has(m.tekmovanje))
+const played: MvpMatch[] = uniqueGames(readJson<Match[]>(new URL("matches.json", OUT_DIR), []))
+  .filter((m) => m.stanje === "koncana" && m.rezultat && competitionByKey.has(competitionKey(m.selekcija, m.tekmovanje)))
   .map((m) => ({
     id: m.id,
-    competitionId: competitionByLabel.get(m.tekmovanje)!,
+    competitionId: competitionByKey.get(competitionKey(m.selekcija, m.tekmovanje))!,
+    selekcija: m.selekcija,
+    tekmovanje: m.tekmovanje,
     zacetek: m.zacetek,
     nasprotnik: m.nasprotnik.ime,
     goalsFor: m.rezultat!.loka,
     goalsAgainst: m.rezultat!.nasprotnik,
   }));
+// A player in two rosters (e.g. U19 and the seniors) is one person with one FloorballFlash id.
 const roster = readJson<RosterPlayer[]>(new URL("roster.json", OUT_DIR), []);
-const names = new Map(roster.filter((p) => p.selekcija === "clani").map((p) => [p.ffId, p.ime]));
+const names = new Map(roster.map((p) => [p.ffId, p.ime]));
 const IGRALCI = new URL("../src/content/igralci/", import.meta.url);
 const manual = existsSync(IGRALCI)
   ? readdirSync(IGRALCI)
       .filter((file) => file.endsWith(".yaml"))
       .map((file) => yaml.load(readFileSync(new URL(file, IGRALCI), "utf8")) as { ime: string; selekcija: string; aktiven?: boolean })
   : [];
-const excluded = new Set(hiddenFfIds(roster, manual, "clani"));
+const excluded = new Set(Object.keys(FF_CONFIG).flatMap((selekcija) => hiddenFfIds(roster, manual, selekcija)));
+
+// "Skupaj v sezoni": the seniors count IFL only (club decision 29. 9. 2026), every other team its own competition.
+const seniorSeasonId = competitionByKey.get(competitionKey("clani", SEASON_LABEL));
+const seasonFor = (match: MvpMatch) => {
+  if (match.selekcija !== "clani") return { competitionId: match.competitionId, label: match.tekmovanje };
+  return seniorSeasonId === undefined ? null : { competitionId: seniorSeasonId, label: SEASON_LABEL };
+};
 
 async function run(): Promise<Mvp | null> {
   const lines: GameLine[] = [];
   const images = new Map<number, string | null>();
-  for (const match of senior) {
+  for (const match of played) {
     await pause();
     const { fieldPlayerStats: playerStats } = await ffRequest<{ fieldPlayerStats: PlayerRow[] }>("mvpPlayers", PLAYERS_QUERY, {
       q: filter({ gameId: match.id, for: "Game" }, "points"),
@@ -106,7 +124,7 @@ async function run(): Promise<Mvp | null> {
 
   // Average save rate per competition, from all its goalies this season.
   const baselines = new Map<number, number>();
-  for (const competitionId of new Set(senior.map((m) => m.competitionId))) {
+  for (const competitionId of new Set(played.map((m) => m.competitionId))) {
     await pause();
     const { goalieStats } = await ffRequest<{ goalieStats: GoalieRow[] }>("mvpGoalies", GOALIES_QUERY, {
       q: filter({ competitionId, for: "Competition" }, "gamesPlayed"),
@@ -117,9 +135,7 @@ async function run(): Promise<Mvp | null> {
     console.log(`OK    MVP baseline ${competitionId}: ${saves}/${shots} -> ${baselines.get(competitionId)!.toFixed(3)}`);
   }
 
-  const seasonId = competitionByLabel.get(SEASON_LABEL);
-  const season = seasonId === undefined ? null : { competitionId: seasonId, label: SEASON_LABEL };
-  const picked = pickMvp(lines, senior, baselines, excluded, season);
+  const picked = pickMvp(lines, played, baselines, excluded, seasonFor);
   if (!picked) {
     await photo(0, null); // no MVP: no photo stays behind
     return null;
@@ -153,7 +169,7 @@ try {
   if (existsSync(MVP_FILE) && readFileSync(MVP_FILE, "utf8") === text) console.log("MVP unchanged.");
   else {
     writeFileSync(MVP_FILE, text);
-    console.log(mvp ? `OK    MVP ${mvp.vikend.od}: ${mvp.ime}` : "OK    no MVP (no finished senior weekend)");
+    console.log(mvp ? `OK    MVP ${mvp.vikend.od}: ${mvp.ime} (${mvp.ekipe.join(", ")})` : "OK    no MVP (no finished weekend)");
   }
 } catch (error) {
   console.warn(`FAIL  MVP: ${(error as Error).message}. Keeping old data.`);

@@ -1,5 +1,5 @@
 // Tests for MVP vikenda (SPEC.md §20.3, LBS-MVPI 1.0): the worked examples of the formula document, the weekend,
-// ties, exclusions and the Slovenian number forms on the card. The weekend data is the real IFL weekend 26.–27. 9. 2026.
+// ties, exclusions, every team counting and the Slovenian number forms. The weekend data is the real IFL weekend 26.–27. 9. 2026.
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { lineScore, matchWeight, pickMvp, statsText, weekendOf, weekendText, type GameLine, type MvpMatch } from "../src/lib/mvp.ts";
@@ -45,9 +45,9 @@ test("weekend: Saturday and Sunday in Ljubljana; a weekday match belongs to none
 
 // IFL, 26. and 27. 9. 2026: FBK Loka – VSV 7:8, FBC Borovnica – FBK Loka 4:5 (5:4 for us); 20. 9. is an older weekend.
 const matches: MvpMatch[] = [
-  { id: 16458, competitionId: 738, zacetek: "2026-09-20T13:00:00+02:00", nasprotnik: "IBK Cartoon Heroes", goalsFor: 13, goalsAgainst: 6 },
-  { id: 16493, competitionId: 738, zacetek: "2026-09-26T17:00:00+02:00", nasprotnik: "C.Hamp VSV Unihockey", goalsFor: 7, goalsAgainst: 8 },
-  { id: 16450, competitionId: 738, zacetek: "2026-09-27T17:00:00+02:00", nasprotnik: "FBC Borovnica", goalsFor: 5, goalsAgainst: 4 },
+  { id: 16458, competitionId: 738, selekcija: "clani", tekmovanje: "IFL", zacetek: "2026-09-20T13:00:00+02:00", nasprotnik: "IBK Cartoon Heroes", goalsFor: 13, goalsAgainst: 6 },
+  { id: 16493, competitionId: 738, selekcija: "clani", tekmovanje: "IFL", zacetek: "2026-09-26T17:00:00+02:00", nasprotnik: "C.Hamp VSV Unihockey", goalsFor: 7, goalsAgainst: 8 },
+  { id: 16450, competitionId: 738, selekcija: "clani", tekmovanje: "IFL", zacetek: "2026-09-27T17:00:00+02:00", nasprotnik: "FBC Borovnica", goalsFor: 5, goalsAgainst: 4 },
 ];
 const lines: GameLine[] = [
   line({ gameId: 16458, personId: 2643, ime: "Nejc Peklaj", goals: 2, assists: 2 }),
@@ -60,9 +60,10 @@ const lines: GameLine[] = [
 ];
 const baselines = new Map([[738, 0.753]]);
 const IFL = { competitionId: 738, label: "IFL" };
+const ifl = () => IFL; // season competition for every match, as for a senior
 
 test("MVP of the latest weekend: both matches summed, one line per match, season totals from IFL", () => {
-  const mvp = pickMvp(lines, matches, baselines, new Set(), IFL);
+  const mvp = pickMvp(lines, matches, baselines, new Set(), ifl);
   assert.equal(mvp?.ime, "Nejc Peklaj");
   assert.deepEqual(mvp?.vikend, { od: "2026-09-26", do: "2026-09-27" });
   assert.deepEqual(
@@ -74,11 +75,11 @@ test("MVP of the latest weekend: both matches summed, one line per match, season
 });
 
 test("the season line counts only IFL: a 1. SFL match is left out, no IFL match means no line", () => {
-  const sfl: MvpMatch = { id: 9001, competitionId: 760, zacetek: "2026-09-13T17:00:00+02:00", nasprotnik: "FBC Borovnica", goalsFor: 9, goalsAgainst: 2 };
+  const sfl: MvpMatch = { id: 9001, competitionId: 760, selekcija: "clani", tekmovanje: "1. SFL", zacetek: "2026-09-13T17:00:00+02:00", nasprotnik: "FBC Borovnica", goalsFor: 9, goalsAgainst: 2 };
   const withSfl = [...lines, line({ gameId: 9001, personId: 2643, ime: "Nejc Peklaj", goals: 5, assists: 5 })];
-  const mvp = pickMvp(withSfl, [...matches, sfl], baselines, new Set(), IFL);
+  const mvp = pickMvp(withSfl, [...matches, sfl], baselines, new Set(), ifl);
   assert.equal(statsText(mvp!.sezona!, false), "7 golov, 4 podaje");
-  const sflOnly = pickMvp(lines, matches, baselines, new Set(), { competitionId: 760, label: "1. SFL" });
+  const sflOnly = pickMvp(lines, matches, baselines, new Set(), () => ({ competitionId: 760, label: "1. SFL" }));
   assert.equal(sflOnly?.sezona, null);
 });
 
@@ -89,7 +90,7 @@ test("a goalie who prevents goals in a 1:0 win beats a one-goal skater", () => {
     shutout,
     baselines,
     new Set(),
-    IFL,
+    ifl,
   );
   assert.equal(mvp?.ime, "Bine Lang");
   assert.equal(mvp?.vratar, true);
@@ -97,15 +98,28 @@ test("a goalie who prevents goals in a 1:0 win beats a one-goal skater", () => {
 });
 
 test("excluded players are never MVP; without a positive score there is no MVP", () => {
-  assert.equal(pickMvp(lines, matches, baselines, new Set([2643]), IFL)?.ime, "Gašper Triler");
-  assert.equal(pickMvp([line({ pim: 2 })], matches, baselines, new Set(), IFL), null);
-  assert.equal(pickMvp(lines, [], baselines, new Set(), IFL), null);
+  assert.equal(pickMvp(lines, matches, baselines, new Set([2643]), ifl)?.ime, "Gašper Triler");
+  assert.equal(pickMvp([line({ pim: 2 })], matches, baselines, new Set(), ifl), null);
+  assert.equal(pickMvp(lines, [], baselines, new Set(), ifl), null);
+});
+
+test("every team counts: a U13 player can be MVP, with the team and the season of the own competition", () => {
+  // U13 12:5 on the same weekend: 6 goals and 2 assists (7.4 × 1.05 = 7.77) beat the senior's 7.30.
+  const u13: MvpMatch = { id: 9100, competitionId: 765, selekcija: "u13", tekmovanje: "DP U13", zacetek: "2026-09-27T10:00:00+02:00", nasprotnik: "FBK Žiri", goalsFor: 12, goalsAgainst: 5 };
+  const youth = [...lines, line({ gameId: 9100, personId: 500, ime: "Mladi Strelec", goals: 6, assists: 2 })];
+  const seasonFor = (m: MvpMatch) => (m.selekcija === "clani" ? IFL : { competitionId: m.competitionId, label: m.tekmovanje });
+  const mvp = pickMvp(youth, [...matches, u13], new Map([...baselines, [765, 0.8]]), new Set(), seasonFor);
+  assert.equal(mvp?.ime, "Mladi Strelec");
+  assert.deepEqual(mvp?.ekipe, ["u13"]);
+  assert.equal(mvp?.sezonaTekmovanje, "DP U13");
+  assert.equal(statsText(mvp!.sezona!, false), "6 golov, 2 podaji");
+  assert.deepEqual(pickMvp(lines, matches, baselines, new Set(), seasonFor)?.ekipe, ["clani"]);
 });
 
 test("a tie (within 0.10) goes to more goals", () => {
   // Both score 1.4 before the weight: 1 goal + 1 assist - 6 penalty minutes, and 2 assists.
   const tied = [line({ personId: 1, ime: "Strelec", goals: 1, assists: 1, pim: 6 }), line({ personId: 2, ime: "Podajalec", assists: 2 })];
-  assert.equal(pickMvp(tied, matches, baselines, new Set(), IFL)?.ime, "Strelec");
+  assert.equal(pickMvp(tied, matches, baselines, new Set(), ifl)?.ime, "Strelec");
 });
 
 test("Slovenian forms on the card", () => {

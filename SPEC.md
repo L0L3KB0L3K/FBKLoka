@@ -1375,7 +1375,7 @@ on:
 **Narejeno:** `tests/ff-gate.test.ts` za poletni in zimski čas: od dveh vnosov na dan teče natanko eden (sobota 22:37,
 nedelja 22:07), zamuda do 45 min še šteje, drugi dnevi ne tečejo, ročni zagon vedno.
 
-### 20.3 MVP vikenda (članske tekme)
+### 20.3 MVP vikenda (vse ekipe)
 
 **Odločitve kluba (29. 9. 2026):** ime "MVP vikenda", s fotografijo; štejejo vsa članska tekmovanja iz `src/config/ff.ts`
 (IFL, 1. SFL s končnico, pokal, ko bo v FloorballFlash). Izračun **LBS-MVPI 1.0** (dokument "Academic MVP Formula for
@@ -1388,12 +1388,18 @@ Floorball"): brez praga za vratarja, ena zvezna ocena v enoti "goli" za igralce 
   povprečje obramb vseh vratarjev istega tekmovanja v sezoni (IFL 2026/27 na dan 29. 9.: 305/405 = 0,753), dokler
   tekmovanje nima 100 strelov, pa 0,80.
 - Utež tekme W: razlika 0–1 → 1,15, razlika 2 → 1,05, 3+ → 1,00; zmaga × 1,05, remi × 1,00, poraz × 0,95.
-- Vikend je sobota in nedelja po ljubljanskem času: zadnji vikend s končanimi članskimi tekmami. Ocena vikenda je
+- Vikend je sobota in nedelja po ljubljanskem času: zadnji vikend s končanimi tekmami katerekoli ekipe. Ocena vikenda je
   vsota tekem. Tekma med tednom šteje samo v sezonske številke.
 - Izenačenje (razlika ≤ 0,10): več golov, manj kazenskih minut, več tekem s pozitivno oceno, nato ID (vedno isti izid).
-- Kandidati so samo igralci s seznama članov (`roster.json`, brez oseb z `incognito`) in brez igralcev, skritih z
+- Kandidati so samo igralci s seznamov ekip (`roster.json`, brez oseb z `incognito`) in brez igralcev, skritih z
   `aktiven: false` v `src/content/igralci` (umaknjena privolitev, 20.7). Mladoletni so dovoljeni; brez letnika, šole in kontakta.
 - Omejitev: formula ne vidi obrambe igralcev v polju, zato branilec brez točk ne more biti MVP.
+
+**Sprememba (26. 10. 2026, lastnik kluba in trener):** štejejo vse ekipe iz `src/config/ff.ts`, z isto formulo in brez
+popravka za starost, ker člani igrajo veliko pogosteje. MVP je lahko tudi igralec U13. Kartica pokaže ekipo; vrstica
+"Skupaj v sezoni" je za člana IFL, za druge njihovo tekmovanje (npr. DP U13). FloorballFlash ima gole, podaje in obrambe
+po tekmah tudi pri mlajših (preverjeno na DP U13 2025/26). Statistika vseh tekem sezone pomeni do okoli 300 klicev na
+teden (pavza 300 ms, 2–3 minute).
 
 **Podatki (preverjeno 29. 9. 2026; 23. 10. je FloorballFlash `playerStats` preimenoval v `fieldPlayerStats`, kar je od
 4. 10. podiralo MVP s HTTP 422):** `fieldPlayerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta

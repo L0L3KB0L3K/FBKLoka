@@ -41,6 +41,7 @@ const mvp: Mvp = {
   vikend: { od: "2026-09-26", do: "2026-09-27" },
   ffId: 2643,
   ime: "Nejc Peklaj",
+  ekipe: ["clani"],
   vratar: false,
   slika: null,
   tekme: [
