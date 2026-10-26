@@ -59,7 +59,7 @@ Data: člani, IFL, sobota doma 7:8 proti C.Hamp VSV Unihockey, nedelja v gosteh 
 > Člani so v soboto v IFL doma izgubili proti ekipi C.Hamp VSV Unihockey s 7:8. V nedeljo so v gosteh premagali ekipo
 > FBC Borovnica s 5:4.
 >
-> MVP vikenda je Nejc Peklaj: proti ekipi C.Hamp VSV Unihockey 3 goli in 1 podaja, proti ekipi FBC Borovnica 2 gola in
+> Igralec tedna je Nejc Peklaj: proti ekipi C.Hamp VSV Unihockey 3 goli in 1 podaja, proti ekipi FBC Borovnica 2 gola in
 > 1 podaja.
 
 Data: U17, DP U17, sobota v gosteh 2:1 proti FBK Polanska banda; no MVP.

@@ -1016,7 +1016,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 - [ ] Preverjeno na pravem telefonu z mobilnimi podatki, tri naloge iz 9.5 v predvidenem številu dotikov
 - [ ] `npm run verify` in `npm run test:a11y` zeleno, ročni pregled s tipkovnico in pri 200 %
 - [x] CSP vsiljen (ne več Report-Only), od 28. 9. 2026; od 30. 9. kot `<meta>` + glava (13.4)
-- [ ] Vsaj ena prava fotografija ekipe (9.1a)
+- [x] Vsaj ena prava fotografija ekipe (9.1a): skupinske fotografije petih ekip in finale 2026 (26. 10. 2026)
 - [ ] MFA na GitHubu in Netlifyju, domena na imenu kluba
 - [ ] Za vsako sekcijo imenovan lastnik v klubu
 
@@ -1352,7 +1352,8 @@ uspešni, zato ni bilo e-pošte: rezultati in povzetki treh vikendov niso bili o
 Prvotni načrt:
 
 Zdaj nedelja 22:00 (`.github/workflows/fetch-ff.yml`). Novo: sobota ob 22:37 in nedelja ob 22:07 po ljubljanskem času.
-Do 27. 10. 2026 je sobotni cron izklopljen zaradi kreditov (20.6); vratca sobotno okno še poznajo.
+Sobotni cron ostane izklopljen (odločitev 26. 10. 2026): nedelja pokrije obe tekmi vikenda, sobota bi stala okoli 60
+kreditov na mesec (20.6). Vratca sobotno okno še poznajo.
 GitHub cron teče samo v UTC, zato sta na dan dva vnosa in vratca, ki spustijo samo pravo uro. Minute niso :00 in :30,
 ker GitHub ob polni in pol ure najbolj zamuja.
 
@@ -1375,7 +1376,7 @@ on:
 **Narejeno:** `tests/ff-gate.test.ts` za poletni in zimski čas: od dveh vnosov na dan teče natanko eden (sobota 22:37,
 nedelja 22:07), zamuda do 45 min še šteje, drugi dnevi ne tečejo, ročni zagon vedno.
 
-### 20.3 MVP vikenda (vse ekipe)
+### 20.3 Igralec tedna (MVP vikenda, vse ekipe)
 
 **Odločitve kluba (29. 9. 2026):** ime "MVP vikenda", s fotografijo; štejejo vsa članska tekmovanja iz `src/config/ff.ts`
 (IFL, 1. SFL s končnico, pokal, ko bo v FloorballFlash). Izračun **LBS-MVPI 1.0** (dokument "Academic MVP Formula for
@@ -1400,6 +1401,10 @@ popravka za starost, ker člani igrajo veliko pogosteje. MVP je lahko tudi igral
 "Skupaj v sezoni" je za člana IFL, za druge njihovo tekmovanje (npr. DP U13). FloorballFlash ima gole, podaje in obrambe
 po tekmah tudi pri mlajših (preverjeno na DP U13 2025/26). Statistika vseh tekem sezone pomeni do okoli 300 klicev na
 teden (pavza 300 ms, 2–3 minute).
+
+**Ime (26. 10. 2026):** na strani "Igralec tedna" z ikono krone (SVG, rumena z obrobo kot žogica v logotipu, skrita
+pred bralnikom zaslona; emoji ne, ker je na vsaki napravi drugačen). Računa se še vedno vikend. V kodi ostane ime `mvp`
+(`mvp.json`, `fetch-mvp.ts`), objavljeni povzetki obdržijo "MVP vikenda".
 
 **Podatki (preverjeno 29. 9. 2026; 23. 10. je FloorballFlash `playerStats` preimenoval v `fieldPlayerStats`, kar je od
 4. 10. podiralo MVP s HTTP 422):** `fieldPlayerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
@@ -1426,6 +1431,8 @@ in ni starejša od 48 ur (`lastPlayed()` v `src/lib/upcoming.ts`, test v `tests/
 isti `setInterval` kot tablo. Ko je rezultat v deployu, vrstica izgine.
 
 ### 20.5 Tedenski povzetek (nedelja, samodejna objava)
+
+**26. 10. 2026:** povzetek ostane, dokler ne deluje kopiranje objav z Instagrama (§6). Potem ga objave z IG nadomestijo.
 
 **Odločitev kluba (29. 9. 2026): povzetek se objavi samodejno, brez pregleda, iz fiksne predloge. Brez AI**, ker API
 stane. Samo dejstva: brez ocen ("odlična igra"), napovedi, citatov in lastnosti igralcev.

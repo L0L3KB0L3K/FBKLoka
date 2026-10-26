@@ -1,5 +1,6 @@
 ---
-// MVP vikenda on the home page (SPEC.md §20.3, club decisions 29. 9. and 26. 10. 2026): heading, the player's photo,
+// "Igralec tedna" on the home page (MVP vikenda in the code; SPEC.md §20.3, club decisions 29. 9. and 26. 10. 2026):
+// heading with a crown, the player's photo,
 // the name, the team and the weekend, one line per match ("Tekma proti FBC Borovnica: 2 gola, 1 podaja") and the
 // season total (IFL for a senior, the team's own competition otherwise). Any team's player can be MVP.
 // Data: src/data/ff/mvp.json and the photo in src/data/ff/mvp/ (scripts/fetch-mvp.ts). Nothing is rendered without
@@ -20,9 +21,24 @@ const ekipe = (mvp?.ekipe ?? []).map((id) => teams.find((team) => team.id === id
 
 {
   mvp && (
-    <section aria-labelledby="mvp-vikenda" class="page-wrap py-12">
-      <h2 id="mvp-vikenda" class="heading-bar">
-        MVP vikenda
+    <section aria-labelledby="igralec-tedna" class="page-wrap py-12">
+      <h2 id="igralec-tedna" class="heading-bar">
+        Igralec tedna
+        {/* Crown: yellow with a black outline like the ball in the logo, so it also reads on white. Decorative,
+            hidden from screen readers. Geometry of "crown" from Tabler Icons (MIT, tabler.io/icons), like ArrowIcon. */}
+        <svg
+          aria-hidden="true"
+          class="ml-1 inline-block size-[1.3em] align-[-0.3em] fill-ball"
+          viewBox="0 0 24 24"
+          width="32"
+          height="32"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z"></path>
+        </svg>
       </h2>
       <div class="mt-8 grid gap-6 sm:grid-cols-[14rem_1fr] sm:items-start">
         {photo && (

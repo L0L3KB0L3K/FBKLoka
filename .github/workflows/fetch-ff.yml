@@ -5,8 +5,9 @@
 # main first, so edits, results and the summary go out in one push and one deploy; then "vsebina" is brought up to
 # date. A manual run is the way to publish an edit at once (15 credits). On a merge conflict the edits wait (warning).
 #
-# Until 27. 10. 2026 only Sunday: 88.7 credits were left for the period on 30. 9. (SPEC.md §20.6). To turn Saturday
-# back on, restore its cron line below; scripts/ff-gate.ts still has the Saturday window.
+# Only Sunday (decision 26. 10. 2026): Sunday covers both matches of the weekend, a Saturday run would cost about 60
+# credits a month (SPEC.md §20.6). To turn Saturday back on, restore its cron line below; scripts/ff-gate.ts still has
+# the Saturday window.
 #
 # Schedule (SPEC.md §20.2): Saturday 22:30 and Sunday 22:00, Ljubljana time. Saturday brings the day's results if they
 # are already entered in FloorballFlash; Sunday covers the whole weekend. Each production deploy costs 15 of the 300

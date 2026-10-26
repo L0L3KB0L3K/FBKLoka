@@ -68,7 +68,7 @@ test("template: one paragraph per team, the MVP last, correct z/s and endings", 
   assert.equal(
     templateSummary(week),
     "Člani so v soboto v IFL doma izgubili proti ekipi C.Hamp VSV Unihockey s 7:8. V nedeljo so v IFL v gosteh premagali ekipo FBC Borovnica s 5:4.\n\n" +
-      "MVP vikenda je Nejc Peklaj (5 golov, 2 podaji).\n\n" +
+      "Igralec tedna je Nejc Peklaj (5 golov, 2 podaji).\n\n" +
       "## Naslednji teden\n\nČlani igrajo v soboto, 3. 10., ob 15:00 v IFL doma proti ekipi C.Hamp VSV Unihockey.",
   );
   const youth = buildWeek([match({ id: 9, selekcija: "u17", tekmovanje: "U17", rezultat: { loka: 12, nasprotnik: 6 } })], { u17: "U17" }, null, teden);
