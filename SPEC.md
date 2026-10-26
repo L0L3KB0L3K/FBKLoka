@@ -519,6 +519,10 @@ Namen: v 3 sekundah pokaže, kdaj je naslednja tekma, in pripelje novega starša
 
 ### 7.2 `/ekipe/[slug]`
 
+**Skupinska fotografija (26. 10. 2026):** polje `foto` (`src`, `alt`) v `src/content/selekcije/<ekipa>.yaml`, pod kratkim
+opisom, 3 : 2, širina največ 42rem. Zdaj U19, U17, U15 in Švigalice (z Instagrama kluba, obrezane v
+`src/assets/foto/ekipe/`); U13, U11 in U9 še nimajo. Brez fotografije se nič ne izriše.
+
 ```
 ┌───────────────────────────────────────────────────────────┐
 │ Člani                                           (naslov)  │

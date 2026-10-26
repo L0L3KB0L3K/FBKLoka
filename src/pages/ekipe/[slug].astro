@@ -4,6 +4,7 @@
 // the roster is completed by src/content/igralci (teamRoster).
 // Tabs appear only when at least two panels have content; empty panels are not rendered.
 import { getCollection, type CollectionEntry } from "astro:content";
+import Photo from "../../components/Photo.astro";
 import RosterList from "../../components/RosterList.astro";
 import StandingsTables from "../../components/StandingsTables.astro";
 import TeamMatches from "../../components/TeamMatches.astro";
@@ -86,6 +87,8 @@ const jsonLd = sportsTeam(
   <div class="page-wrap py-12">
     <h1>{ime}</h1>
     <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>
+    {/* Team photo, narrower than on /klub so the trainings and matches stay close (26. 10. 2026). */}
+    {team.data.foto && <Photo src={team.data.foto.src} alt={team.data.foto.alt} priority class="mt-8 max-w-2xl" />}
 
     <div class:list={["mt-10 grid gap-10", twoColumns && "lg:grid-cols-[18rem_1fr] lg:items-start"]}>
       <TeamSummary team={summaryTeam} coaches={coaches} trainings={trainings} calendarSlug={calendarSlug} />

@@ -8,3 +8,7 @@ kratekOpis: "Selekcija U19 igra v državnem prvenstvu U19."
 prikaziSestavo: true
 treningiOpomba: "U19 trenira skupaj s člani ali z U17."
 treniraZ: clani # shown on /treningi as "Člani in U19" (owner, 28. 9. 2026)
+# Team photo (club Instagram, 31. 3. 2026).
+foto:
+  src: ../../assets/foto/ekipe/u19.jpg
+  alt: "Ekipa U19 FBK Loka v črnih dresih s trenerjem, marec 2026."

@@ -6,3 +6,7 @@ kapetan: "TODO"
 trenerji: [] # recreational team without a coach (club, 27. 9. 2026)
 kratekOpis: "Švigalice so rekreativna ekipa kluba in igrajo v mešani 2. slovenski floorball ligi."
 prikaziSestavo: true
+# Team photo (club Instagram, 2. 3. 2024, still in Insport jerseys).
+foto:
+  src: ../../assets/foto/ekipe/svigalice.jpg
+  alt: "Švigalice z medaljami in transparentom po naslovu v 2. SFL leta 2024."

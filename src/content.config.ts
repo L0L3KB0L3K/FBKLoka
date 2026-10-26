@@ -59,18 +59,21 @@ function listUnder(key: string, makeId: (item: Record<string, unknown>, index: n
 // §4.1 Teams (selekcije). File name = slug, e.g. src/content/selekcije/u15.yaml -> "u15".
 const selekcije = defineCollection({
   loader: glob({ pattern: "*.yaml", base: "./src/content/selekcije" }),
-  schema: z.object({
-    ime: z.string().min(1),
-    vrstniRed: z.number().int().positive(),
-    starostniRazpon: z.string().min(1), // shown to parents, e.g. "18+"
-    kapetan: z.string().default(""), // name, empty or "TODO"
-    trenerji: z.array(refTo("trenerji")).default([]),
-    kratekOpis: z.string().min(1), // 1–2 sentences
-    prikaziSestavo: z.boolean().default(true),
-    treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
-    // Trains with this team (e.g. U19 with "clani"): no own card on /treningi, the host card is "Člani in U19".
-    treniraZ: refTo("selekcije").optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      ime: z.string().min(1),
+      vrstniRed: z.number().int().positive(),
+      starostniRazpon: z.string().min(1), // shown to parents, e.g. "18+"
+      kapetan: z.string().default(""), // name, empty or "TODO"
+      trenerji: z.array(refTo("trenerji")).default([]),
+      kratekOpis: z.string().min(1), // 1–2 sentences
+      prikaziSestavo: z.boolean().default(true),
+      treningiOpomba: z.string().optional(), // e.g. "Trenira skupaj s člani ali z U17." Shown with the training times.
+      // Trains with this team (e.g. U19 with "clani"): no own card on /treningi, the host card is "Člani in U19".
+      treniraZ: refTo("selekcije").optional(),
+      // Team photo under the description on the team page (26. 10. 2026). 3:2, from src/assets/foto/ekipe/.
+      foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+    }),
 });
 
 // §4.2 Training slots. One file, list under "termini". Source for /treningi and each team page.

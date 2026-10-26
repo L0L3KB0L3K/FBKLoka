@@ -6,3 +6,7 @@ kapetan: "TODO"
 trenerji: [gasper-triler, maj-oman, nik-oman]
 kratekOpis: "Selekcija U15 igra v državnem prvenstvu U15."
 prikaziSestavo: true
+# Team photo (club Instagram, runners-up 11. 4. 2026).
+foto:
+  src: ../../assets/foto/ekipe/u15.jpg
+  alt: "Ekipa U15 FBK Loka s srebrnimi medaljami državnega prvenstva 2026."
