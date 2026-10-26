@@ -6,3 +6,8 @@ kapetan: "Nejc Peklaj"
 trenerji: [gorazd-tomc]
 kratekOpis: "Člani igrajo v mednarodni ligi 3 Nations – IFL in v 1. slovenski floorball ligi."
 prikaziSestavo: true
+
+# Team photo (club Instagram, silver medals after the state championship final, 22. 3. 2026).
+foto:
+  src: ../../assets/foto/ekipe/clani.jpg
+  alt: "Članska ekipa FBK Loka s srebrnimi medaljami po finalu državnega prvenstva 2026."

@@ -21,7 +21,7 @@ Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Za stran o zasebnosti potrdi uradno ime iz registra: FLOORBALL KLUB LOKA. Naslov, matična in davčna številka so enaki kot na stari strani.
 - [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.
 - [ ] Avtor fotografij s finala državnega prvenstva 2026 (naslovnica in /klub; dovoljenje imamo): ali ga navedemo ob fotografiji, in s kakšnim imenom?
-- [ ] Skupinske fotografije za strani ekip U13, U11 in U9 (ležeče, vsi obrazi vidni). U19, U17, U15 in Švigalice jih imajo z Instagrama; Švigalice iz leta 2024, še v dresih Insport.
+- [ ] Skupinske fotografije za strani ekip U13, U11 in U9 (ležeče, vsi obrazi vidni). Člani, U19, U17, U15 in Švigalice jih imajo z Instagrama; Švigalice iz leta 2024, še v dresih Insport.
 - [ ] Fotografije: ali ima kdo nove fotografije, primerne za pasico na naslovnici (ležeče, kakovostne, vsaj 2400 px široke)? Poleg tega postavljena skupinska fotografija članov, portreti trenerjev, otroci na treningu, dvorana od zunaj. Priložnost: praznovanje 25 let floorballa na Podnu 18. 10. 2026.
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
 - [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta.
