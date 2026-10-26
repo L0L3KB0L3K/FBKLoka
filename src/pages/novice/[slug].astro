@@ -2,9 +2,12 @@
 // /novice/[slug] (SPEC.md §7.8): title, date, team, cover, text and a link back to all news.
 // The URL is the file name, e.g. /novice/2026-04-12-u17-drzavni-prvaki/ (Decap's default slug also starts with the date).
 // The cover is shown whole (no crop, height capped) and is the share image as a 1200×630 crop.
+// An Instagram post (SPEC.md §6) adds more photos under the text and a link to the post; a video links right under
+// its thumbnail, so nobody waits for a photo to play.
 import { getImage, Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ArrowLink from "../../components/ArrowLink.astro";
+import NewTabIcon from "../../components/NewTabIcon.astro";
 import Base from "../../layouts/Base.astro";
 import { loadCollection } from "../../lib/content.ts";
 import { formatDate } from "../../lib/format.ts";
@@ -21,7 +24,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { naslov, datum, povzetek, naslovnaSlika, slikaAlt, selekcija } = post.data;
+const { naslov, datum, povzetek, naslovnaSlika, slikaAlt, selekcija, galerija, instagram, video } = post.data;
 const { Content } = await render(post);
 const team = selekcija ? (await loadCollection("selekcije")).find((entry) => entry.id === selekcija) : undefined;
 const iso = datum.toISOString();
@@ -54,9 +57,50 @@ const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.
       class="mt-8 block h-auto max-h-[36rem] w-auto max-w-full rounded-card border border-line"
     />
 
+    {
+      instagram && video && (
+        <p class="mt-4">
+          <a href={instagram} target="_blank" rel="noopener" class="inline-flex min-h-11 items-center gap-1 font-semibold">
+            Poglej video na Instagramu
+            <NewTabIcon class="inline size-4" />
+          </a>
+        </p>
+      )
+    }
+
     <div class="mt-8 prose">
       <Content />
     </div>
+
+    {/* Same width as the cover; Astro's default lazy loading, since the photos are below the text. */}
+    {
+      galerija.length > 0 && (
+        <ul class="mt-8 grid max-w-2xl gap-4 sm:grid-cols-2">
+          {galerija.map((photo) => (
+            <li>
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                widths={[480, 720, 960]}
+                sizes="(min-width: 40rem) 21rem, 100vw"
+                class="block h-auto w-full rounded-card border border-line"
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      instagram && !video && (
+        <p class="mt-8">
+          <a href={instagram} target="_blank" rel="noopener" class="inline-flex min-h-11 items-center gap-1 font-semibold">
+            Objava na Instagramu
+            <NewTabIcon class="inline size-4" />
+          </a>
+        </p>
+      )
+    }
 
     <p class="mt-12">
       <ArrowLink href="/novice/">Vse novice</ArrowLink>

@@ -96,6 +96,20 @@ collections:
         hint: >-
           Kaj je na sliki, za bralnike zaslona, npr. "Člani z medaljami po finalu". Če je plakat, prepiši njegovo
           besedilo.
+      - name: galerija
+        label: Več fotografij
+        label_singular: fotografijo
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.alt}}"
+        hint: Neobvezno. Fotografije se pokažejo pod besedilom, po vrsti. Otroci samo s privolitvijo staršev.
+        fields:
+          - { name: src, label: Fotografija, widget: image }
+          - name: alt
+            label: Opis fotografije
+            widget: string
+            hint: Kaj je na sliki, za bralnike zaslona.
       - name: selekcija
         label: Ekipa
         widget: select
@@ -121,6 +135,15 @@ collections:
           - { label: Instagram, value: instagram }
           - { label: Facebook, value: facebook }
           - { label: samodejno (povzetek tedna), value: samodejno }
+      - name: instagram
+        label: Povezava na Instagram
+        widget: string
+        required: false
+        pattern: ['^https://www\.instagram\.com/', 'Povezava se začne z https://www.instagram.com/']
+        hint: Neobvezno. Pod novico se pokaže povezava "Objava na Instagramu".
+      # Written by scripts/fetch-ig.ts for a mirrored Instagram post; hidden, kept on save.
+      - { name: igId, label: Instagram ID, widget: hidden, required: false }
+      - { name: video, label: Video, widget: hidden, required: false, default: false }
       - name: osnutek
         label: Osnutek (še ne objavi)
         widget: boolean

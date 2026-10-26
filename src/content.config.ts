@@ -147,6 +147,14 @@ const novice = defineCollection({
       vir: optional(z.enum(["instagram", "facebook", "rocno", "samodejno"])),
       // Draft (SPEC.md §13.4): Decap saves go live on Sunday, so an unfinished post stays off the site until unticked.
       osnutek: z.boolean().default(false),
+      // More photos under the text, in order (an Instagram album). Alt required, as for the cover.
+      galerija: z.array(z.object({ src: image(), alt: z.string().min(1) })).default([]),
+      // Link to the post on Instagram, shown on the news page.
+      instagram: optional(z.url()),
+      // Instagram post id, written by scripts/fetch-ig.ts so a post is never imported twice.
+      igId: optional(z.string()),
+      // The cover is a video's thumbnail: the link to Instagram moves right under it ("Poglej video na Instagramu").
+      video: z.boolean().default(false),
     }),
 });
 
