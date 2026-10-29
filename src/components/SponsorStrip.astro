@@ -8,19 +8,9 @@
 // and with "reduce motion" or without JS the logos stand still and wrap. The second copy of the list only
 // makes the loop seamless: hidden from screen readers and from the keyboard (inert).
 import { Image } from "astro:assets";
-import { loadCollection } from "../lib/content.ts";
+import { loadSponsors } from "../lib/sponsors.ts";
 
-const LEVEL_ORDER = { glavni: 0, zlati: 1, podporni: 2 } as const;
-// Missing level or order goes last, so a new sponsor without them never jumps ahead.
-const level = (raven?: keyof typeof LEVEL_ORDER) => (raven ? LEVEL_ORDER[raven] : 3);
-const order = (vrstniRed?: number) => vrstniRed ?? Number.MAX_SAFE_INTEGER;
-
-const sponzorji = (await loadCollection("sponzorji")).sort(
-  (a, b) =>
-    level(a.data.raven) - level(b.data.raven) ||
-    order(a.data.vrstniRed) - order(b.data.vrstniRed) ||
-    a.data.ime.localeCompare(b.data.ime, "sl"),
-);
+const sponzorji = await loadSponsors();
 // Every logo gets the same box and keeps its shape inside it (object-contain), so wide and square logos
 // look equally strong. Logo files are trimmed to their content.
 const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";

@@ -217,7 +217,7 @@ collections:
   - name: sponzorji
     label: Sponzorji
     label_singular: Sponzor
-    description: Pas logotipov nad nogo vsake strani. Sprememba gre na stran v nedeljo zvečer.
+    description: Pas logotipov nad nogo vsake strani in seznam na strani Podpri nas. Sprememba gre na stran v nedeljo zvečer.
     folder: src/content/sponzorji
     extension: yaml
     format: yaml
