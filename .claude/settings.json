@@ -1,0 +1,18 @@
+{
+  "skillOverrides": {
+    "web-projekt": "on",
+    "anthropic-skills:web-projekt": "on",
+    "web-pregled": "on",
+    "anthropic-skills:web-pregled": "on",
+    "web-cms-model": "on",
+    "anthropic-skills:web-cms-model": "on",
+    "web-dizajn-sistem": "name-only",
+    "anthropic-skills:web-dizajn-sistem": "name-only",
+    "web-vsebina-seo": "name-only",
+    "anthropic-skills:web-vsebina-seo": "name-only",
+    "diagnosing-bugs": "name-only",
+    "anthropic-skills:diagnosing-bugs": "name-only",
+    "objave-fbk-fzs": "name-only",
+    "anthropic-skills:objave-fbk-fzs": "name-only"
+  }
+}
