@@ -69,11 +69,12 @@ const venueOf = (match: Match) =>
                 loading={index === 0 ? undefined : "eager"}
                 fetchpriority={index === 0 ? undefined : "low"}
                 pictureAttributes={{ class: "contents" }}
-                class="size-full object-cover object-top"
+                class="size-full object-cover object-[50%_15%]"
               />
             </div>
           ))}
-          {/* Photos are aligned to the top (object-top): the wide board crops them, and the faces are in the upper part.
+          {/* Photos are aligned at 15 % of their height: the wide board shows only a band, and with object-top the faces of real
+              match photos (about 10–30 % of the height) fell into the dark lower part (30. 10. 2026). Phones see the whole height.
               Darkest at the bottom, where the text sits. */}
           <div class="absolute inset-0 bg-linear-to-t from-ink via-ink/75 to-ink/45" />
         </div>
