@@ -42,14 +42,14 @@ const intro =
   </nav>
 
   <h1 class="mt-8">{mode === "plato" ? "Plato" : "Prevoz"}</h1>
-  <p class="mt-6 max-w-[60ch]">{intro} <span data-deadline hidden></span></p>
+  <p class="mt-6 max-w-text">{intro} <span data-deadline hidden></span></p>
 
   <noscript><p class="mt-6 font-semibold">Ta stran potrebuje JavaScript. Vklopi ga in osveži stran.</p></noscript>
 
   {/* Accessible announcements after an action (the visible message is also shown at the match). */}
   <p class="sr-only" aria-live="polite" data-announce></p>
 
-  <p class="mt-8 max-w-[60ch] rounded-card bg-court p-6" data-state="setup" hidden>
+  <p class="mt-8 max-w-text rounded-card bg-court p-6" data-state="setup" hidden>
     Stran še ni povezana z ekipno tabelo. Skrbnik mora objaviti Apps Script (navodila v repozitoriju).
   </p>
 
@@ -93,7 +93,7 @@ const intro =
     </p>
   </div>
 
-  <div class="mt-8 max-w-[60ch] rounded-card bg-court p-6" data-load-error hidden>
+  <div class="mt-8 max-w-text rounded-card bg-court p-6" data-load-error hidden>
     <p>Podatkov trenutno ni mogoče naložiti. Poskusi znova čez minuto.</p>
     <div class="mt-4">
       <Button variant="on-paper">

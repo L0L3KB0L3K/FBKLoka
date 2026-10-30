@@ -8,7 +8,21 @@ kratekOpis: "Selekcija U19 igra v državnem prvenstvu U19."
 prikaziSestavo: true
 treningiOpomba: "U19 trenira skupaj s člani ali z U17."
 treniraZ: clani # shown on /treningi as "Člani in U19" (owner, 28. 9. 2026)
-# Team photo (club Instagram, 31. 3. 2026).
+# Team photo: club photographer, U19 FBK Loka – Polanska banda, 29. 3. 2026 (also on the club Instagram, 31. 3. 2026).
 foto:
   src: ../../assets/foto/ekipe/u19.jpg
   alt: "Ekipa U19 FBK Loka v črnih dresih s trenerjem, marec 2026."
+# Match photos: U19 FBK Loka – Polanska banda 3:5, Poden, 29. 3. 2026 (FloorballFlash 15454), club photographer.
+galerija:
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-286.jpg
+    alt: "Igralec FBK Loka s številko 9 v črnem dresu teče z žogico po igrišču."
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-313.jpg
+    alt: "Igralec FBK Loka v črnem dresu in nasprotnik v belo-modrem dresu se borita za žogico."
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-272.jpg
+    alt: "Igralec FBK Loka s številko 70 vodi žogico mimo nasprotnika v belo-modrem dresu."
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-283.jpg
+    alt: "Igralec FBK Loka s številko 68 vodi žogico, ob njem nasprotnik v belo-modrem dresu."
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-345.jpg
+    alt: "Igralka FBK Loka v črnem dresu z žogico pred nasprotnikovim golom."
+  - src: ../../assets/foto/ekipe/u19/tekma-2026-03-29-264.jpg
+    alt: "Igralci U19 FBK Loka v črnih dresih se pogovarjajo s trenerjem."

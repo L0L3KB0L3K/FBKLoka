@@ -7,6 +7,7 @@
 import { Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ArrowLink from "../../components/ArrowLink.astro";
+import Gallery from "../../components/Gallery.astro";
 import NewTabIcon from "../../components/NewTabIcon.astro";
 import Base from "../../layouts/Base.astro";
 import { shareImage } from "../../lib/share.ts";
@@ -68,24 +69,8 @@ const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.
       <Content />
     </div>
 
-    {/* Same width as the cover; Astro's default lazy loading, since the photos are below the text. */}
-    {
-      galerija.length > 0 && (
-        <ul class="mt-8 grid max-w-2xl gap-4 sm:grid-cols-2">
-          {galerija.map((photo) => (
-            <li>
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                widths={[480, 720, 960]}
-                sizes="(min-width: 40rem) 21rem, 100vw"
-                class="block h-auto w-full rounded-card border border-line"
-              />
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {/* Same width as the cover; the photos are below the text. */}
+    <Gallery photos={galerija} class="mt-8" />
 
     {
       instagram && !video && (

@@ -73,6 +73,8 @@ const selekcije = defineCollection({
       treniraZ: refTo("selekcije").optional(),
       // Team photo under the description on the team page (26. 10. 2026). 3:2, from src/assets/foto/ekipe/.
       foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+      // Up to six match photos at the bottom of the team page (audit 30. 10. 2026), from src/assets/foto/ekipe/<slug>/.
+      galerija: z.array(z.object({ src: image(), alt: z.string().min(1) })).max(6).default([]),
     }),
 });
 
