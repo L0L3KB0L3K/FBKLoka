@@ -1008,7 +1008,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 
 ### Pogoji za lansiranje (pred prestavitvijo domene)
 
-- [ ] Logo v SVG, svetla in temna različica
+- [x] Logo v SVG, svetla in temna različica (klubski PDF, 30. 10. 2026)
 - [x] Tekme vsaj za člane (IFL) se nalagajo same (od 23. 10. 2026 tudi 1. SFL, 2. SFL in mladinske lige)
 - [ ] Treningi, trenerji in kontakti za vse selekcije
 - [x] Zasebnost v nogi, obrazec testiran do prejetega e-maila (kontakt, 1. 10. 2026; vpis gre prek EOS)

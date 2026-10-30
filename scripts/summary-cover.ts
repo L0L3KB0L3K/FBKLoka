@@ -20,14 +20,18 @@ function token(name: string): string {
   return value;
 }
 
-// The holes of the ball (black shapes in a 240 x 240 tile) and the logo for dark backgrounds (viewBox 0 0 1772 789).
+// The holes of the ball (black shapes in a 240 x 240 tile) and the logo for dark backgrounds, with its own viewBox.
 const holes = read("src/assets/ball-holes.svg").match(/<g fill="#000">([\s\S]*?)<\/g>/)?.[1];
-const logo = read("src/assets/logo/logo-na-temnem.svg")
+const logoFile = read("src/assets/logo/logo-na-temnem.svg");
+const viewBox = logoFile.match(/viewBox="([^"]+)"/)?.[1];
+const logo = logoFile
   .replace(/^[\s\S]*?<svg[^>]*>/, "")
   .replace(/<\/svg>\s*$/, "")
   .replace(/<title[\s\S]*?<\/title>/, "");
 if (!holes) throw new Error("No holes in src/assets/ball-holes.svg");
-const logoHeight = Math.round((LOGO_WIDTH * 789) / 1772);
+if (!viewBox) throw new Error("No viewBox in src/assets/logo/logo-na-temnem.svg");
+const [, , viewWidth, viewHeight] = viewBox.trim().split(/[\s,]+/).map(Number);
+const logoHeight = Math.round((LOGO_WIDTH * viewHeight) / viewWidth);
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}">
   <defs>
@@ -37,7 +41,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${
   </defs>
   <rect width="${WIDTH}" height="${HEIGHT}" fill="${token("color-ink")}"/>
   <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#holes)"/>
-  <svg x="${(WIDTH - LOGO_WIDTH) / 2}" y="${(HEIGHT - logoHeight) / 2}" width="${LOGO_WIDTH}" height="${logoHeight}" viewBox="0 0 1772 789">${logo}</svg>
+  <svg x="${(WIDTH - LOGO_WIDTH) / 2}" y="${(HEIGHT - logoHeight) / 2}" width="${LOGO_WIDTH}" height="${logoHeight}" viewBox="${viewBox}">${logo}</svg>
 </svg>`;
 
 const info = await sharp(Buffer.from(svg)).webp({ quality: 90 }).toFile(OUT);

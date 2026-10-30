@@ -28,28 +28,31 @@ podlagi so obrisi črni, na temni beli.
 
 | Datoteka | Oblika | Stanje |
 |---|---|---|
-| `src/assets/logo/logo-dark.png` | PNG 1772×790, črna podlaga, brez prosojnosti | V glavi strani |
-| `src/assets/logo/logo-light.png` | PNG 1772×790, bela podlaga, brez prosojnosti | Vir za vektor |
+| Klubski PDF »LOGO - FBK Loka - (končni).pdf« | Vektor (poti, pisave v krivuljah), tri različice: svetla, temna, enobarvna vijolična | Od 30. 10. 2026 vir za `src/assets/logo/logo-na-temnem.svg` in `docs/znamka/logo-na-svetlem.svg`, `logo-stampiljka.svg` |
+| `docs/znamka/logo-dark.png` | PNG 1772×790, črna podlaga, brez prosojnosti | Arhiv (do 28. 9. 2026 v glavi) |
+| `docs/znamka/logo-light.png` | PNG 1772×790, bela podlaga, brez prosojnosti | Arhiv, vir prerisanega vektorja |
 | FloorballFlash »LOGO - FBK Loka - (končni).svg« | JPEG 1812×828 v ovoju SVG. Ni vektor. Podatki v datoteki: ACDSee, 20. 10. 2024, Gorazd Tomc | Na FloorballFlash |
-| `src/assets/logo/*.svg` | Vektor (poti), 28. 9. 2026 | Na strani od 28. 9. 2026: glava, favicon, slika za deljenje, lestvica; od 29. 9. naslovnica povzetka tedna (`scripts/summary-cover.ts`, ob novem logotipu jo zaženi znova). Klub še potrdi |
+| `src/assets/logo/logo-na-temnem.svg` | Klubski vektor (30. 10. 2026) | Glava strani, slika za deljenje (`public/og.png`), naslovnica povzetka tedna (`scripts/summary-cover.ts`, ob novem logotipu jo zaženi znova) |
 
-[MANJKA] izvorna datoteka oblikovalca (AI, PDF, EPS ali SVG s potmi) in avtor znaka.
+Klubski PDF so poslali kot `.pdf` in `.cdr`; SVG je iz PDF-ja, samo poti, brez rastra in pisav. Avtor znaka: [MANJKA].
+V temni različici so notranjosti črk črne (tako je v PDF-ju): na črni podlagi se ne vidijo.
 
-### Nove vektorske datoteke (`src/assets/logo/`)
+### Vektorske datoteke
 
-Ista mapa kot za spletno stran, da je vir en sam: ob spremembi datoteke se stran zgradi znova.
+Na strani je samo, kar stran uporablja (`src/assets/logo/`). Ostale različice so v `docs/znamka/`.
 
 | Datoteka | Za kaj |
 |---|---|
-| `logo-na-svetlem.svg` | Bela in svetla podlaga, dokumenti |
-| `logo-na-temnem.svg` | Črna in temna podlaga, glava in noga strani |
-| `logo-na-svetlem-brez-napisa.svg`, `logo-na-temnem-brez-napisa.svg` | Majhne velikosti (pod okoli 200 px širine), kjer napis ni berljiv. Črta je neprekinjena: to je izpeljava, ne izvirnik |
-| `logo-enobarvni-crn.svg`, `logo-enobarvni-bel.svg` | Tisk v eni barvi, vezenje, žig |
-| `zogica.svg`, `zogica-crna.svg`, `zogica-bela.svg` | Favicon, profilna slika, 16–64 px |
+| `docs/znamka/logo-na-svetlem.svg` | Bela in svetla podlaga, dokumenti (klubski vektor) |
+| `src/assets/logo/logo-na-temnem.svg` | Črna in temna podlaga, glava strani (klubski vektor) |
+| `docs/znamka/logo-stampiljka.svg` | Enobarvni vijolični, žig (klubski vektor) |
+| `docs/znamka/logo-na-*-brez-napisa.svg` | Majhne velikosti (pod okoli 200 px širine), kjer napis ni berljiv. Prerisano (28. 9.), izpeljava, ne izvirnik |
+| `docs/znamka/logo-enobarvni-crn.svg`, `logo-enobarvni-bel.svg` | Tisk v eni barvi, vezenje (prerisano, 28. 9.) |
+| `src/assets/logo/zogica.svg`, `docs/znamka/zogica-crna.svg`, `zogica-bela.svg` | Favicon, profilna slika, 16–64 px (prerisano, 28. 9.) |
 
 Pregled vseh različic: `docs/znamka/pregled.png`.
 
-Kako so nastale: brez AI generatorja slik. Obrisi, palica, črta in napis so sledeni (potrace) iz
+Kako so nastale prerisane različice (28. 9. 2026): brez AI generatorja slik. Obrisi, palica, črta in napis so sledeni (potrace) iz
 `logo-light.png` pri 2- in 4-kratni povečavi. Žogica je zgrajena na novo: en krog in 11 elips,
 izmerjenih iz slike. Primerjava z izvirnikom: razlika 1,7 % pikslov, vsa na robovih. Preverjeno pri
 16, 24, 32, 128 in 1024 px, na svetli in temni podlagi. V datotekah ni rastra, skript ne pisav.
