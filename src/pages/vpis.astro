@@ -1,11 +1,13 @@
 ---
 // /vpis: for a new parent (SPEC.md §7.5). A black panel first: free first trainings and the large
 // "Vpiši se" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
-// no repeats), when and where the youth train, and a link to the contact form.
+// no repeats), when and where the youth train, and a link to the contact form. The photo (vpis.md, optional) comes
+// after the panel, so the way into EOS stays first.
 // Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
 import ArrowLink from "../components/ArrowLink.astro";
+import Photo from "../components/Photo.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
 import { getPage, loadCollection } from "../lib/content.ts";
@@ -58,6 +60,8 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       </div>
       {isSet(eos.registracija) && <p class="mt-4 text-small">Vpis in članarina potekata v aplikaciji EOS.</p>}
     </section>
+
+    {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} class="mt-12" />}
 
     {/* Questions first, as headings a parent can scan; extra text from vpis.md follows, if any. */}
     <div class="mt-12 prose">

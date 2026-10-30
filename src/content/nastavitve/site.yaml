@@ -14,9 +14,12 @@ socialna:
   tiktok: https://www.tiktok.com/@fbk.loka # from the old club site
   youtube: https://www.youtube.com/user/FBKInsport
 # Photos behind the match board on the home page: state championship final, 22. 3. 2026, FBK Loka jerseys
-# (permission 26. 10. 2026). 2400 x 1600, without EXIF. The board shows the top of the photo (it crops the bottom on wide
+# (permission 26. 10. 2026), and a home game in Poden, camera date 9. 12. 2025 (club photographer, permission
+# 30. 10. 2026). 2400 x 1600, without EXIF. The board shows the top of the photo (it crops the bottom on wide
 # screens), so faces must be in the upper half of any photo added here.
 naslovnaFotografije:
   - ../../assets/foto/clani-finale-2026-dvoboj.jpg
   - ../../assets/foto/clani-finale-2026-z-zogico.jpg
   - ../../assets/foto/clani-finale-2026-napad.jpg
+  - ../../assets/foto/domaca-tekma-obramba.jpg
+  - ../../assets/foto/domaca-tekma-napad.jpg

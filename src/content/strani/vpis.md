@@ -4,6 +4,10 @@ opis: "Vpis otrok v floorball klub FBK Loka v Škofji Loki. Prvi treningi so bre
 # Answers from the club (27. 9. 2026), rewritten 29. 9. 2026 without repeats: each fact is said once, and the black
 # panel on /vpis already says that the first trainings are free and that joining is in EOS. Shown as open sections.
 # An answer that contains TODO is not shown on the site.
+# Photo: a young FBK Loka player at a youth tournament, camera date 13. 12. 2025 (permission 30. 10. 2026).
+foto:
+  src: ../../assets/foto/mladi-igralec-turnir.jpg
+  alt: "Mladi igralec FBK Loka s številko 17 vodi žogico na turnirju."
 vprasanja:
   - vprasanje: "Kaj otrok potrebuje?"
     odgovor: "Opremo, kot jo ima za športno vzgojo: dvoranske čevlje, kratke hlače in majico. Palico mu na prvih treningih posodimo, zato je ni treba kupiti vnaprej."
