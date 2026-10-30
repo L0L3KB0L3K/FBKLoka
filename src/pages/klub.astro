@@ -1,11 +1,12 @@
 ---
 // /klub (SPEC.md §7.6): about the club (Markdown), coaches as cards with their teams, and the halls
-// with a map link. "Vodstvo" follows when the club sends it; /zgodovina is linked in phase 3.
+// with a map link. "Vodstvo" follows when the club sends it; the timeline links to /zgodovina.
 // The senior team photo (SPEC.md §9.1a) sits under the title when klub.md has one.
 // The club timeline (foundings, names, titles) sits right of text, coaches and halls from 1024 px, under them on phones.
 // Coaches and halls are two per row in the left column, so the timeline has room beside them (club decision 29. 9. 2026).
 import { Image } from "astro:assets";
 import { render } from "astro:content";
+import ArrowLink from "../components/ArrowLink.astro";
 import ClubTimeline from "../components/ClubTimeline.astro";
 import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
@@ -89,7 +90,9 @@ const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden"
           )
         }
       </div>
-      <ClubTimeline entries={timeline} class="mt-16 lg:mt-8" />
+      <ClubTimeline entries={timeline} class="mt-16 lg:mt-8">
+        <ArrowLink href="/zgodovina/" class="mt-6">Vsa zgodovina</ArrowLink>
+      </ClubTimeline>
     </div>
   </div>
 </Base>

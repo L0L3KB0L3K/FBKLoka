@@ -57,6 +57,10 @@ dogodki:
     vrsta: naslovi
     sezona: "2006/07"
     dogodek: "Člani so državni prvaki."
+    # Foto: Gorazdov arhiv, datum v fotoaparatu 21. 4. 2007; da je to naslov 2006/07, klub še ni potrdil.
+    foto:
+      src: ../../assets/foto/zgodovina/2007-naslov.jpg
+      alt: "Igralci v svetlo modrih dresih s pokalom in medaljami na parketu."
     # Wikipedija, tabela državnih prvakov; Gorenjski glas, 24. 4. 2007 (dve zmagi v finalu).
 
   - leto: 2007
@@ -81,12 +85,20 @@ dogodki:
     vrsta: naslovi
     sezona: "2010/11"
     dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+    # Foto: Gorazdov arhiv (prvaki2.jpg), datum v fotoaparatu 16. 4. 2011.
+    foto:
+      src: ../../assets/foto/zgodovina/2011-naslov.jpg
+      alt: "Člani FBK Insport s pokalom in medaljami za transparentom FBK Insport Škofja Loka."
     # Člani: Wikipedija, tabela (finale proti Zelencem 2:0). Mladi: članek o klubu.
 
   - leto: 2012
     vrsta: naslovi
     sezona: "2011/12"
     dogodek: "Člani so državni prvaki. U19, U13 in U11: 1. mesto."
+    # Foto: Gorazdov arhiv, datum v fotoaparatu 12. 5. 2012; da je to naslov 2011/12, klub še ni potrdil.
+    foto:
+      src: ../../assets/foto/zgodovina/2012-naslov.jpg
+      alt: "Člani FBK Insport v črnih majicah s pokalom in medaljami za transparentom kluba."
     # Člani: Wikipedija, tabela (finale proti Olimpiji 6:5 po kazenskih strelih). Mladi: članek o klubu.
 
   - leto: 2013
@@ -120,6 +132,10 @@ dogodki:
     vrsta: naslovi
     sezona: "2016/17"
     dogodek: "Člani so državni prvaki. U19 in U16: 1. mesto."
+    # Foto: Gorazdov arhiv, datum v fotoaparatu 22. 4. 2017; da je to naslov 2016/17, klub še ni potrdil.
+    foto:
+      src: ../../assets/foto/zgodovina/2017-naslov.jpg
+      alt: "Člani FBK Insport z medaljami na igrišču, za njimi gledalci na tribuni."
     # Člani: Wikipedija, tabela (finale proti Polanski bandi 2:1 v zmagah). Mladi: članek o klubu.
 
   - leto: 2018
@@ -158,12 +174,20 @@ dogodki:
     vrsta: naslovi
     sezona: "2022/23"
     dogodek: "Člani osvojijo IFL in so državni prvaki. V finalu na Podnu prva ekipa premaga drugo z 10:3. Švigalice osvojijo 2. SFL. U19 je državni prvak."
+    # Foto: Gorazdov arhiv, datum v fotoaparatu 25. 3. 2023 (finale na Podnu).
+    foto:
+      src: ../../assets/foto/zgodovina/2023-naslov.jpg
+      alt: "Člani FBK Insport v belih in črnih dresih s pokalom za transparentom kluba."
     # FloorballFlash: IFL 9964; DP 10813; 2. SFL 10763, 10765; U19 1. od 3 (tekmovanje 519).
 
   - leto: 2024
     vrsta: naslovi
     sezona: "2023/24"
     dogodek: "Člani osvojijo IFL in so državni prvaki. Švigalice osvojijo 2. SFL."
+    # Foto: Gorazdov arhiv, datum v fotoaparatu 10. 3. 2024; da je to IFL 2023/24, klub še ni potrdil.
+    foto:
+      src: ../../assets/foto/zgodovina/2024-naslov.jpg
+      alt: "Igralci FBK Insport v črnih dresih se objemajo in veselijo na igrišču."
     # FloorballFlash: IFL 11557; DP 12740; 2. SFL 12423, 12425. Gorenjski glas, 10. 4. 2024.
 
   - leto: 2024

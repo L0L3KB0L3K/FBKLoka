@@ -183,9 +183,10 @@ const zgodovina = defineCollection({
       .object({
         leto: z.number().int().min(1900).max(2100),
         dogodek: z.string().min(1),
-        foto: image().optional(),
+        // Photo for /zgodovina (not shown in the narrow /klub column), from src/assets/foto/zgodovina/.
+        foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
         opomba: z.string().optional(),
-        // The /klub timeline shows foundings, name changes and titles; plain events wait for /zgodovina (phase 3).
+        // The /klub timeline shows foundings, name changes and titles; /zgodovina shows plain events too.
         vrsta: z.enum(["dogodek", "ustanovitev", "ime", "naslovi"]).default("dogodek"),
         klub: z.string().min(1).optional(), // club name from a founding or a name change on, e.g. "FBK Loka"
         sezona: z.string().regex(/^\d{4}\/\d{2}$/).optional(), // titles: "2024/25", leto is its second year

@@ -1,4 +1,4 @@
-// Pages from SPEC.md §13.5 plus /klub, /zasebnost and the news pages:
+// Pages from SPEC.md §13.5 plus /klub, /zgodovina, /zasebnost and the news pages:
 // 1. axe finds no WCAG 2.2 A/AA violations,
 // 2. no CSP violation: the site policy is the <meta> tag in the built page (src/config/csp.ts), plus the "/*" header,
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button,
@@ -20,6 +20,7 @@ const PAGES = [
   "/vpis/",
   "/kontakt/",
   "/klub/",
+  "/zgodovina/",
   "/zasebnost/",
   "/podpri-nas/",
   "/novice/",

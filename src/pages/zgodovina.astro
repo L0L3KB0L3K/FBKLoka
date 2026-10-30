@@ -1,0 +1,30 @@
+---
+// /zgodovina (SPEC.md §7.8, phase 3): every confirmed entry of the zgodovina collection on one vertical timeline,
+// oldest first, also the plain events that /klub leaves out, with a photo where an entry has one. No JS.
+// Linked from the timeline on /klub. The next step for a visitor: send an old photo or a correction (/kontakt).
+import ClubTimeline from "../components/ClubTimeline.astro";
+import Base from "../layouts/Base.astro";
+import { loadCollection } from "../lib/content.ts";
+import { historyTimeline } from "../lib/timeline.ts";
+
+const entries = historyTimeline((await loadCollection("zgodovina")).map((entry) => entry.data));
+---
+
+<Base
+  title="Zgodovina"
+  description="Zgodovina floorballa v Škofji Loki od leta 1991: FBK Loka Spiders, FBK Insport in FBK Loka, ustanovitve, imena in naslovi po sezonah."
+>
+  <div class="page-wrap py-12">
+    <h1>Zgodovina</h1>
+    <p class="mt-6 max-w-[60ch]">
+      Floorball se v Škofji Loki igra od leta 1991. Klub je bil ustanovljen leta 2000 kot FBK Loka Spiders, leta 2007
+      so igralci ustanovili FBK Insport Škofja Loka, od sezone 2024/25 klub nastopa kot FBK Loka.
+    </p>
+
+    <ClubTimeline entries={entries} photos class="mt-12 max-w-2xl" />
+
+    <p class="mt-14 max-w-xl">
+      Imate staro fotografijo ali popravek? Pišite nam na strani <a href="/kontakt/">Kontakt</a>.
+    </p>
+  </div>
+</Base>
