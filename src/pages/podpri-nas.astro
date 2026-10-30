@@ -10,17 +10,19 @@ import Field from "../components/forms/Field.astro";
 import NetlifyForm from "../components/forms/NetlifyForm.astro";
 import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
+import { shareImage } from "../lib/share.ts";
 import { getPage } from "../lib/content.ts";
 import { loadSponsors } from "../lib/sponsors.ts";
 
 const page = await getPage("podpri-nas");
 const { Content } = await render(page);
+const ogImage = page.data.foto ? await shareImage(page.data.foto.src, page.data.foto.alt, Astro.site as URL) : undefined;
 const sponzorji = await loadSponsors();
 // Same box as in the strip: every logo keeps its shape inside it.
 const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
 ---
 
-<Base title={page.data.naslov} description={page.data.opis}>
+<Base title={page.data.naslov} description={page.data.opis} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
 

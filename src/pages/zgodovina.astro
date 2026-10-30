@@ -5,14 +5,19 @@
 import ClubTimeline from "../components/ClubTimeline.astro";
 import Base from "../layouts/Base.astro";
 import { loadCollection } from "../lib/content.ts";
+import { shareImage } from "../lib/share.ts";
 import { historyTimeline } from "../lib/timeline.ts";
 
 const entries = historyTimeline((await loadCollection("zgodovina")).map((entry) => entry.data));
+// Shared links show the newest photo of the timeline.
+const photo = [...entries].reverse().find((entry) => entry.foto)?.foto;
+const ogImage = photo ? await shareImage(photo.src, photo.alt, Astro.site as URL) : undefined;
 ---
 
 <Base
-  title="Zgodovina"
+  title="Zgodovina floorballa v Škofji Loki"
   description="Zgodovina floorballa v Škofji Loki od leta 1991: FBK Loka Spiders, FBK Insport in FBK Loka, ustanovitve, imena in naslovi po sezonah."
+  ogImage={ogImage}
 >
   <div class="page-wrap py-12">
     <h1>Zgodovina</h1>

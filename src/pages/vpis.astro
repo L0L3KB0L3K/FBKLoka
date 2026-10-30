@@ -10,6 +10,7 @@ import ArrowLink from "../components/ArrowLink.astro";
 import Photo from "../components/Photo.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
+import { shareImage } from "../lib/share.ts";
 import { getPage, loadCollection } from "../lib/content.ts";
 import { groupBySchedule, joinSl } from "../lib/schedule.ts";
 import { getSettings, isSet } from "../lib/site.ts";
@@ -17,6 +18,7 @@ import { getTrainings } from "../lib/trainings.ts";
 
 const page = await getPage("vpis");
 const { Content } = await render(page);
+const ogImage = page.data.foto ? await shareImage(page.data.foto.src, page.data.foto.alt, Astro.site as URL) : undefined;
 const { eos } = await getSettings();
 
 // Youth teams (U9 ... U19), youngest first, grouped when they train at the same time.
@@ -31,7 +33,7 @@ const schedules = groupBySchedule(youth);
 const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
 ---
 
-<Base title={page.data.naslov} description={page.data.opis}>
+<Base title="Vpis otrok v floorball v Škofji Loki" description={page.data.opis} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
 

@@ -13,6 +13,7 @@ import TabPanel from "../../components/ui/TabPanel.astro";
 import Tabs from "../../components/ui/Tabs.astro";
 import { FF_CONFIG, ffCompetitionWeb } from "../../config/ff.ts";
 import Base from "../../layouts/Base.astro";
+import { shareImage } from "../../lib/share.ts";
 import { loadCollection } from "../../lib/content.ts";
 import { allMatches, ffRoster, standingsFile } from "../../lib/match-data.ts";
 import { splitByState } from "../../lib/matches.ts";
@@ -32,6 +33,8 @@ interface Props {
 
 const { team } = Astro.props;
 const { ime, kratekOpis, trenerji, prikaziSestavo } = team.data;
+// Shared links show the team photo, when there is one (audit 30. 10. 2026).
+const ogImage = team.data.foto ? await shareImage(team.data.foto.src, team.data.foto.alt, Astro.site as URL) : undefined;
 
 // Coaches in the order the team file lists them (head coach first).
 const allCoaches = await loadCollection("trenerji");
@@ -83,7 +86,7 @@ const jsonLd = sportsTeam(
 );
 ---
 
-<Base title={ime} description={kratekOpis} jsonLd={jsonLd}>
+<Base title={`${ime}: tekme, treningi in trenerji`} description={kratekOpis} jsonLd={jsonLd} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{ime}</h1>
     <p class="mt-6 max-w-[70ch]">{kratekOpis}</p>

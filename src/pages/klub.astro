@@ -10,6 +10,7 @@ import ArrowLink from "../components/ArrowLink.astro";
 import ClubTimeline from "../components/ClubTimeline.astro";
 import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
+import { shareImage } from "../lib/share.ts";
 import { getPage, loadCollection } from "../lib/content.ts";
 import { joinSl } from "../lib/schedule.ts";
 import { isSet } from "../lib/site.ts";
@@ -17,6 +18,7 @@ import { clubTimeline } from "../lib/timeline.ts";
 
 const page = await getPage("klub");
 const { Content } = await render(page);
+const ogImage = page.data.foto ? await shareImage(page.data.foto.src, page.data.foto.alt, Astro.site as URL) : undefined;
 const timeline = clubTimeline((await loadCollection("zgodovina")).map((entry) => entry.data));
 
 const teams = (await loadCollection("selekcije")).sort((a, b) => a.data.vrstniRed - b.data.vrstniRed);
@@ -32,7 +34,7 @@ const coaches = (await loadCollection("trenerji"))
 const halls = (await loadCollection("dvorane")).sort((a, b) => (a.id === "poden" ? -1 : b.id === "poden" ? 1 : 0));
 ---
 
-<Base title="Klub" description={page.data.opis}>
+<Base title="O klubu: floorball v Škofji Loki" description={page.data.opis} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
     <div class:list={[timeline.length > 0 && "lg:grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16"]}>

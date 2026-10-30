@@ -4,11 +4,12 @@
 // The cover is shown whole (no crop, height capped) and is the share image as a 1200×630 crop.
 // An Instagram post (SPEC.md §6) adds more photos under the text and a link to the post; a video links right under
 // its thumbnail, so nobody waits for a photo to play.
-import { getImage, Image } from "astro:assets";
+import { Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ArrowLink from "../../components/ArrowLink.astro";
 import NewTabIcon from "../../components/NewTabIcon.astro";
 import Base from "../../layouts/Base.astro";
+import { shareImage } from "../../lib/share.ts";
 import { loadCollection } from "../../lib/content.ts";
 import { formatDate } from "../../lib/format.ts";
 import { newsArticle } from "../../lib/jsonld.ts";
@@ -29,13 +30,8 @@ const { Content } = await render(post);
 const team = selekcija ? (await loadCollection("selekcije")).find((entry) => entry.id === selekcija) : undefined;
 const iso = datum.toISOString();
 
-// Share image for Facebook, WhatsApp and search: a 1.91:1 crop, 1200×630 at most.
-// Astro never upscales and then ignores the crop, so a smaller cover gets the largest 1.91:1 crop it allows.
-// The size is computed here, so og:image:width/height match the real file.
-const shareWidth = Math.min(1200, naslovnaSlika.width, Math.floor((naslovnaSlika.height * 1200) / 630));
-const shareHeight = Math.round((shareWidth * 630) / 1200);
-const share = await getImage({ src: naslovnaSlika, width: shareWidth, height: shareHeight, format: "jpg" });
-const ogImage = { url: new URL(share.src, Astro.site), width: shareWidth, height: shareHeight, alt: slikaAlt };
+// Share image for Facebook, WhatsApp and search: the cover as a 1.91:1 crop (src/lib/share.ts).
+const ogImage = await shareImage(naslovnaSlika, slikaAlt, Astro.site as URL);
 const jsonLd = newsArticle(Astro.site as URL, new URL(Astro.url.pathname, Astro.site), naslov, datum, ogImage.url);
 ---
 
