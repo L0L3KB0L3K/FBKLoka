@@ -52,7 +52,7 @@ Pravila v SPEC §9.6: samo kjer potrdi dejanje, največ 250 ms za UI, `prefers-r
 | Element | Gibanje |
 |---|---|
 | Fotografije za tablo na naslovnici | Prelivanje prosojnosti 1,2 s vsakih 6 s, gumb za ustavitev, brez z "reduce motion" (odločitev kluba 28. 9.) |
-| Trak sponzorjev | Brez gibanja od 30. 10. 2026 (prej neskončna zanka) |
+| Trak sponzorjev | Počasna zanka 35 s, gumb za ustavitev, ustavi se pod miško in fokusom, brez z "reduce motion" (odločitev kluba 28. 9., Maj jo je potrdil 30. 10. 2026) |
 | Mobilni meni, gumbi, povezave, kartice novic | `--ease-out`, `--dur-*` tokeni |
 
 ## Komponente s stanji

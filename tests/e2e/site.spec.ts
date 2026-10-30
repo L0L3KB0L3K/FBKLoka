@@ -3,7 +3,7 @@
 // 2. no CSP violation: the site policy is the <meta> tag in the built page (src/config/csp.ts), plus the "/*" header,
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button,
 // 4. the team filter on /novice shows only that team and goes back to all,
-// 5. the sponsor strip is one still list of logos, with no loop and no stop button (audit 30. 10. 2026),
+// 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
 // 6. the same for the photos behind the home match board,
 // 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue,
 // 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4),
@@ -101,12 +101,18 @@ test("news filter: ?s=u17 shows only U17 posts, Vse shows all again", async ({ p
   expect(new URL(page.url()).search).toBe("");
 });
 
-test("sponsors: the logos stand still in one list, with no stop button", async ({ page }) => {
+test("sponsors: the button stops the scrolling, reduced motion keeps them still", async ({ page }) => {
   await page.goto("/hvala/");
   const strip = page.locator("[data-sponsors]");
-  await expect(strip.locator("ul")).toHaveCount(1);
-  await expect(strip.locator("img").first()).toBeVisible();
-  await expect(strip.getByRole("button")).toHaveCount(0);
+  await expect(strip).toHaveAttribute("data-marquee", "on");
+  await page.getByRole("button", { name: "Ustavite pomikanje logotipov" }).click();
+  await expect(strip).toHaveAttribute("data-marquee", "paused");
+  await expect(page.getByRole("button", { name: "Nadaljujte pomikanje logotipov" })).toBeVisible();
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.reload();
+  await expect(strip).not.toHaveAttribute("data-marquee");
+  await expect(page.getByRole("button", { name: /pomikanje logotipov/ })).toBeHidden();
 });
 
 test("home photos: the button stops the change, reduced motion keeps the first photo", async ({ page }) => {
