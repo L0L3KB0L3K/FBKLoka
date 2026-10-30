@@ -26,6 +26,7 @@ Fiksni elementi znamke: klubski logotip (vektor iz PDF kluba, 30. 10. 2026), rum
   Pravilo v SPEC §9.7 (Maj, 30. 10. 2026).
 - Vzorec 6 (obarvana beseda v naslovu): ena sama, "Prvi treningi so **brezplačni**" na /vpis. Razlog: glavno
   sporočilo strani za starše. Izjema v SPEC §9.7 (Maj, 30. 10. 2026); drugje ne.
+- Pikice kot ločilo: ena med dvema podatkoma (časovnica, novice, Igralec tedna), nikoli veriga. SPEC §9.7.
 
 ## Tokeni (izvleček)
 

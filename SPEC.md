@@ -817,7 +817,8 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
   zunanje povezave imajo ikono za nov zavihek, ne puščice.
 - Številčenje 01 / 02 / 03 za vsebino, ki ni zaporedje.
 - Enake kartice z enako senco za vse.
-- Pikice kot ločilo v metapodatkih (`A · B · C`) več kot na enem mestu.
+- Verige pikic kot ločilo v metapodatkih (`A · B · C`). Dovoljena je ena pikica med dvema podatkoma
+  (`2000 · Ustanovitev`, `datum · ekipa`, `ekipe · vikend`): časovnica, novice, Igralec tedna (odločitev 30. 10. 2026).
 
 ---
 
