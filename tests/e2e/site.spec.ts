@@ -6,7 +6,8 @@
 // 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
 // 6. the same for the photos behind the home match board,
 // 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue,
-// 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4).
+// 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4),
+// 9. at 320 CSS px no page scrolls sideways (WCAG 1.4.10; the /treningi table did, audit 30. 10. 2026).
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -60,6 +61,16 @@ for (const path of PAGES) {
     await page.waitForLoadState("networkidle");
     const violations = await page.evaluate(() => (window as unknown as { cspViolations: string[] }).cspViolations);
     expect(violations).toEqual([]);
+  });
+
+  test(`reflow at 320 px: ${path}`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto(path);
+    const { scroll, client } = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(scroll, "the page scrolls sideways").toBeLessThanOrEqual(client);
   });
 }
 
