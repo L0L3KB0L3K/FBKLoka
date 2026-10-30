@@ -809,8 +809,12 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 ### 9.7 Česa ne delaj
 
 - ALL CAPS oznake nad naslovi, razmaknjene črke.
-- Poudarjanje ene besede v naslovu z drugo barvo ali poševnim.
-- Puščice `→` na koncu gumbov in povezav.
+- Poudarjanje ene besede v naslovu z drugo barvo ali poševnim. Ena izjema: "brezplačni" v naslovu črnega okvirja
+  na `/vpis`, ker je to glavno sporočilo strani (odločitev 30. 10. 2026).
+- Puščice `→` na koncu gumbov in povezav, razen kjer povezava vodi naprej na več istega ali na naslednji korak
+  (`ArrowLink`, `Button` z `arrow`, kartica ekipe): "Vse tekme", "Vse novice", "Vsa zgodovina", "Kdaj in kje so
+  treningi", "Vpišite otroka". Tam puščica pove "pojdi naprej" (odločitev 30. 10. 2026). Nikoli pri oddaji obrazca;
+  zunanje povezave imajo ikono za nov zavihek, ne puščice.
 - Številčenje 01 / 02 / 03 za vsebino, ki ni zaporedje.
 - Enake kartice z enako senco za vse.
 - Pikice kot ločilo v metapodatkih (`A · B · C`) več kot na enem mestu.

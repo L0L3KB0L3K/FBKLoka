@@ -21,10 +21,11 @@ Fiksni elementi znamke: klubski logotip (vektor iz PDF kluba, 30. 10. 2026), rum
   Prepoznavnost nosijo še vzorec lukenj žogice na tabli, prave fotografije s Podna in široka Archivo.
 - Vzorec 3 (enake kartice povsod): ne. Kartice samo za novice, trenerje in treninge.
 - Vzorec 5 (pojavljanje ob pomikanju): ne.
-- Vzorec 4 (`→` na povezavah): `ArrowLink` pri "Vse tekme", "Vse novice", "Vsa zgodovina", "Vpišite otroka".
-  **Odprto:** SPEC §9.7 puščice prepoveduje. Odloči: SPEC popravi ali puščice odstrani.
-- Vzorec 6 (obarvana beseda v naslovu): "Prvi treningi so **brezplačni**" na /vpis.
-  **Odprto:** SPEC §9.7 to prepoveduje. Razlog za izjemo bi bil glavno sporočilo strani; odloči.
+- Vzorec 4 (`→` na povezavah): samo pri povezavah, ki vodijo naprej ("Vse tekme", "Vse novice", "Vsa zgodovina",
+  "Kdaj in kje so treningi", "Vpišite otroka") in na kartici ekipe. Razlog: puščica pove "pojdi naprej", ni okras.
+  Pravilo v SPEC §9.7 (Maj, 30. 10. 2026).
+- Vzorec 6 (obarvana beseda v naslovu): ena sama, "Prvi treningi so **brezplačni**" na /vpis. Razlog: glavno
+  sporočilo strani za starše. Izjema v SPEC §9.7 (Maj, 30. 10. 2026); drugje ne.
 
 ## Tokeni (izvleček)
 
@@ -60,5 +61,4 @@ mobilni meni (`<dialog>`, Escape, fokus se vrne), `Tabs`, `TeamFilter`, `ArrowLi
 
 ## Odprto
 
-- Puščice in obarvana beseda proti SPEC §9.7 (zgoraj).
 - Točne barve kluba (rumena je vzeta z logotipa) in avtor znaka: `docs/04-odprto-pri-klubu.md`.
