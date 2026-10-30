@@ -653,7 +653,7 @@ Vse slike gredo skozi `astro:assets` iz `src/`, ne iz `public/`, z odstranjenim 
 | Token | Hex | Uporaba |
 |---|---|---|
 | `--color-ink` | `#0B0B0C` | Skoraj črna (ne čista `#000`, na zaslonu mirnejša): glava, noga, tabla, glavno besedilo |
-| `--color-ball` | `#FFF112` | Rumena, odčitana s klubskega PNG. Klubski vektor (PDF, 30. 10. 2026) ima `#FFF200`; točno barvo potrdi klub. Gumbi na črni, poudarki, "Danes igramo" |
+| `--color-ball` | `#FFF200` | Rumena iz klubskega vektorja (PDF, 30. 10. 2026; prej `#FFF112`, odčitana s PNG). CMYK ali Pantone za tisk potrdi klub. Gumbi na črni, poudarki, "Danes igramo" |
 | `--color-paper` | `#FFFFFF` | Ozadje vsebine |
 | `--color-court` | `#F4F4F2` | Izmenične vrstice, ozadje sekcij |
 | `--color-muted` | `#5C5C5C` | Datumi, pomožno besedilo (kontrast na beli ≥ 6:1) |
@@ -1030,7 +1030,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 
 ## 16. Predpostavke
 
-- Obstoječi logo in barve ostanejo. Rumena `#FFF112` je odčitana s klubskega PNG (glej 9.2).
+- Obstoječi logo in barve ostanejo. Rumena `#FFF200` je iz klubskega vektorja (glej 9.2).
 - Klub ostane na EOS za člane, starše in prisotnost.
 - Člani igrajo v IFL in 1. SFL, zato stran selekcije podpira več tekmovanj.
 - Netlify free zadostuje (en klub, gradnja samo ob spremembi podatkov).

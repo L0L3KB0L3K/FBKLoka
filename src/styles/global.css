@@ -29,7 +29,7 @@
   /* Colors (SPEC.md §9.2). The reset removes Tailwind's default palette. */
   --color-*: initial;
   --color-ink: #0b0b0c; /* near-black (not pure #000, flatter on screens): header, footer, match board, main text */
-  --color-ball: #fff112; /* logo yellow, sampled from the club PNG. Never as text on light backgrounds. */
+  --color-ball: #fff200; /* logo yellow, from the club vector (PDF, 30. 10. 2026). Never as text on light backgrounds. */
   --color-paper: #ffffff; /* content background */
   --color-court: #f4f4f2; /* alternating rows, section backgrounds */
   --color-muted: #5c5c5c; /* dates, secondary text */

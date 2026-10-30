@@ -13,7 +13,7 @@ lokalno (ne generično), zanesljivo (ne korporativno).
 
 Kdo gleda: starš na telefonu zvečer (urnik, vpis), navijač pred tekmo (naslednja tekma), sponzor (doseg).
 
-Fiksni elementi znamke: klubski logotip (vektor iz PDF kluba, 30. 10. 2026), rumena `#fff112` iz logotipa, črna.
+Fiksni elementi znamke: klubski logotip (vektor iz PDF kluba, 30. 10. 2026), rumena `#fff200` iz klubskega vektorja, črna.
 
 ## Test proti generičnemu videzu
 
@@ -33,7 +33,7 @@ Fiksni elementi znamke: klubski logotip (vektor iz PDF kluba, 30. 10. 2026), rum
 | Vloga | Token | Vrednost |
 |---|---|---|
 | Glava, noga, tabla, besedilo | `--color-ink` | `#0b0b0c` |
-| Poudarek (nikoli besedilo na svetlem) | `--color-ball` | `#fff112` |
+| Poudarek (nikoli besedilo na svetlem) | `--color-ball` | `#fff200` |
 | Podlaga | `--color-paper` / `--color-court` | `#ffffff` / `#f4f4f2` |
 | Drugotno besedilo | `--color-muted` | `#5c5c5c` |
 | Robovi polj | `--color-input-border` | `#767676` |

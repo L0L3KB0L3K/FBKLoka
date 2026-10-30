@@ -67,7 +67,7 @@ Omejitve:
 
 | Barva | Vrednost | Vir | Opomba |
 |---|---|---|---|
-| Rumena (žogica, napis) | `#fff112`, RGB 255 241 18 | Izmerjeno iz logotipa | [MANJKA] CMYK ali Pantone za tisk |
+| Rumena (žogica, napis) | `#fff200`, RGB 255 242 0 | Klubski vektor (PDF, 30. 10. 2026); prej `#fff112`, izmerjeno s PNG | [MANJKA] CMYK ali Pantone za tisk |
 | Črna | `#000000` | Logotip | |
 | Bela | `#ffffff` | Logotip | |
 | Rumena stare strani | `#FFD60A` | fbkloka.si | Se ne ujema z logotipom, ne uporabljati |
