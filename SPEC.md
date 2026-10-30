@@ -250,7 +250,7 @@ telefon: "TODO"
 naslov: "TODO"
 eos:
   portal: "TODO"             # gumb "Za starše in člane"
-  registracija: "TODO"       # gumb "Vpiši se" na /vpis
+  registracija: "TODO"       # gumb "Vpišite otroka" na /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/
   facebook: https://www.facebook.com/FloorballInsport   # TODO: potrdi, da je uradna
@@ -512,7 +512,7 @@ Namen: v 3 sekundah pokaže, kdaj je naslednja tekma, in pripelje novega starša
    za tablo, označi "Danes igramo" in izračuna odštevanje. Brez JS se pokaže prva tekma iz HTML z datumom, brez odštevanja.
    Logika je v `src/lib/upcoming.ts` (čista funkcija `pick(matches, now)`) in ima teste.
 2. **Naslednje tekme.** Do 5 prihodnjih tekem vseh selekcij, vrstica na tekmo. Povezava "Vse tekme".
-3. **Poziv za vpis.** Kratek stavek, letniki (TODO), "Prvi trening je brezplačen" (TODO: potrdi), gumb "Vpiši otroka".
+3. **Poziv za vpis.** Kratek stavek, letniki (TODO), "Prvi trening je brezplačen" (TODO: potrdi), gumb "Vpišite otroka".
 4. **Zadnje novice.** 3 najnovejše (faza 2, skrito dokler ni 3 objav).
 5. **Instagram.** 6 objav (faza 2).
 6. **Sponzorji.** Pas z logotipi v nogi vsake strani, ne samo na naslovnici.
@@ -563,7 +563,7 @@ Mobilno: kartica na selekcijo, ne vodoravno drsenje tabele.
 
 - Za koga: letniki, ki jih klub sprejema (TODO), kje in kdaj so treningi za začetnike.
 - Kaj otrok potrebuje na prvem treningu (TODO od kluba).
-- Glavni gumb **Vpiši se** vodi na EOS registracijo (`nastavitve.eos.registracija`).
+- Glavni gumb **Vpišite otroka** vodi na EOS registracijo (`nastavitve.eos.registracija`).
 - **Članarina:** znesek ali stavek "Članarina se ureja v EOS" (TODO od kluba).
 - **Pogosta vprašanja** (`<details>`): kaj otrok potrebuje (oprema, palica), koliko stane, od katere starosti,
   ali se lahko pridruži med sezono, kaj če otrok še ni nikoli igral. Odgovori TODO od kluba.
@@ -738,9 +738,9 @@ sob 10. 10. 17:00
 ned 11. 10. 10:00
 U15 · Turnir                  Žiri
 ─────────────────────────────────
-Pridruži se nam
+Pridružite se nam
 Letniki TODO. Prvi trening je brezplačen (TODO).
-[ Vpiši otroka ]                       ← črn gumb na beli
+[ Vpišite otroka ]                     ← črn gumb na beli
 ─────────────────────────────────
 Novice (skrito do 3 objav)
 Instagram (faza 2)
@@ -754,7 +754,7 @@ Kontakt · Za starše (EOS)             ← črna noga
 | Naloga | Pot | Dotiki |
 |---|---|---|
 | Starš: kdaj je trening U15? | Meni → Treningi → kartica U15 | 2 |
-| Nov starš: kako vpišem otroka? | Naslovnica → Vpiši otroka → Vpiši se (EOS) | 2 |
+| Nov starš: kako vpišem otroka? | Naslovnica → Vpišite otroka → Vpišite otroka (EOS) | 2 |
 | Navijač: kdaj in kje je naslednja tekma? | Naslovnica, prvi zaslon | 0 |
 
 Če katera od teh nalog na zgrajeni strani rabi več dotikov, je to napaka.
@@ -774,7 +774,7 @@ NASLOVNICA (desktop)
 │ sob 10. 10. 17:00  Člani  FBK Loka – KAC       Poden     │
 │ ned 11. 10. 10:00  U15    Turnir               Žiri      │
 ├──────────────────────────────────────────────────────────┤
-│ Pridruži se nam     Letniki TODO.         [Vpiši otroka]   │
+│ Pridružite se nam   Letniki TODO.         [Vpišite otroka] │
 ├──────────────────────────────────────────────────────────┤
 │ Novice (3)                 │ Instagram (6)               │
 ├──────────────────────────────────────────────────────────┤
@@ -820,7 +820,8 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 ## 10. Besedila
 
 - Slovenščina, stavčna velikost črk (samo prva črka velika), kratki stavki.
-- Gumbi povedo, kaj se zgodi: "Vpiši otroka", "Pošlji vprašanje", "Dodaj v koledar", "Vse tekme".
+- Gumbi povedo, kaj se zgodi: "Vpišite otroka", "Pošljite sporočilo", "Dodajte v koledar", "Vse tekme".
+- Javne strani vikajo povsod: besedila, gumbi in napake (audit 30. 10. 2026). Interna aplikacija `/ekipa` za člane ekip tika.
 - Datumi: `sob 10. 10.`, polno `sobota, 10. oktober 2026`. Ure: `17:00`. Vse v `Europe/Ljubljana`.
 - Rezultat vedno z vidika FBK Loke v seznamih selekcije ("Zmaga 12:6"), v splošnem seznamu domači – gostje.
 - Napake v obrazcih povedo, kaj popraviti: "Vpiši e-mail v obliki ime@domena.si".
@@ -830,7 +831,7 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 ## 11. EOS, plato in prevoz
 
 - **EOS:** klub ga uporablja za člane, starše, prisotnost in vpis. Stran nanj samo povezuje, ničesar ne podvaja.
-  Gumb "Za starše in člane" v glavi, gumb "Vpiši se" na `/vpis`.
+  Gumb "Za starše in člane" v glavi, gumb "Vpišite otroka" na `/vpis`.
 - **Plato in prevoz:** skriti strani `/ekipa/plato` in `/ekipa/prevoz`, zaščiteni z ekipno kodo. Podrobnosti v poglavju 19.
 
 ---

@@ -117,8 +117,8 @@ test("sponsors: the button stops the scrolling, reduced motion keeps them still"
 
 test("home photos: the button stops the change, reduced motion keeps the first photo", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Ustavi menjavo slik" }).click();
-  await expect(page.getByRole("button", { name: "Nadaljuj menjavo slik" })).toBeVisible();
+  await page.getByRole("button", { name: "Ustavite menjavo slik" }).click();
+  await expect(page.getByRole("button", { name: "Nadaljujte menjavo slik" })).toBeVisible();
 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();

@@ -7,7 +7,7 @@ davcna: "29559588" # from the old club site
 maticna: "1677055000" # business register and the old club site
 eos:
   portal: https://eos.fbkloka.si # header button "Za starše in člane"
-  registracija: https://eos.fbkloka.si/registration # button "Vpiši se" on /vpis
+  registracija: https://eos.fbkloka.si/registration # button "Vpišite otroka" on /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/
   facebook: https://www.facebook.com/FloorballInsport/ # official club page (confirmed 27. 9. 2026)

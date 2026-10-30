@@ -240,7 +240,7 @@ const nastavitve = defineCollection({
       maticna: z.union([todo, z.string().regex(/^[0-9]{10}$/, "Matična številka ima 10 številk.")]),
       eos: z.object({
         portal: z.union([todo, z.url()]), // header button "Za starše in člane"
-        registracija: z.union([todo, z.url()]), // button "Vpiši se" on /vpis
+        registracija: z.union([todo, z.url()]), // button "Vpišite otroka" on /vpis
       }),
       socialna: z.object({
         instagram: z.url().optional(),

@@ -85,7 +85,7 @@ const venueOf = (match: Match) =>
             data-photos-toggle
             hidden
           >
-            <span data-photos-label>Ustavi</span>
+            <span data-photos-label>Ustavite</span>
             <span class="sr-only"> menjavo slik</span>
           </button>
         )}
@@ -292,12 +292,12 @@ const venueOf = (match: Match) =>
     };
     const play = () => {
       timer = window.setInterval(next, 6000);
-      photoLabel.textContent = "Ustavi";
+      photoLabel.textContent = "Ustavite";
     };
     const stop = () => {
       window.clearInterval(timer);
       timer = undefined;
-      photoLabel.textContent = "Nadaljuj";
+      photoLabel.textContent = "Nadaljujte";
     };
 
     photoToggle.hidden = false;

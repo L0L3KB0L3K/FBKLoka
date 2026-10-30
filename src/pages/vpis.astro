@@ -1,9 +1,9 @@
 ---
 // /vpis: for a new parent (SPEC.md §7.5). A black panel first: free first trainings and the large
-// "Vpiši se" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
+// "Vpišite otroka" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
 // no repeats), when and where the youth train, and a link to the contact form. The photo (vpis.md, optional) comes
 // after the panel, so the way into EOS stays first.
-// Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
+// Path from the home page: "Vpišite otroka" -> "Vpišite otroka" (EOS) = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
 import ArrowLink from "../components/ArrowLink.astro";
@@ -48,7 +48,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
         {
           isSet(eos.registracija) && (
             <Button href={eos.registracija} variant="on-ink" size="lg" newTab>
-              Vpiši se
+              Vpišite otroka
             </Button>
           )
         }
