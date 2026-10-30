@@ -1,13 +1,13 @@
 # Odprto pri klubu
 
-Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
+Stanje: 30. 10. 2026. Kar je odkljukano, je vneseno na stran.
 
 ## Najprej: za vodjo kluba
 
 - [ ] Kdo bo po zagonu urejal novice, treninge in sponzorje (vsaj ena oseba poleg Maja)? Urejevalnik je pripravljen, prijava z Googlom ali e-pošto. E-naslov urednika je viden v javni zgodovini sprememb, zato naj uporablja klubskega.
 - [ ] Domena fbkloka.si: kdo v klubu jo ima? Ta oseba mora ob objavi nastaviti DNS ali domeno prenesti. Zapisi MX za e-pošto info@fbkloka.si morajo ostati, sicer pošta ne pride več.
 - [ ] Podatki o klubu v nogi: ali še veljajo davčna številka 29559588, matična številka 1677055000 in e-mail info@fbkloka.si? Telefonske številke na strani ni, tako je prav (Maj, 26. 10. 2026; številka na stari strani ne drži).
-- [ ] Grafična podoba kluba: logotip je prejet (PDF, 30. 10. 2026) in je na strani. Odprto: točne barve (rumena, črna in morebitne druge) in avtor znaka. Do takrat se uporablja prerisan vektor iz `src/assets/logo/` (glava, favicon, deljenje): potrdite ga (`docs/znamka/pregled.png`). Vsa vprašanja o znamki: `docs/05-znamka.md`.
+- [ ] Grafična podoba kluba: logotip je prejet (PDF, 30. 10. 2026) in je na strani. Odprto: točne barve (rumena, črna in morebitne druge) in avtor znaka. Klubski vektor je v glavi, na sliki za deljenje in na naslovnici povzetka tedna. Favicon in profilna slika sta še prerisana žogica (28. 9. 2026): potrdite jo (`docs/znamka/pregled.png`). Vsa vprašanja o znamki: `docs/05-znamka.md`.
 - [ ] Kdo v klubu sprejme preklic privolitve (igralec ali starši) in ga vnese? En vnos v urejevalniku igralca skrije na strani ekipe, v vrstici kapetan in pri MVP; plato in prevoz imata svoj seznam v Sheetu. Koraki: SPEC.md §20.7.
 - [ ] Sponzorji: seznam je potrjen (Gorazd, 30. 10. 2026): Elekom Košir, Ines, Mersteel, Oblaček, OSM, Peklaj, SAX konstrukcije, Šofer, Tehnoservis. Tein in Adriatic Slovenica nista več na strani. Odprto: spletne strani sponzorjev in logotip Šofer za svetlo podlago. Za stran Podpri nas: ponudba je vpisana (bande, dresi, Instagram in Facebook, logotip na strani); vpisano je tudi okoli 100 članov, od tega okoli 80 otrok; manjkajo cene ali okvirni paketi. Do takrat stran podjetje prosi, naj piše.
 - [ ] Preberite in potrdite osnutka besedil na straneh O klubu (/klub) in Zasebnost (/zasebnost). Pri zasebnosti: ali drži rok hrambe sporočil največ 12 mesecev? Priporočam, da ga prebere nekdo s pravnim znanjem.
@@ -20,9 +20,9 @@ Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [ ] Vpis: znesek članarine in približna cena palice, da bo odgovor »Koliko stane?« na /vpis popoln.
 - [ ] Za stran o zasebnosti potrdi uradno ime iz registra: FLOORBALL KLUB LOKA. Naslov, matična in davčna številka so enaki kot na stari strani.
 - [ ] Vodstvo kluba za stran O klubu (predsednik in kdo še naj bo naveden), če ga želite objaviti.
-- [ ] Avtor fotografij s finala državnega prvenstva 2026 (naslovnica in /klub; dovoljenje imamo): ali ga navedemo ob fotografiji, in s kakšnim imenom?
+- [ ] Avtor fotografij s finala državnega prvenstva 2026 (postava na /klub) in klubski fotograf s tekem 2025/26 (naslovnica, U19, /vpis, /podpri-nas); dovoljenje imamo: ali ju navedemo ob fotografiji, in s kakšnim imenom?
 - [ ] Skupinske fotografije za strani ekip U13, U11 in U9 (ležeče, vsi obrazi vidni). Člani, U19, U17, U15 in Švigalice jih imajo z Instagrama.
-- [ ] Fotografije: ali ima kdo nove fotografije, primerne za pasico na naslovnici (ležeče, kakovostne, vsaj 2400 px široke)? Poleg tega postavljena skupinska fotografija članov, portreti trenerjev, otroci na treningu, dvorana od zunaj. Priložnost: praznovanje 25 let floorballa na Podnu 18. 10. 2026.
+- [ ] Fotografije: pasica na naslovnici je rešena s fotografijami klubskega fotografa (30. 10. 2026). Še manjkajo postavljena skupinska fotografija članov, portreti trenerjev, otroci na treningu in dvorana od zunaj. Ali ima kdo fotografije s praznovanja 25 let floorballa na Podnu (18. 10. 2026)?
 - [ ] Datoteka logotipa Floorball zveze Slovenije: različica brez napisa, za temno podlago (dovoljenje že imamo).
 - [ ] Plato in prevoz: klubski Google račun za Sheet in Apps Script (navodila `apps-script/ekipa/README.md`), vsaj dva urednika Sheeta.
 - [ ] Preberite 11 novic na /novice (pripravljene iz objav na Instagramu) in opise slik (alt) v datotekah. Popravite, kar ne drži.
@@ -52,11 +52,11 @@ Stanje: 26. 10. 2026. Kar je odkljukano, je vneseno na stran.
 - [x] Rok: ni določen.
 - [x] E-mail info@fbkloka.si, davčna številka 29559588, matična številka 1677055000, TikTok @fbk.loka (s stare strani).
 - [x] Sponzorji s stare strani: 7 logotipov, v enakem vrstnem redu. Klub nima ravni sponzorjev.
-- [x] Fotografije s finala državnega prvenstva 22. 3. 2026 v dresih FBK Loka: tri na naslovnici, postava na /klub (26. 10. 2026). Fotografije s stare strani (dresi Insport) so odstranjene.
+- [x] Fotografije s finala državnega prvenstva 22. 3. 2026 v dresih FBK Loka: postava na /klub (26. 10. 2026). Na naslovnici so bile do 30. 10. 2026, ko so jih zamenjale ostrejše z domače tekme. Fotografije s stare strani (dresi Insport) so odstranjene.
 - [x] Stari naslovi strani (/o-klubu/, /ekipa/, /tekmovanja/) vodijo na nove strani.
 - [x] Novice: seznam s filtrom po selekciji, stran vsake novice, zadnje 3 na naslovnici, Novice v meniju.
 - [x] Lestvica in sestava članov iz FloorballFlash, osvežita se vsako nedeljo. Lestvica 1. SFL se pokaže po prvi tekmi.
-- [x] Naslovnica: tri fotografije se menjajo za tablo z naslednjo tekmo. Sponzorji se pomikajo.
+- [x] Naslovnica: pet fotografij z domače tekme 9. 12. 2025 se menja za tablo z naslednjo tekmo (od 30. 10. 2026). Sponzorji se pomikajo.
 - [x] Vpis: obrazec odstranjen, vprašanja gredo prek obrazca na strani Kontakt.
 - [x] Obrazec na strani Kontakt preizkušen do prejetega e-maila, obvestila delujejo (1. 10. 2026).
 - [x] Povzetek tedna in MVP vikenda se objavita sama vsako nedeljo; povzetka za 14.–20. 9. in 21.–27. 9. sta objavljena.
