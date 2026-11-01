@@ -1,5 +1,5 @@
 {
-  "posodobljeno": "2026-10-25T22:24:38.294Z",
+  "posodobljeno": "2026-11-01T23:27:00.800Z",
   "tekmovanja": [
     {
       "selekcija": "clani",
@@ -224,7 +224,103 @@
       "selekcija": "svigalice",
       "tekmovanje": "2. SFL",
       "competitionId": 761,
-      "tabele": []
+      "tabele": [
+        {
+          "ime": "Redni del - Redni del - Redni del",
+          "vrstice": [
+            {
+              "mesto": 1,
+              "ekipa": "Švigalice Loka",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": true,
+              "tekme": 2,
+              "zmage": 2,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 25,
+              "goliPrejeti": 10,
+              "tocke": 6
+            },
+            {
+              "mesto": 2,
+              "ekipa": "Team Brlog",
+              "logo": "b2e97c6a-a3a6-5a0d-9263-3fca70bd9c48.svg",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 20,
+              "goliPrejeti": 15,
+              "tocke": 3
+            },
+            {
+              "mesto": 3,
+              "ekipa": "FBC Borovnica U19",
+              "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 16,
+              "goliPrejeti": 13,
+              "tocke": 3
+            },
+            {
+              "mesto": 4,
+              "ekipa": "ŠD Pungert",
+              "logo": "97da23c4-ca4a-5668-a13c-0427d7ccc236.svg",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 14,
+              "goliPrejeti": 17,
+              "tocke": 3
+            },
+            {
+              "mesto": 5,
+              "ekipa": "Flooball klub Ljubljana",
+              "logo": "7e894dd7-055f-5b83-bb71-ce9dd1ad6631.jpg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 6,
+              "ekipa": "ŠD Zelenci",
+              "logo": "a8b7bde3-a2ca-52ce-9f52-f4ca56502425.svg",
+              "loka": false,
+              "tekme": 2,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 2,
+              "remi": 0,
+              "goliDani": 10,
+              "goliPrejeti": 30,
+              "tocke": 0
+            }
+          ]
+        }
+      ]
     },
     {
       "selekcija": "u19",
@@ -233,6 +329,86 @@
       "tabele": [
         {
           "ime": "Redni del - Round Robin - Round Robin - Round Robin",
+          "vrstice": [
+            {
+              "mesto": 1,
+              "ekipa": "KAC Floorball",
+              "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png",
+              "loka": false,
+              "tekme": 1,
+              "zmage": 1,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 6,
+              "goliPrejeti": 1,
+              "tocke": 3
+            },
+            {
+              "mesto": 2,
+              "ekipa": "FBK Loka",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": true,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 2,
+              "ekipa": "ŠD Zelenci",
+              "logo": "a8b7bde3-a2ca-52ce-9f52-f4ca56502425.svg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 2,
+              "ekipa": "FBK Polanska banda",
+              "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 5,
+              "ekipa": "VSV Unihockey",
+              "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png",
+              "loka": false,
+              "tekme": 1,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 1,
+              "goliPrejeti": 6,
+              "tocke": 0
+            }
+          ]
+        },
+        {
+          "ime": "Redni del - Round Robin - Round Robin - Redni del - Round Robin standings",
           "vrstice": [
             {
               "mesto": 1,
@@ -353,7 +529,22 @@
             },
             {
               "mesto": 1,
-              "ekipa": "FBK Polanska banda",
+              "ekipa": "FBK Polanska banda - modri 🔵",
+              "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 1,
+              "ekipa": "FBK Polanska banda - zeleni 🟢",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
               "tekme": 0,
@@ -410,7 +601,22 @@
             },
             {
               "mesto": 1,
-              "ekipa": "FBK Polanska banda",
+              "ekipa": "FBK Polanska banda - modri 🔵",
+              "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
+              "loka": false,
+              "tekme": 0,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 0,
+              "remi": 0,
+              "goliDani": 0,
+              "goliPrejeti": 0,
+              "tocke": 0
+            },
+            {
+              "mesto": 1,
+              "ekipa": "FBK Polanska banda - zeleni 🟢",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
               "tekme": 0,
@@ -701,7 +907,7 @@
             },
             {
               "mesto": 1,
-              "ekipa": "FBK Polanska banda A",
+              "ekipa": "FBK Polanska banda - modri",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
               "tekme": 0,
@@ -716,7 +922,7 @@
             },
             {
               "mesto": 1,
-              "ekipa": "FBK Polanska banda B",
+              "ekipa": "FBK Polanska banda - zeleni",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
               "tekme": 0,

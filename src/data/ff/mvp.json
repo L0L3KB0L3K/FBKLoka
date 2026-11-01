@@ -1,36 +1,39 @@
 {
   "razlicica": "LBS-MVPI 1.0",
   "vikend": {
-    "od": "2026-10-24",
-    "do": "2026-10-25"
+    "od": "2026-10-31",
+    "do": "2026-11-01"
   },
-  "ffId": 2643,
-  "ime": "Nejc Peklaj",
+  "ffId": 157,
+  "ime": "Metod Proj",
+  "ekipe": [
+    "svigalice"
+  ],
   "vratar": false,
   "tekme": [
     {
-      "nasprotnik": "SU Wiener FV",
-      "zacetek": "2026-10-24T17:00:00+02:00",
+      "nasprotnik": "ŠD Pungert",
+      "zacetek": "2026-10-31T09:00:00+01:00",
       "goli": 3,
-      "podaje": 0,
+      "podaje": 1,
       "obrambe": 0,
       "streli": 0
     },
     {
-      "nasprotnik": "FBC Dragons",
-      "zacetek": "2026-10-25T13:00:00+01:00",
-      "goli": 0,
-      "podaje": 3,
+      "nasprotnik": "ŠD Zelenci",
+      "zacetek": "2026-10-31T11:30:00+01:00",
+      "goli": 6,
+      "podaje": 0,
       "obrambe": 0,
       "streli": 0
     }
   ],
   "sezona": {
-    "goli": 21,
-    "podaje": 14,
+    "goli": 9,
+    "podaje": 1,
     "obrambe": 0,
     "streli": 0
   },
-  "sezonaTekmovanje": "IFL",
-  "slika": "2643.jpeg"
+  "sezonaTekmovanje": "2. SFL",
+  "slika": "157.jpeg"
 }
