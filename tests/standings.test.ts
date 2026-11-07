@@ -17,6 +17,22 @@ test("only tables with our team are kept (the Austria-only table is dropped)", (
   assert.match(standings.tabele[0]?.ime ?? "", /IFL$/);
 });
 
+test("the same table twice is kept once (DP U19, 1. 11. 2026: two phase names, same rows); a different one stays", () => {
+  const ifl = tables.find((table) => table.teams.some((row) => row.id === LOKA));
+  assert.ok(ifl);
+  const other = structuredClone(ifl);
+  other.name = "Skupina B";
+  const [first] = other.teams;
+  assert.ok(first);
+  first.points = (first.points ?? 0) + 1;
+  const config = { selekcija: "u19", label: "DP U19", competitionId: 762 };
+  const result = normalizeStandings([ifl, { ...ifl, name: `${ifl.name} standings` }, other], new Set([LOKA]), config);
+  assert.deepEqual(
+    result.tabele.map((table) => table.ime),
+    [ifl.name, "Skupina B"],
+  );
+});
+
 test("rows keep FloorballFlash order and numbers, our row is marked", () => {
   const rows = standings.tabele[0]?.vrstice ?? [];
   assert.equal(rows.length, 8);

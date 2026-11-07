@@ -3,6 +3,8 @@
 // Every team shows its FloorballFlash logo at the same size, ours too (owner, 28. 9. 2026); our row is bold
 // on a light yellow tint with a black bar on the left. Rows turn grey under the mouse to help reading across.
 // Tables where nobody has played yet are left out by the page (SPEC.md §1: no empty sections).
+// Ids and names are unique per table: U17 A and B share competition 763, and a competition can have several
+// tables (html-validate unique-landmark and no-dup-id, failed build of 1. 11. 2026).
 // On a phone the overtime columns are hidden, so the table fits 320 px; the box still scrolls sideways
 // if a long name needs it, and takes keyboard focus for that (axe: scrollable-region-focusable).
 import { ffCompetitionWeb } from "../config/ff.ts";
@@ -25,10 +27,14 @@ const overtime = `${cell} hidden sm:table-cell`;
 
 {
   standings.map((competition, index) => (
-    <section class:list={[index > 0 && "mt-10"]} aria-labelledby={`lestvica-${competition.competitionId}`}>
-      <h3 id={`lestvica-${competition.competitionId}`}>{competition.tekmovanje}</h3>
+    <section class:list={[index > 0 && "mt-10"]} aria-labelledby={`lestvica-${competition.competitionId}-${index}`}>
+      <h3 id={`lestvica-${competition.competitionId}-${index}`}>{competition.tekmovanje}</h3>
       {competition.tabele.map((table) => (
-        <section class="mt-3 overflow-x-auto rounded-card border border-line" tabindex="0" aria-label={`Lestvica ${competition.tekmovanje}`}>
+        <section
+          class="mt-3 overflow-x-auto rounded-card border border-line"
+          tabindex="0"
+          aria-label={`Lestvica ${competition.tekmovanje}${competition.tabele.length > 1 ? `, ${table.ime}` : ""}`}
+        >
           <table class="w-full text-small tabular-nums">
             <caption class="sr-only">
               Lestvica {competition.tekmovanje}

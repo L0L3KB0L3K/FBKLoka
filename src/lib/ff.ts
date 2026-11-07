@@ -272,12 +272,14 @@ export type FfCompetitionPlayer = {
 /**
  * Keeps only the tables with one of our teams (IFL also has an Austria-only table) and maps the rows.
  * Missing numbers count as 0. The table order and FloorballFlash's ranks are kept as they are.
+ * FloorballFlash can send the same table under two phase names (DP U19, 1. 11. 2026): it is kept once.
  */
 export function normalizeStandings(
   tables: FfStandingsTable[],
   ourIds: Set<number>,
   config: { selekcija: string; label: string; competitionId: number },
 ): Standings {
+  const seen = new Set<string>();
   return {
     selekcija: config.selekcija,
     tekmovanje: config.label,
@@ -301,7 +303,13 @@ export function normalizeStandings(
           goliPrejeti: row.goalsAgainst ?? 0,
           tocke: row.points ?? 0,
         })),
-      })),
+      }))
+      .filter((table) => {
+        const rows = JSON.stringify(table.vrstice);
+        if (seen.has(rows)) return false;
+        seen.add(rows);
+        return true;
+      }),
   };
 }
 
