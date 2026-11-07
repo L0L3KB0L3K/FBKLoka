@@ -148,11 +148,8 @@ dogodki:
     # IFF arhiv, "Polanska Banda and Insport champions in Slovenia", 24. 4. 2019 (finale 13. 4. 2019 na Podnu, 3:0,
     # oba naslova). FloorballFlash: finale IFL 6460.
 
-  - leto: 2019
-    dogodek: "Branilec Rok Prevodnik podpiše za IBF Falun kot prvi Slovenec v elitni švedski ligi."
-
-  - leto: 2019
-    dogodek: "Vratar Jaka Zupančič prejme malo športno plaketo občine Medvode."
+  # Odstranjeno (Maj, 7. 11. 2026): Rok Prevodnik v IBF Falun je bila šala, ni res; občinska plaketa enega igralca ni
+  # zgodovina kluba. Novice o posameznikih sodijo v Novice, ne sem.
 
   - leto: 2020
     vrsta: naslovi
