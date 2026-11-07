@@ -313,6 +313,38 @@ export function normalizeStandings(
   };
 }
 
+/**
+ * One table per competition on a team page: entries of the same competition with the same rows (U17 A and B, both in
+ * competition 763) become one, with every row of ours marked and the words their labels share as the name
+ * ("DP U17 A" + "DP U17 B" -> "DP U17"). Different tables stay as they are (Maj, 7. 11. 2026).
+ */
+export function mergeSameCompetition(list: Standings[]): Standings[] {
+  const rowsOf = (s: Standings) =>
+    JSON.stringify(s.tabele.map((table) => table.vrstice.map((row) => ({ ...row, loka: false }))));
+  const result: Standings[] = [];
+  for (const entry of list) {
+    const index = result.findIndex((s) => s.competitionId === entry.competitionId && rowsOf(s) === rowsOf(entry));
+    const same = result[index];
+    if (!same) {
+      result.push(entry);
+      continue;
+    }
+    const words = same.tekmovanje.split(" ");
+    const other = entry.tekmovanje.split(" ");
+    let shared = 0;
+    while (shared < words.length && words[shared] === other[shared]) shared++;
+    result[index] = {
+      ...same,
+      tekmovanje: words.slice(0, shared).join(" ") || same.tekmovanje,
+      tabele: same.tabele.map((table, t) => ({
+        ...table,
+        vrstice: table.vrstice.map((row, r) => ({ ...row, loka: row.loka || Boolean(entry.tabele[t]?.vrstice[r]?.loka) })),
+      })),
+    };
+  }
+  return result;
+}
+
 const POSITIONS: Record<string, Position> = { G: "vratar", D: "branilec", F: "napadalec" };
 
 /** "Miha " + "Triler" -> "Miha Triler": FloorballFlash names sometimes carry extra spaces. */
@@ -324,15 +356,24 @@ function fullName(first: string | null, last: string | null): string {
  * Roster of one team from one or more competitions. Players marked incognito in FloorballFlash are left out,
  * so are entries without a name. A player in two competitions (IFL and 1. SFL) is listed once:
  * the first competition in src/config/ff.ts wins, so the number from IFL is kept.
+ * `teams` names the team of each list when a selection has several (U17: "FBK Loka A", "FBK Loka B"); each player
+ * then carries the team, and a player on both teams is on both (Maj, 7. 11. 2026).
  */
-export function normalizeRoster(lists: FfCompetitionPlayer[][], selekcija: string): RosterPlayer[] {
-  const players = new Map<number, RosterPlayer>();
-  for (const list of lists) {
+export function normalizeRoster(
+  lists: FfCompetitionPlayer[][],
+  selekcija: string,
+  teams: (string | null)[] = [],
+): RosterPlayer[] {
+  const players = new Map<string, RosterPlayer>();
+  for (const [index, list] of lists.entries()) {
+    const ekipa = teams[index] ?? null;
     for (const entry of list) {
       const ime = fullName(entry.person.firstname, entry.person.lastname);
-      if (entry.person.incognito || !ime || players.has(entry.person.id)) continue;
-      players.set(entry.person.id, {
+      const id = `${entry.person.id}/${ekipa ?? ""}`;
+      if (entry.person.incognito || !ime || players.has(id)) continue;
+      players.set(id, {
         selekcija,
+        ...(ekipa && { ekipa }),
         ffId: entry.person.id,
         ime,
         stevilka: entry.number,

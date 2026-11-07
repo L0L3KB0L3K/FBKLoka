@@ -16,6 +16,7 @@ import { FF_CONFIG, ffCompetitionWeb } from "../../config/ff.ts";
 import Base from "../../layouts/Base.astro";
 import { shareImage } from "../../lib/share.ts";
 import { loadCollection } from "../../lib/content.ts";
+import { mergeSameCompetition } from "../../lib/ff.ts";
 import { allMatches, ffRoster, standingsFile } from "../../lib/match-data.ts";
 import { splitByState } from "../../lib/matches.ts";
 import { sportsTeam } from "../../lib/jsonld.ts";
@@ -51,10 +52,13 @@ const summaryTeam = isHiddenName(team.data.kapetan, manualPlayers, team.id)
   : team;
 
 // League tables of this team. A table where nobody has played yet (start of the season) is left out.
-const standings = standingsFile.tekmovanja
-  .filter((s) => s.selekcija === team.id)
-  .map((s) => ({ ...s, tabele: s.tabele.filter((table) => table.vrstice.some((row) => row.tekme > 0)) }))
-  .filter((s) => s.tabele.length > 0);
+// Two teams in one competition (U17 A and B) share one table with both rows marked.
+const standings = mergeSameCompetition(
+  standingsFile.tekmovanja
+    .filter((s) => s.selekcija === team.id)
+    .map((s) => ({ ...s, tabele: s.tabele.filter((table) => table.vrstice.some((row) => row.tekme > 0)) }))
+    .filter((s) => s.tabele.length > 0),
+);
 
 // Matches per competition, in the order of src/config/ff.ts. Competitions without matches are left out.
 const competitions = (FF_CONFIG[team.id] ?? [])

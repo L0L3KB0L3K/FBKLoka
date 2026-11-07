@@ -4,7 +4,13 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { FF_LOGO_BASE, normalizeRoster, normalizeStandings, type FfStandingsTable } from "../src/lib/ff.ts";
+import {
+  FF_LOGO_BASE,
+  mergeSameCompetition,
+  normalizeRoster,
+  normalizeStandings,
+  type FfStandingsTable,
+} from "../src/lib/ff.ts";
 
 const fixture = JSON.parse(readFileSync(new URL("./fixtures/ff-738-standings.json", import.meta.url), "utf8"));
 const tables: FfStandingsTable[] = fixture.data.competitionStandings;
@@ -49,6 +55,30 @@ test("rows keep FloorballFlash order and numbers, our row is marked", () => {
   }
 });
 
+test("one table per competition: U17 A and B (763) become DP U17 with both our rows; other tables stay", () => {
+  const ifl = tables.find((table) => table.teams.some((row) => row.id === LOKA));
+  assert.ok(ifl);
+  const [a, b] = ifl.teams;
+  assert.ok(a && b);
+  const u17 = (label: string, ours: number) =>
+    normalizeStandings([ifl], new Set([ours]), { selekcija: "u17", label, competitionId: 763 });
+  const changed = structuredClone(u17("DP U17 C", a.id));
+  const [firstRow] = changed.tabele[0]?.vrstice ?? [];
+  assert.ok(firstRow);
+  firstRow.tocke += 1;
+  const other = { ...u17("DP U15", a.id), competitionId: 764 };
+
+  const merged = mergeSameCompetition([u17("DP U17 A", a.id), u17("DP U17 B", b.id), changed, other]);
+  assert.deepEqual(
+    merged.map((s) => s.tekmovanje),
+    ["DP U17", "DP U17 C", "DP U15"],
+  );
+  assert.deepEqual(
+    merged[0]?.tabele[0]?.vrstice.filter((row) => row.loka).map((row) => row.ekipa),
+    [a.name, b.name],
+  );
+});
+
 test("missing numbers count as 0", () => {
   const [table] = structuredClone(tables);
   assert.ok(table);
@@ -88,4 +118,21 @@ test("roster: positions mapped, names cleaned, incognito left out, one entry per
     ],
   );
   assert.ok(roster.every((p) => p.selekcija === "clani"));
+  assert.ok(roster.every((p) => !("ekipa" in p)));
+});
+
+test("roster of a selection with two teams (U17 A and B): each player carries the team, also when on both", () => {
+  const a = [player(1, "Ana", "Novak", 9, "F"), player(2, "Bor", "Kos", 1, "G")];
+  const b = [player(3, "Cene", "Zupan", 5, "F"), player(1, "Ana", "Novak", 9, "F")];
+  const roster = normalizeRoster([a, b], "u17", ["FBK Loka A", "FBK Loka B"]);
+
+  assert.deepEqual(
+    roster.map((p) => [p.ime, p.ekipa]),
+    [
+      ["Ana Novak", "FBK Loka A"],
+      ["Ana Novak", "FBK Loka B"],
+      ["Bor Kos", "FBK Loka A"],
+      ["Cene Zupan", "FBK Loka B"],
+    ],
+  );
 });

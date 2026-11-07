@@ -167,7 +167,8 @@ test("Igralec tedna (MVP): heading above the photo, one line per match and the s
   // The crown is hidden from screen readers, so the heading's name is the text alone.
   await expect(card.getByRole("heading", { name: "Igralec tedna", exact: true })).toBeVisible();
   await expect(card.getByText(/^Tekma proti /).first()).toBeVisible();
-  await expect(card.getByText(/^Skupaj v sezoni IFL:/)).toBeVisible();
+  // Any team since 26. 10. 2026 (e.g. "Skupaj v sezoni DP U17 A:"), not only IFL.
+  await expect(card.getByText(/^Skupaj v sezoni .+:/)).toBeVisible();
   const photo = card.locator("img");
   if ((await photo.count()) > 0) await expect(photo).toHaveAttribute("alt", /\S/);
 });
