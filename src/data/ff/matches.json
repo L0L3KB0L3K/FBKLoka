@@ -303,8 +303,11 @@
       "kraj": "Poljane nad Škofjo Loko",
       "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 10,
+      "nasprotnik": 4
+    },
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/18067"
   },
@@ -324,8 +327,11 @@
       "kraj": "Poljane nad Škofjo Loko",
       "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 0,
+      "nasprotnik": 15
+    },
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/17774"
   },
@@ -345,8 +351,11 @@
       "kraj": "Poljane nad Škofjo Loko",
       "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 7,
+      "nasprotnik": 5
+    },
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/17775"
   },
@@ -582,11 +591,11 @@
     "ffUrl": "https://floorballflash.si/game/17621"
   },
   {
-    "id": 17736,
+    "id": 17735,
     "selekcija": "svigalice",
     "tekmovanje": "2. SFL",
-    "zacetek": "2026-11-22T10:50:00+01:00",
-    "doma": false,
+    "zacetek": "2026-11-22T10:00:00+01:00",
+    "doma": true,
     "ekipaLoka": "Švigalice Loka",
     "nasprotnik": {
       "ime": "ŠD Zelenci",
@@ -600,7 +609,7 @@
     "stanje": "prihodnja",
     "rezultat": null,
     "faza": "Redni del",
-    "ffUrl": "https://floorballflash.si/game/17736"
+    "ffUrl": "https://floorballflash.si/game/17735"
   },
   {
     "id": 17738,
@@ -1300,7 +1309,7 @@
     "selekcija": "u15",
     "tekmovanje": "DP U15",
     "zacetek": "2027-01-31T09:00:00+01:00",
-    "doma": true,
+    "doma": false,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
       "ime": "FBK Žiri",
@@ -1384,7 +1393,7 @@
     "selekcija": "u11",
     "tekmovanje": "DP U11",
     "zacetek": "2027-02-06T13:30:00+01:00",
-    "doma": false,
+    "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {
       "ime": "VSV Unihockey A",

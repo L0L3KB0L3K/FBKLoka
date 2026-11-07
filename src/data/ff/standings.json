@@ -1,5 +1,5 @@
 {
-  "posodobljeno": "2026-11-01T23:27:00.800Z",
+  "posodobljeno": "2026-11-07T11:01:00.686Z",
   "tekmovanja": [
     {
       "selekcija": "clani",
@@ -406,86 +406,6 @@
               "tocke": 0
             }
           ]
-        },
-        {
-          "ime": "Redni del - Round Robin - Round Robin - Redni del - Round Robin standings",
-          "vrstice": [
-            {
-              "mesto": 1,
-              "ekipa": "KAC Floorball",
-              "logo": "c0346a77-eb6d-5c86-93ea-4f13db7f026f.png",
-              "loka": false,
-              "tekme": 1,
-              "zmage": 1,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 6,
-              "goliPrejeti": 1,
-              "tocke": 3
-            },
-            {
-              "mesto": 2,
-              "ekipa": "FBK Loka",
-              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
-              "loka": true,
-              "tekme": 0,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
-            },
-            {
-              "mesto": 2,
-              "ekipa": "ŠD Zelenci",
-              "logo": "a8b7bde3-a2ca-52ce-9f52-f4ca56502425.svg",
-              "loka": false,
-              "tekme": 0,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
-            },
-            {
-              "mesto": 2,
-              "ekipa": "FBK Polanska banda",
-              "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
-              "loka": false,
-              "tekme": 0,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
-            },
-            {
-              "mesto": 5,
-              "ekipa": "VSV Unihockey",
-              "logo": "f701d553-c8d9-4aa1-a425-78f99da52eb1.png",
-              "loka": false,
-              "tekme": 1,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 1,
-              "remi": 0,
-              "goliDani": 1,
-              "goliPrejeti": 6,
-              "tocke": 0
-            }
-          ]
         }
       ]
     },
@@ -502,59 +422,59 @@
               "ekipa": "FBK Loka A",
               "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
               "loka": true,
-              "tekme": 0,
-              "zmage": 0,
+              "tekme": 2,
+              "zmage": 2,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
               "porazi": 0,
               "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
+              "goliDani": 17,
+              "goliPrejeti": 9,
+              "tocke": 6
             },
             {
-              "mesto": 1,
-              "ekipa": "FBK Loka B",
-              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
-              "loka": false,
-              "tekme": 0,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
-            },
-            {
-              "mesto": 1,
+              "mesto": 2,
               "ekipa": "FBK Polanska banda - modri 🔵",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
-              "tekme": 0,
-              "zmage": 0,
+              "tekme": 2,
+              "zmage": 1,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
-              "porazi": 0,
+              "porazi": 1,
               "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
+              "goliDani": 20,
+              "goliPrejeti": 7,
+              "tocke": 3
             },
             {
-              "mesto": 1,
+              "mesto": 3,
               "ekipa": "FBK Polanska banda - zeleni 🟢",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
-              "tekme": 0,
+              "tekme": 1,
               "zmage": 0,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
-              "porazi": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 4,
+              "goliPrejeti": 10,
+              "tocke": 0
+            },
+            {
+              "mesto": 4,
+              "ekipa": "FBK Loka B",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": false,
+              "tekme": 1,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
               "remi": 0,
               "goliDani": 0,
-              "goliPrejeti": 0,
+              "goliPrejeti": 15,
               "tocke": 0
             }
           ]
@@ -574,59 +494,59 @@
               "ekipa": "FBK Loka A",
               "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
               "loka": false,
-              "tekme": 0,
-              "zmage": 0,
+              "tekme": 2,
+              "zmage": 2,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
               "porazi": 0,
               "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
+              "goliDani": 17,
+              "goliPrejeti": 9,
+              "tocke": 6
             },
             {
-              "mesto": 1,
-              "ekipa": "FBK Loka B",
-              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
-              "loka": true,
-              "tekme": 0,
-              "zmage": 0,
-              "zmagePodaljsek": 0,
-              "poraziPodaljsek": 0,
-              "porazi": 0,
-              "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
-            },
-            {
-              "mesto": 1,
+              "mesto": 2,
               "ekipa": "FBK Polanska banda - modri 🔵",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
-              "tekme": 0,
-              "zmage": 0,
+              "tekme": 2,
+              "zmage": 1,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
-              "porazi": 0,
+              "porazi": 1,
               "remi": 0,
-              "goliDani": 0,
-              "goliPrejeti": 0,
-              "tocke": 0
+              "goliDani": 20,
+              "goliPrejeti": 7,
+              "tocke": 3
             },
             {
-              "mesto": 1,
+              "mesto": 3,
               "ekipa": "FBK Polanska banda - zeleni 🟢",
               "logo": "643cf8ff-d939-5d69-bd85-0e2ecb41b971.jpg",
               "loka": false,
-              "tekme": 0,
+              "tekme": 1,
               "zmage": 0,
               "zmagePodaljsek": 0,
               "poraziPodaljsek": 0,
-              "porazi": 0,
+              "porazi": 1,
+              "remi": 0,
+              "goliDani": 4,
+              "goliPrejeti": 10,
+              "tocke": 0
+            },
+            {
+              "mesto": 4,
+              "ekipa": "FBK Loka B",
+              "logo": "d57bc550-2f42-57f0-9f34-0316a32990c3.svg",
+              "loka": true,
+              "tekme": 1,
+              "zmage": 0,
+              "zmagePodaljsek": 0,
+              "poraziPodaljsek": 0,
+              "porazi": 1,
               "remi": 0,
               "goliDani": 0,
-              "goliPrejeti": 0,
+              "goliPrejeti": 15,
               "tocke": 0
             }
           ]
@@ -639,7 +559,7 @@
       "competitionId": 764,
       "tabele": [
         {
-          "ime": "Redni del - Round Robin - Redni del - Round Robin",
+          "ime": "Redni del - Round Robin - Redni del - Round Robin - Redni del - Round Robin",
           "vrstice": [
             {
               "mesto": 1,

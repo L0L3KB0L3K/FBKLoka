@@ -1,39 +1,39 @@
 {
   "razlicica": "LBS-MVPI 1.0",
   "vikend": {
-    "od": "2026-10-31",
-    "do": "2026-11-01"
+    "od": "2026-11-07",
+    "do": "2026-11-08"
   },
-  "ffId": 157,
-  "ime": "Metod Proj",
+  "ffId": 5398,
+  "ime": "Miha Triler",
   "ekipe": [
-    "svigalice"
+    "u17"
   ],
   "vratar": false,
   "tekme": [
     {
-      "nasprotnik": "ŠD Pungert",
-      "zacetek": "2026-10-31T09:00:00+01:00",
-      "goli": 3,
-      "podaje": 1,
+      "nasprotnik": "FBK Polanska banda - zeleni 🟢",
+      "zacetek": "2026-11-07T09:00:00+01:00",
+      "goli": 4,
+      "podaje": 2,
       "obrambe": 0,
       "streli": 0
     },
     {
-      "nasprotnik": "ŠD Zelenci",
-      "zacetek": "2026-10-31T11:30:00+01:00",
-      "goli": 6,
-      "podaje": 0,
+      "nasprotnik": "FBK Polanska banda - modri 🔵",
+      "zacetek": "2026-11-07T10:40:00+01:00",
+      "goli": 2,
+      "podaje": 3,
       "obrambe": 0,
       "streli": 0
     }
   ],
   "sezona": {
-    "goli": 9,
-    "podaje": 1,
+    "goli": 6,
+    "podaje": 5,
     "obrambe": 0,
     "streli": 0
   },
-  "sezonaTekmovanje": "2. SFL",
-  "slika": "157.jpeg"
+  "sezonaTekmovanje": "DP U17 A",
+  "slika": null
 }
