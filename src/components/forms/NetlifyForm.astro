@@ -42,7 +42,7 @@ const { name, submitLabel } = Astro.props;
       const message = document.getElementById(`${field.id}-error`);
       field.setAttribute("aria-invalid", String(!valid));
       if (message) {
-        message.textContent = valid ? "" : (field.dataset.error ?? "Preveri to polje.");
+        message.textContent = valid ? "" : (field.dataset.error ?? "Preverite to polje.");
         message.hidden = valid;
       }
       return valid;

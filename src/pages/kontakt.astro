@@ -126,8 +126,8 @@ const social = socialLinks(socialna);
         <h2 id="pisite-nam" class="heading-bar">Pišite nam</h2>
         <p class="mt-4 text-muted">Odgovorimo po e-pošti.</p>
         <div class="mt-6">
-          <NetlifyForm name="kontakt" submitLabel="Pošlji sporočilo">
-            <Field id="kontakt-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpiši svoje ime." />
+          <NetlifyForm name="kontakt" submitLabel="Pošljite sporočilo">
+            <Field id="kontakt-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpišite svoje ime." />
             <Field
               id="kontakt-email"
               name="email"
@@ -136,7 +136,7 @@ const social = socialLinks(socialna);
               autocomplete="email"
               placeholder="npr. ime@domena.si"
               required
-              error="Vpiši e-mail v obliki ime@domena.si."
+              error="Vpišite e-mail v obliki ime@domena.si."
             />
             <Field id="kontakt-zadeva" name="zadeva" label="Zadeva" maxlength={150} error="Zadeva je predolga." />
             <Field
@@ -146,7 +146,7 @@ const social = socialLinks(socialna);
               label="Sporočilo"
               required
               maxlength={2000}
-              error="Napiši sporočilo."
+              error="Napišite sporočilo."
             />
           </NetlifyForm>
         </div>

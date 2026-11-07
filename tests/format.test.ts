@@ -103,6 +103,21 @@ test("club timeline: foundings, names and titles only, unconfirmed hidden, title
   );
 });
 
+test("history timeline: plain events too, unconfirmed hidden, titles first in the same year", async () => {
+  const { historyTimeline } = await import("../src/lib/timeline.ts");
+  const input: TimelineEntry[] = [
+    { leto: 2024, vrsta: "dogodek", dogodek: "Turnir." },
+    { leto: 2024, vrsta: "ime", klub: "FBK Loka", dogodek: "Novo ime." },
+    { leto: 2024, vrsta: "naslovi", sezona: "2023/24", dogodek: "IFL." },
+    { leto: 2019, vrsta: "dogodek", dogodek: "Prestop." },
+    { leto: 2001, vrsta: "naslovi", sezona: "2000/01", dogodek: "DP.", opomba: "TODO: potrdi" },
+  ];
+  assert.deepEqual(
+    historyTimeline(input).map((entry) => entry.dogodek),
+    ["Prestop.", "IFL.", "Turnir.", "Novo ime."],
+  );
+});
+
 test("clean page paths for canonical URLs and the menu", async () => {
   const { cleanPath } = await import("../src/lib/paths.ts");
   assert.equal(cleanPath("/index.html"), "/");

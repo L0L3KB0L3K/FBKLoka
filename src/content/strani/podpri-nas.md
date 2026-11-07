@@ -4,6 +4,10 @@ opis: "Podprite FBK Loka: klub prostovoljcev z okoli 100 člani, od tega 80 otro
 # Order (Maj, 1. 10. 2026): achievements first, then what matters more than results, then the costs a sponsor helps with.
 # Instagram numbers left out (Maj, 1. 10. 2026: not strong enough). Members: about 100, about 80 children (Maj, 1. 10. 2026).
 # Prices: from the club (docs/04).
+# Photo: players at the sponsor boards at a home game in Poden, camera date 9. 12. 2025 (permission 30. 10. 2026).
+foto:
+  src: ../../assets/foto/igralci-ob-sponzorjih.jpg
+  alt: "Igralci FBK Loka v rumenih dresih stojijo ob ogradi s tablama sponzorjev Tehnoservis in Ines."
 ---
 
 ## Dosežki zadnjih let

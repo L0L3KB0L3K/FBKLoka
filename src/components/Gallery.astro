@@ -1,0 +1,31 @@
+---
+// A still grid of photos below the text (news, team pages): two per row from sm, no motion, Astro's default lazy
+// loading. Nothing is rendered without photos (SPEC.md §1).
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  photos: { src: ImageMetadata; alt: string }[];
+  class?: string;
+}
+
+const { photos, class: className } = Astro.props;
+---
+
+{
+  photos.length > 0 && (
+    <ul class:list={["grid max-w-2xl gap-4 sm:grid-cols-2", className]}>
+      {photos.map((photo) => (
+        <li>
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            widths={[480, 720, 960]}
+            sizes="(min-width: 40rem) 21rem, 100vw"
+            class="block h-auto w-full rounded-card border border-line"
+          />
+        </li>
+      ))}
+    </ul>
+  )
+}

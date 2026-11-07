@@ -250,7 +250,7 @@ telefon: "TODO"
 naslov: "TODO"
 eos:
   portal: "TODO"             # gumb "Za starše in člane"
-  registracija: "TODO"       # gumb "Vpiši se" na /vpis
+  registracija: "TODO"       # gumb "Vpišite otroka" na /vpis
 socialna:
   instagram: https://www.instagram.com/fbk_loka/
   facebook: https://www.facebook.com/FloorballInsport   # TODO: potrdi, da je uradna
@@ -512,7 +512,7 @@ Namen: v 3 sekundah pokaže, kdaj je naslednja tekma, in pripelje novega starša
    za tablo, označi "Danes igramo" in izračuna odštevanje. Brez JS se pokaže prva tekma iz HTML z datumom, brez odštevanja.
    Logika je v `src/lib/upcoming.ts` (čista funkcija `pick(matches, now)`) in ima teste.
 2. **Naslednje tekme.** Do 5 prihodnjih tekem vseh selekcij, vrstica na tekmo. Povezava "Vse tekme".
-3. **Poziv za vpis.** Kratek stavek, letniki (TODO), "Prvi trening je brezplačen" (TODO: potrdi), gumb "Vpiši otroka".
+3. **Poziv za vpis.** Kratek stavek, letniki (TODO), "Prvi trening je brezplačen" (TODO: potrdi), gumb "Vpišite otroka".
 4. **Zadnje novice.** 3 najnovejše (faza 2, skrito dokler ni 3 objav).
 5. **Instagram.** 6 objav (faza 2).
 6. **Sponzorji.** Pas z logotipi v nogi vsake strani, ne samo na naslovnici.
@@ -563,7 +563,7 @@ Mobilno: kartica na selekcijo, ne vodoravno drsenje tabele.
 
 - Za koga: letniki, ki jih klub sprejema (TODO), kje in kdaj so treningi za začetnike.
 - Kaj otrok potrebuje na prvem treningu (TODO od kluba).
-- Glavni gumb **Vpiši se** vodi na EOS registracijo (`nastavitve.eos.registracija`).
+- Glavni gumb **Vpišite otroka** vodi na EOS registracijo (`nastavitve.eos.registracija`).
 - **Članarina:** znesek ali stavek "Članarina se ureja v EOS" (TODO od kluba).
 - **Pogosta vprašanja** (`<details>`): kaj otrok potrebuje (oprema, palica), koliko stane, od katere starosti,
   ali se lahko pridruži med sezono, kaj če otrok še ni nikoli igral. Odgovori TODO od kluba.
@@ -652,8 +652,8 @@ Vse slike gredo skozi `astro:assets` iz `src/`, ne iz `public/`, z odstranjenim 
 
 | Token | Hex | Uporaba |
 |---|---|---|
-| `--color-ink` | `#000000` | Črna iz loga: glava, noga, tabla, glavno besedilo |
-| `--color-ball` | `#F2EC55` | Rumena iz loga (TODO: potrdi z originalno datoteko). Gumbi na črni, poudarki, "Danes igramo" |
+| `--color-ink` | `#0B0B0C` | Skoraj črna (ne čista `#000`, na zaslonu mirnejša): glava, noga, tabla, glavno besedilo |
+| `--color-ball` | `#FFF200` | Rumena iz klubskega vektorja (PDF, 30. 10. 2026; prej `#FFF112`, odčitana s PNG). CMYK ali Pantone za tisk potrdi klub. Gumbi na črni, poudarki, "Danes igramo" |
 | `--color-paper` | `#FFFFFF` | Ozadje vsebine |
 | `--color-court` | `#F4F4F2` | Izmenične vrstice, ozadje sekcij |
 | `--color-muted` | `#5C5C5C` | Datumi, pomožno besedilo (kontrast na beli ≥ 6:1) |
@@ -704,7 +704,7 @@ Preveri, da paket vsebuje os `wdth`; če je ne, uporabi `@fontsource-variable/ar
 
 - **Luknje žogice:** statičen SVG vzorec (krogi in ovali kot na žogici v logu) v ozadju tekmovalne table,
   rumen na črni, prosojnost ~12 %. Nikjer drugje. Ne animira se. Na tabli s fotografijami ga ni (26. 10. 2026): na
-  fotografiji deluje kot pike po obrazih. Fotografije za tablo so poravnane na vrh, zato naj bodo obrazi v zgornji polovici.
+  fotografiji deluje kot pike po obrazih. Fotografije za tablo so poravnane na 15 % višine, zato naj bodo obrazi pri okoli 10–30 % višine (30. 10. 2026).
 - **Vodoravna črta:** debela črna črta pod napisom v logu je ločilo pod naslovom H1 na vsaki strani
   (debelina 6 px, širina 64 px, levo poravnana).
 - Palica iz loga se ne uporablja kot dekoracija.
@@ -738,9 +738,9 @@ sob 10. 10. 17:00
 ned 11. 10. 10:00
 U15 · Turnir                  Žiri
 ─────────────────────────────────
-Pridruži se nam
+Pridružite se nam
 Letniki TODO. Prvi trening je brezplačen (TODO).
-[ Vpiši otroka ]                       ← črn gumb na beli
+[ Vpišite otroka ]                     ← črn gumb na beli
 ─────────────────────────────────
 Novice (skrito do 3 objav)
 Instagram (faza 2)
@@ -754,7 +754,7 @@ Kontakt · Za starše (EOS)             ← črna noga
 | Naloga | Pot | Dotiki |
 |---|---|---|
 | Starš: kdaj je trening U15? | Meni → Treningi → kartica U15 | 2 |
-| Nov starš: kako vpišem otroka? | Naslovnica → Vpiši otroka → Vpiši se (EOS) | 2 |
+| Nov starš: kako vpišem otroka? | Naslovnica → Vpišite otroka → Vpišite otroka (EOS) | 2 |
 | Navijač: kdaj in kje je naslednja tekma? | Naslovnica, prvi zaslon | 0 |
 
 Če katera od teh nalog na zgrajeni strani rabi več dotikov, je to napaka.
@@ -774,7 +774,7 @@ NASLOVNICA (desktop)
 │ sob 10. 10. 17:00  Člani  FBK Loka – KAC       Poden     │
 │ ned 11. 10. 10:00  U15    Turnir               Žiri      │
 ├──────────────────────────────────────────────────────────┤
-│ Pridruži se nam     Letniki TODO.         [Vpiši otroka]   │
+│ Pridružite se nam   Letniki TODO.         [Vpišite otroka] │
 ├──────────────────────────────────────────────────────────┤
 │ Novice (3)                 │ Instagram (6)               │
 ├──────────────────────────────────────────────────────────┤
@@ -809,18 +809,24 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 ### 9.7 Česa ne delaj
 
 - ALL CAPS oznake nad naslovi, razmaknjene črke.
-- Poudarjanje ene besede v naslovu z drugo barvo ali poševnim.
-- Puščice `→` na koncu gumbov in povezav.
+- Poudarjanje ene besede v naslovu z drugo barvo ali poševnim. Ena izjema: "brezplačni" v naslovu črnega okvirja
+  na `/vpis`, ker je to glavno sporočilo strani (odločitev 30. 10. 2026).
+- Puščice `→` na koncu gumbov in povezav, razen kjer povezava vodi naprej na več istega ali na naslednji korak
+  (`ArrowLink`, `Button` z `arrow`, kartica ekipe): "Vse tekme", "Vse novice", "Vsa zgodovina", "Kdaj in kje so
+  treningi", "Vpišite otroka". Tam puščica pove "pojdi naprej" (odločitev 30. 10. 2026). Nikoli pri oddaji obrazca;
+  zunanje povezave imajo ikono za nov zavihek, ne puščice.
 - Številčenje 01 / 02 / 03 za vsebino, ki ni zaporedje.
 - Enake kartice z enako senco za vse.
-- Pikice kot ločilo v metapodatkih (`A · B · C`) več kot na enem mestu.
+- Verige pikic kot ločilo v metapodatkih (`A · B · C`). Dovoljena je ena pikica med dvema podatkoma
+  (`2000 · Ustanovitev`, `datum · ekipa`, `ekipe · vikend`): časovnica, novice, Igralec tedna (odločitev 30. 10. 2026).
 
 ---
 
 ## 10. Besedila
 
 - Slovenščina, stavčna velikost črk (samo prva črka velika), kratki stavki.
-- Gumbi povedo, kaj se zgodi: "Vpiši otroka", "Pošlji vprašanje", "Dodaj v koledar", "Vse tekme".
+- Gumbi povedo, kaj se zgodi: "Vpišite otroka", "Pošljite sporočilo", "Dodajte v koledar", "Vse tekme".
+- Javne strani vikajo povsod: besedila, gumbi in napake (audit 30. 10. 2026). Interna aplikacija `/ekipa` za člane ekip tika.
 - Datumi: `sob 10. 10.`, polno `sobota, 10. oktober 2026`. Ure: `17:00`. Vse v `Europe/Ljubljana`.
 - Rezultat vedno z vidika FBK Loke v seznamih selekcije ("Zmaga 12:6"), v splošnem seznamu domači – gostje.
 - Napake v obrazcih povedo, kaj popraviti: "Vpiši e-mail v obliki ime@domena.si".
@@ -830,7 +836,7 @@ Pravila: nikoli `transition: all`, vedno naštej lastnosti. Nobena UI animacija 
 ## 11. EOS, plato in prevoz
 
 - **EOS:** klub ga uporablja za člane, starše, prisotnost in vpis. Stran nanj samo povezuje, ničesar ne podvaja.
-  Gumb "Za starše in člane" v glavi, gumb "Vpiši se" na `/vpis`.
+  Gumb "Za starše in člane" v glavi, gumb "Vpišite otroka" na `/vpis`.
 - **Plato in prevoz:** skriti strani `/ekipa/plato` in `/ekipa/prevoz`, zaščiteni z ekipno kodo. Podrobnosti v poglavju 19.
 
 ---
@@ -1008,7 +1014,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 
 ### Pogoji za lansiranje (pred prestavitvijo domene)
 
-- [ ] Logo v SVG, svetla in temna različica
+- [x] Logo v SVG, svetla in temna različica (klubski PDF, 30. 10. 2026)
 - [x] Tekme vsaj za člane (IFL) se nalagajo same (od 23. 10. 2026 tudi 1. SFL, 2. SFL in mladinske lige)
 - [ ] Treningi, trenerji in kontakti za vse selekcije
 - [x] Zasebnost v nogi, obrazec testiran do prejetega e-maila (kontakt, 1. 10. 2026; vpis gre prek EOS)
@@ -1016,7 +1022,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 - [ ] Preverjeno na pravem telefonu z mobilnimi podatki, tri naloge iz 9.5 v predvidenem številu dotikov
 - [ ] `npm run verify` in `npm run test:a11y` zeleno, ročni pregled s tipkovnico in pri 200 %
 - [x] CSP vsiljen (ne več Report-Only), od 28. 9. 2026; od 30. 9. kot `<meta>` + glava (13.4)
-- [ ] Vsaj ena prava fotografija ekipe (9.1a)
+- [x] Vsaj ena prava fotografija ekipe (9.1a): skupinske fotografije petih ekip in finale 2026 (26. 10. 2026)
 - [ ] MFA na GitHubu in Netlifyju, domena na imenu kluba
 - [ ] Za vsako sekcijo imenovan lastnik v klubu
 
@@ -1024,7 +1030,7 @@ Lestvica, statistika igralcev, `/igralci/[slug]`, `/zgodovina`, OG slike tekem (
 
 ## 16. Predpostavke
 
-- Obstoječi logo in barve ostanejo. Rumena `#F2EC55` je odčitana s posnetka zaslona.
+- Obstoječi logo in barve ostanejo. Rumena `#FFF200` je iz klubskega vektorja (glej 9.2).
 - Klub ostane na EOS za člane, starše in prisotnost.
 - Člani igrajo v IFL in 1. SFL, zato stran selekcije podpira več tekmovanj.
 - Netlify free zadostuje (en klub, gradnja samo ob spremembi podatkov).
@@ -1352,7 +1358,8 @@ uspešni, zato ni bilo e-pošte: rezultati in povzetki treh vikendov niso bili o
 Prvotni načrt:
 
 Zdaj nedelja 22:00 (`.github/workflows/fetch-ff.yml`). Novo: sobota ob 22:37 in nedelja ob 22:07 po ljubljanskem času.
-Do 27. 10. 2026 je sobotni cron izklopljen zaradi kreditov (20.6); vratca sobotno okno še poznajo.
+Sobotni cron ostane izklopljen (odločitev 26. 10. 2026): nedelja pokrije obe tekmi vikenda, sobota bi stala okoli 60
+kreditov na mesec (20.6). Vratca sobotno okno še poznajo.
 GitHub cron teče samo v UTC, zato sta na dan dva vnosa in vratca, ki spustijo samo pravo uro. Minute niso :00 in :30,
 ker GitHub ob polni in pol ure najbolj zamuja.
 
@@ -1375,7 +1382,7 @@ on:
 **Narejeno:** `tests/ff-gate.test.ts` za poletni in zimski čas: od dveh vnosov na dan teče natanko eden (sobota 22:37,
 nedelja 22:07), zamuda do 45 min še šteje, drugi dnevi ne tečejo, ročni zagon vedno.
 
-### 20.3 MVP vikenda (vse ekipe)
+### 20.3 Igralec tedna (MVP vikenda, vse ekipe)
 
 **Odločitve kluba (29. 9. 2026):** ime "MVP vikenda", s fotografijo; štejejo vsa članska tekmovanja iz `src/config/ff.ts`
 (IFL, 1. SFL s končnico, pokal, ko bo v FloorballFlash). Izračun **LBS-MVPI 1.0** (dokument "Academic MVP Formula for
@@ -1400,6 +1407,10 @@ popravka za starost, ker člani igrajo veliko pogosteje. MVP je lahko tudi igral
 "Skupaj v sezoni" je za člana IFL, za druge njihovo tekmovanje (npr. DP U13). FloorballFlash ima gole, podaje in obrambe
 po tekmah tudi pri mlajših (preverjeno na DP U13 2025/26). Statistika vseh tekem sezone pomeni do okoli 300 klicev na
 teden (pavza 300 ms, 2–3 minute).
+
+**Ime (26. 10. 2026):** na strani "Igralec tedna" z ikono krone (SVG, rumena z obrobo kot žogica v logotipu, skrita
+pred bralnikom zaslona; emoji ne, ker je na vsaki napravi drugačen). Računa se še vedno vikend. V kodi ostane ime `mvp`
+(`mvp.json`, `fetch-mvp.ts`), objavljeni povzetki obdržijo "MVP vikenda".
 
 **Podatki (preverjeno 29. 9. 2026; 23. 10. je FloorballFlash `playerStats` preimenoval v `fieldPlayerStats`, kar je od
 4. 10. podiralo MVP s HTTP 422):** `fieldPlayerStats` in `goalieStats` z `baseFilter: { gameId, for: "Game" }` vrneta
@@ -1426,6 +1437,8 @@ in ni starejša od 48 ur (`lastPlayed()` v `src/lib/upcoming.ts`, test v `tests/
 isti `setInterval` kot tablo. Ko je rezultat v deployu, vrstica izgine.
 
 ### 20.5 Tedenski povzetek (nedelja, samodejna objava)
+
+**26. 10. 2026:** povzetek ostane, dokler ne deluje kopiranje objav z Instagrama (§6). Potem ga objave z IG nadomestijo.
 
 **Odločitev kluba (29. 9. 2026): povzetek se objavi samodejno, brez pregleda, iz fiksne predloge. Brez AI**, ker API
 stane. Samo dejstva: brez ocen ("odlična igra"), napovedi, citatov in lastnosti igralcev.

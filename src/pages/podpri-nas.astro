@@ -2,32 +2,69 @@
 // /podpri-nas (SPEC.md §7.8, phase 2): why support the club, its reach and where a sponsor's name is seen (Markdown in
 // src/content/strani/podpri-nas.md), and a form for sponsors. Sponsor packages and prices follow when the club sends them
 // (docs/04-odprto-pri-klubu.md); until then the form asks the company to write. Linked from the footer and the sponsor strip.
+// Under the text: a photo of players at the sponsor boards (podpri-nas.md, optional), then the sponsors the club
+// already has, same order and logos as the strip (no sponsors -> no section).
+import { Image } from "astro:assets";
 import { render } from "astro:content";
 import Field from "../components/forms/Field.astro";
 import NetlifyForm from "../components/forms/NetlifyForm.astro";
+import Photo from "../components/Photo.astro";
 import Base from "../layouts/Base.astro";
+import { shareImage } from "../lib/share.ts";
 import { getPage } from "../lib/content.ts";
+import { loadSponsors } from "../lib/sponsors.ts";
 
 const page = await getPage("podpri-nas");
 const { Content } = await render(page);
+const ogImage = page.data.foto ? await shareImage(page.data.foto.src, page.data.foto.alt, Astro.site as URL) : undefined;
+const sponzorji = await loadSponsors();
+// Same box as in the strip: every logo keeps its shape inside it.
+const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
 ---
 
-<Base title={page.data.naslov} description={page.data.opis}>
+<Base title={page.data.naslov} description={page.data.opis} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
 
     <div class="mt-10 grid gap-12 lg:grid-cols-2">
-      <div class="prose">
-        <Content />
+      <div>
+        <div class="prose">
+          <Content />
+        </div>
+
+        {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} class="mt-12" />}
+
+        {
+          sponzorji.length > 0 && (
+            <section aria-labelledby="ze-podpirajo" class="mt-12">
+              <h2 id="ze-podpirajo" class="heading-bar">
+                Klub že podpirajo
+              </h2>
+              <ul class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4">
+                {sponzorji.map(({ data }) => (
+                  <li>
+                    {data.povezava ? (
+                      <a href={data.povezava} class="flex min-h-11 items-center">
+                        <Image src={data.logo} alt={data.ime} class={logoClass} />
+                      </a>
+                    ) : (
+                      <Image src={data.logo} alt={data.ime} class={logoClass} />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
       </div>
 
       <section aria-labelledby="postanite-sponzor" class="max-w-xl self-start rounded-card bg-court p-6 md:p-8">
         <h2 id="postanite-sponzor" class="heading-bar">Postanite sponzor</h2>
         <p class="mt-4 text-muted">Pišite nam in predstavimo vam možnosti sodelovanja. Odgovorimo po e-pošti.</p>
         <div class="mt-6">
-          <NetlifyForm name="sponzorstvo" submitLabel="Pošlji povpraševanje">
-            <Field id="sponzor-podjetje" name="podjetje" label="Podjetje" autocomplete="organization" required error="Vpiši ime podjetja." />
-            <Field id="sponzor-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpiši svoje ime." />
+          <NetlifyForm name="sponzorstvo" submitLabel="Pošljite povpraševanje">
+            <Field id="sponzor-podjetje" name="podjetje" label="Podjetje" autocomplete="organization" required error="Vpišite ime podjetja." />
+            <Field id="sponzor-ime" name="ime" label="Ime in priimek" autocomplete="name" required error="Vpišite svoje ime." />
             <Field
               id="sponzor-email"
               name="email"
@@ -36,7 +73,7 @@ const { Content } = await render(page);
               autocomplete="email"
               placeholder="npr. ime@podjetje.si"
               required
-              error="Vpiši e-mail v obliki ime@podjetje.si."
+              error="Vpišite e-mail v obliki ime@podjetje.si."
             />
             <Field
               id="sponzor-sporocilo"

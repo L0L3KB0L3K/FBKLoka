@@ -1,6 +1,7 @@
 ---
 // Training slots of one team (SPEC.md §7.4, §8).
 // Full: a small table (day, time, hall with a map link). Compact: one line per slot for the team summary.
+// On phones the full table shows the short day ("pon"), so it fits a card at 320 px (WCAG 1.4.10, audit 30. 10. 2026).
 // Nothing is rendered without slots.
 import type { Training } from "../lib/trainings.ts";
 
@@ -47,7 +48,10 @@ const DAY_SHORT: Record<string, string> = {
         <tbody>
           {trainings.map((t) => (
             <tr class="border-t border-line align-top">
-              <td class="py-3 pr-4">{t.dan}</td>
+              <td class="py-3 pr-4">
+                <span class="sm:hidden">{DAY_SHORT[t.dan]}</span>
+                <span class="hidden sm:inline">{t.dan}</span>
+              </td>
               <td class="py-3 pr-4 font-bold whitespace-nowrap tabular-nums">
                 {t.od}–{t.do}
               </td>

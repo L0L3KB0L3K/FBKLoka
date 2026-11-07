@@ -1,13 +1,16 @@
 ---
 // /vpis: for a new parent (SPEC.md §7.5). A black panel first: free first trainings and the large
-// "Vpiši se" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
-// no repeats), when and where the youth train, and a link to the contact form.
-// Path from the home page: "Vpiši otroka" -> "Vpiši se" = 2 taps (SPEC.md §9.5).
+// "Vpišite otroka" button (EOS, new tab). Then the parents' questions as open sections (owner, 29. 9. 2026: no accordion,
+// no repeats), when and where the youth train, and a link to the contact form. The photo (vpis.md, optional) comes
+// after the panel, so the way into EOS stays first.
+// Path from the home page: "Vpišite otroka" -> "Vpišite otroka" (EOS) = 2 taps (SPEC.md §9.5).
 import { render } from "astro:content";
 import TrainingTable from "../components/TrainingTable.astro";
 import ArrowLink from "../components/ArrowLink.astro";
+import Photo from "../components/Photo.astro";
 import Button from "../components/ui/Button.astro";
 import Base from "../layouts/Base.astro";
+import { shareImage } from "../lib/share.ts";
 import { getPage, loadCollection } from "../lib/content.ts";
 import { groupBySchedule, joinSl } from "../lib/schedule.ts";
 import { getSettings, isSet } from "../lib/site.ts";
@@ -15,6 +18,7 @@ import { getTrainings } from "../lib/trainings.ts";
 
 const page = await getPage("vpis");
 const { Content } = await render(page);
+const ogImage = page.data.foto ? await shareImage(page.data.foto.src, page.data.foto.alt, Astro.site as URL) : undefined;
 const { eos } = await getSettings();
 
 // Youth teams (U9 ... U19), youngest first, grouped when they train at the same time.
@@ -29,7 +33,7 @@ const schedules = groupBySchedule(youth);
 const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
 ---
 
-<Base title={page.data.naslov} description={page.data.opis}>
+<Base title="Vpis otrok v floorball v Škofji Loki" description={page.data.opis} ogImage={ogImage}>
   <div class="page-wrap py-12">
     <h1>{page.data.naslov}</h1>
 
@@ -38,7 +42,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       <h2 id="prvi-treningi" class="text-h1">
         Prvi treningi so <span class="text-ball">brezplačni</span>
       </h2>
-      <p class="mt-4 max-w-[55ch]">
+      <p class="mt-4 max-w-text">
         Otrok pride na nekaj treningov in vidi, kako potekajo in ali mu je floorball všeč. Ko se odloči, ga vpišete v
         aplikaciji EOS.
       </p>
@@ -46,7 +50,7 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
         {
           isSet(eos.registracija) && (
             <Button href={eos.registracija} variant="on-ink" size="lg" newTab>
-              Vpiši se
+              Vpišite otroka
             </Button>
           )
         }
@@ -58,6 +62,8 @@ const questions = page.data.vprasanja.filter((q) => isSet(q.odgovor));
       </div>
       {isSet(eos.registracija) && <p class="mt-4 text-small">Vpis in članarina potekata v aplikaciji EOS.</p>}
     </section>
+
+    {page.data.foto && <Photo src={page.data.foto.src} alt={page.data.foto.alt} class="mt-12" />}
 
     {/* Questions first, as headings a parent can scan; extra text from vpis.md follows, if any. */}
     <div class="mt-12 prose">

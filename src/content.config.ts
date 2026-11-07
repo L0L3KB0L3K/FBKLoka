@@ -73,6 +73,8 @@ const selekcije = defineCollection({
       treniraZ: refTo("selekcije").optional(),
       // Team photo under the description on the team page (26. 10. 2026). 3:2, from src/assets/foto/ekipe/.
       foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
+      // Up to six match photos at the bottom of the team page (audit 30. 10. 2026), from src/assets/foto/ekipe/<slug>/.
+      galerija: z.array(z.object({ src: image(), alt: z.string().min(1) })).max(6).default([]),
     }),
 });
 
@@ -183,9 +185,10 @@ const zgodovina = defineCollection({
       .object({
         leto: z.number().int().min(1900).max(2100),
         dogodek: z.string().min(1),
-        foto: image().optional(),
+        // Photo for /zgodovina (not shown in the narrow /klub column), from src/assets/foto/zgodovina/.
+        foto: z.object({ src: image(), alt: z.string().min(1) }).optional(),
         opomba: z.string().optional(),
-        // The /klub timeline shows foundings, name changes and titles; plain events wait for /zgodovina (phase 3).
+        // The /klub timeline shows foundings, name changes and titles; /zgodovina shows plain events too.
         vrsta: z.enum(["dogodek", "ustanovitev", "ime", "naslovi"]).default("dogodek"),
         klub: z.string().min(1).optional(), // club name from a founding or a name change on, e.g. "FBK Loka"
         sezona: z.string().regex(/^\d{4}\/\d{2}$/).optional(), // titles: "2024/25", leto is its second year
@@ -239,7 +242,7 @@ const nastavitve = defineCollection({
       maticna: z.union([todo, z.string().regex(/^[0-9]{10}$/, "Matična številka ima 10 številk.")]),
       eos: z.object({
         portal: z.union([todo, z.url()]), // header button "Za starše in člane"
-        registracija: z.union([todo, z.url()]), // button "Vpiši se" on /vpis
+        registracija: z.union([todo, z.url()]), // button "Vpišite otroka" on /vpis
       }),
       socialna: z.object({
         instagram: z.url().optional(),

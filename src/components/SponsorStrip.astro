@@ -3,24 +3,14 @@
 // Order: by level when the club sets one (it has none now), then by vrstniRed, then by name.
 // No sponsors -> nothing is rendered (SPEC.md §1).
 //
-// The logos scroll slowly in a loop, as on the old club site (owner, 28. 9. 2026). This is more motion
+// The logos scroll slowly in a loop, as on the old club site (owner, 28. 9. 2026; kept by Maj, 30. 10. 2026). This is more motion
 // than SPEC.md §9.6 allows, so it follows WCAG 2.2.2: a button stops it, hover and keyboard focus pause it,
 // and with "reduce motion" or without JS the logos stand still and wrap. The second copy of the list only
 // makes the loop seamless: hidden from screen readers and from the keyboard (inert).
 import { Image } from "astro:assets";
-import { loadCollection } from "../lib/content.ts";
+import { loadSponsors } from "../lib/sponsors.ts";
 
-const LEVEL_ORDER = { glavni: 0, zlati: 1, podporni: 2 } as const;
-// Missing level or order goes last, so a new sponsor without them never jumps ahead.
-const level = (raven?: keyof typeof LEVEL_ORDER) => (raven ? LEVEL_ORDER[raven] : 3);
-const order = (vrstniRed?: number) => vrstniRed ?? Number.MAX_SAFE_INTEGER;
-
-const sponzorji = (await loadCollection("sponzorji")).sort(
-  (a, b) =>
-    level(a.data.raven) - level(b.data.raven) ||
-    order(a.data.vrstniRed) - order(b.data.vrstniRed) ||
-    a.data.ime.localeCompare(b.data.ime, "sl"),
-);
+const sponzorji = await loadSponsors();
 // Every logo gets the same box and keeps its shape inside it (object-contain), so wide and square logos
 // look equally strong. Logo files are trimmed to their content.
 const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
@@ -38,7 +28,7 @@ const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
             <a href="/podpri-nas/" class="inline-flex min-h-11 items-center text-small font-semibold underline">Postanite sponzor</a>
           </div>
           <button type="button" class="inline-flex min-h-11 items-center text-small font-semibold underline" data-sponsors-toggle hidden>
-            <span data-sponsors-label>Ustavi</span>
+            <span data-sponsors-label>Ustavite</span>
             <span class="sr-only"> pomikanje logotipov</span>
           </button>
         </div>
@@ -126,7 +116,7 @@ const logoClass = "h-12 w-28 object-contain sm:h-16 sm:w-32";
     toggle.addEventListener("click", () => {
       const paused = section.dataset.marquee === "paused";
       section.dataset.marquee = paused ? "on" : "paused";
-      label.textContent = paused ? "Ustavi" : "Nadaljuj";
+      label.textContent = paused ? "Ustavite" : "Nadaljujte";
     });
   }
 </script>

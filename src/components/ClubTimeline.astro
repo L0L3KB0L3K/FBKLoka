@@ -1,16 +1,20 @@
 ---
-// Club timeline beside the text on /klub (SPEC.md §7.6): foundings, name changes and titles by season, oldest first.
+// Club timeline, oldest first: beside the text on /klub (SPEC.md §7.6) and on its own page /zgodovina (§7.8).
 // A founding or a name change is a bigger marker with the club name, so the titles below it read as that club's.
-// Nothing is rendered without entries (SPEC.md §1). No links or controls: plain text in an ordered list.
+// Titles show the season, plain events the year. Nothing is rendered without entries (SPEC.md §1).
+// No controls in the list; a link may follow it (slot), e.g. "Vsa zgodovina" on /klub.
+import { Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  /** Already filtered and sorted by clubTimeline() (src/lib/timeline.ts). */
+  /** Already filtered and sorted by clubTimeline() or historyTimeline() (src/lib/timeline.ts). */
   entries: CollectionEntry<"zgodovina">["data"][];
+  /** Show the photos of titles and events (/zgodovina). The narrow /klub column has no room for them. */
+  photos?: boolean;
   class?: string;
 }
 
-const { entries, class: className } = Astro.props;
+const { entries, photos = false, class: className } = Astro.props;
 ---
 
 {
@@ -21,10 +25,20 @@ const { entries, class: className } = Astro.props;
       </h2>
       <ol class="timeline mt-8">
         {entries.map((entry) =>
-          entry.vrsta === "naslovi" ? (
+          entry.vrsta === "naslovi" || entry.vrsta === "dogodek" ? (
             <li class="timeline-item">
-              <p class="font-semibold tabular-nums">{entry.sezona}</p>
+              <p class="font-semibold tabular-nums">{entry.vrsta === "naslovi" ? entry.sezona : entry.leto}</p>
               <p class="mt-1">{entry.dogodek}</p>
+              {photos && entry.foto && (
+                <Picture
+                  src={entry.foto.src}
+                  alt={entry.foto.alt}
+                  formats={["avif", "webp"]}
+                  widths={[480, 960]}
+                  sizes="(min-width: 32rem) 28rem, 100vw"
+                  class="mt-3 block h-auto w-full max-w-md rounded-card"
+                />
+              )}
             </li>
           ) : (
             <li class="timeline-item timeline-club">
@@ -37,6 +51,7 @@ const { entries, class: className } = Astro.props;
           ),
         )}
       </ol>
+      <slot />
     </section>
   )
 }

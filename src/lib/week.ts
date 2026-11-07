@@ -176,7 +176,7 @@ export function templateSummary(week: Week): string {
       });
     paragraphs.push(sentences.join(" "));
   }
-  if (week.mvp) paragraphs.push(`MVP vikenda je ${week.mvp.ime} (${statsText(week.mvp.skupaj, week.mvp.vratar)}).`);
+  if (week.mvp) paragraphs.push(`Igralec tedna je ${week.mvp.ime} (${statsText(week.mvp.skupaj, week.mvp.vratar)}).`);
   paragraphs.push(nextWeekText(week));
   return paragraphs.join("\n\n");
 }

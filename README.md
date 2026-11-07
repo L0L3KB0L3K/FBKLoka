@@ -2,7 +2,7 @@
 
 Spletna stran floorball kluba FBK Loka iz Škofje Loke: **https://fbkloka.netlify.app** (po selitvi domene fbkloka.si).
 
-Tekme, rezultati, lestvice in MVP vikenda prihajajo sami s FloorballFlash. Novice, treninge, sponzorje, trenerje in
+Tekme, rezultati, lestvice in igralec tedna prihajajo sami s FloorballFlash. Novice, treninge, sponzorje, trenerje in
 igralce klub ureja v urejevalniku na `/admin`, brez programiranja.
 
 **Kaj gradimo:** [`SPEC.md`](SPEC.md). **Zakaj in za koga:** [`docs/01-brief.md`](docs/01-brief.md).

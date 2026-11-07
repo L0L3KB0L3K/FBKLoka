@@ -1,4 +1,4 @@
-// Pages from SPEC.md §13.5 plus /klub, /zasebnost and the news pages:
+// Pages from SPEC.md §13.5 plus /klub, /zgodovina, /zasebnost and the news pages:
 // 1. axe finds no WCAG 2.2 A/AA violations,
 // 2. no CSP violation: the site policy is the <meta> tag in the built page (src/config/csp.ts), plus the "/*" header,
 // 3. mobile menu: Enter opens it, Escape closes it, focus returns to the button,
@@ -6,7 +6,8 @@
 // 5. the sponsor strip scrolls, the button stops it, and it stands still with "reduce motion" (WCAG 2.2.2),
 // 6. the same for the photos behind the home match board,
 // 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue,
-// 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4).
+// 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4),
+// 9. at 320 CSS px no page scrolls sideways (WCAG 1.4.10; the /treningi table did, audit 30. 10. 2026).
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -20,6 +21,7 @@ const PAGES = [
   "/vpis/",
   "/kontakt/",
   "/klub/",
+  "/zgodovina/",
   "/zasebnost/",
   "/podpri-nas/",
   "/novice/",
@@ -60,6 +62,16 @@ for (const path of PAGES) {
     const violations = await page.evaluate(() => (window as unknown as { cspViolations: string[] }).cspViolations);
     expect(violations).toEqual([]);
   });
+
+  test(`reflow at 320 px: ${path}`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto(path);
+    const { scroll, client } = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(scroll, "the page scrolls sideways").toBeLessThanOrEqual(client);
+  });
 }
 
 test("mobile menu: Enter opens, Escape closes, focus returns to the button", async ({ page, isMobile }) => {
@@ -93,9 +105,9 @@ test("sponsors: the button stops the scrolling, reduced motion keeps them still"
   await page.goto("/hvala/");
   const strip = page.locator("[data-sponsors]");
   await expect(strip).toHaveAttribute("data-marquee", "on");
-  await page.getByRole("button", { name: "Ustavi pomikanje logotipov" }).click();
+  await page.getByRole("button", { name: "Ustavite pomikanje logotipov" }).click();
   await expect(strip).toHaveAttribute("data-marquee", "paused");
-  await expect(page.getByRole("button", { name: "Nadaljuj pomikanje logotipov" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Nadaljujte pomikanje logotipov" })).toBeVisible();
 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
@@ -105,8 +117,8 @@ test("sponsors: the button stops the scrolling, reduced motion keeps them still"
 
 test("home photos: the button stops the change, reduced motion keeps the first photo", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Ustavi menjavo slik" }).click();
-  await expect(page.getByRole("button", { name: "Nadaljuj menjavo slik" })).toBeVisible();
+  await page.getByRole("button", { name: "Ustavite menjavo slik" }).click();
+  await expect(page.getByRole("button", { name: "Nadaljujte menjavo slik" })).toBeVisible();
 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
@@ -148,11 +160,12 @@ test("played: after a match ends, a line under the board links to the result on 
   await expect(played.getByRole("link", { name: /Rezultat na FloorballFlash/ })).toHaveAttribute("target", "_blank");
 });
 
-test("MVP vikenda: heading above the photo, one line per match and the season total", async ({ page }) => {
+test("Igralec tedna (MVP): heading above the photo, one line per match and the season total", async ({ page }) => {
   await page.goto("/");
-  const card = page.locator("section[aria-labelledby=mvp-vikenda]");
+  const card = page.locator("section[aria-labelledby=igralec-tedna]");
   test.skip((await card.count()) === 0, "no MVP in src/data/ff/mvp.json");
-  await expect(card.getByRole("heading", { name: "MVP vikenda" })).toBeVisible();
+  // The crown is hidden from screen readers, so the heading's name is the text alone.
+  await expect(card.getByRole("heading", { name: "Igralec tedna", exact: true })).toBeVisible();
   await expect(card.getByText(/^Tekma proti /).first()).toBeVisible();
   await expect(card.getByText(/^Skupaj v sezoni IFL:/)).toBeVisible();
   const photo = card.locator("img");
