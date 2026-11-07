@@ -173,6 +173,9 @@ for (const [selekcija, competitions] of Object.entries(FF_CONFIG)) {
   const keepStandings = (label: string) =>
     standings.push(...previousStandings.tekmovanja.filter((s) => s.selekcija === selekcija && s.tekmovanje === label));
   const lists: FfCompetitionPlayer[][] = [];
+  // The team of each list, when the selection has several teams (U17 A and B): the roster is shown per team.
+  const teams: (string | null)[] = [];
+  const severalTeams = new Set(competitions.flatMap((c) => c.teamNames)).size > 1;
   let rosterComplete = true;
 
   for (const { competitionId, label, teamNames } of competitions) {
@@ -207,6 +210,7 @@ for (const [selekcija, competitions] of Object.entries(FF_CONFIG)) {
           pagination: { start: 0, limit: 200 },
         });
         lists.push(data.competitionPlayers);
+        teams.push(severalTeams && teamNames.length === 1 ? (teamNames[0] ?? null) : null);
       } catch (error) {
         rosterComplete = false;
         console.warn(`FAIL  ${selekcija} ${label} roster: ${(error as Error).message}. Keeping old roster.`);
@@ -215,7 +219,9 @@ for (const [selekcija, competitions] of Object.entries(FF_CONFIG)) {
   }
 
   // A roster from only some of the calls could drop players, so the team keeps its old roster then.
-  const players = rosterComplete ? normalizeRoster(lists, selekcija) : previousRoster.filter((p) => p.selekcija === selekcija);
+  const players = rosterComplete
+    ? normalizeRoster(lists, selekcija, teams)
+    : previousRoster.filter((p) => p.selekcija === selekcija);
   if (rosterComplete && lists.length) console.log(`OK    ${selekcija} roster: ${players.length} players`);
   roster.push(...players);
 }

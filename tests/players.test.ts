@@ -20,6 +20,21 @@ const manual = (ime: string, extra: Partial<ManualPlayer> = {}): ManualPlayer =>
   ...extra,
 });
 
+test("the team of a split roster (U17 A and B) is kept, also when an entry replaces the FloorballFlash line", () => {
+  const roster = teamRoster(
+    [{ ...ff("Ana Novak", 9, "u17"), ekipa: "FBK Loka A" }, { ...ff("Bor Kos", 1, "u17"), ekipa: "FBK Loka B" }],
+    [manual("Ana Novak", { selekcija: "u17", stevilka: 19 })],
+    "u17",
+  );
+  assert.deepEqual(
+    roster.map((p) => [p.ime, p.stevilka, p.ekipa]),
+    [
+      ["Ana Novak", 19, "FBK Loka A"],
+      ["Bor Kos", 1, "FBK Loka B"],
+    ],
+  );
+});
+
 test("FloorballFlash players of this team only", () => {
   const roster = teamRoster([ff("Ana Novak", 9), ff("Bor Kos", 1, "u19")], [], "clani");
   assert.deepEqual(

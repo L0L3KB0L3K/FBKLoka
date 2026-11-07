@@ -55,6 +55,7 @@ export type Position = "vratar" | "branilec" | "napadalec";
  */
 export type RosterPlayer = {
   selekcija: string;
+  ekipa?: string; // only when the selection has several teams, e.g. "FBK Loka A" (U17)
   ffId: number;
   ime: string;
   stevilka: number | null;
