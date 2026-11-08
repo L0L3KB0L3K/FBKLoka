@@ -351,6 +351,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 8316,
     "ime": "Adam Brdnik",
     "stevilka": 17,
@@ -358,6 +359,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 7020,
     "ime": "Aljaž Kalan",
     "stevilka": 1,
@@ -365,6 +367,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 8314,
     "ime": "Blaž Kosec",
     "stevilka": 15,
@@ -372,6 +375,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 7013,
     "ime": "Blaž Triler",
     "stevilka": 25,
@@ -379,6 +383,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 7576,
     "ime": "Filip Košir",
     "stevilka": 55,
@@ -386,6 +391,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 8313,
     "ime": "Jakob Kalan",
     "stevilka": 29,
@@ -393,6 +399,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 8589,
     "ime": "Jakob Šifrer",
     "stevilka": 84,
@@ -400,6 +407,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 7016,
     "ime": "Luka Kosec",
     "stevilka": 52,
@@ -407,6 +415,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 6505,
     "ime": "Matija Notar",
     "stevilka": 9,
@@ -414,6 +423,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 5398,
     "ime": "Miha Triler",
     "stevilka": 70,
@@ -421,6 +431,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 7019,
     "ime": "Ožbej Polajnar",
     "stevilka": 18,
@@ -428,6 +439,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 5402,
     "ime": "Tadej Tomažin",
     "stevilka": 50,
@@ -435,6 +447,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 5403,
     "ime": "Tilen Tomažin",
     "stevilka": 8,
@@ -442,6 +455,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 7732,
     "ime": "Tim Kankel Kular",
     "stevilka": 68,
@@ -449,6 +463,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka A",
     "ffId": 7101,
     "ime": "Žak Kankel Kular",
     "stevilka": 92,
@@ -456,6 +471,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 8400,
     "ime": "Žan Kalan",
     "stevilka": 1,
@@ -463,6 +479,7 @@
   },
   {
     "selekcija": "u17",
+    "ekipa": "FBK Loka B",
     "ffId": 7577,
     "ime": "Žiga Bohinc",
     "stevilka": 24,
@@ -582,6 +599,13 @@
   },
   {
     "selekcija": "u13",
+    "ffId": 8589,
+    "ime": "Jakob Šifrer",
+    "stevilka": null,
+    "pozicija": "vratar"
+  },
+  {
+    "selekcija": "u13",
     "ffId": 6508,
     "ime": "Jure Tavčar",
     "stevilka": 40,
@@ -628,6 +652,13 @@
     "ime": "Matic Bohinc",
     "stevilka": 75,
     "pozicija": "napadalec"
+  },
+  {
+    "selekcija": "u13",
+    "ffId": 7014,
+    "ime": "Tine Kalan",
+    "stevilka": null,
+    "pozicija": null
   },
   {
     "selekcija": "u13",

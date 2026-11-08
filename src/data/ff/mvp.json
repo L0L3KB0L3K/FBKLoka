@@ -7,7 +7,8 @@
   "ffId": 5398,
   "ime": "Miha Triler",
   "ekipe": [
-    "u17"
+    "u17",
+    "clani"
   ],
   "vratar": false,
   "tekme": [
@@ -24,6 +25,22 @@
       "zacetek": "2026-11-07T10:40:00+01:00",
       "goli": 2,
       "podaje": 3,
+      "obrambe": 0,
+      "streli": 0
+    },
+    {
+      "nasprotnik": "IBK Cartoon Heroes",
+      "zacetek": "2026-11-07T17:00:00+01:00",
+      "goli": 0,
+      "podaje": 2,
+      "obrambe": 0,
+      "streli": 0
+    },
+    {
+      "nasprotnik": "Phoenix Fireball",
+      "zacetek": "2026-11-08T13:00:00+01:00",
+      "goli": 0,
+      "podaje": 1,
       "obrambe": 0,
       "streli": 0
     }
