@@ -1,0 +1,18 @@
+---
+// Notice strip above the header (13. 11. 2026): yellow with black text (16.7:1, npm run check:contrast), one link,
+// one or two lines on a phone. Not a landmark. It scrolls away; the header stays sticky. Nothing is drawn after the date.
+import { activeAnnouncement } from "../lib/announcement.ts";
+import ArrowLink from "./ArrowLink.astro";
+
+const notice = activeAnnouncement(new Date());
+---
+
+{
+  notice && (
+    <div class="bg-ball text-ink" data-announcement>
+      <div class="page-wrap flex justify-center py-0.5 text-center text-small">
+        <ArrowLink href={notice.href}>{notice.text}</ArrowLink>
+      </div>
+    </div>
+  )
+}

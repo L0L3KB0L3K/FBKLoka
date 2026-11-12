@@ -5,6 +5,7 @@
 import "../styles/global.css";
 // The one font file above the fold is preloaded (SPEC.md §9.3). Same hashed file as in global.css.
 import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
+import Announcement from "../components/Announcement.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CourtLines from "../components/CourtLines.astro";
@@ -67,6 +68,7 @@ const share = ogImage ?? { url: new URL("/og.png", Astro.site), width: 1200, hei
   </head>
   <body class="flex min-h-dvh flex-col">
     <a href="#main" class="skip-link">Skoči na vsebino</a>
+    <Announcement />
     <Header />
     {/* isolate: the court lines sit behind the page content (-z-10) but above the page background. */}
     <main id="main" class="relative isolate flex-1">

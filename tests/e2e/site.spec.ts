@@ -7,7 +7,8 @@
 // 6. the same for the photos behind the home match board,
 // 7. the "Doma / V gosteh" filter on /tekme shows only matches of that venue,
 // 8. a match that ended gets a line "Odigrano" under the board with a link to the result (SPEC.md §20.4),
-// 9. at 320 CSS px no page scrolls sideways (WCAG 1.4.10; the /treningi table did, audit 30. 10. 2026).
+// 9. at 320 CSS px no page scrolls sideways (WCAG 1.4.10; the /treningi table did, audit 30. 10. 2026),
+// 10. the yellow notice strip above the header links to the 1 % dohodnine news while it is active (src/lib/announcement.ts).
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -158,6 +159,15 @@ test("played: after a match ends, a line under the board links to the result on 
   await expect(played).toBeVisible();
   await expect(played.locator("[data-played-teams]")).not.toBeEmpty();
   await expect(played.getByRole("link", { name: /Rezultat na FloorballFlash/ })).toHaveAttribute("target", "_blank");
+});
+
+test("notice strip: one link to the 1 % dohodnine news, above the header", async ({ page }) => {
+  await page.goto("/");
+  const strip = page.locator("[data-announcement]");
+  test.skip((await strip.count()) === 0, "the notice is over (until in src/lib/announcement.ts)");
+  await expect(strip.getByRole("link")).toHaveAttribute("href", "/novice/2026-11-19-dohodnina/");
+  const [stripBox, headerBox] = await Promise.all([strip.boundingBox(), page.locator("header").first().boundingBox()]);
+  expect(stripBox && headerBox && stripBox.y < headerBox.y).toBe(true);
 });
 
 test("Igralec tedna (MVP): heading above the photo, one line per match and the season total", async ({ page }) => {
