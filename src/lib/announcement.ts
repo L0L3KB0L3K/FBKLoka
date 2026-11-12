@@ -5,7 +5,7 @@ export type Announcement = { text: string; href: string; until: string };
 // 1 % of income tax for the club (news of 19. 11. 2026). The form on olympic.si asks for a tax number and a signature,
 // so the strip leads to the news first, where it is explained that the donation costs nothing.
 export const ANNOUNCEMENT: Announcement = {
-  text: "Namenite 1 % dohodnine klubu: odprite navodila",
+  text: "Namenite 1 % dohodnine klubu",
   href: "/novice/2026-11-19-dohodnina/",
   until: "2026-12-31",
 };
