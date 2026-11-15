@@ -1,56 +1,39 @@
 {
   "razlicica": "LBS-MVPI 1.0",
   "vikend": {
-    "od": "2026-11-07",
-    "do": "2026-11-08"
+    "od": "2026-11-14",
+    "do": "2026-11-15"
   },
-  "ffId": 5398,
-  "ime": "Miha Triler",
+  "ffId": 7020,
+  "ime": "Aljaž Kalan",
   "ekipe": [
-    "u17",
-    "clani"
+    "u15"
   ],
-  "vratar": false,
+  "vratar": true,
   "tekme": [
     {
-      "nasprotnik": "FBK Polanska banda - zeleni 🟢",
-      "zacetek": "2026-11-07T09:00:00+01:00",
-      "goli": 4,
-      "podaje": 2,
-      "obrambe": 0,
-      "streli": 0
-    },
-    {
-      "nasprotnik": "FBK Polanska banda - modri 🔵",
-      "zacetek": "2026-11-07T10:40:00+01:00",
-      "goli": 2,
-      "podaje": 3,
-      "obrambe": 0,
-      "streli": 0
-    },
-    {
-      "nasprotnik": "IBK Cartoon Heroes",
-      "zacetek": "2026-11-07T17:00:00+01:00",
+      "nasprotnik": "KAC Floorball",
+      "zacetek": "2026-11-14T09:50:00+01:00",
       "goli": 0,
-      "podaje": 2,
-      "obrambe": 0,
-      "streli": 0
+      "podaje": 0,
+      "obrambe": 19,
+      "streli": 23
     },
     {
-      "nasprotnik": "Phoenix Fireball",
-      "zacetek": "2026-11-08T13:00:00+01:00",
+      "nasprotnik": "ŠD Zelenci",
+      "zacetek": "2026-11-14T13:10:00+01:00",
       "goli": 0,
-      "podaje": 1,
-      "obrambe": 0,
-      "streli": 0
+      "podaje": 0,
+      "obrambe": 27,
+      "streli": 30
     }
   ],
   "sezona": {
-    "goli": 6,
-    "podaje": 5,
-    "obrambe": 0,
-    "streli": 0
+    "goli": 0,
+    "podaje": 0,
+    "obrambe": 46,
+    "streli": 53
   },
-  "sezonaTekmovanje": "DP U17 A",
+  "sezonaTekmovanje": "DP U15",
   "slika": null
 }

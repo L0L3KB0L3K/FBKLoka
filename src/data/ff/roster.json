@@ -165,42 +165,42 @@
     "ffId": 160,
     "ime": "Anže Burnik",
     "stevilka": 9,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 1013,
     "ime": "Anže Križaj",
     "stevilka": 27,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 163,
     "ime": "Gašper Egart",
     "stevilka": 18,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 6481,
     "ime": "Gašper Kalan",
     "stevilka": 3,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 5283,
     "ime": "Gašper Masnec",
     "stevilka": 45,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 166,
     "ime": "Jan Dolenc",
     "stevilka": 5,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "svigalice",
@@ -221,14 +221,14 @@
     "ffId": 926,
     "ime": "Luka Košenina",
     "stevilka": 8,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 157,
     "ime": "Metod Proj",
     "stevilka": 7,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
@@ -242,28 +242,28 @@
     "ffId": 173,
     "ime": "Nik Oman",
     "stevilka": 98,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 1043,
     "ime": "Rok Prevodnik",
     "stevilka": 11,
-    "pozicija": null
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 153,
     "ime": "Rok Ritonja",
     "stevilka": 61,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "svigalice",
     "ffId": 171,
     "ime": "Tadej Žontar",
     "stevilka": 21,
-    "pozicija": null
+    "pozicija": "branilec"
   },
   {
     "selekcija": "u19",
@@ -494,6 +494,13 @@
   },
   {
     "selekcija": "u15",
+    "ffId": 9828,
+    "ime": "Atena Markovski",
+    "stevilka": null,
+    "pozicija": "branilec"
+  },
+  {
+    "selekcija": "u15",
     "ffId": 7013,
     "ime": "Blaž Triler",
     "stevilka": 25,
@@ -540,6 +547,13 @@
     "ime": "Jakob Šifrer",
     "stevilka": 84,
     "pozicija": "vratar"
+  },
+  {
+    "selekcija": "u15",
+    "ffId": 9829,
+    "ime": "Koru Arhar Lušterk",
+    "stevilka": null,
+    "pozicija": "napadalec"
   },
   {
     "selekcija": "u15",

@@ -96,30 +96,6 @@
     "ffUrl": "https://www.floorballflash.at/game/16450"
   },
   {
-    "id": 17645,
-    "selekcija": "clani",
-    "tekmovanje": "1. SFL",
-    "zacetek": "2026-09-27T17:00:00+02:00",
-    "doma": false,
-    "ekipaLoka": "FBK Loka",
-    "nasprotnik": {
-      "ime": "FBC Borovnica",
-      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
-    },
-    "prizorisce": {
-      "ime": "Osnovna šola Dobrova",
-      "kraj": "Dobrova",
-      "naslov": "Cesta 7. maja 20, 1356 Dobrova"
-    },
-    "stanje": "koncana",
-    "rezultat": {
-      "loka": 5,
-      "nasprotnik": 4
-    },
-    "faza": "Redni del",
-    "ffUrl": "https://floorballflash.si/game/17645"
-  },
-  {
     "id": 16464,
     "selekcija": "clani",
     "tekmovanje": "IFL",
@@ -238,6 +214,30 @@
     },
     "faza": "Qualification Round",
     "ffUrl": "https://www.floorballflash.at/game/16496"
+  },
+  {
+    "id": 18153,
+    "selekcija": "clani",
+    "tekmovanje": "1. SFL",
+    "zacetek": "2026-10-27T17:00:00+01:00",
+    "doma": false,
+    "ekipaLoka": "FBK Loka",
+    "nasprotnik": {
+      "ime": "FBC Borovnica",
+      "logo": "4bd8fb7c-f480-5b2b-ada6-52c77ec52170.png"
+    },
+    "prizorisce": {
+      "ime": "Osnovna šola Dobrova",
+      "kraj": "Dobrova",
+      "naslov": "Cesta 7. maja 20, 1356 Dobrova"
+    },
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 5,
+      "nasprotnik": 4
+    },
+    "faza": "Redni del",
+    "ffUrl": "https://floorballflash.si/game/18153"
   },
   {
     "id": 17730,
@@ -495,8 +495,11 @@
       "kraj": "Poljane nad Škofjo Loko",
       "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 4,
+      "nasprotnik": 4
+    },
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17833"
   },
@@ -516,8 +519,11 @@
       "kraj": "Poljane nad Škofjo Loko",
       "naslov": "Poljane 100, 4223 Poljane nad Škofjo Loko"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 4,
+      "nasprotnik": 3
+    },
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17834"
   },
@@ -635,7 +641,7 @@
     "ekipaLoka": "Švigalice Loka",
     "nasprotnik": {
       "ime": "Flooball klub Ljubljana",
-      "logo": "7e894dd7-055f-5b83-bb71-ce9dd1ad6631.jpg"
+      "logo": "42104ddb-9b37-4d61-84c2-861b809c7d2e.svg"
     },
     "prizorisce": {
       "ime": "Center GIB",
@@ -1181,7 +1187,7 @@
     "ekipaLoka": "Švigalice Loka",
     "nasprotnik": {
       "ime": "Flooball klub Ljubljana",
-      "logo": "7e894dd7-055f-5b83-bb71-ce9dd1ad6631.jpg"
+      "logo": "42104ddb-9b37-4d61-84c2-861b809c7d2e.svg"
     },
     "prizorisce": {
       "ime": "Osnovna šola Ivana Tavčarja",
