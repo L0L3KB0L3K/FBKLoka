@@ -543,8 +543,11 @@
       "kraj": "Mojstrana",
       "naslov": "Ulica Alojza Rabiča 7, 4281 Mojstrana"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 2,
+      "nasprotnik": 1
+    },
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17843"
   },
@@ -564,8 +567,11 @@
       "kraj": "Mojstrana",
       "naslov": "Ulica Alojza Rabiča 7, 4281 Mojstrana"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 10,
+      "nasprotnik": 3
+    },
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17842"
   },
@@ -585,8 +591,11 @@
       "kraj": "Klagenfurt",
       "naslov": "Obirstraße 6, 9020 Klagenfurt"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 7,
+      "nasprotnik": 6
+    },
     "faza": "Qualification Round",
     "ffUrl": "https://www.floorballflash.at/game/16483"
   },
@@ -606,8 +615,11 @@
       "kraj": "Villach",
       "naslov": "St.Martiner-Straße 11, 9500 Villach"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 2,
+      "nasprotnik": 3
+    },
     "faza": "Redni del - Round Robin",
     "ffUrl": "https://floorballflash.si/game/17621"
   },
@@ -648,8 +660,11 @@
       "kraj": "Ljubljana",
       "naslov": "Drenikova ulica 32, 1000 Ljubljana"
     },
-    "stanje": "prihodnja",
-    "rezultat": null,
+    "stanje": "koncana",
+    "rezultat": {
+      "loka": 10,
+      "nasprotnik": 5
+    },
     "faza": "Redni del",
     "ffUrl": "https://floorballflash.si/game/17738"
   },
@@ -657,7 +672,7 @@
     "id": 17623,
     "selekcija": "u19",
     "tekmovanje": "DP U19",
-    "zacetek": "2026-11-28T17:00:00+01:00",
+    "zacetek": "2026-11-28T20:00:00+01:00",
     "doma": true,
     "ekipaLoka": "FBK Loka",
     "nasprotnik": {

@@ -1,38 +1,38 @@
 {
   "razlicica": "LBS-MVPI 1.0",
   "vikend": {
-    "od": "2026-11-14",
-    "do": "2026-11-15"
+    "od": "2026-11-21",
+    "do": "2026-11-22"
   },
-  "ffId": 7020,
-  "ime": "Aljaž Kalan",
+  "ffId": 7013,
+  "ime": "Blaž Triler",
   "ekipe": [
     "u15"
   ],
-  "vratar": true,
+  "vratar": false,
   "tekme": [
     {
-      "nasprotnik": "KAC Floorball",
-      "zacetek": "2026-11-14T09:50:00+01:00",
-      "goli": 0,
+      "nasprotnik": "VSV Unihockey",
+      "zacetek": "2026-11-21T09:50:00+01:00",
+      "goli": 1,
       "podaje": 0,
-      "obrambe": 19,
-      "streli": 23
+      "obrambe": 0,
+      "streli": 0
     },
     {
-      "nasprotnik": "ŠD Zelenci",
-      "zacetek": "2026-11-14T13:10:00+01:00",
-      "goli": 0,
+      "nasprotnik": "KAC Floorball",
+      "zacetek": "2026-11-21T11:30:00+01:00",
+      "goli": 6,
       "podaje": 0,
-      "obrambe": 27,
-      "streli": 30
+      "obrambe": 0,
+      "streli": 0
     }
   ],
   "sezona": {
-    "goli": 0,
-    "podaje": 0,
-    "obrambe": 46,
-    "streli": 53
+    "goli": 9,
+    "podaje": 1,
+    "obrambe": 0,
+    "streli": 0
   },
   "sezonaTekmovanje": "DP U15",
   "slika": null

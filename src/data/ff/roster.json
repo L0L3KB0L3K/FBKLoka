@@ -302,6 +302,20 @@
   },
   {
     "selekcija": "u19",
+    "ffId": 7099,
+    "ime": "Lea Tomažin",
+    "stevilka": 6,
+    "pozicija": "napadalec"
+  },
+  {
+    "selekcija": "u19",
+    "ffId": 7016,
+    "ime": "Luka Kosec",
+    "stevilka": 52,
+    "pozicija": "napadalec"
+  },
+  {
+    "selekcija": "u19",
     "ffId": 6505,
     "ime": "Matija Notar",
     "stevilka": 9,
