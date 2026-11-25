@@ -30,7 +30,8 @@ Imena gumbov so iz uradne dokumentacije Meta (12. 11. 2026). Meta jih pogosto pr
 4. Primer uporabe: **Other**. Vrsta aplikacije: **Business**. Nato **Create app**. Če vpraša po povezavi s podjetjem, to preskoči.
 5. V nadzorni plošči pri izdelku **Instagram** klikni **Set up**. Odpre se **API setup with Instagram login**.
 6. **Ne klikaj** "Complete App Review" in aplikacije ne preklopi na **Live**. Ostane v razvojnem načinu.
-7. Dodaj še enega skrbnika, da aplikacija ni vezana samo na tvoj račun: **App Roles > Roles > Add People**, vloga Administrator. Predlog: nekdo iz kluba.
+7. Dodaj še enega skrbnika, da aplikacija ni vezana samo na tvoj račun: **App Roles > Roles > Add People**, vloga Administrator.
+   Skrbnik mora imeti **lasten Meta razvijalski račun** (Meta, App Roles, 25. 11. 2026). Predlog: nekdo iz kluba, ki mu SMS pride.
 
 ## B. Račun kluba kot tester
 
